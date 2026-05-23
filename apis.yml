@@ -1,0 +1,148 @@
+aid: vellum
+name: Vellum AI
+description: >-
+  Vellum AI is an LLM development platform that helps product and engineering
+  teams build, evaluate, deploy, and monitor LLM-powered applications. The
+  platform centers on prompt engineering, a visual Workflows builder for
+  agentic and multi-step pipelines, evaluation suites with dataset
+  management, retrieval-augmented generation, and production observability
+  with logs, traces, and metrics. Target customers are AI product teams at
+  startups and enterprises that need version control, collaboration, and
+  vendor-neutral access across OpenAI, Anthropic, Google, Mistral, and open
+  models. Vellum exposes a REST API plus Python and TypeScript SDKs, runs in
+  cloud and self-hosted deployments, and offers tiered pricing for
+  Pro/Business/Enterprise. Note: as of 2026 the vellum.ai marketing surface
+  has been refocused on a personal AI assistant product; the developer
+  platform documented here remains the LLM application stack.
+type: Index
+position: Provider
+access: 3rd-Party
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - LLM Platform
+  - Prompt Engineering
+  - Workflows
+  - Evaluations
+  - LLM Ops
+  - RAG
+  - Observability
+  - Datasets
+  - Deployments
+  - Multi-Provider
+  - Agent Builder
+  - Self-Hosted
+url: https://raw.githubusercontent.com/api-evangelist/vellum/refs/heads/main/apis.yml
+created: '2026-05-23'
+modified: '2026-05-23'
+specificationVersion: '0.20'
+apis:
+  - aid: vellum:llm-platform
+    name: Vellum LLM Platform API
+    description: >-
+      The Vellum REST API exposes prompts, workflows, evaluations, datasets,
+      document indexes, deployments, and execution endpoints so developers can
+      run versioned LLM pipelines from their own backends and capture logs and
+      metrics for production monitoring.
+    humanURL: https://docs.vellum.ai
+    baseURL: https://api.vellum.ai
+    tags:
+      - Prompts
+      - Workflows
+      - Evaluations
+      - Datasets
+      - Documents
+      - Deployments
+      - Executions
+      - Monitoring
+    properties:
+      - type: Documentation
+        url: https://docs.vellum.ai
+      - type: APIReference
+        url: https://docs.vellum.ai/api-reference
+      - type: GettingStarted
+        url: https://docs.vellum.ai/welcome/getting-started
+      - type: SignUp
+        url: https://app.vellum.ai/signup
+      - type: SDK
+        url: https://github.com/vellum-ai/vellum-client-python
+      - type: SDK
+        url: https://github.com/vellum-ai/vellum-client-typescript
+      - type: GitHubOrganization
+        url: https://github.com/vellum-ai
+      - type: Pricing
+        url: https://www.vellum.ai/pricing
+      - type: Blog
+        url: https://www.vellum.ai/blog
+    features:
+      - name: Prompt Engineering Workbench
+        description: Versioned prompts, side-by-side model comparisons, and structured prompt variables.
+      - name: Workflows Builder
+        description: Visual builder for multi-step LLM pipelines including branching, tools, and RAG nodes.
+      - name: Evaluation Suites
+        description: Run dataset-driven evals with built-in and custom metrics for prompts and workflows.
+      - name: Dataset Management
+        description: Store labeled test cases and production examples to drive evaluations and fine-tuning.
+      - name: Document Indexes / RAG
+        description: Managed document ingestion, embeddings, and retrieval for grounded generation.
+      - name: Deployments and Versioning
+        description: Promote prompts and workflows through environments with rollback and traffic splits.
+      - name: Production Monitoring
+        description: Logs, traces, latency, cost, and quality metrics for every execution.
+      - name: Multi-Provider Routing
+        description: Vendor-neutral access to OpenAI, Anthropic, Google, Mistral, and open models.
+      - name: SDKs for Python and TypeScript
+        description: First-class SDKs for invoking prompts, workflows, and datasets from application code.
+      - name: Self-Hosted Option
+        description: Deploy Vellum into the customer's own cloud for compliance-sensitive workloads.
+    useCases:
+      - name: Build Production LLM Apps
+        description: Iterate on prompts and workflows, then deploy versioned endpoints into apps.
+      - name: Evaluate LLM Quality
+        description: Use datasets and evals to measure regressions across models and prompt variants.
+      - name: Build Agents
+        description: Compose tools, retrieval, and conditional logic via the visual workflow builder.
+      - name: RAG Pipelines
+        description: Ingest documents, index them, and query through Vellum's managed retrieval layer.
+      - name: Observe and Debug
+        description: Trace production runs to debug failures and improve quality over time.
+    integrations:
+      - name: OpenAI
+      - name: Anthropic
+      - name: Google
+      - name: Mistral
+      - name: Cohere
+      - name: AWS Bedrock
+      - name: Azure OpenAI
+      - name: Pinecone
+      - name: Snowflake
+      - name: LangChain
+      - name: LlamaIndex
+    authentication:
+      - type: API Key
+        description: Workspace API keys passed via the `X_API_KEY` header authenticate REST and SDK calls.
+common:
+  - type: Website
+    url: https://www.vellum.ai
+  - type: Documentation
+    url: https://docs.vellum.ai
+  - type: Blog
+    url: https://www.vellum.ai/blog
+  - type: GitHubOrganization
+    url: https://github.com/vellum-ai
+  - type: Pricing
+    url: https://www.vellum.ai/pricing
+  - type: SignUp
+    url: https://app.vellum.ai/signup
+  - type: Login
+    url: https://app.vellum.ai/login
+  - type: TermsOfService
+    url: https://www.vellum.ai/terms-of-service
+  - type: PrivacyPolicy
+    url: https://www.vellum.ai/privacy-policy
+  - type: Twitter
+    url: https://x.com/vellum_ai
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/vellum-ai
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
