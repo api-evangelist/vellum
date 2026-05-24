@@ -143,6 +143,8 @@ common:
     url: https://x.com/vellum_ai
   - type: LinkedIn
     url: https://www.linkedin.com/company/vellum-ai
+  - type: LLMsTxt
+    url: https://docs.vellum.ai/llms.txt
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
