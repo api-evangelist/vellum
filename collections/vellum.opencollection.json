@@ -1,0 +1,2240 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Client SDK",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Execute Prompt",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://predict.vellum.ai/v1/execute-prompt",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Executes a deployed Prompt and returns the result."
+        },
+        {
+          "info": {
+            "name": "Execute Prompt Stream",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://predict.vellum.ai/v1/execute-prompt-stream",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Executes a deployed Prompt and streams back the results."
+        },
+        {
+          "info": {
+            "name": "Submit Completion Actuals",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://predict.vellum.ai/v1/submit-completion-actuals",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Used to submit feedback regarding the quality of previously generated completions."
+        },
+        {
+          "info": {
+            "name": "Execute Workflow",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://predict.vellum.ai/v1/execute-workflow",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Executes a deployed Workflow and returns its outputs."
+        },
+        {
+          "info": {
+            "name": "Execute Workflow Async",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://predict.vellum.ai/v1/execute-workflow-async",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Executes a deployed Workflow asynchronously and returns the execution ID."
+        },
+        {
+          "info": {
+            "name": "Execute Workflow Stream",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://predict.vellum.ai/v1/execute-workflow-stream",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Executes a deployed Workflow and streams back its results."
+        },
+        {
+          "info": {
+            "name": "Submit Workflow Execution Actuals",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://predict.vellum.ai/v1/submit-workflow-execution-actuals",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "    Used to submit feedback regarding the quality of previous workflow execution and its outputs.\n\n    **Note:** Uses a base url of `https://predict.vellum.ai`.    "
+        },
+        {
+          "info": {
+            "name": "Search",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://predict.vellum.ai/v1/search",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Perform a search against a document index."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "subpackage_deployments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve Provider Payload",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://predict.vellum.ai/v1/deployments/provider-payload",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Given a set of input variable values, compile the exact payload that Vellum would send to the configured model provider\nfor execution if the execute-prompt endpoint had been invoked. Note that this endpoint does not actually execute the\nprompt or make an API call to the model provider.\n\nThis endpoint is useful if you don't want to proxy LLM provider requests through Vellum and prefer to send them directly\nto the provider yourself. Note that no guarantees are made on the format of this API's resp"
+        },
+        {
+          "info": {
+            "name": "List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://predict.vellum.ai/v1/deployments",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "status"
+              }
+            ]
+          },
+          "docs": "Used to list all Prompt Deployments."
+        },
+        {
+          "info": {
+            "name": "Retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://predict.vellum.ai/v1/deployments/:id",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Prompt Deployment's ID or its unique name"
+              }
+            ]
+          },
+          "docs": "Used to retrieve a Prompt Deployment given its ID or name."
+        },
+        {
+          "info": {
+            "name": "Retrieve Prompt Deployment Release",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://predict.vellum.ai/v1/deployments/:id/releases/:release_id_or_release_tag",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Prompt Deployment's ID or its unique name"
+              },
+              {
+                "name": "release_id_or_release_tag",
+                "value": "",
+                "type": "path",
+                "description": "Either the UUID of Prompt Deployment Release you'd like to retrieve, or the name of a Release Tag that's pointing to the Prompt Deployment Release you'd like to retrieve."
+              }
+            ]
+          },
+          "docs": "Retrieve a specific Prompt Deployment Release by either its UUID or the name of a Release Tag that points to it."
+        },
+        {
+          "info": {
+            "name": "Retrieve Deployment Release Tag",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://predict.vellum.ai/v1/deployments/:id/release-tags/:name",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Prompt Deployment's ID or its unique name"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Release Tag associated with this Deployment that you'd like to retrieve."
+              }
+            ]
+          },
+          "docs": "Retrieve a Deployment Release Tag by tag name, associated with a specified Deployment."
+        },
+        {
+          "info": {
+            "name": "Update Deployment Release Tag",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://predict.vellum.ai/v1/deployments/:id/release-tags/:name",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Prompt Deployment's ID or its unique name"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Release Tag associated with this Deployment that you'd like to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing Release Tag associated with the specified Prompt Deployment."
+        },
+        {
+          "info": {
+            "name": "List Deployment Release Tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://predict.vellum.ai/v1/deployments/:id/release-tags",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Prompt Deployment's ID or its unique name"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "source",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Release Tags associated with the specified Prompt Deployment"
+        },
+        {
+          "info": {
+            "name": "Deployment History Item Retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://predict.vellum.ai/v1/deployments/:id/history/:history_id_or_release_tag",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "history_id_or_release_tag",
+                "value": "",
+                "type": "path",
+                "description": "Either the UUID of Deployment History Item you'd like to retrieve, or the name of a Release Tag that's pointing to the Deployment History Item you'd like to retrieve."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Prompt Deployment's ID or its unique name"
+              }
+            ]
+          },
+          "docs": "DEPRECATED: This endpoint is deprecated and will be removed in a future release. Please use the\n`retrieve_prompt_deployment_release` xendpoint instead."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "subpackage_sandboxes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Deploy Prompt",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://predict.vellum.ai/v1/sandboxes/:id/prompts/:prompt_variant_id/deploy",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this sandbox."
+              },
+              {
+                "name": "prompt_variant_id",
+                "value": "",
+                "type": "path",
+                "description": "An ID identifying the Prompt you'd like to deploy."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deploy Prompt"
+        },
+        {
+          "info": {
+            "name": "Upsert Sandbox Scenario",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://predict.vellum.ai/v1/sandboxes/:id/scenarios",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this sandbox."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Upserts a new scenario for a sandbox, keying off of the optionally provided scenario id.\n\nIf an id is provided and has a match, the scenario will be updated. If no id is provided or no match\nis found, a new scenario will be appended to the end.\n\nNote that a full replacement of the scenario is performed, so any fields not provided will be removed\nor overwritten with default values."
+        },
+        {
+          "info": {
+            "name": "Delete Sandbox Scenario",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://predict.vellum.ai/v1/sandboxes/:id/scenarios/:scenario_id",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this sandbox."
+              },
+              {
+                "name": "scenario_id",
+                "value": "",
+                "type": "path",
+                "description": "An id identifying the scenario that you'd like to delete"
+              }
+            ]
+          },
+          "docs": "Deletes an existing scenario from a sandbox, keying off of the provided scenario id."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "subpackage_workflows",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workflow Execution Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://predict.vellum.ai/v1/workflows/executions/:execution_id/status",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "execution_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Checks if a workflow execution is currently executing (not fulfilled, not rejected, and has no end time).\nUses the ClickHouse Prime summary materialized view."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "subpackage_workflowSandboxes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Deploy Workflow",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://predict.vellum.ai/v1/workflow-sandboxes/:id/deploy",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this workflow sandbox."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deploy Workflow"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "subpackage_workflowDeployments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Execute Stream",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://predict.vellum.ai/v1/workflow-deployments/:id/execute-stream",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Workflow Deployment's ID or its unique name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Executes a deployed Workflow and streams back its results."
+        },
+        {
+          "info": {
+            "name": "List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://predict.vellum.ai/v1/workflow-deployments",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "has_story_config",
+                "value": "",
+                "type": "query",
+                "description": "has_story_config"
+              },
+              {
+                "name": "is_public",
+                "value": "",
+                "type": "query",
+                "description": "is_public"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the ordering of the returned Workflow Deployments. Valid values are:\n- `created` - Orders by creation time in ascending order.\n- `-created` - Orders by creation time in descending order. (default)\n- `name` - Orders by name in ascending order.\n- `-name` - Orders by name in descending order.\n\nCompound orderings are supported by separating fields with commas, e.g., `-created,name`.\n"
+              },
+              {
+                "name": "owned_by",
+                "value": "",
+                "type": "query",
+                "description": "owned_by"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "status"
+              }
+            ]
+          },
+          "docs": "Used to list all Workflow Deployments."
+        },
+        {
+          "info": {
+            "name": "List Workflow Deployment Releases",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://predict.vellum.ai/v1/workflow-deployments/:id/releases",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Workflow Deployment's ID or its unique name"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              }
+            ]
+          },
+          "docs": "List the Releases of the specified Workflow Deployment for the current Environment."
+        },
+        {
+          "info": {
+            "name": "Retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://predict.vellum.ai/v1/workflow-deployments/:id",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Workflow Deployment's ID or its unique name"
+              }
+            ]
+          },
+          "docs": "Used to retrieve a workflow deployment given its ID or name."
+        },
+        {
+          "info": {
+            "name": "Retrieve Workflow Deployment Release",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://predict.vellum.ai/v1/workflow-deployments/:id/releases/:release_id_or_release_tag",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Workflow Deployment's ID or its unique name"
+              },
+              {
+                "name": "release_id_or_release_tag",
+                "value": "",
+                "type": "path",
+                "description": "Either the UUID of Workflow Deployment Release you'd like to retrieve, or the name of a Release Tag that's pointing to the Workflow Deployment Release you'd like to retrieve."
+              }
+            ]
+          },
+          "docs": "Retrieve a specific Workflow Deployment Release by either its UUID or the name of a Release Tag that points to it."
+        },
+        {
+          "info": {
+            "name": "Retrieve Workflow Release Tag",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://predict.vellum.ai/v1/workflow-deployments/:id/release-tags/:name",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Workflow Deployment's ID or its unique name"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Release Tag associated with this Workflow Deployment that you'd like to retrieve."
+              }
+            ]
+          },
+          "docs": "Retrieve a Workflow Release Tag by tag name, associated with a specified Workflow Deployment."
+        },
+        {
+          "info": {
+            "name": "Update Workflow Release Tag",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://predict.vellum.ai/v1/workflow-deployments/:id/release-tags/:name",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Workflow Deployment's ID or its unique name"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Release Tag associated with this Workflow Deployment that you'd like to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing Release Tag associated with the specified Workflow Deployment."
+        },
+        {
+          "info": {
+            "name": "List Workflow Release Tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://predict.vellum.ai/v1/workflow-deployments/:id/release-tags",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Workflow Deployment's ID or its unique name"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "source",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Release Tags associated with the specified Workflow Deployment"
+        },
+        {
+          "info": {
+            "name": "Workflow Deployment History Item Retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://predict.vellum.ai/v1/workflow-deployments/:id/history/:history_id_or_release_tag",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "history_id_or_release_tag",
+                "value": "",
+                "type": "path",
+                "description": "Either the UUID of Workflow Deployment History Item you'd like to retrieve, or the name of a Release Tag that's pointing to the Workflow Deployment History Item you'd like to retrieve."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Workflow Deployment's ID or its unique name"
+              }
+            ]
+          },
+          "docs": "DEPRECATED: This endpoint is deprecated and will be removed in a future release. Please use the\n`retrieve_workflow_deployment_release` endpoint instead."
+        },
+        {
+          "info": {
+            "name": "List Workflow Deployment Event Executions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://predict.vellum.ai/v1/workflow-deployments/:id/execution-events",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of executions to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the executions."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Workflow Deployment Event Executions"
+        },
+        {
+          "info": {
+            "name": "Workflow Deployment Event Execution",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://predict.vellum.ai/v1/workflow-deployments/:id/execution-events/:execution_id",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "execution_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Workflow Deployment Event Execution"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "subpackage_workflowExecutions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve Workflow Execution Detail",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://predict.vellum.ai/v1/workflow-executions/:execution_id/detail",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "execution_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "prev_span_id",
+                "value": "",
+                "type": "query",
+                "description": "Optional keyset cursor span_id to continue from (exclusive)"
+              },
+              {
+                "name": "span_limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of spans to return (for lazy loading)"
+              }
+            ]
+          },
+          "docs": "Retrieve Workflow Execution Detail"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "subpackage_events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://predict.vellum.ai/monitoring/v1/events",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Accept an event or list of events and publish them to ClickHouse for analytics processing."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "subpackage_documentIndexes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Add Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://predict.vellum.ai/v1/document-indexes/:id/documents/:document_id",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "document_id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Vellum-generated ID or the originally supplied external_id that uniquely identifies the Document you'd like to add."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Vellum-generated ID or the originally specified name that uniquely identifies the Document Index to which you'd like to add the Document."
+              }
+            ]
+          },
+          "docs": "Adds a previously uploaded Document to the specified Document Index."
+        },
+        {
+          "info": {
+            "name": "Remove Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://predict.vellum.ai/v1/document-indexes/:id/documents/:document_id",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "document_id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Vellum-generated ID or the originally supplied external_id that uniquely identifies the Document you'd like to remove."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Vellum-generated ID or the originally specified name that uniquely identifies the Document Index from which you'd like to remove a Document."
+              }
+            ]
+          },
+          "docs": "Removes a Document from a Document Index without deleting the Document itself."
+        },
+        {
+          "info": {
+            "name": "List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://predict.vellum.ai/v1/document-indexes",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search for document indices by name or label"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter down to only document indices that have a status matching the status specified\n\n* `ACTIVE` - Active\n* `ARCHIVED` - Archived\n* `PENDING_DELETION` - Pending Deletion"
+              }
+            ]
+          },
+          "docs": "Used to retrieve a list of Document Indexes."
+        },
+        {
+          "info": {
+            "name": "Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://predict.vellum.ai/v1/document-indexes",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new document index."
+        },
+        {
+          "info": {
+            "name": "Retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://predict.vellum.ai/v1/document-indexes/:id",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Document Index's ID or its unique name"
+              },
+              {
+                "name": "mask_indexing_config",
+                "value": "",
+                "type": "query",
+                "description": "Whether to mask the indexing configuration in the response"
+              }
+            ]
+          },
+          "docs": "Used to retrieve a Document Index given its ID or name."
+        },
+        {
+          "info": {
+            "name": "Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://predict.vellum.ai/v1/document-indexes/:id",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Document Index's ID or its unique name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Used to fully update a Document Index given its ID or name."
+        },
+        {
+          "info": {
+            "name": "Partial Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://predict.vellum.ai/v1/document-indexes/:id",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Document Index's ID or its unique name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Used to partial update a Document Index given its ID or name."
+        },
+        {
+          "info": {
+            "name": "Destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://predict.vellum.ai/v1/document-indexes/:id",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Document Index's ID or its unique name"
+              }
+            ]
+          },
+          "docs": "Used to delete a Document Index given its ID or name."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "subpackage_documents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Upload",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://predict.vellum.ai/v1/upload-document",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "add_to_index_names",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "external_id",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "label",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "contents",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "url",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "keywords",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "metadata",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Upload a document to be indexed and used for search.\n\n**Note:** Uses a base url of `https://documents.vellum.ai`.\n"
+        },
+        {
+          "info": {
+            "name": "Retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://predict.vellum.ai/v1/documents/:id",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a Document, keying off of either its Vellum-generated ID or its external ID."
+        },
+        {
+          "info": {
+            "name": "Partial Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://predict.vellum.ai/v1/documents/:id",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "label",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "status",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "keywords",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "metadata",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Update a Document, keying off of either its Vellum-generated ID or its external ID. Particularly useful for updating its metadata."
+        },
+        {
+          "info": {
+            "name": "Destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://predict.vellum.ai/v1/documents/:id",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a Document, keying off of either its Vellum-generated ID or its external ID."
+        },
+        {
+          "info": {
+            "name": "List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://predict.vellum.ai/v1/documents",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "document_index_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter down to only those documents that are included in the specified index. You may provide either the Vellum-generated ID or the unique name of the index specified upon initial creation."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              }
+            ]
+          },
+          "docs": "Used to list documents. Optionally filter on supported fields."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "subpackage_uploadedFiles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://predict.vellum.ai/v1/uploaded-files/:id",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this uploaded file."
+              },
+              {
+                "name": "expiry_seconds",
+                "value": "",
+                "type": "query",
+                "description": "The number of seconds until the signed URL expires. Must be > 0 and <= 2592000 (30 days). Non-numeric or out-of-range values fall back to the default (604800 seconds or 7 days)."
+              }
+            ]
+          },
+          "docs": "Retrieve a previously uploaded file by its ID"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "subpackage_testSuites",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Test Suite Test Cases",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://predict.vellum.ai/v1/test-suites/:id/test-cases",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Test Suites' ID or its unique name"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "List the Test Cases associated with a Test Suite"
+        },
+        {
+          "info": {
+            "name": "Upsert Test Suite Test Case",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://predict.vellum.ai/v1/test-suites/:id/test-cases",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Test Suites' ID or its unique name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Upserts a new test case for a test suite, keying off of the optionally provided test case id.\n\nIf an id is provided and has a match, the test case will be updated. If no id is provided or no match\nis found, a new test case will be appended to the end.\n\nNote that a full replacement of the test case is performed, so any fields not provided will be removed\nor overwritten with default values."
+        },
+        {
+          "info": {
+            "name": "Test Suite Test Cases Bulk",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://predict.vellum.ai/v1/test-suites/:id/test-cases-bulk",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Test Suites' ID or its unique name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Created, replace, and delete Test Cases within the specified Test Suite in bulk"
+        },
+        {
+          "info": {
+            "name": "Delete Test Suite Test Case",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://predict.vellum.ai/v1/test-suites/:id/test-cases/:test_case_id",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Test Suites' ID or its unique name"
+              },
+              {
+                "name": "test_case_id",
+                "value": "",
+                "type": "path",
+                "description": "An id identifying the test case that you'd like to delete"
+              }
+            ]
+          },
+          "docs": "Deletes an existing test case for a test suite, keying off of the test case id.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "subpackage_testSuiteRuns",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://predict.vellum.ai/v1/test-suite-runs",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Trigger a Test Suite and create a new Test Suite Run"
+        },
+        {
+          "info": {
+            "name": "Retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://predict.vellum.ai/v1/test-suite-runs/:id",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this test suite run."
+              }
+            ]
+          },
+          "docs": "Retrieve a specific Test Suite Run by ID"
+        },
+        {
+          "info": {
+            "name": "List Executions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://predict.vellum.ai/v1/test-suite-runs/:id/executions",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this test suite run."
+              },
+              {
+                "name": "expand",
+                "value": "",
+                "type": "query",
+                "description": "The response fields to expand for more information.\n- 'metric_results.metric_label' expands the metric label for each metric result.\n- 'metric_results.metric_definition' expands the metric definition for each metric result.\n- 'metric_results.metric_definition.name' expands the metric definition name for each metric result."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "List Executions"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "subpackage_folderEntities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Add Entity To Folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://predict.vellum.ai/v1/folders/:folder_id/add-entity",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "folder_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the folder to which the entity should be added. This can be a UUID of a folder, or the name of a root\ndirectory. Supported root directories include:\n- PROMPT_SANDBOX\n- WORKFLOW_SANDBOX\n- DOCUMENT_INDEX\n- TEST_SUITE"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add an entity to a specific folder or root directory.\n\nAdding an entity to a folder will remove it from any other folders it might have been a member of."
+        },
+        {
+          "info": {
+            "name": "List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://predict.vellum.ai/v1/folder-entities",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "entity_status",
+                "value": "",
+                "type": "query",
+                "description": "Filter down to only those objects whose entities have a status matching the status specified.\n\n* `ACTIVE` - Active\n* `ARCHIVED` - Archived\n* `PENDING_DELETION` - Pending Deletion"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "parent_folder_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter down to only those entities whose parent folder has the specified ID.\n\nTo filter by an entity's parent folder, provide the ID of the parent folder. To filter by the root directory, provide\na string representing the entity type of the root directory. Supported root directories include:\n- PROMPT_SANDBOX\n- WORKFLOW_SANDBOX\n- DOCUMENT_INDEX\n- TEST_SUITE"
+              }
+            ]
+          },
+          "docs": "List all folder entities within a specified folder."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "subpackage_workspaceSecrets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://predict.vellum.ai/v1/workspace-secrets/:id",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Workspace Secret's ID or its unique name"
+              }
+            ]
+          },
+          "docs": "Used to retrieve a Workspace Secret given its ID or name."
+        },
+        {
+          "info": {
+            "name": "Partial Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://predict.vellum.ai/v1/workspace-secrets/:id",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Workspace Secret's ID or its unique name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Used to update a Workspace Secret given its ID or name."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
