@@ -61,11 +61,11 @@ apis:
         url: https://docs.vellum.ai/api-reference
       - type: GettingStarted
         url: https://docs.vellum.ai/welcome/getting-started
-      - type: SignUp
+      - type: Signup
         url: https://app.vellum.ai/signup
-      - type: SDK
+      - type: SDKs
         url: https://github.com/vellum-ai/vellum-client-python
-      - type: SDK
+      - type: SDKs
         url: https://github.com/vellum-ai/vellum-client-typescript
       - type: GitHubOrganization
         url: https://github.com/vellum-ai
@@ -131,7 +131,7 @@ common:
     url: https://github.com/vellum-ai
   - type: Pricing
     url: https://www.vellum.ai/pricing
-  - type: SignUp
+  - type: Signup
     url: https://app.vellum.ai/signup
   - type: Login
     url: https://app.vellum.ai/login
@@ -143,7 +143,7 @@ common:
     url: https://x.com/vellum_ai
   - type: LinkedIn
     url: https://www.linkedin.com/company/vellum-ai
-  - type: LLMsTxt
+  - type: LlmsText
     url: https://docs.vellum.ai/llms.txt
 maintainers:
   - FN: Kin Lane
