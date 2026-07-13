@@ -2,13 +2,21 @@
   "repo": "vellum",
   "feeds": [
     {
-      "source": "https://www.vellum.ai/blog",
-      "feed_url": "",
-      "saved": 2,
-      "method": "agent-scrape"
+      "source": "https://www.vellum.ai/pricing",
+      "feed_url": "https://www.vellum.ai/pricing",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    },
+    {
+      "source": "https://docs.vellum.ai",
+      "feed_url": "https://docs.vellum.ai",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
   "post_count": 3,
-  "fetched": "2026-06-27T13:19:38Z",
+  "fetched": "2026-07-11T11:50:51Z",
   "agent_pulled": "2026-06-27"
 }
