@@ -121,6 +121,8 @@ apis:
       - type: API Key
         description: Workspace API keys passed via the `X_API_KEY` header authenticate REST and SDK calls.
 common:
+  - type: AgenticAccess
+    url: agentic-access/vellum-agentic-access.yml
   - type: DomainSecurity
     url: security/vellum-domain-security.yml
   - type: Authentication
