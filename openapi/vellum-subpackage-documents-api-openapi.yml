@@ -1,0 +1,584 @@
+openapi: 3.1.0
+info:
+  title: Client SDK subpackage_documents API
+  version: 1.0.0
+servers:
+- url: https://predict.vellum.ai
+- url: https://api.vellum.ai
+- url: https://documents.vellum.ai
+tags:
+- name: subpackage_documents
+paths:
+  /v1/upload-document:
+    post:
+      operationId: upload
+      summary: Upload
+      description: 'Upload a document to be indexed and used for search.
+
+
+        **Note:** Uses a base url of `https://documents.vellum.ai`.
+
+        '
+      tags:
+      - subpackage_documents
+      parameters:
+      - name: X-API-KEY
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-API-Version
+        in: header
+        required: false
+        schema:
+          type: string
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadDocumentResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadDocumentErrorResponse'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadDocumentErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadDocumentErrorResponse'
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                add_to_index_names:
+                  type:
+                  - array
+                  - 'null'
+                  items:
+                    type: string
+                  description: Optionally include the names of all indexes that you'd like this document to be included in
+                external_id:
+                  type:
+                  - string
+                  - 'null'
+                  description: Optionally include an external ID for this document. This is useful if you want to re-upload the same document later when its contents change and would like it to be re-indexed.
+                label:
+                  type: string
+                  description: A human-friendly name for this document. Typically the filename.
+                contents:
+                  type: string
+                  format: binary
+                  description: The file contents of the document. Either contents or url must be provided.
+                url:
+                  type:
+                  - string
+                  - 'null'
+                  format: uri
+                  description: A URL from which the document can be downloaded. Either contents or url must be provided.
+                keywords:
+                  type:
+                  - array
+                  - 'null'
+                  items:
+                    type: string
+                  description: Optionally include a list of keywords that'll be associated with this document. Used when performing keyword searches.
+                metadata:
+                  type:
+                  - string
+                  - 'null'
+                  format: byte
+                  description: A stringified JSON object containing any metadata associated with the document that you'd like to filter upon later.
+              required:
+              - label
+  /v1/documents/{id}:
+    get:
+      operationId: retrieve
+      summary: Retrieve
+      description: Retrieve a Document, keying off of either its Vellum-generated ID or its external ID.
+      tags:
+      - subpackage_documents
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-API-KEY
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-API-Version
+        in: header
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentRead'
+    patch:
+      operationId: partial-update
+      summary: Partial Update
+      description: Update a Document, keying off of either its Vellum-generated ID or its external ID. Particularly useful for updating its metadata.
+      tags:
+      - subpackage_documents
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-API-KEY
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-API-Version
+        in: header
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentRead'
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                label:
+                  type: string
+                  description: A human-readable label for the document. Defaults to the originally uploaded file's file name.
+                status:
+                  $ref: '#/components/schemas/DocumentStatus'
+                  description: 'The current status of the document
+
+
+                    * `ACTIVE` - Active'
+                keywords:
+                  type: array
+                  items:
+                    type: string
+                  description: A list of keywords that'll be associated with the document. Used as part of keyword search.
+                metadata:
+                  type:
+                  - object
+                  - 'null'
+                  additionalProperties:
+                    description: Any type
+                  description: A JSON object containing any metadata associated with the document that you'd like to filter upon later.
+    delete:
+      operationId: destroy
+      summary: Destroy
+      description: Delete a Document, keying off of either its Vellum-generated ID or its external ID.
+      tags:
+      - subpackage_documents
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-API-KEY
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-API-Version
+        in: header
+        required: false
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No response body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/documents_destroy_Response_204'
+  /v1/documents:
+    get:
+      operationId: list
+      summary: List
+      description: Used to list documents. Optionally filter on supported fields.
+      tags:
+      - subpackage_documents
+      parameters:
+      - name: document_index_id
+        in: query
+        description: Filter down to only those documents that are included in the specified index. You may provide either the Vellum-generated ID or the unique name of the index specified upon initial creation.
+        required: false
+        schema:
+          type: string
+          format: uuid
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        required: false
+        schema:
+          type: integer
+      - name: ordering
+        in: query
+        description: Which field to use when ordering the results.
+        required: false
+        schema:
+          type: string
+      - name: search
+        in: query
+        description: A search term.
+        required: false
+        schema:
+          type: string
+      - name: X-API-KEY
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-API-Version
+        in: header
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedSlimDocumentList'
+components:
+  schemas:
+    PaginatedSlimDocumentList:
+      type: object
+      properties:
+        count:
+          type: integer
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/SlimDocument'
+      title: PaginatedSlimDocumentList
+    DocumentStatus:
+      type: string
+      enum:
+      - ACTIVE
+      description: '* `ACTIVE` - Active'
+      title: DocumentStatus
+    SlimDocument:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Vellum-generated ID that uniquely identifies this document.
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: The external ID that was originally provided when uploading the document.
+        last_uploaded_at:
+          type: string
+          format: date-time
+          description: A timestamp representing when this document was most recently uploaded.
+        label:
+          type: string
+          description: Human-friendly name for this document.
+        processing_state:
+          $ref: '#/components/schemas/DocumentProcessingState'
+        processing_failure_reason:
+          oneOf:
+          - $ref: '#/components/schemas/ProcessingFailureReasonEnum'
+          - type: 'null'
+          description: 'An enum value representing why the document could not be processed. Is null unless processing_state is FAILED.
+
+
+            * `EXCEEDED_CHARACTER_LIMIT` - Exceeded Character Limit
+
+            * `INVALID_FILE` - Invalid File
+
+            * `INVALID_CREDENTIALS` - Invalid Credentials'
+        status:
+          $ref: '#/components/schemas/DocumentStatus'
+          description: 'The document''s current status.
+
+
+            * `ACTIVE` - Active'
+        keywords:
+          type: array
+          items:
+            type: string
+          description: A list of keywords associated with this document. Originally provided when uploading the document.
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+          description: A previously supplied JSON object containing metadata that can be filtered on when searching.
+        document_to_document_indexes:
+          type: array
+          items:
+            $ref: '#/components/schemas/SlimDocumentDocumentToDocumentIndex'
+      required:
+      - id
+      - last_uploaded_at
+      - label
+      - processing_state
+      - document_to_document_indexes
+      title: SlimDocument
+    UploadDocumentResponse:
+      type: object
+      properties:
+        document_id:
+          type: string
+          format: uuid
+          description: The ID of the newly created document.
+      required:
+      - document_id
+      title: UploadDocumentResponse
+    DocumentProcessingState:
+      type: string
+      enum:
+      - QUEUED
+      - PROCESSING
+      - PROCESSED
+      - FAILED
+      - UNKNOWN
+      description: '* `QUEUED` - Queued
+
+        * `PROCESSING` - Processing
+
+        * `PROCESSED` - Processed
+
+        * `FAILED` - Failed
+
+        * `UNKNOWN` - Unknown'
+      title: DocumentProcessingState
+    DocumentRead:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: The unique id of this document as it exists in the user's system.
+        last_uploaded_at:
+          type: string
+          format: date-time
+        label:
+          type: string
+          description: A human-readable label for the document. Defaults to the originally uploaded file's file name.
+        processing_state:
+          $ref: '#/components/schemas/DocumentProcessingState'
+        status:
+          $ref: '#/components/schemas/DocumentStatus'
+          description: 'The current status of the document
+
+
+            * `ACTIVE` - Active'
+        keywords:
+          type: array
+          items:
+            type: string
+          description: A list of keywords that'll be associated with the document. Used as part of keyword search.
+        original_file_url:
+          type:
+          - string
+          - 'null'
+        document_to_document_indexes:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentDocumentToDocumentIndex'
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+          description: A previously supplied JSON object containing metadata that can be filtered on when searching.
+      required:
+      - id
+      - last_uploaded_at
+      - label
+      - processing_state
+      - original_file_url
+      - document_to_document_indexes
+      title: DocumentRead
+    ProcessingFailureReasonEnum:
+      type: string
+      enum:
+      - EXCEEDED_CHARACTER_LIMIT
+      - INVALID_FILE
+      - INVALID_CREDENTIALS
+      description: '* `EXCEEDED_CHARACTER_LIMIT` - Exceeded Character Limit
+
+        * `INVALID_FILE` - Invalid File
+
+        * `INVALID_CREDENTIALS` - Invalid Credentials'
+      title: ProcessingFailureReasonEnum
+    documents_destroy_Response_204:
+      type: object
+      properties: {}
+      description: Empty response body
+      title: documents_destroy_Response_204
+    SlimDocumentDocumentToDocumentIndex:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Vellum-generated ID that uniquely identifies this link.
+        environment_document_index_id:
+          type: string
+          format: uuid
+          description: Vellum-generated ID that uniquely identifies the environment index this document is included in.
+        document_index_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: Vellum-generated ID that uniquely identifies the index this document is included in.
+        indexing_state:
+          $ref: '#/components/schemas/IndexingStateEnum'
+          description: 'An enum value representing where this document is along its indexing lifecycle for this index.
+
+
+            * `AWAITING_PROCESSING` - Awaiting Processing
+
+            * `QUEUED` - Queued
+
+            * `INDEXING` - Indexing
+
+            * `INDEXED` - Indexed
+
+            * `FAILED` - Failed'
+        processing_state:
+          type:
+          - string
+          - 'null'
+      required:
+      - id
+      - environment_document_index_id
+      - document_index_id
+      - processing_state
+      description: A slim representation of the link between a Document and a Document Index it's a member of.
+      title: SlimDocumentDocumentToDocumentIndex
+    DocumentDocumentToDocumentIndex:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Vellum-generated ID that uniquely identifies this link.
+        environment_document_index_id:
+          type: string
+          format: uuid
+          description: Vellum-generated ID that uniquely identifies the environment index this document is included in.
+        document_index_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: Vellum-generated ID that uniquely identifies the index this document is included in.
+        indexing_state:
+          $ref: '#/components/schemas/IndexingStateEnum'
+          description: 'An enum value representing where this document is along its indexing lifecycle for this index.
+
+
+            * `AWAITING_PROCESSING` - Awaiting Processing
+
+            * `QUEUED` - Queued
+
+            * `INDEXING` - Indexing
+
+            * `INDEXED` - Indexed
+
+            * `FAILED` - Failed'
+        extracted_text_file_url:
+          type:
+          - string
+          - 'null'
+        processing_state:
+          type:
+          - string
+          - 'null'
+      required:
+      - id
+      - environment_document_index_id
+      - document_index_id
+      - extracted_text_file_url
+      - processing_state
+      description: A detailed representation of the link between a Document and a Document Index it's a member of.
+      title: DocumentDocumentToDocumentIndex
+    IndexingStateEnum:
+      type: string
+      enum:
+      - AWAITING_PROCESSING
+      - QUEUED
+      - INDEXING
+      - INDEXED
+      - FAILED
+      description: '* `AWAITING_PROCESSING` - Awaiting Processing
+
+        * `QUEUED` - Queued
+
+        * `INDEXING` - Indexing
+
+        * `INDEXED` - Indexed
+
+        * `FAILED` - Failed'
+      title: IndexingStateEnum
+    UploadDocumentErrorResponse:
+      type: object
+      properties:
+        detail:
+          type: string
+      required:
+      - detail
+      title: UploadDocumentErrorResponse
+  securitySchemes:
+    default:
+      type: apiKey
+      in: header
+      name: X-API-KEY

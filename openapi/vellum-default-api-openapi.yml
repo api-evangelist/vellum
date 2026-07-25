@@ -1,0 +1,5817 @@
+openapi: 3.1.0
+info:
+  title: Client SDK  API
+  version: 1.0.0
+servers:
+- url: https://predict.vellum.ai
+- url: https://api.vellum.ai
+- url: https://documents.vellum.ai
+tags:
+- name: ''
+paths:
+  /v1/execute-prompt:
+    post:
+      operationId: execute-prompt
+      summary: Execute Prompt
+      description: Executes a deployed Prompt and returns the result.
+      tags:
+      - ''
+      parameters:
+      - name: X-API-KEY
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-API-Version
+        in: header
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecutePromptResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecutePromptApiErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecutePromptApiErrorResponse'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecutePromptApiErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecutePromptApiErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExecutePromptRequest'
+  /v1/execute-prompt-stream:
+    post:
+      operationId: execute-prompt-stream
+      summary: Execute Prompt Stream
+      description: Executes a deployed Prompt and streams back the results.
+      tags:
+      - ''
+      parameters:
+      - name: X-API-KEY
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-API-Version
+        in: header
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            text/event-stream:
+              schema:
+                $ref: '#/components/schemas/ExecutePromptEvent'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecutePromptApiErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecutePromptApiErrorResponse'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecutePromptApiErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecutePromptApiErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExecutePromptStreamRequest'
+  /v1/submit-completion-actuals:
+    post:
+      operationId: submit-completion-actuals
+      summary: Submit Completion Actuals
+      description: Used to submit feedback regarding the quality of previously generated completions.
+      tags:
+      - ''
+      parameters:
+      - name: X-API-KEY
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-API-Version
+        in: header
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: No response body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/submit-completion-actuals_Response_200'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubmitCompletionActualsErrorResponse'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubmitCompletionActualsErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubmitCompletionActualsErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubmitCompletionActualsRequest'
+  /v1/execute-workflow:
+    post:
+      operationId: execute-workflow
+      summary: Execute Workflow
+      description: Executes a deployed Workflow and returns its outputs.
+      tags:
+      - ''
+      parameters:
+      - name: X-API-KEY
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-API-Version
+        in: header
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecuteWorkflowResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  description: Any type
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  description: Any type
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecuteWorkflowErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExecuteWorkflowRequest'
+  /v1/execute-workflow-async:
+    post:
+      operationId: execute-workflow-async
+      summary: Execute Workflow Async
+      description: Executes a deployed Workflow asynchronously and returns the execution ID.
+      tags:
+      - ''
+      parameters:
+      - name: X-API-KEY
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-API-Version
+        in: header
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecuteWorkflowAsyncResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  description: Any type
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  description: Any type
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecuteWorkflowStreamErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExecuteWorkflowAsyncRequest'
+  /v1/execute-workflow-stream:
+    post:
+      operationId: execute-workflow-stream
+      summary: Execute Workflow Stream
+      description: Executes a deployed Workflow and streams back its results.
+      tags:
+      - ''
+      parameters:
+      - name: X-API-KEY
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-API-Version
+        in: header
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            text/event-stream:
+              schema:
+                $ref: '#/components/schemas/WorkflowStreamEvent'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  description: Any type
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecuteWorkflowStreamErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecuteWorkflowStreamErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExecuteWorkflowStreamRequest'
+  /v1/submit-workflow-execution-actuals:
+    post:
+      operationId: submit-workflow-execution-actuals
+      summary: Submit Workflow Execution Actuals
+      description: "    Used to submit feedback regarding the quality of previous workflow execution and its outputs.\n\n    **Note:** Uses a base url of `https://predict.vellum.ai`.    "
+      tags:
+      - ''
+      parameters:
+      - name: X-API-KEY
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-API-Version
+        in: header
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: No response body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/submit-workflow-execution-actuals_Response_200'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubmitWorkflowExecutionActualsRequest'
+  /v1/search:
+    post:
+      operationId: search
+      summary: Search
+      description: Perform a search against a document index.
+      tags:
+      - ''
+      parameters:
+      - name: X-API-KEY
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-API-Version
+        in: header
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchErrorResponse'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchRequestBodyRequest'
+components:
+  schemas:
+    ErrorVellumValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ErrorEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumError'
+          - type: 'null'
+      required:
+      - type
+      - value
+      description: A value representing an Error.
+      title: ErrorVellumValue
+    TemplatingNodeSearchResultsResult:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/SearchResultsEnum'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SearchResult'
+      required:
+      - id
+      - type
+      - value
+      title: TemplatingNodeSearchResultsResult
+    ArrayVellumValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ArrayEnum'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/VellumValue'
+      required:
+      - type
+      - value
+      description: A value representing an array of Vellum variable values.
+      title: ArrayVellumValue
+    WorkflowOutput:
+      oneOf:
+      - $ref: '#/components/schemas/WorkflowOutputString'
+      - $ref: '#/components/schemas/WorkflowOutputNumber'
+      - $ref: '#/components/schemas/WorkflowOutputJSON'
+      - $ref: '#/components/schemas/WorkflowOutputChatHistory'
+      - $ref: '#/components/schemas/WorkflowOutputSearchResults'
+      - $ref: '#/components/schemas/WorkflowOutputArray'
+      - $ref: '#/components/schemas/WorkflowOutputError'
+      - $ref: '#/components/schemas/WorkflowOutputFunctionCall'
+      - $ref: '#/components/schemas/WorkflowOutputImage'
+      - $ref: '#/components/schemas/WorkflowOutputAudio'
+      - $ref: '#/components/schemas/WorkflowOutputVideo'
+      - $ref: '#/components/schemas/WorkflowOutputDocument'
+      title: WorkflowOutput
+    ExecutePromptEvent:
+      oneOf:
+      - $ref: '#/components/schemas/InitiatedExecutePromptEvent'
+      - $ref: '#/components/schemas/StreamingExecutePromptEvent'
+      - $ref: '#/components/schemas/FulfilledExecutePromptEvent'
+      - $ref: '#/components/schemas/RejectedExecutePromptEvent'
+      title: ExecutePromptEvent
+    WorkflowOutputChatHistory:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          description: The output's name, as defined in the workflow
+        type:
+          $ref: '#/components/schemas/ChatHistoryEnum'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ChatMessage'
+      required:
+      - id
+      - name
+      - type
+      - value
+      description: A chat history output from a Workflow execution.
+      title: WorkflowOutputChatHistory
+    WorkflowRequestNumberInputRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The variable's name, as defined in the Workflow.
+        type:
+          $ref: '#/components/schemas/NumberEnum'
+        value:
+          type: number
+          format: double
+      required:
+      - name
+      - type
+      - value
+      description: The input for a number variable in a Workflow.
+      title: WorkflowRequestNumberInputRequest
+    MetricEnum:
+      type: string
+      enum:
+      - METRIC
+      title: MetricEnum
+    NodeOutputCompiledValue:
+      oneOf:
+      - $ref: '#/components/schemas/NodeOutputCompiledStringValue'
+      - $ref: '#/components/schemas/NodeOutputCompiledNumberValue'
+      - $ref: '#/components/schemas/NodeOutputCompiledJsonValue'
+      - $ref: '#/components/schemas/NodeOutputCompiledChatHistoryValue'
+      - $ref: '#/components/schemas/NodeOutputCompiledSearchResultsValue'
+      - $ref: '#/components/schemas/NodeOutputCompiledErrorValue'
+      - $ref: '#/components/schemas/NodeOutputCompiledArrayValue'
+      - $ref: '#/components/schemas/NodeOutputCompiledFunctionCallValue'
+      - $ref: '#/components/schemas/NodeOutputCompiledThinkingValue'
+      title: NodeOutputCompiledValue
+    CodeExecutionNodeSearchResultsResult:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/SearchResultsEnum'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SearchResult'
+      required:
+      - id
+      - type
+      - value
+      title: CodeExecutionNodeSearchResultsResult
+    DocumentChatMessageContentRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/DocumentEnum'
+        value:
+          $ref: '#/components/schemas/VellumDocumentRequest'
+      required:
+      - type
+      - value
+      description: A document value that is used in a chat message.
+      title: DocumentChatMessageContentRequest
+    SearchRequestOptionsRequest:
+      type: object
+      properties:
+        limit:
+          type:
+          - integer
+          - 'null'
+          default: 10
+          description: The maximum number of results to return.
+        weights:
+          oneOf:
+          - $ref: '#/components/schemas/SearchWeightsRequest'
+          - type: 'null'
+          description: The weights to use for the search. Must add up to 1.0.
+        result_merging:
+          oneOf:
+          - $ref: '#/components/schemas/SearchResultMergingRequest'
+          - type: 'null'
+          description: The configuration for merging results.
+        filters:
+          oneOf:
+          - $ref: '#/components/schemas/SearchFiltersRequest'
+          - type: 'null'
+          description: The filters to apply to the search.
+      title: SearchRequestOptionsRequest
+    SearchFiltersRequest:
+      type: object
+      properties:
+        external_ids:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: The document external IDs to filter by
+        metadata:
+          oneOf:
+          - $ref: '#/components/schemas/MetadataFiltersRequest'
+          - type: 'null'
+          description: The metadata filters to apply to the search
+      title: SearchFiltersRequest
+    CodeExecutionNodeNumberResult:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/NumberEnum'
+        value:
+          type:
+          - number
+          - 'null'
+          format: double
+      required:
+      - id
+      - type
+      - value
+      title: CodeExecutionNodeNumberResult
+    NodeEnum:
+      type: string
+      enum:
+      - NODE
+      title: NodeEnum
+    FunctionCallVellumValueRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/FunctionCallEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/FunctionCallRequest'
+          - type: 'null'
+      required:
+      - type
+      - value
+      description: A value representing a Function Call.
+      title: FunctionCallVellumValueRequest
+    TemplatingNodeResultOutput:
+      oneOf:
+      - $ref: '#/components/schemas/TemplatingNodeStringResult'
+      - $ref: '#/components/schemas/TemplatingNodeNumberResult'
+      - $ref: '#/components/schemas/TemplatingNodeJsonResult'
+      - $ref: '#/components/schemas/TemplatingNodeChatHistoryResult'
+      - $ref: '#/components/schemas/TemplatingNodeSearchResultsResult'
+      - $ref: '#/components/schemas/TemplatingNodeErrorResult'
+      - $ref: '#/components/schemas/TemplatingNodeArrayResult'
+      - $ref: '#/components/schemas/TemplatingNodeFunctionCallResult'
+      title: TemplatingNodeResultOutput
+    StreamingEnum:
+      type: string
+      enum:
+      - STREAMING
+      title: StreamingEnum
+    CodeExecutionNodeResultData:
+      type: object
+      properties:
+        output:
+          $ref: '#/components/schemas/CodeExecutionNodeResultOutput'
+        log_output_id:
+          type:
+          - string
+          - 'null'
+      required:
+      - output
+      title: CodeExecutionNodeResultData
+    ChatHistoryVellumValueRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ChatHistoryEnum'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ChatMessageRequest'
+      required:
+      - type
+      - value
+      description: A value representing Chat History.
+      title: ChatHistoryVellumValueRequest
+    StreamingPromptExecutionMeta:
+      type: object
+      properties:
+        latency:
+          type:
+          - integer
+          - 'null'
+      description: The subset of the metadata tracked by Vellum during prompt execution that the request opted into with `expand_meta`.
+      title: StreamingPromptExecutionMeta
+    NodeInputCompiledVideoValue:
+      type: object
+      properties:
+        node_input_id:
+          type: string
+        key:
+          type: string
+        type:
+          $ref: '#/components/schemas/VideoEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumVideo'
+          - type: 'null'
+      required:
+      - node_input_id
+      - key
+      - type
+      - value
+      title: NodeInputCompiledVideoValue
+    WorkflowResultEventOutputData:
+      oneOf:
+      - $ref: '#/components/schemas/WorkflowResultEventOutputDataString'
+      - $ref: '#/components/schemas/WorkflowResultEventOutputDataNumber'
+      - $ref: '#/components/schemas/WorkflowResultEventOutputDataJSON'
+      - $ref: '#/components/schemas/WorkflowResultEventOutputDataChatHistory'
+      - $ref: '#/components/schemas/WorkflowResultEventOutputDataSearchResults'
+      - $ref: '#/components/schemas/WorkflowResultEventOutputDataArray'
+      - $ref: '#/components/schemas/WorkflowResultEventOutputDataFunctionCall'
+      - $ref: '#/components/schemas/WorkflowResultEventOutputDataError'
+      title: WorkflowResultEventOutputData
+    ExecuteWorkflowAsyncResponse:
+      type: object
+      properties:
+        execution_id:
+          type: string
+          description: The ID of the workflow execution.
+      required:
+      - execution_id
+      description: The response from an async Workflow Deployment execution.
+      title: ExecuteWorkflowAsyncResponse
+    ExecutionFunctionCallVellumValue:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The variable's uniquely identifying internal id.
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/FunctionCallEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/FunctionCall'
+          - type: 'null'
+      required:
+      - id
+      - name
+      - type
+      - value
+      description: A value representing a Function Call.
+      title: ExecutionFunctionCallVellumValue
+    NodeInputCompiledAudioValue:
+      type: object
+      properties:
+        node_input_id:
+          type: string
+        key:
+          type: string
+        type:
+          $ref: '#/components/schemas/AudioEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumAudio'
+          - type: 'null'
+      required:
+      - node_input_id
+      - key
+      - type
+      - value
+      title: NodeInputCompiledAudioValue
+    ConditionalEnum:
+      type: string
+      enum:
+      - CONDITIONAL
+      title: ConditionalEnum
+    Price:
+      type: object
+      properties:
+        value:
+          type: number
+          format: double
+        unit:
+          $ref: '#/components/schemas/UnitEnum'
+      required:
+      - value
+      - unit
+      title: Price
+    SubworkflowNodeResultData:
+      type: object
+      properties:
+        execution_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+      title: SubworkflowNodeResultData
+    CodeExecutionNodeArrayResult:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/ArrayEnum'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/VellumValue'
+      required:
+      - id
+      - type
+      - value
+      title: CodeExecutionNodeArrayResult
+    submit-workflow-execution-actuals_Response_200:
+      type: object
+      properties: {}
+      description: Empty response body
+      title: submit-workflow-execution-actuals_Response_200
+    RejectedPromptExecutionMeta:
+      type: object
+      properties:
+        latency:
+          type:
+          - integer
+          - 'null'
+        finish_reason:
+          oneOf:
+          - $ref: '#/components/schemas/FinishReasonEnum'
+          - type: 'null'
+      description: The subset of the metadata tracked by Vellum during prompt execution that the request opted into with `expand_meta`.
+      title: RejectedPromptExecutionMeta
+    AudioEnum:
+      type: string
+      enum:
+      - AUDIO
+      title: AudioEnum
+    InitiatedEnum:
+      type: string
+      enum:
+      - INITIATED
+      title: InitiatedEnum
+    MergeNodeResultData:
+      type: object
+      properties:
+        paused_node_data:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      title: MergeNodeResultData
+    VellumError:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/VellumErrorCodeEnum'
+        message:
+          type: string
+        raw_data:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - code
+      - message
+      title: VellumError
+    WorkflowEventErrorRawData:
+      oneOf:
+      - type: object
+        additionalProperties:
+          description: Any type
+      - type: string
+      title: WorkflowEventErrorRawData
+    SubmitCompletionActualsErrorResponse:
+      type: object
+      properties:
+        detail:
+          type: string
+      required:
+      - detail
+      title: SubmitCompletionActualsErrorResponse
+    MetadataFilterRuleCombinator:
+      type: string
+      enum:
+      - and
+      - or
+      description: '* `and` - AND
+
+        * `or` - OR'
+      title: MetadataFilterRuleCombinator
+    VellumVideoRequest:
+      type: object
+      properties:
+        src:
+          type: string
+          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - src
+      title: VellumVideoRequest
+    ExecutionSearchResultsVellumValue:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The variable's uniquely identifying internal id.
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/SearchResultsEnum'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SearchResult'
+      required:
+      - id
+      - name
+      - type
+      - value
+      description: A value representing Search Results.
+      title: ExecutionSearchResultsVellumValue
+    RejectedEnum:
+      type: string
+      enum:
+      - REJECTED
+      title: RejectedEnum
+    SecretEnum:
+      type: string
+      enum:
+      - SECRET
+      title: SecretEnum
+    ThinkingEnum:
+      type: string
+      enum:
+      - THINKING
+      title: ThinkingEnum
+    PromptNodeExecutionMeta:
+      type: object
+      properties:
+        usage:
+          oneOf:
+          - $ref: '#/components/schemas/MLModelUsage'
+          - type: 'null'
+        cost:
+          oneOf:
+          - $ref: '#/components/schemas/Price'
+          - type: 'null'
+        model_name:
+          type:
+          - string
+          - 'null'
+      description: The subset of the metadata tracked by Vellum during prompt execution that the request opted into with `expand_meta`.
+      title: PromptNodeExecutionMeta
+    WorkflowOutputError:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          description: The output's name, as defined in the workflow
+        type:
+          $ref: '#/components/schemas/ErrorEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumError'
+          - type: 'null'
+      required:
+      - id
+      - name
+      - type
+      - value
+      description: An error output from a Workflow execution.
+      title: WorkflowOutputError
+    MergeEnum:
+      type: string
+      enum:
+      - MERGE
+      title: MergeEnum
+    SearchResultMergingRequest:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          default: true
+          description: Whether to enable merging results
+      title: SearchResultMergingRequest
+    AudioVellumValueRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/AudioEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumAudioRequest'
+          - type: 'null'
+      required:
+      - type
+      - value
+      description: A base Vellum primitive value representing audio.
+      title: AudioVellumValueRequest
+    FulfilledExecutePromptEvent:
+      type: object
+      properties:
+        state:
+          $ref: '#/components/schemas/FulfilledEnum'
+        outputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/PromptOutput'
+        execution_id:
+          type: string
+        meta:
+          $ref: '#/components/schemas/FulfilledPromptExecutionMeta'
+        chat_message_metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - state
+      - outputs
+      - execution_id
+      description: The final data event returned indicating that the stream has ended and all final resolved values from the model can be found.
+      title: FulfilledExecutePromptEvent
+    FunctionCallEnum:
+      type: string
+      enum:
+      - FUNCTION_CALL
+      title: FunctionCallEnum
+    PromptNodeResult:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/PromptEnum'
+        data:
+          $ref: '#/components/schemas/PromptNodeResultData'
+      required:
+      - type
+      - data
+      description: A Node Result Event emitted from a Prompt Node.
+      title: PromptNodeResult
+    ExecutionThinkingVellumValue:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The variable's uniquely identifying internal id.
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/ThinkingEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/StringVellumValue'
+          - type: 'null'
+      required:
+      - id
+      - name
+      - type
+      - value
+      description: A value representing Thinking mode output.
+      title: ExecutionThinkingVellumValue
+    TemplatingNodeChatHistoryResult:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/ChatHistoryEnum'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ChatMessage'
+      required:
+      - id
+      - type
+      - value
+      title: TemplatingNodeChatHistoryResult
+    TemplatingNodeNumberResult:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/NumberEnum'
+        value:
+          type:
+          - number
+          - 'null'
+          format: double
+      required:
+      - id
+      - type
+      - value
+      title: TemplatingNodeNumberResult
+    WorkflowEventError:
+      type: object
+      properties:
+        message:
+          type: string
+        raw_data:
+          oneOf:
+          - $ref: '#/components/schemas/WorkflowEventErrorRawData'
+          - type: 'null'
+        code:
+          $ref: '#/components/schemas/WorkflowExecutionEventErrorCode'
+        stacktrace:
+          type:
+          - string
+          - 'null'
+      required:
+      - message
+      - code
+      title: WorkflowEventError
+    ExecutionJsonVellumValue:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The variable's uniquely identifying internal id.
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/JsonEnum'
+        value:
+          oneOf:
+          - description: Any type
+          - type: 'null'
+      required:
+      - id
+      - name
+      - type
+      - value
+      description: A value representing a JSON object.
+      title: ExecutionJsonVellumValue
+    SearchResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/SearchResult'
+          description: The results of the search. Each result represents a chunk that matches the search query.
+      required:
+      - results
+      title: SearchResponse
+    LogicalOperator:
+      type: string
+      enum:
+      - '='
+      - '!='
+      - <
+      - '>'
+      - <=
+      - '>='
+      - contains
+      - beginsWith
+      - endsWith
+      - doesNotContain
+      - doesNotBeginWith
+      - doesNotEndWith
+      - 'null'
+      - notNull
+      - in
+      - notIn
+      - between
+      - notBetween
+      - concat
+      - +
+      - '-'
+      - blank
+      - notBlank
+      - coalesce
+      - accessField
+      - parseJson
+      - and
+      - or
+      - isError
+      - length
+      description: '* `=` - EQUALS
+
+        * `!=` - DOES_NOT_EQUAL
+
+        * `<` - LESS_THAN
+
+        * `>` - GREATER_THAN
+
+        * `<=` - LESS_THAN_OR_EQUAL_TO
+
+        * `>=` - GREATER_THAN_OR_EQUAL_TO
+
+        * `contains` - CONTAINS
+
+        * `beginsWith` - BEGINS_WITH
+
+        * `endsWith` - ENDS_WITH
+
+        * `doesNotContain` - DOES_NOT_CONTAIN
+
+        * `doesNotBeginWith` - DOES_NOT_BEGIN_WITH
+
+        * `doesNotEndWith` - DOES_NOT_END_WITH
+
+        * `null` - NULL
+
+        * `notNull` - NOT_NULL
+
+        * `in` - IN
+
+        * `notIn` - NOT_IN
+
+        * `between` - BETWEEN
+
+        * `notBetween` - NOT_BETWEEN
+
+        * `concat` - CONCAT
+
+        * `+` - ADD
+
+        * `-` - MINUS
+
+        * `blank` - BLANK
+
+        * `notBlank` - NOT_BLANK
+
+        * `coalesce` - COALESCE
+
+        * `accessField` - ACCESS_FIELD
+
+        * `parseJson` - PARSE_JSON
+
+        * `and` - AND
+
+        * `or` - OR
+
+        * `isError` - IS_ERROR
+
+        * `length` - LENGTH'
+      title: LogicalOperator
+    TemplatingNodeStringResult:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/StringEnum'
+        value:
+          type:
+          - string
+          - 'null'
+      required:
+      - id
+      - type
+      - value
+      title: TemplatingNodeStringResult
+    ExecutePromptResponse:
+      oneOf:
+      - $ref: '#/components/schemas/FulfilledExecutePromptResponse'
+      - $ref: '#/components/schemas/RejectedExecutePromptResponse'
+      title: ExecutePromptResponse
+    FunctionCallChatMessageContent:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/FunctionCallEnum'
+        value:
+          $ref: '#/components/schemas/FunctionCallChatMessageContentValue'
+      required:
+      - type
+      - value
+      description: A function call value that is used in a chat message.
+      title: FunctionCallChatMessageContent
+    NodeInputCompiledErrorValue:
+      type: object
+      properties:
+        node_input_id:
+          type: string
+        key:
+          type: string
+        type:
+          $ref: '#/components/schemas/ErrorEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumError'
+          - type: 'null'
+      required:
+      - node_input_id
+      - key
+      - type
+      - value
+      title: NodeInputCompiledErrorValue
+    SubmitCompletionActualsRequest:
+      type: object
+      properties:
+        deployment_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of the deployment. Must provide either this or deployment_name.
+        deployment_name:
+          type:
+          - string
+          - 'null'
+          description: The name of the deployment. Must provide either this or deployment_id.
+        actuals:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubmitCompletionActualRequest'
+          description: Feedback regarding the quality of previously generated completions
+      required:
+      - actuals
+      title: SubmitCompletionActualsRequest
+    SearchResultDocument:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of the document.
+        label:
+          type: string
+          description: The human-readable name for the document.
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: The unique ID of the document as represented in an external system and specified when it was originally uploaded.
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+          description: A previously supplied JSON object containing metadata that can be filtered on when searching.
+      required:
+      - label
+      title: SearchResultDocument
+    MLModelUsage:
+      type: object
+      properties:
+        output_token_count:
+          type:
+          - integer
+          - 'null'
+        input_token_count:
+          type:
+          - integer
+          - 'null'
+        input_char_count:
+          type:
+          - integer
+          - 'null'
+        output_char_count:
+          type:
+          - integer
+          - 'null'
+        compute_nanos:
+          type:
+          - integer
+          - 'null'
+        cache_creation_input_tokens:
+          type:
+          - integer
+          - 'null'
+        cache_read_input_tokens:
+          type:
+          - integer
+          - 'null'
+      title: MLModelUsage
+    CodeExecutionNodeResultOutput:
+      oneOf:
+      - $ref: '#/components/schemas/CodeExecutionNodeStringResult'
+      - $ref: '#/components/schemas/CodeExecutionNodeNumberResult'
+      - $ref: '#/components/schemas/CodeExecutionNodeJsonResult'
+      - $ref: '#/components/schemas/CodeExecutionNodeChatHistoryResult'
+      - $ref: '#/components/schemas/CodeExecutionNodeSearchResultsResult'
+      - $ref: '#/components/schemas/CodeExecutionNodeErrorResult'
+      - $ref: '#/components/schemas/CodeExecutionNodeArrayResult'
+      - $ref: '#/components/schemas/CodeExecutionNodeFunctionCallResult'
+      title: CodeExecutionNodeResultOutput
+    WorkflowOutputSearchResults:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          description: The output's name, as defined in the workflow
+        type:
+          $ref: '#/components/schemas/SearchResultsEnum'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SearchResult'
+      required:
+      - id
+      - name
+      - type
+      - value
+      description: A search results output from a Workflow execution.
+      title: WorkflowOutputSearchResults
+    VellumValue:
+      oneOf:
+      - $ref: '#/components/schemas/StringVellumValue'
+      - $ref: '#/components/schemas/NumberVellumValue'
+      - $ref: '#/components/schemas/JsonVellumValue'
+      - $ref: '#/components/schemas/AudioVellumValue'
+      - $ref: '#/components/schemas/VideoVellumValue'
+      - $ref: '#/components/schemas/ImageVellumValue'
+      - $ref: '#/components/schemas/DocumentVellumValue'
+      - $ref: '#/components/schemas/FunctionCallVellumValue'
+      - $ref: '#/components/schemas/ErrorVellumValue'
+      - $ref: '#/components/schemas/ArrayVellumValue'
+      - $ref: '#/components/schemas/ChatHistoryVellumValue'
+      - $ref: '#/components/schemas/SearchResultsVellumValue'
+      - $ref: '#/components/schemas/ThinkingVellumValue'
+      title: VellumValue
+    WorkflowNodeResultEvent:
+      oneOf:
+      - $ref: '#/components/schemas/InitiatedWorkflowNodeResultEvent'
+      - $ref: '#/components/schemas/StreamingWorkflowNodeResultEvent'
+      - $ref: '#/components/schemas/FulfilledWorkflowNodeResultEvent'
+      - $ref: '#/components/schemas/RejectedWorkflowNodeResultEvent'
+      title: WorkflowNodeResultEvent
+    ArrayChatMessageContentRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ArrayEnum'
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/ArrayChatMessageContentItemRequest'
+      required:
+      - type
+      - value
+      description: A list of chat message content items.
+      title: ArrayChatMessageContentRequest
+    CodeExecutionNodeErrorResult:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/ErrorEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumError'
+          - type: 'null'
+      required:
+      - id
+      - type
+      - value
+      title: CodeExecutionNodeErrorResult
+    FunctionCallRequest:
+      type: object
+      properties:
+        arguments:
+          type: object
+          additionalProperties:
+            description: Any type
+        id:
+          type:
+          - string
+          - 'null'
+        name:
+          type: string
+      required:
+      - arguments
+      - name
+      description: The final resolved function call value.
+      title: FunctionCallRequest
+    NodeInputVariableCompiledValue:
+      oneOf:
+      - $ref: '#/components/schemas/NodeInputCompiledStringValue'
+      - $ref: '#/components/schemas/NodeInputCompiledNumberValue'
+      - $ref: '#/components/schemas/NodeInputCompiledJsonValue'
+      - $ref: '#/components/schemas/NodeInputCompiledChatHistoryValue'
+      - $ref: '#/components/schemas/NodeInputCompiledSearchResultsValue'
+      - $ref: '#/components/schemas/NodeInputCompiledErrorValue'
+      - $ref: '#/components/schemas/NodeInputCompiledArrayValue'
+      - $ref: '#/components/schemas/NodeInputCompiledFunctionCallValue'
+      - $ref: '#/components/schemas/NodeInputCompiledSecretValue'
+      - $ref: '#/components/schemas/NodeInputCompiledAudioValue'
+      - $ref: '#/components/schemas/NodeInputCompiledVideoValue'
+      - $ref: '#/components/schemas/NodeInputCompiledImageValue'
+      - $ref: '#/components/schemas/NodeInputCompiledDocumentValue'
+      title: NodeInputVariableCompiledValue
+    MapEnum:
+      type: string
+      enum:
+      - MAP
+      title: MapEnum
+    DocumentVellumValueRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/DocumentEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumDocumentRequest'
+          - type: 'null'
+      required:
+      - type
+      - value
+      description: A base Vellum primitive value representing a document.
+      title: DocumentVellumValueRequest
+    WorkflowOutputNumber:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          description: The output's name, as defined in the workflow
+        type:
+          $ref: '#/components/schemas/NumberEnum'
+        value:
+          type:
+          - number
+          - 'null'
+          format: double
+      required:
+      - id
+      - name
+      - type
+      - value
+      description: A number output from a Workflow execution.
+      title: WorkflowOutputNumber
+    WorkflowOutputDocument:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          description: The output's name, as defined in the workflow
+        type:
+          $ref: '#/components/schemas/DocumentEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumDocument'
+          - type: 'null'
+      required:
+      - id
+      - name
+      - type
+      - value
+      description: A document output from a Workflow execution.
+      title: WorkflowOutputDocument
+    ChatHistoryVellumValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ChatHistoryEnum'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ChatMessage'
+      required:
+      - type
+      - value
+      description: A value representing Chat History.
+      title: ChatHistoryVellumValue
+    FulfilledWorkflowNodeResultEvent:
+      type: object
+      properties:
+        id:
+          type: string
+        node_id:
+          type: string
+        node_result_id:
+          type: string
+        state:
+          $ref: '#/components/schemas/FulfilledEnum'
+        ts:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/WorkflowNodeResultData'
+          - type: 'null'
+        source_execution_id:
+          type:
+          - string
+          - 'null'
+        output_values:
+          type: array
+          items:
+            $ref: '#/components/schemas/NodeOutputCompiledValue'
+        mocked:
+          type: boolean
+      required:
+      - id
+      - node_id
+      - node_result_id
+      - state
+      - data
+      - output_values
+      description: An event that indicates that the node has fulfilled its execution.
+      title: FulfilledWorkflowNodeResultEvent
+    VideoInputRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The variable's name
+        type:
+          $ref: '#/components/schemas/VideoEnum'
+        value:
+          $ref: '#/components/schemas/VellumVideoRequest'
+      required:
+      - name
+      - type
+      - value
+      description: A user input representing a Vellum Video value
+      title: VideoInputRequest
+    VideoEnum:
+      type: string
+      enum:
+      - VIDEO
+      title: VideoEnum
+    SubmitWorkflowExecutionActualsRequest:
+      type: object
+      properties:
+        actuals:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubmitWorkflowExecutionActualRequest'
+          description: Feedback regarding the quality of an output on a previously executed workflow.
+        execution_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The Vellum-generated ID of a previously executed workflow. Must provide either this or external_id.
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: The external ID that was originally provided by when executing the workflow, if applicable, that you'd now like to submit actuals for. Must provide either this or execution_id.
+      required:
+      - actuals
+      title: SubmitWorkflowExecutionActualsRequest
+    submit-completion-actuals_Response_200:
+      type: object
+      properties: {}
+      description: Empty response body
+      title: submit-completion-actuals_Response_200
+    ErrorVellumValueRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ErrorEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumErrorRequest'
+          - type: 'null'
+      required:
+      - type
+      - value
+      description: A value representing an Error.
+      title: ErrorVellumValueRequest
+    VideoChatMessageContent:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/VideoEnum'
+        value:
+          $ref: '#/components/schemas/VellumVideo'
+      required:
+      - type
+      - value
+      description: A video value that is used in a chat message.
+      title: VideoChatMessageContent
+    ExecutionImageVellumValue:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The variable's uniquely identifying internal id.
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/ImageEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumImage'
+          - type: 'null'
+      required:
+      - id
+      - name
+      - type
+      - value
+      description: A base Vellum primitive value representing an image.
+      title: ExecutionImageVellumValue
+    WorkflowRequestJSONInputRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The variable's name, as defined in the Workflow.
+        type:
+          $ref: '#/components/schemas/JsonEnum'
+        value:
+          oneOf:
+          - description: Any type
+          - type: 'null'
+      required:
+      - name
+      - type
+      - value
+      description: The input for a JSON variable in a Workflow.
+      title: WorkflowRequestJSONInputRequest
+    NodeOutputCompiledFunctionCallValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/FunctionCallEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/FunctionCall'
+          - type: 'null'
+        node_output_id:
+          type: string
+        state:
+          $ref: '#/components/schemas/WorkflowNodeResultEventState'
+      required:
+      - type
+      - value
+      - node_output_id
+      description: An output returned by a node that is of type FUNCTION_CALL.
+      title: NodeOutputCompiledFunctionCallValue
+    ChatMessageRole:
+      type: string
+      enum:
+      - SYSTEM
+      - ASSISTANT
+      - USER
+      - FUNCTION
+      description: '* `SYSTEM` - System
+
+        * `ASSISTANT` - Assistant
+
+        * `USER` - User
+
+        * `FUNCTION` - Function'
+      title: ChatMessageRole
+    NumberEnum:
+      type: string
+      enum:
+      - NUMBER
+      title: NumberEnum
+    FulfilledEnum:
+      type: string
+      enum:
+      - FULFILLED
+      title: FulfilledEnum
+    WorkflowExecutionActualChatHistoryRequest:
+      type: object
+      properties:
+        output_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The Vellum-generated ID of a workflow output. Must provide either this or output_key. output_key is typically preferred.
+        output_key:
+          type:
+          - string
+          - 'null'
+          description: The user-defined name of a workflow output. Must provide either this or output_id. Should correspond to the `Name` specified in a Final Output Node. Generally preferred over output_id.
+        quality:
+          type:
+          - number
+          - 'null'
+          format: double
+          description: Optionally provide a decimal number between 0.0 and 1.0 (inclusive) representing the quality of the output. 0 is the worst, 1 is the best.
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+          description: Optionally provide additional metadata about the feedback submission.
+        timestamp:
+          type:
+          - number
+          - 'null'
+          format: double
+          description: Optionally provide the timestamp representing when this feedback was collected. Used for reporting purposes.
+        output_type:
+          $ref: '#/components/schemas/ChatHistoryEnum'
+          description: The variable type of the output that this actual is being submitted for.
+        desired_output_value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ChatMessageRequest'
+          description: Optionally provide the value that the output ideally should have been.
+      required:
+      - output_type
+      title: WorkflowExecutionActualChatHistoryRequest
+    WorkflowExecutionEventType:
+      type: string
+      enum:
+      - NODE
+      - WORKFLOW
+      description: '* `NODE` - NODE
+
+        * `WORKFLOW` - WORKFLOW'
+      title: WorkflowExecutionEventType
+    WorkflowNodeResultEventState:
+      type: string
+      enum:
+      - INITIATED
+      - STREAMING
+      - FULFILLED
+      - REJECTED
+      description: '* `INITIATED` - INITIATED
+
+        * `STREAMING` - STREAMING
+
+        * `FULFILLED` - FULFILLED
+
+        * `REJECTED` - REJECTED'
+      title: WorkflowNodeResultEventState
+    LogicalConditionEnum:
+      type: string
+      enum:
+      - LOGICAL_CONDITION
+      title: LogicalConditionEnum
+    SubmitCompletionActualRequest:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          description: The Vellum-generated ID of a previously generated completion. Must provide either this or external_id.
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: The external ID that was originally provided when generating the completion that you'd now like to submit actuals for. Must provide either this or id.
+        text:
+          type:
+          - string
+          - 'null'
+          description: Text representing what the completion _should_ have been.
+        quality:
+          type:
+          - number
+          - 'null'
+          format: double
+          description: A number between 0 and 1 representing the quality of the completion. 0 is the worst, 1 is the best.
+        timestamp:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Optionally provide the timestamp representing when this feedback was collected. Used for reporting purposes.
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+          description: Optionally provide additional metadata about the feedback submission.
+      title: SubmitCompletionActualRequest
+    ImageVellumValueRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ImageEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumImageRequest'
+          - type: 'null'
+      required:
+      - type
+      - value
+      description: A base Vellum primitive value representing an image.
+      title: ImageVellumValueRequest
+    RejectedExecuteWorkflowWorkflowResultEvent:
+      type: object
+      properties:
+        id:
+          type: string
+        state:
+          $ref: '#/components/schemas/RejectedEnum'
+        ts:
+          type: string
+          format: date-time
+        error:
+          $ref: '#/components/schemas/WorkflowEventError'
+      required:
+      - id
+      - state
+      - ts
+      - error
+      description: The unsuccessful response from the Workflow execution containing an error specifying what went wrong.
+      title: RejectedExecuteWorkflowWorkflowResultEvent
+    WorkflowRequestChatHistoryInputRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The variable's name, as defined in the Workflow.
+        type:
+          $ref: '#/components/schemas/ChatHistoryEnum'
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChatMessageRequest'
+      required:
+      - name
+      - type
+      - value
+      description: The input for a chat history variable in a Workflow.
+      title: WorkflowRequestChatHistoryInputRequest
+    MetadataFilterRuleRequest:
+      type: object
+      properties:
+        combinator:
+          oneOf:
+          - $ref: '#/components/schemas/MetadataFilterRuleCombinator'
+          - type: 'null'
+        negated:
+          type:
+          - boolean
+          - 'null'
+        rules:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/MetadataFilterRuleRequest'
+        field:
+          type:
+          - string
+          - 'null'
+        operator:
+          oneOf:
+          - $ref: '#/components/schemas/LogicalOperator'
+          - type: 'null'
+        value:
+          type:
+          - string
+          - 'null'
+      title: MetadataFilterRuleRequest
+    ArrayVellumValueRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ArrayEnum'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/VellumValueRequest'
+      required:
+      - type
+      - value
+      description: A value representing an array of Vellum variable values.
+      title: ArrayVellumValueRequest
+    ThinkingVellumValueRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ThinkingEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/StringVellumValueRequest'
+          - type: 'null'
+      required:
+      - type
+      - value
+      description: A value representing Thinking mode output.
+      title: ThinkingVellumValueRequest
+    FulfilledExecuteWorkflowWorkflowResultEvent:
+      type: object
+      properties:
+        id:
+          type: string
+        state:
+          $ref: '#/components/schemas/FulfilledEnum'
+        ts:
+          type: string
+          format: date-time
+        outputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkflowOutput'
+      required:
+      - id
+      - state
+      - ts
+      - outputs
+      description: The successful response from the Workflow execution containing the produced outputs.
+      title: FulfilledExecuteWorkflowWorkflowResultEvent
+    ConditionCombinator:
+      type: string
+      enum:
+      - OR
+      - AND
+      description: '* `OR` - OR
+
+        * `AND` - AND'
+      title: ConditionCombinator
+    WorkflowResultEventOutputDataArray:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        name:
+          type: string
+        state:
+          $ref: '#/components/schemas/WorkflowNodeResultEventState'
+        node_id:
+          type:
+          - string
+          - 'null'
+        delta:
+          type:
+          - string
+          - 'null'
+          description: The newly output string value. Only relevant for string outputs with a state of STREAMING.
+        type:
+          $ref: '#/components/schemas/ArrayEnum'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/VellumValue'
+      required:
+      - name
+      - state
+      - delta
+      - type
+      - value
+      description: An Array output returned from a Workflow execution.
+      title: WorkflowResultEventOutputDataArray
+    NodeInputCompiledArrayValue:
+      type: object
+      properties:
+        node_input_id:
+          type: string
+        key:
+          type: string
+        type:
+          $ref: '#/components/schemas/ArrayEnum'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/VellumValue'
+      required:
+      - node_input_id
+      - key
+      - type
+      - value
+      title: NodeInputCompiledArrayValue
+    ImageChatMessageContentRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ImageEnum'
+        value:
+          $ref: '#/components/schemas/VellumImageRequest'
+      required:
+      - type
+      - value
+      description: An image value that is used in a chat message.
+      title: ImageChatMessageContentRequest
+    ImageEnum:
+      type: string
+      enum:
+      - IMAGE
+      title: ImageEnum
+    VellumValueLogicalConditionGroupRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/LogicalConditionGroupEnum'
+        conditions:
+          type: array
+          items:
+            $ref: '#/components/schemas/VellumValueLogicalExpressionRequest'
+        combinator:
+          $ref: '#/components/schemas/ConditionCombinator'
+        negated:
+          type: boolean
+      required:
+      - type
+      - conditions
+      - combinator
+      - negated
+      description: A higher-order condition that combines one or more basic conditions or other higher-order conditions.
+      title: VellumValueLogicalConditionGroupRequest
+    NodeOutputCompiledNumberValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/NumberEnum'
+        value:
+          type:
+          - number
+          - 'null'
+          format: double
+        node_output_id:
+          type: string
+        state:
+          $ref: '#/components/schemas/WorkflowNodeResultEventState'
+      required:
+      - type
+      - value
+      - node_output_id
+      description: An output returned by a node that is of type NUMBER.
+      title: NodeOutputCompiledNumberValue
+    IterationStateEnum:
+      type: string
+      enum:
+      - INITIATED
+      - FULFILLED
+      - REJECTED
+      description: '* `INITIATED` - INITIATED
+
+        * `FULFILLED` - FULFILLED
+
+        * `REJECTED` - REJECTED'
+      title: IterationStateEnum
+    FunctionCallChatMessageContentValue:
+      type: object
+      properties:
+        name:
+          type: string
+        arguments:
+          type: object
+          additionalProperties:
+            description: Any type
+        id:
+          type:
+          - string
+          - 'null'
+      required:
+      - name
+      - arguments
+      description: The final resolved function call value.
+      title: FunctionCallChatMessageContentValue
+    PromptDeploymentExpandMetaRequest:
+      type: object
+      properties:
+        model_name:
+          type:
+          - boolean
+          - 'null'
+          description: If enabled, the response will include the model identifier representing the ML Model invoked by the Prompt.
+        usage:
+          type:
+          - boolean
+          - 'null'
+          description: If enabled, the response will include model host usage tracking. This may increase latency for some model hosts.
+        cost:
+          type:
+          - boolean
+          - 'null'
+          description: If enabled, the response will include model host cost tracking. This may increase latency for some model hosts.
+        finish_reason:
+          type:
+          - boolean
+          - 'null'
+          description: If enabled, the response will include the reason provided by the model for why the execution finished.
+        latency:
+          type:
+          - boolean
+          - 'null'
+          description: If enabled, the response will include the time in nanoseconds it took to execute the Prompt Deployment.
+        deployment_release_tag:
+          type:
+          - boolean
+          - 'null'
+          description: If enabled, the response will include the release tag of the Prompt Deployment.
+        prompt_version_id:
+          type:
+          - boolean
+          - 'null'
+          description: If enabled, the response will include the ID of the Prompt Version backing the deployment.
+      title: PromptDeploymentExpandMetaRequest
+    VellumValueLogicalExpressionRequest:
+      oneOf:
+      - $ref: '#/components/schemas/VellumValueLogicalConditionRequest'
+      - $ref: '#/components/schemas/VellumValueLogicalConditionGroupRequest'
+      title: VellumValueLogicalExpressionRequest
+    NodeInputCompiledFunctionCallValue:
+      type: object
+      properties:
+        node_input_id:
+          type: string
+        key:
+          type: string
+        type:
+          $ref: '#/components/schemas/FunctionCallEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/FunctionCall'
+          - type: 'null'
+      required:
+      - node_input_id
+      - key
+      - type
+      - value
+      title: NodeInputCompiledFunctionCallValue
+    StreamingExecutePromptEvent:
+      type: object
+      properties:
+        state:
+          $ref: '#/components/schemas/StreamingEnum'
+        output:
+          $ref: '#/components/schemas/PromptOutput'
+        output_index:
+          type: integer
+        execution_id:
+          type: string
+        meta:
+          $ref: '#/components/schemas/StreamingPromptExecutionMeta'
+        raw:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: The subset of the raw response from the model that the request opted into with `expand_raw`.
+      required:
+      - state
+      - output
+      - output_index
+      - execution_id
+      description: The data returned for each delta during the prompt execution stream.
+      title: StreamingExecutePromptEvent
+    SearchResultRequest:
+      type: object
+      properties:
+        text:
+          type: string
+          description: The text of the chunk that matched the search query.
+        score:
+          type: number
+          format: double
+          description: A score representing how well the chunk matches the search query.
+        keywords:
+          type: array
+          items:
+            type: string
+        document:
+          $ref: '#/components/schemas/SearchResultDocumentRequest'
+          description: The document that contains the chunk that matched the search query.
+        meta:
+          oneOf:
+          - $ref: '#/components/schemas/SearchResultMetaRequest'
+          - type: 'null'
+          description: Additional information about the search result.
+      required:
+      - text
+      - score
+      - keywords
+      - document
+      title: SearchResultRequest
+    ExecutePromptStreamRequest:
+      type: object
+      properties:
+        inputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/PromptDeploymentInputRequest'
+          description: A list consisting of the Prompt Deployment's input variables and their values.
+        prompt_deployment_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of the Prompt Deployment. Must provide either this or prompt_deployment_name.
+        prompt_deployment_name:
+          type:
+          - string
+          - 'null'
+          description: The unique name of the Prompt Deployment. Must provide either this or prompt_deployment_id.
+        release_tag:
+          type:
+          - string
+          - 'null'
+          description: Optionally specify a release tag if you want to pin to a specific release of the Prompt Deployment
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: Optionally include a unique identifier for tracking purposes. Must be unique within a given Workspace.
+        expand_meta:
+          oneOf:
+          - $ref: '#/components/schemas/PromptDeploymentExpandMetaRequest'
+          - type: 'null'
+          description: An optionally specified configuration used to opt in to including additional metadata about this prompt execution in the API response. Corresponding values will be returned under the `meta` key of the API response.
+        raw_overrides:
+          oneOf:
+          - $ref: '#/components/schemas/RawPromptExecutionOverridesRequest'
+          - type: 'null'
+          description: Overrides for the raw API request sent to the model host. Combined with `expand_raw`, it can be used to access new features from models.
+        expand_raw:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: A list of keys whose values you'd like to directly return from the JSON response of the model provider. Useful if you need lower-level info returned by model providers that Vellum would otherwise omit. Corresponding key/value pairs will be returned under the `raw` key of the API response.
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+          description: Arbitrary JSON metadata associated with this request. Can be used to capture additional monitoring data such as user id, session id, etc. for future analysis.
+      required:
+      - inputs
+      title: ExecutePromptStreamRequest
+    SearchWeightsRequest:
+      type: object
+      properties:
+        semantic_similarity:
+          type: number
+          format: double
+          default: 0.8
+          description: The relative weight to give to semantic similarity
+        keywords:
+          type: number
+          format: double
+          default: 0.2
+          description: The relative weight to give to keywords
+      title: SearchWeightsRequest
+    TemplatingNodeJsonResult:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/JsonEnum'
+        value:
+          oneOf:
+          - description: Any type
+          - type: 'null'
+      required:
+      - id
+      - type
+      - value
+      title: TemplatingNodeJsonResult
+    WorkflowOutputImage:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          description: The output's name, as defined in the workflow
+        type:
+          $ref: '#/components/schemas/ImageEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumImage'
+          - type: 'null'
+      required:
+      - id
+      - name
+      - type
+      - value
+      description: An image output from a Workflow execution.
+      title: WorkflowOutputImage
+    SubworkflowNodeResult:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/SubworkflowEnum'
+        data:
+          $ref: '#/components/schemas/SubworkflowNodeResultData'
+      required:
+      - type
+      description: A Node Result Event emitted from a Subworkflow Node.
+      title: SubworkflowNodeResult
+    FulfilledPromptExecutionMeta:
+      type: object
+      properties:
+        latency:
+          type:
+          - integer
+          - 'null'
+        finish_reason:
+          oneOf:
+          - $ref: '#/components/schemas/FinishReasonEnum'
+          - type: 'null'
+        usage:
+          oneOf:
+          - $ref: '#/components/schemas/MLModelUsage'
+          - type: 'null'
+        cost:
+          oneOf:
+          - $ref: '#/components/schemas/Price'
+          - type: 'null'
+      description: The subset of the metadata tracked by Vellum during prompt execution that the request opted into with `expand_meta`.
+      title: FulfilledPromptExecutionMeta
+    JsonEnum:
+      type: string
+      enum:
+      - JSON
+      title: JsonEnum
+    ArrayEnum:
+      type: string
+      enum:
+      - ARRAY
+      title: ArrayEnum
+    TemplatingEnum:
+      type: string
+      enum:
+      - TEMPLATING
+      title: TemplatingEnum
+    TemplatingNodeErrorResult:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/ErrorEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumError'
+          - type: 'null'
+      required:
+      - id
+      - type
+      - value
+      title: TemplatingNodeErrorResult
+    WorkflowExecutionActualJsonRequest:
+      type: object
+      properties:
+        output_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The Vellum-generated ID of a workflow output. Must provide either this or output_key. output_key is typically preferred.
+        output_key:
+          type:
+          - string
+          - 'null'
+          description: The user-defined name of a workflow output. Must provide either this or output_id. Should correspond to the `Name` specified in a Final Output Node. Generally preferred over output_id.
+        quality:
+          type:
+          - number
+          - 'null'
+          format: double
+          description: Optionally provide a decimal number between 0.0 and 1.0 (inclusive) representing the quality of the output. 0 is the worst, 1 is the best.
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+          description: Optionally provide additional metadata about the feedback submission.
+        timestamp:
+          type:
+          - number
+          - 'null'
+          format: double
+          description: Optionally provide the timestamp representing when this feedback was collected. Used for reporting purposes.
+        output_type:
+          $ref: '#/components/schemas/JsonEnum'
+          description: The variable type of the output that this actual is being submitted for.
+        desired_output_value:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+          description: Optionally provide the value that the output ideally should have been.
+      required:
+      - output_type
+      title: WorkflowExecutionActualJsonRequest
+    NodeOutputCompiledArrayValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ArrayEnum'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/VellumValue'
+        node_output_id:
+          type: string
+        state:
+          $ref: '#/components/schemas/WorkflowNodeResultEventState'
+      required:
+      - type
+      - value
+      - node_output_id
+      description: An output returned by a node that is of type ARRAY.
+      title: NodeOutputCompiledArrayValue
+    VellumErrorCodeEnum:
+      type: string
+      enum:
+      - INVALID_REQUEST
+      - INVALID_INPUTS
+      - PROVIDER_ERROR
+      - PROVIDER_CREDENTIALS_UNAVAILABLE
+      - INTEGRATION_CREDENTIALS_UNAVAILABLE
+      - REQUEST_TIMEOUT
+      - INTERNAL_SERVER_ERROR
+      - USER_DEFINED_ERROR
+      - WORKFLOW_CANCELLED
+      - NODE_CANCELLED
+      - PROVIDER_QUOTA_EXCEEDED
+      - CHAT_QUOTA_EXCEEDED
+      description: '* `INVALID_REQUEST` - INVALID_REQUEST
+
+        * `INVALID_INPUTS` - INVALID_INPUTS
+
+        * `PROVIDER_ERROR` - PROVIDER_ERROR
+
+        * `PROVIDER_CREDENTIALS_UNAVAILABLE` - PROVIDER_CREDENTIALS_UNAVAILABLE
+
+        * `INTEGRATION_CREDENTIALS_UNAVAILABLE` - INTEGRATION_CREDENTIALS_UNAVAILABLE
+
+        * `REQUEST_TIMEOUT` - REQUEST_TIMEOUT
+
+        * `INTERNAL_SERVER_ERROR` - INTERNAL_SERVER_ERROR
+
+        * `USER_DEFINED_ERROR` - USER_DEFINED_ERROR
+
+        * `WORKFLOW_CANCELLED` - WORKFLOW_CANCELLED
+
+        * `NODE_CANCELLED` - NODE_CANCELLED
+
+        * `PROVIDER_QUOTA_EXCEEDED` - PROVIDER_QUOTA_EXCEEDED
+
+        * `CHAT_QUOTA_EXCEEDED` - CHAT_QUOTA_EXCEEDED'
+      title: VellumErrorCodeEnum
+    ExecuteWorkflowErrorResponse:
+      type: object
+      properties:
+        detail:
+          type: string
+          description: Details about why the request failed.
+      required:
+      - detail
+      title: ExecuteWorkflowErrorResponse
+    ErrorEnum:
+      type: string
+      enum:
+      - ERROR
+      title: ErrorEnum
+    MetadataFiltersRequest:
+      oneOf:
+      - $ref: '#/components/schemas/MetadataFilterConfigRequest'
+      - $ref: '#/components/schemas/VellumValueLogicalExpressionRequest'
+      title: MetadataFiltersRequest
+    ExecutePromptRequest:
+      type: object
+      properties:
+        inputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/PromptDeploymentInputRequest'
+          description: A list consisting of the Prompt Deployment's input variables and their values.
+        prompt_deployment_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of the Prompt Deployment. Must provide either this or prompt_deployment_name.
+        prompt_deployment_name:
+          type:
+          - string
+          - 'null'
+          description: The unique name of the Prompt Deployment. Must provide either this or prompt_deployment_id.
+        release_tag:
+          type:
+          - string
+          - 'null'
+          description: Optionally specify a release tag if you want to pin to a specific release of the Prompt Deployment
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: Optionally include a unique identifier for tracking purposes. Must be unique within a given Workspace.
+        expand_meta:
+          oneOf:
+          - $ref: '#/components/schemas/PromptDeploymentExpandMetaRequest'
+          - type: 'null'
+          description: An optionally specified configuration used to opt in to including additional metadata about this prompt execution in the API response. Corresponding values will be returned under the `meta` key of the API response.
+        raw_overrides:
+          oneOf:
+          - $ref: '#/components/schemas/RawPromptExecutionOverridesRequest'
+          - type: 'null'
+          description: Overrides for the raw API request sent to the model host. Combined with `expand_raw`, it can be used to access new features from models.
+        expand_raw:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: A list of keys whose values you'd like to directly return from the JSON response of the model provider. Useful if you need lower-level info returned by model providers that Vellum would otherwise omit. Corresponding key/value pairs will be returned under the `raw` key of the API response.
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+          description: Arbitrary JSON metadata associated with this request. Can be used to capture additional monitoring data such as user id, session id, etc. for future analysis.
+      required:
+      - inputs
+      title: ExecutePromptRequest
+    PdfSearchResultMetaSourceRequest:
+      type: object
+      properties:
+        document_type:
+          $ref: '#/components/schemas/PdfEnum'
+        start_page_num:
+          type:
+          - integer
+          - 'null'
+          description: The 1-indexed page number where the chunk starts in the document. Only available for supported chunking strategies and document types.
+        end_page_num:
+          type:
+          - integer
+          - 'null'
+          description: The 1-indexed page number where the chunk ends in the document. Only available for supported chunking strategies and document types.
+      required:
+      - document_type
+      - start_page_num
+      - end_page_num
+      description: The source of a search result from a PDF document.
+      title: PdfSearchResultMetaSourceRequest
+    WorkflowExpandMetaRequest:
+      type: object
+      properties:
+        usage:
+          type:
+          - boolean
+          - 'null'
+          description: If enabled, the Prompt Node FULFILLED events will include model host usage tracking. This may increase latency for some model hosts.
+        cost:
+          type:
+          - boolean
+          - 'null'
+          description: If enabled, the Prompt Node FULFILLED events will include model host cost tracking. This may increase latency for some model hosts.
+        model_name:
+          type:
+          - boolean
+          - 'null'
+          description: If enabled, the Prompt Node FULFILLED events will include model host name
+      title: WorkflowExpandMetaRequest
+    RawPromptExecutionOverridesRequest:
+      type: object
+      properties:
+        body:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+        headers:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+          description: The raw headers to send to the model host.
+        url:
+          type:
+          - string
+          - 'null'
+          description: The raw URL to send to the model host.
+      title: RawPromptExecutionOverridesRequest
+    ChatMessage:
+      type: object
+      properties:
+        text:
+          type:
+          - string
+          - 'null'
+        role:
+          $ref: '#/components/schemas/ChatMessageRole'
+        content:
+          oneOf:
+          - $ref: '#/components/schemas/ChatMessageContent'
+          - type: 'null'
+        source:
+          type:
+          - string
+          - 'null'
+          description: An optional identifier representing who or what generated this message.
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - role
+      title: ChatMessage
+    AudioChatMessageContent:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/AudioEnum'
+        value:
+          $ref: '#/components/schemas/VellumAudio'
+      required:
+      - type
+      - value
+      description: An audio value that is used in a chat message.
+      title: AudioChatMessageContent
+    StreamingWorkflowNodeResultEvent:
+      type: object
+      properties:
+        id:
+          type: string
+        node_id:
+          type: string
+        node_result_id:
+          type: string
+        state:
+          $ref: '#/components/schemas/StreamingEnum'
+        ts:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/WorkflowNodeResultData'
+          - type: 'null'
+        source_execution_id:
+          type:
+          - string
+          - 'null'
+        output:
+          oneOf:
+          - $ref: '#/components/schemas/NodeOutputCompiledValue'
+          - type: 'null'
+        output_index:
+          type:
+          - integer
+          - 'null'
+      required:
+      - id
+      - node_id
+      - node_result_id
+      - state
+      - data
+      description: An event that indicates that the node has execution is in progress.
+      title: StreamingWorkflowNodeResultEvent
+    DocumentEnum:
+      type: string
+      enum:
+      - DOCUMENT
+      title: DocumentEnum
+    LogicalConditionGroupEnum:
+      type: string
+      enum:
+      - LOGICAL_CONDITION_GROUP
+      title: LogicalConditionGroupEnum
+    SearchResult:
+      type: object
+      properties:
+        text:
+          type: string
+          description: The text of the chunk that matched the search query.
+        score:
+          type: number
+          format: double
+          description: A score representing how well the chunk matches the search query.
+        keywords:
+          type: array
+          items:
+            type: string
+        document:
+          $ref: '#/components/schemas/SearchResultDocument'
+          description: The document that contains the chunk that matched the search query.
+        meta:
+          oneOf:
+          - $ref: '#/components/schemas/SearchResultMeta'
+          - type: 'null'
+          description: Additional information about the search result.
+      required:
+      - text
+      - score
+      - keywords
+      - document
+      title: SearchResult
+    ApiNodeResultData:
+      type: object
+      properties:
+        json:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+        text_output_id:
+          type: string
+        text:
+          type:
+          - string
+          - 'null'
+        json_output_id:
+          type: string
+        status_code_output_id:
+          type: string
+        status_code:
+          type: integer
+      required:
+      - text_output_id
+      - json_output_id
+      - status_code_output_id
+      - status_code
+      title: ApiNodeResultData
+    JSONInputRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The variable's name
+        type:
+          $ref: '#/components/schemas/JsonEnum'
+        value:
+          oneOf:
+          - description: Any type
+          - type: 'null'
+      required:
+      - name
+      - type
+      - value
+      description: A user input representing a JSON object
+      title: JSONInputRequest
+    WorkflowRequestInputRequest:
+      oneOf:
+      - $ref: '#/components/schemas/WorkflowRequestStringInputRequest'
+      - $ref: '#/components/schemas/WorkflowRequestJSONInputRequest'
+      - $ref: '#/components/schemas/WorkflowRequestChatHistoryInputRequest'
+      - $ref: '#/components/schemas/WorkflowRequestNumberInputRequest'
+      - $ref: '#/components/schemas/WorkflowRequestAudioInputRequest'
+      - $ref: '#/components/schemas/WorkflowRequestVideoInputRequest'
+      - $ref: '#/components/schemas/WorkflowRequestImageInputRequest'
+      - $ref: '#/components/schemas/WorkflowRequestDocumentInputRequest'
+      title: WorkflowRequestInputRequest
+    WorkflowRequestAudioInputRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The variable's name, as defined in the Workflow.
+        type:
+          $ref: '#/components/schemas/AudioEnum'
+        value:
+          $ref: '#/components/schemas/VellumAudioRequest'
+      required:
+      - name
+      - type
+      - value
+      description: The input for an audio variable in a Workflow.
+      title: WorkflowRequestAudioInputRequest
+    ThinkingVellumValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ThinkingEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/StringVellumValue'
+          - type: 'null'
+      required:
+      - type
+      - value
+      description: A value representing Thinking mode output.
+      title: ThinkingVellumValue
+    VellumAudio:
+      type: object
+      properties:
+        src:
+          type: string
+          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - src
+      title: VellumAudio
+    SearchResultMetaSource:
+      oneOf:
+      - $ref: '#/components/schemas/PdfSearchResultMetaSource'
+      title: SearchResultMetaSource
+    ConditionalNodeResult:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ConditionalEnum'
+        data:
+          $ref: '#/components/schemas/ConditionalNodeResultData'
+      required:
+      - type
+      - data
+      description: A Node Result Event emitted from a Conditional Node.
+      title: ConditionalNodeResult
+    ExecuteWorkflowStreamErrorResponse:
+      type: object
+      properties:
+        detail:
+          type: string
+          description: Details about why the request failed.
+      required:
+      - detail
+      title: ExecuteWorkflowStreamErrorResponse
+    WorkflowRequestVideoInputRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The variable's name, as defined in the Workflow.
+        type:
+          $ref: '#/components/schemas/VideoEnum'
+        value:
+          $ref: '#/components/schemas/VellumVideoRequest'
+      required:
+      - name
+      - type
+      - value
+      description: The input for a video variable in a Workflow.
+      title: WorkflowRequestVideoInputRequest
+    TerminalNodeErrorResult:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        name:
+          type: string
+          description: The unique name given to the terminal node that produced this output.
+        type:
+          $ref: '#/components/schemas/ErrorEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumError'
+          - type: 'null'
+      required:
+      - name
+      - type
+      - value
+      title: TerminalNodeErrorResult
+    WorkflowResultEvent:
+      type: object
+      properties:
+        id:
+          type: string
+        state:
+          $ref: '#/components/schemas/WorkflowResultEventState'
+        ts:
+          type: string
+          format: date-time
+        output:
+          oneOf:
+          - $ref: '#/components/schemas/WorkflowResultEventOutputData'
+          - type: 'null'
+        error:
+          oneOf:
+          - $ref: '#/components/schemas/WorkflowEventError'
+          - type: 'null'
+        outputs:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/WorkflowOutput'
+        inputs:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ExecutionVellumValue'
+      required:
+      - id
+      - state
+      - ts
+      - output
+      title: WorkflowResultEvent
+    ExecuteWorkflowWorkflowResultEvent:
+      oneOf:
+      - $ref: '#/components/schemas/FulfilledExecuteWorkflowWorkflowResultEvent'
+      - $ref: '#/components/schemas/RejectedExecuteWorkflowWorkflowResultEvent'
+      title: ExecuteWorkflowWorkflowResultEvent
+    ExecutionArrayVellumValue:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The variable's uniquely identifying internal id.
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/ArrayEnum'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/VellumValue'
+      required:
+      - id
+      - name
+      - type
+      - value
+      description: A value representing an array of Vellum variable values.
+      title: ExecutionArrayVellumValue
+    PdfEnum:
+      type: string
+      enum:
+      - PDF
+      title: PdfEnum
+    VideoVellumValueRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/VideoEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumVideoRequest'
+          - type: 'null'
+      required:
+      - type
+      - value
+      description: A base Vellum primitive value representing a video.
+      title: VideoVellumValueRequest
+    NodeOutputCompiledJsonValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/JsonEnum'
+        value:
+          oneOf:
+          - description: Any type
+          - type: 'null'
+        node_output_id:
+          type: string
+        state:
+          $ref: '#/components/schemas/WorkflowNodeResultEventState'
+      required:
+      - type
+      - value
+      - node_output_id
+      description: An output returned by a node that is of type JSON.
+      title: NodeOutputCompiledJsonValue
+    ExecuteWorkflowAsyncRequest:
+      type: object
+      properties:
+        inputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkflowRequestInputRequest'
+          description: The list of inputs defined in the Workflow's Deployment with their corresponding values.
+        workflow_deployment_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of the Workflow Deployment. Must provide either this or workflow_deployment_name.
+        workflow_deployment_name:
+          type:
+          - string
+          - 'null'
+          description: The name of the Workflow Deployment. Must provide either this or workflow_deployment_id.
+        release_tag:
+          type:
+          - string
+          - 'null'
+          description: Optionally specify a release tag if you want to pin to a specific release of the Workflow Deployment
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: Optionally include a unique identifier for tracking purposes. Must be unique within a given Workspace.
+        previous_execution_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of a previous Workflow Execution to reference for initial State loading.
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+          description: Arbitrary JSON metadata associated with this request. Can be used to capture additional monitoring data such as user id, session id, etc. for future analysis.
+      required:
+      - inputs
+      description: The request to execute a Workflow Deployment asynchronously.
+      title: ExecuteWorkflowAsyncRequest
+    ConditionalNodeResultData:
+      type: object
+      properties:
+        source_handle_id:
+          type:
+          - string
+          - 'null'
+      title: ConditionalNodeResultData
+    RejectedExecutePromptEvent:
+      type: object
+      properties:
+        state:
+          $ref: '#/components/schemas/RejectedEnum'
+        error:
+          $ref: '#/components/schemas/VellumError'
+        execution_id:
+          type: string
+        meta:
+          $ref: '#/components/schemas/RejectedPromptExecutionMeta'
+      required:
+      - state
+      - error
+      - execution_id
+      description: The final data returned indicating an error occurred during the stream.
+      title: RejectedExecutePromptEvent
+    WorkflowExecutionWorkflowResultEvent:
+      type: object
+      properties:
+        execution_id:
+          type: string
+        run_id:
+          type:
+          - string
+          - 'null'
+        external_id:
+          type:
+          - string
+          - 'null'
+        type:
+          $ref: '#/components/schemas/WorkflowEnum'
+        data:
+          $ref: '#/components/schemas/WorkflowResultEvent'
+      required:
+      - execution_id
+      - type
+      - data
+      description: A WORKFLOW-level event emitted from the workflow's execution.
+      title: WorkflowExecutionWorkflowResultEvent
+    NodeOutputCompiledErrorValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ErrorEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumError'
+          - type: 'null'
+        node_output_id:
+          type: string
+        state:
+          $ref: '#/components/schemas/WorkflowNodeResultEventState'
+      required:
+      - type
+      - value
+      - node_output_id
+      description: An output returned by a node that is of type ERROR.
+      title: NodeOutputCompiledErrorValue
+    TemplatingNodeArrayResult:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/ArrayEnum'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/VellumValue'
+      required:
+      - id
+      - type
+      - value
+      title: TemplatingNodeArrayResult
+    WorkflowNodeResultData:
+      oneOf:
+      - $ref: '#/components/schemas/PromptNodeResult'
+      - $ref: '#/components/schemas/SearchNodeResult'
+      - $ref: '#/components/schemas/TemplatingNodeResult'
+      - $ref: '#/components/schemas/CodeExecutionNodeResult'
+      - $ref: '#/components/schemas/ConditionalNodeResult'
+      - $ref: '#/components/schemas/ApiNodeResult'
+      - $ref: '#/components/schemas/TerminalNodeResult'
+      - $ref: '#/components/schemas/MergeNodeResult'
+      - $ref: '#/components/schemas/SubworkflowNodeResult'
+      - $ref: '#/components/schemas/MetricNodeResult'
+      - $ref: '#/components/schemas/MapNodeResult'
+      title: WorkflowNodeResultData
+    SearchResultMeta:
+      type: object
+      properties:
+        source:
+          oneOf:
+          - $ref: '#/components/schemas/SearchResultMetaSource'
+          - type: 'null'
+      title: SearchResultMeta
+    SubmitWorkflowExecutionActualRequest:
+      oneOf:
+      - $ref: '#/components/schemas/WorkflowExecutionActualStringRequest'
+      - $ref: '#/components/schemas/WorkflowExecutionActualJsonRequest'
+      - $ref: '#/components/schemas/WorkflowExecutionActualChatHistoryRequest'
+      title: SubmitWorkflowExecutionActualRequest
+    VideoChatMessageContentRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/VideoEnum'
+        value:
+          $ref: '#/components/schemas/VellumVideoRequest'
+      required:
+      - type
+      - value
+      description: A video value that is used in a chat message.
+      title: VideoChatMessageContentRequest
+    AudioVellumValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/AudioEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumAudio'
+          - type: 'null'
+      required:
+      - type
+      - value
+      description: A base Vellum primitive value representing audio.
+      title: AudioVellumValue
+    TerminalNodeArrayResult:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        name:
+          type: string
+          description: The unique name given to the terminal node that produced this output.
+        type:
+          $ref: '#/components/schemas/ArrayEnum'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/VellumValue'
+      required:
+      - name
+      - type
+      - value
+      title: TerminalNodeArrayResult
+    NodeOutputCompiledChatHistoryValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ChatHistoryEnum'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ChatMessage'
+        node_output_id:
+          type: string
+        state:
+          $ref: '#/components/schemas/WorkflowNodeResultEventState'
+      required:
+      - type
+      - value
+      - node_output_id
+      description: An output returned by a node that is of type CHAT_HISTORY.
+      title: NodeOutputCompiledChatHistoryValue
+    StringInputRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The variable's name
+        type:
+          $ref: '#/components/schemas/StringEnum'
+        value:
+          type: string
+      required:
+      - name
+      - type
+      - value
+      description: A user input representing a string value
+      title: StringInputRequest
+    InitiatedWorkflowNodeResultEvent:
+      type: object
+      properties:
+        id:
+          type: string
+        node_id:
+          type: string
+        node_result_id:
+          type: string
+        state:
+          $ref: '#/components/schemas/InitiatedEnum'
+        ts:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/WorkflowNodeResultData'
+          - type: 'null'
+        source_execution_id:
+          type:
+          - string
+          - 'null'
+        input_values:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/NodeInputVariableCompiledValue'
+      required:
+      - id
+      - node_id
+      - node_result_id
+      - state
+      - data
+      description: An event that indicates that the node has initiated its execution.
+      title: InitiatedWorkflowNodeResultEvent
+    ArrayChatMessageContentItemRequest:
+      oneOf:
+      - $ref: '#/components/schemas/StringChatMessageContentRequest'
+      - $ref: '#/components/schemas/FunctionCallChatMessageContentRequest'
+      - $ref: '#/components/schemas/AudioChatMessageContentRequest'
+      - $ref: '#/components/schemas/VideoChatMessageContentRequest'
+      - $ref: '#/components/schemas/ImageChatMessageContentRequest'
+      - $ref: '#/components/schemas/DocumentChatMessageContentRequest'
+      title: ArrayChatMessageContentItemRequest
+    TerminalNodeStringResult:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        name:
+          type: string
+          description: The unique name given to the terminal node that produced this output.
+        type:
+          $ref: '#/components/schemas/StringEnum'
+        value:
+          type:
+          - string
+          - 'null'
+      required:
+      - name
+      - type
+      - value
+      title: TerminalNodeStringResult
+    WorkflowResultEventState:
+      type: string
+      enum:
+      - INITIATED
+      - STREAMING
+      - FULFILLED
+      - REJECTED
+      - PENDING
+      description: '* `INITIATED` - Initiated
+
+        * `STREAMING` - Streaming
+
+        * `FULFILLED` - Fulfilled
+
+        * `REJECTED` - Rejected
+
+        * `PENDING` - Pending'
+      title: WorkflowResultEventState
+    StringChatMessageContentRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/StringEnum'
+        value:
+          type: string
+      required:
+      - type
+      - value
+      description: A string value that is used in a chat message.
+      title: StringChatMessageContentRequest
+    VellumImage:
+      type: object
+      properties:
+        src:
+          type: string
+          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - src
+      title: VellumImage
+    ExecutionErrorVellumValue:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The variable's uniquely identifying internal id.
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/ErrorEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumError'
+          - type: 'null'
+      required:
+      - id
+      - name
+      - type
+      - value
+      description: A value representing an Error.
+      title: ExecutionErrorVellumValue
+    ExecutePromptApiErrorResponse:
+      type: object
+      properties:
+        detail:
+          type: string
+          description: Details about why the request failed.
+        raw_data:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+          description: The raw error data structure, if available.
+      required:
+      - detail
+      title: ExecutePromptApiErrorResponse
+    VellumSecret:
+      type: object
+      properties:
+        name:
+          type: string
+      required:
+      - name
+      title: VellumSecret
+    TerminalNodeChatHistoryResult:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        name:
+          type: string
+          description: The unique name given to the terminal node that produced this output.
+        type:
+          $ref: '#/components/schemas/ChatHistoryEnum'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ChatMessage'
+      required:
+      - name
+      - type
+      - value
+      title: TerminalNodeChatHistoryResult
+    VellumDocumentRequest:
+      type: object
+      properties:
+        src:
+          type: string
+          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - src
+      title: VellumDocumentRequest
+    PromptEnum:
+      type: string
+      enum:
+      - PROMPT
+      title: PromptEnum
+    SubworkflowEnum:
+      type: string
+      enum:
+      - SUBWORKFLOW
+      title: SubworkflowEnum
+    NodeInputCompiledChatHistoryValue:
+      type: object
+      properties:
+        node_input_id:
+          type: string
+        key:
+          type: string
+        type:
+          $ref: '#/components/schemas/ChatHistoryEnum'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ChatMessage'
+      required:
+      - node_input_id
+      - key
+      - type
+      - value
+      title: NodeInputCompiledChatHistoryValue
+    NodeInputCompiledImageValue:
+      type: object
+      properties:
+        node_input_id:
+          type: string
+        key:
+          type: string
+        type:
+          $ref: '#/components/schemas/ImageEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumImage'
+          - type: 'null'
+      required:
+      - node_input_id
+      - key
+      - type
+      - value
+      title: NodeInputCompiledImageValue
+    ChatHistoryInputRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The variable's name, as defined in the deployment.
+        type:
+          $ref: '#/components/schemas/ChatHistoryEnum'
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChatMessageRequest'
+      required:
+      - name
+      - type
+      - value
+      description: A user input representing a list of chat messages
+      title: ChatHistoryInputRequest
+    TerminalNodeSearchResultsResult:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        name:
+          type: string
+          description: The unique name given to the terminal node that produced this output.
+        type:
+          $ref: '#/components/schemas/SearchResultsEnum'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SearchResult'
+      required:
+      - name
+      - type
+      - value
+      title: TerminalNodeSearchResultsResult
+    VellumDocument:
+      type: object
+      properties:
+        src:
+          type: string
+          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - src
+      title: VellumDocument
+    PromptDeploymentInputRequest:
+      oneOf:
+      - $ref: '#/components/schemas/StringInputRequest'
+      - $ref: '#/components/schemas/JSONInputRequest'
+      - $ref: '#/components/schemas/ChatHistoryInputRequest'
+      - $ref: '#/components/schemas/AudioInputRequest'
+      - $ref: '#/components/schemas/VideoInputRequest'
+      - $ref: '#/components/schemas/ImageInputRequest'
+      - $ref: '#/components/schemas/DocumentInputRequest'
+      title: PromptDeploymentInputRequest
+    VideoVellumValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/VideoEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumVideo'
+          - type: 'null'
+      required:
+      - type
+      - value
+      description: A base Vellum primitive value representing a video.
+      title: VideoVellumValue
+    PdfSearchResultMetaSource:
+      type: object
+      properties:
+        document_type:
+          $ref: '#/components/schemas/PdfEnum'
+        start_page_num:
+          type:
+          - integer
+          - 'null'
+          description: The 1-indexed page number where the chunk starts in the document. Only available for supported chunking strategies and document types.
+        end_page_num:
+          type:
+          - integer
+          - 'null'
+          description: The 1-indexed page number where the chunk ends in the document. Only available for supported chunking strategies and document types.
+      required:
+      - document_type
+      - start_page_num
+      - end_page_num
+      description: The source of a search result from a PDF document.
+      title: PdfSearchResultMetaSource
+    AudioInputRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The variable's name
+        type:
+          $ref: '#/components/schemas/AudioEnum'
+        value:
+          $ref: '#/components/schemas/VellumAudioRequest'
+      required:
+      - name
+      - type
+      - value
+      description: A user input representing a Vellum Audio value
+      title: AudioInputRequest
+    WorkflowRequestStringInputRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The variable's name, as defined in the Workflow.
+        type:
+          $ref: '#/components/schemas/StringEnum'
+        value:
+          type: string
+      required:
+      - name
+      - type
+      - value
+      description: The input for a string variable in a Workflow.
+      title: WorkflowRequestStringInputRequest
+    ExecuteWorkflowResponse:
+      type: object
+      properties:
+        execution_id:
+          type: string
+        run_id:
+          type:
+          - string
+          - 'null'
+        external_id:
+          type:
+          - string
+          - 'null'
+        data:
+          $ref: '#/components/schemas/ExecuteWorkflowWorkflowResultEvent'
+      required:
+      - execution_id
+      - data
+      title: ExecuteWorkflowResponse
+    ExecutionStringVellumValue:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The variable's uniquely identifying internal id.
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/StringEnum'
+        value:
+          type:
+          - string
+          - 'null'
+      required:
+      - id
+      - name
+      - type
+      - value
+      description: A value representing a string.
+      title: ExecutionStringVellumValue
+    WorkflowStreamEvent:
+      oneOf:
+      - $ref: '#/components/schemas/WorkflowExecutionWorkflowResultEvent'
+      - $ref: '#/components/schemas/WorkflowExecutionNodeResultEvent'
+      title: WorkflowStreamEvent
+    SearchEnum:
+      type: string
+      enum:
+      - SEARCH
+      title: SearchEnum
+    WorkflowResultEventOutputDataFunctionCall:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        name:
+          type: string
+        state:
+          $ref: '#/components/schemas/WorkflowNodeResultEventState'
+        node_id:
+          type:
+          - string
+          - 'null'
+        delta:
+          type:
+          - string
+          - 'null'
+          description: The newly output string value. Only relevant for string outputs with a state of STREAMING.
+        type:
+          $ref: '#/components/schemas/FunctionCallEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/FunctionCall'
+          - type: 'null'
+      required:
+      - name
+      - state
+      - delta
+      - type
+      - value
+      description: A Function Call output returned from a Workflow execution.
+      title: WorkflowResultEventOutputDataFunctionCall
+    StringChatMessageContent:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/StringEnum'
+        value:
+          type: string
+      required:
+      - type
+      - value
+      description: A string value that is used in a chat message.
+      title: StringChatMessageContent
+    InitiatedExecutePromptEvent:
+      type: object
+      properties:
+        state:
+          $ref: '#/components/schemas/InitiatedEnum'
+        meta:
+          $ref: '#/components/schemas/InitiatedPromptExecutionMeta'
+        execution_id:
+          type: string
+      required:
+      - state
+      - execution_id
+      description: The initial data returned indicating that the response from the model has returned and begun streaming.
+      title: InitiatedExecutePromptEvent
+    PromptNodeResultData:
+      type: object
+      properties:
+        execution_meta:
+          oneOf:
+          - $ref: '#/components/schemas/PromptNodeExecutionMeta'
+          - type: 'null'
+        output_id:
+          type: string
+        array_output_id:
+          type:
+          - string
+          - 'null'
+        execution_id:
+          type:
+          - string
+          - 'null'
+        text:
+          type:
+          - string
+          - 'null'
+        delta:
+          type:
+          - string
+          - 'null'
+      required:
+      - output_id
+      title: PromptNodeResultData
+    WorkflowExecutionEventErrorCode:
+      type: string
+      enum:
+      - WORKFLOW_INITIALIZATION
+      - WORKFLOW_CANCELLED
+      - WORKFLOW_TIMEOUT
+      - PROVIDER_CREDENTIALS_UNAVAILABLE
+      - INTEGRATION_CREDENTIALS_UNAVAILABLE
+      - NODE_EXECUTION_COUNT_LIMIT_REACHED
+      - INTERNAL_SERVER_ERROR
+      - NODE_EXECUTION
+      - NODE_CANCELLED
+      - NODE_TIMEOUT
+      - LLM_PROVIDER
+      - INVALID_TEMPLATE
+      - INVALID_INPUTS
+      - PROVIDER_QUOTA_EXCEEDED
+      - USER_DEFINED_ERROR
+      description: '* `WORKFLOW_INITIALIZATION` - WORKFLOW_INITIALIZATION
+
+        * `WORKFLOW_CANCELLED` - WORKFLOW_CANCELLED
+
+        * `WORKFLOW_TIMEOUT` - WORKFLOW_TIMEOUT
+
+        * `PROVIDER_CREDENTIALS_UNAVAILABLE` - PROVIDER_CREDENTIALS_UNAVAILABLE
+
+        * `INTEGRATION_CREDENTIALS_UNAVAILABLE` - INTEGRATION_CREDENTIALS_UNAVAILABLE
+
+        * `NODE_EXECUTION_COUNT_LIMIT_REACHED` - NODE_EXECUTION_COUNT_LIMIT_REACHED
+
+        * `INTERNAL_SERVER_ERROR` - INTERNAL_SERVER_ERROR
+
+        * `NODE_EXECUTION` - NODE_EXECUTION
+
+        * `NODE_CANCELLED` - NODE_CANCELLED
+
+        * `NODE_TIMEOUT` - NODE_TIMEOUT
+
+        * `LLM_PROVIDER` - LLM_PROVIDER
+
+        * `INVALID_TEMPLATE` - INVALID_TEMPLATE
+
+        * `INVALID_INPUTS` - INVALID_INPUTS
+
+        * `PROVIDER_QUOTA_EXCEEDED` - PROVIDER_QUOTA_EXCEEDED
+
+        * `USER_DEFINED_ERROR` - USER_DEFINED_ERROR'
+      title: WorkflowExecutionEventErrorCode
+    NodeInputCompiledStringValue:
+      type: object
+      properties:
+        node_input_id:
+          type: string
+        key:
+          type: string
+        type:
+          $ref: '#/components/schemas/StringEnum'
+        value:
+          type:
+          - string
+          - 'null'
+      required:
+      - node_input_id
+      - key
+      - type
+      - value
+      title: NodeInputCompiledStringValue
+    ChatMessageContent:
+      oneOf:
+      - $ref: '#/components/schemas/StringChatMessageContent'
+      - $ref: '#/components/schemas/FunctionCallChatMessageContent'
+      - $ref: '#/components/schemas/ArrayChatMessageContent'
+      - $ref: '#/components/schemas/AudioChatMessageContent'
+      - $ref: '#/components/schemas/VideoChatMessageContent'
+      - $ref: '#/components/schemas/ImageChatMessageContent'
+      - $ref: '#/components/schemas/DocumentChatMessageContent'
+      title: ChatMessageContent
+    StringEnum:
+      type: string
+      enum:
+      - STRING
+      title: StringEnum
+    NumberVellumValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/NumberEnum'
+        value:
+          type:
+          - number
+          - 'null'
+          format: double
+      required:
+      - type
+      - value
+      description: A value representing a number.
+      title: NumberVellumValue
+    TerminalNodeNumberResult:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        name:
+          type: string
+          description: The unique name given to the terminal node that produced this output.
+        type:
+          $ref: '#/components/schemas/NumberEnum'
+        value:
+          type:
+          - number
+          - 'null'
+          format: double
+      required:
+      - name
+      - type
+      - value
+      title: TerminalNodeNumberResult
+    ExecutionDocumentVellumValue:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The variable's uniquely identifying internal id.
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/DocumentEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumDocument'
+          - type: 'null'
+      required:
+      - id
+      - name
+      - type
+      - value
+      description: A base Vellum primitive value representing a document.
+      title: ExecutionDocumentVellumValue
+    WorkflowResultEventOutputDataJSON:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        name:
+          type: string
+        state:
+          $ref: '#/components/schemas/WorkflowNodeResultEventState'
+        node_id:
+          type:
+          - string
+          - 'null'
+        delta:
+          type:
+          - string
+          - 'null'
+          description: The newly output string value. Only relevant for string outputs with a state of STREAMING.
+        type:
+          $ref: '#/components/schemas/JsonEnum'
+        value:
+          oneOf:
+          - description: Any type
+          - type: 'null'
+      required:
+      - name
+      - state
+      - delta
+      - type
+      - value
+      description: A JSON output streamed from a Workflow execution.
+      title: WorkflowResultEventOutputDataJSON
+    AudioChatMessageContentRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/AudioEnum'
+        value:
+          $ref: '#/components/schemas/VellumAudioRequest'
+      required:
+      - type
+      - value
+      description: An audio value that is used in a chat message.
+      title: AudioChatMessageContentRequest
+    SearchResultsEnum:
+      type: string
+      enum:
+      - SEARCH_RESULTS
+      title: SearchResultsEnum
+    MetricNodeResult:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/MetricEnum'
+      required:
+      - type
+      description: A Node Result Event emitted from a Metric Node.
+      title: MetricNodeResult
+    MapNodeResultData:
+      type: object
+      properties:
+        execution_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+        iteration_state:
+          oneOf:
+          - $ref: '#/components/schemas/IterationStateEnum'
+          - type: 'null'
+      required:
+      - execution_ids
+      title: MapNodeResultData
+    VellumAudioRequest:
+      type: object
+      properties:
+        src:
+          type: string
+          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - src
+      title: VellumAudioRequest
+    JsonVellumValueRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/JsonEnum'
+        value:
+          oneOf:
+          - description: Any type
+          - type: 'null'
+      required:
+      - type
+      - value
+      description: A value representing a JSON object.
+      title: JsonVellumValueRequest
+    WorkflowRequestImageInputRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The variable's name, as defined in the Workflow.
+        type:
+          $ref: '#/components/schemas/ImageEnum'
+        value:
+          $ref: '#/components/schemas/VellumImageRequest'
+      required:
+      - name
+      - type
+      - value
+      description: The input for an image variable in a Workflow.
+      title: WorkflowRequestImageInputRequest
+    WorkflowExecutionActualStringRequest:
+      type: object
+      properties:
+        output_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The Vellum-generated ID of a workflow output. Must provide either this or output_key. output_key is typically preferred.
+        output_key:
+          type:
+          - string
+          - 'null'
+          description: The user-defined name of a workflow output. Must provide either this or output_id. Should correspond to the `Name` specified in a Final Output Node. Generally preferred over output_id.
+        quality:
+          type:
+          - number
+          - 'null'
+          format: double
+          description: Optionally provide a decimal number between 0.0 and 1.0 (inclusive) representing the quality of the output. 0 is the worst, 1 is the best.
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+          description: Optionally provide additional metadata about the feedback submission.
+        timestamp:
+          type:
+          - number
+          - 'null'
+          format: double
+          description: Optionally provide the timestamp representing when this feedback was collected. Used for reporting purposes.
+        output_type:
+          $ref: '#/components/schemas/StringEnum'
+          description: The variable type of the output that this actual is being submitted for.
+        desired_output_value:
+          type:
+          - string
+          - 'null'
+          description: Optionally provide the value that the output ideally should have been.
+      required:
+      - output_type
+      title: WorkflowExecutionActualStringRequest
+    WorkflowResultEventOutputDataSearchResults:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        name:
+          type: string
+        state:
+          $ref: '#/components/schemas/WorkflowNodeResultEventState'
+        node_id:
+          type:
+          - string
+          - 'null'
+        delta:
+          type:
+          - string
+          - 'null'
+          description: The newly output string value. Only relevant for string outputs with a state of STREAMING.
+        type:
+          $ref: '#/components/schemas/SearchResultsEnum'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SearchResult'
+      required:
+      - name
+      - state
+      - delta
+      - type
+      - value
+      description: A Search Results output streamed from a Workflow execution.
+      title: WorkflowResultEventOutputDataSearchResults
+    TemplatingNodeResult:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/TemplatingEnum'
+        data:
+          $ref: '#/components/schemas/TemplatingNodeResultData'
+      required:
+      - type
+      - data
+      description: A Node Result Event emitted from a Templating Node.
+      title: TemplatingNodeResult
+    ExecutionChatHistoryVellumValue:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The variable's uniquely identifying internal id.
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/ChatHistoryEnum'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ChatMessage'
+      required:
+      - id
+      - name
+      - type
+      - value
+      description: A value representing Chat History.
+      title: ExecutionChatHistoryVellumValue
+    FinishReasonEnum:
+      type: string
+      enum:
+      - LENGTH
+      - STOP
+      - UNKNOWN
+      description: '* `LENGTH` - LENGTH
+
+        * `STOP` - STOP
+
+        * `UNKNOWN` - UNKNOWN'
+      title: FinishReasonEnum
+    NodeInputCompiledSearchResultsValue:
+      type: object
+      properties:
+        node_input_id:
+          type: string
+        key:
+          type: string
+        type:
+          $ref: '#/components/schemas/SearchResultsEnum'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SearchResult'
+      required:
+      - node_input_id
+      - key
+      - type
+      - value
+      title: NodeInputCompiledSearchResultsValue
+    CodeExecutionNodeStringResult:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/StringEnum'
+        value:
+          type:
+          - string
+          - 'null'
+      required:
+      - id
+      - type
+      - value
+      title: CodeExecutionNodeStringResult
+    WorkflowExecutionNodeResultEvent:
+      type: object
+      properties:
+        execution_id:
+          type: string
+        run_id:
+          type:
+          - string
+          - 'null'
+        external_id:
+          type:
+          - string
+          - 'null'
+        type:
+          $ref: '#/components/schemas/NodeEnum'
+        data:
+          $ref: '#/components/schemas/WorkflowNodeResultEvent'
+      required:
+      - execution_id
+      - type
+      - data
+      description: A NODE-level event emitted from the workflow's execution.
+      title: WorkflowExecutionNodeResultEvent
+    VellumImageRequest:
+      type: object
+      properties:
+        src:
+          type: string
+          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - src
+      title: VellumImageRequest
+    RejectedWorkflowNodeResultEvent:
+      type: object
+      properties:
+        id:
+          type: string
+        node_id:
+          type: string
+        node_result_id:
+          type: string
+        state:
+          $ref: '#/components/schemas/RejectedEnum'
+        ts:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/WorkflowNodeResultData'
+          - type: 'null'
+        source_execution_id:
+          type:
+          - string
+          - 'null'
+        error:
+          $ref: '#/components/schemas/WorkflowEventError'
+      required:
+      - id
+      - node_id
+      - node_result_id
+      - state
+      - data
+      - error
+      description: An event that indicates that the node has rejected its execution.
+      title: RejectedWorkflowNodeResultEvent
+    FulfilledExecutePromptResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/PromptExecutionMeta'
+        raw:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: The subset of the raw response from the model that the request opted into with `expand_raw`.
+        execution_id:
+          type: string
+          description: The ID of the execution.
+        state:
+          $ref: '#/components/schemas/FulfilledEnum'
+        outputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/PromptOutput'
+        chat_message_metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - execution_id
+      - state
+      - outputs
+      description: The successful response from the model containing all of the resolved values generated by the prompt.
+      title: FulfilledExecutePromptResponse
+    NodeOutputCompiledThinkingValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ThinkingEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/StringVellumValue'
+          - type: 'null'
+        node_output_id:
+          type: string
+        state:
+          $ref: '#/components/schemas/WorkflowNodeResultEventState'
+      required:
+      - type
+      - value
+      - node_output_id
+      description: An output returned by a node that is of type THINKING.
+      title: NodeOutputCompiledThinkingValue
+    WorkflowResultEventOutputDataString:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        name:
+          type: string
+        state:
+          $ref: '#/components/schemas/WorkflowNodeResultEventState'
+        node_id:
+          type:
+          - string
+          - 'null'
+        delta:
+          type:
+          - string
+          - 'null'
+          description: The newly output string value, meant to be concatenated with all previous. Will be non-null for events of state STREAMING.
+        type:
+          $ref: '#/components/schemas/StringEnum'
+        value:
+          type:
+          - string
+          - 'null'
+          description: The entire string value. Will be non-null for events of state FULFILLED.
+      required:
+      - name
+      - state
+      - delta
+      - type
+      - value
+      description: A string output streamed from a Workflow execution.
+      title: WorkflowResultEventOutputDataString
+    ExecuteWorkflowRequest:
+      type: object
+      properties:
+        inputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkflowRequestInputRequest'
+          description: The list of inputs defined in the Workflow's Deployment with their corresponding values.
+        expand_meta:
+          oneOf:
+          - $ref: '#/components/schemas/WorkflowExpandMetaRequest'
+          - type: 'null'
+          description: An optionally specified configuration used to opt in to including additional metadata about this workflow execution in the API response. Corresponding values will be returned under the `execution_meta` key within NODE events in the response stream.
+        workflow_deployment_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of the Workflow Deployment. Must provide either this or workflow_deployment_name.
+        workflow_deployment_name:
+          type:
+          - string
+          - 'null'
+          description: The name of the Workflow Deployment. Must provide either this or workflow_deployment_id.
+        release_tag:
+          type:
+          - string
+          - 'null'
+          description: Optionally specify a release tag if you want to pin to a specific release of the Workflow Deployment
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: Optionally include a unique identifier for tracking purposes. Must be unique within a given Workspace.
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+          description: Arbitrary JSON metadata associated with this request. Can be used to capture additional monitoring data such as user id, session id, etc. for future analysis.
+        previous_execution_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of a previous Workflow Execution to reference for initial State loading.
+      required:
+      - inputs
+      description: The request to invoke a Workflow Deployment execution.
+      title: ExecuteWorkflowRequest
+    WorkflowOutputAudio:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          description: The output's name, as defined in the workflow
+        type:
+          $ref: '#/components/schemas/AudioEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumAudio'
+          - type: 'null'
+      required:
+      - id
+      - name
+      - type
+      - value
+      description: An audio output from a Workflow execution.
+      title: WorkflowOutputAudio
+    StringVellumValueRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/StringEnum'
+        value:
+          type:
+          - string
+          - 'null'
+      required:
+      - type
+      - value
+      description: A value representing a string.
+      title: StringVellumValueRequest
+    ExecutionNumberVellumValue:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The variable's uniquely identifying internal id.
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/NumberEnum'
+        value:
+          type:
+          - number
+          - 'null'
+          format: double
+      required:
+      - id
+      - name
+      - type
+      - value
+      description: A value representing a number.
+      title: ExecutionNumberVellumValue
+    ApiNodeResult:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ApiEnum'
+        data:
+          $ref: '#/components/schemas/ApiNodeResultData'
+      required:
+      - type
+      - data
+      description: A Node Result Event emitted from an API Node.
+      title: ApiNodeResult
+    MapNodeResult:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/MapEnum'
+        data:
+          $ref: '#/components/schemas/MapNodeResultData'
+      required:
+      - type
+      description: A Node Result Event emitted from a Map Node.
+      title: MapNodeResult
+    WorkflowOutputArray:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          description: The output's name, as defined in the workflow
+        type:
+          $ref: '#/components/schemas/ArrayEnum'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/VellumValue'
+      required:
+      - id
+      - name
+      - type
+      - value
+      description: An array output from a Workflow execution.
+      title: WorkflowOutputArray
+    WorkflowResultEventOutputDataError:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        name:
+          type: string
+        state:
+          $ref: '#/components/schemas/WorkflowNodeResultEventState'
+        node_id:
+          type:
+          - string
+          - 'null'
+        delta:
+          type:
+          - string
+          - 'null'
+          description: The newly output string value. Only relevant for string outputs with a state of STREAMING.
+        type:
+          $ref: '#/components/schemas/ErrorEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumError'
+          - type: 'null'
+      required:
+      - name
+      - state
+      - delta
+      - type
+      - value
+      description: An Error output streamed from a Workflow execution.
+      title: WorkflowResultEventOutputDataError
+    SearchResultsVellumValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/SearchResultsEnum'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SearchResult'
+      required:
+      - type
+      - value
+      description: A value representing Search Results.
+      title: SearchResultsVellumValue
+    TerminalNodeResult:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/TerminalEnum'
+        data:
+          $ref: '#/components/schemas/TerminalNodeResultData'
+      required:
+      - type
+      - data
+      description: A Node Result Event emitted from a Terminal Node.
+      title: TerminalNodeResult
+    CodeExecutionEnum:
+      type: string
+      enum:
+      - CODE_EXECUTION
+      title: CodeExecutionEnum
+    FunctionCallChatMessageContentValueRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        arguments:
+          type: object
+          additionalProperties:
+            description: Any type
+        id:
+          type:
+          - string
+          - 'null'
+      required:
+      - name
+      - arguments
+      description: The final resolved function call value.
+      title: FunctionCallChatMessageContentValueRequest
+    WorkflowOutputVideo:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          description: The output's name, as defined in the workflow
+        type:
+          $ref: '#/components/schemas/VideoEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumVideo'
+          - type: 'null'
+      required:
+      - id
+      - name
+      - type
+      - value
+      description: A video output from a Workflow execution.
+      title: WorkflowOutputVideo
+    NodeOutputCompiledStringValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/StringEnum'
+        value:
+          type:
+          - string
+          - 'null'
+        node_output_id:
+          type: string
+        state:
+          $ref: '#/components/schemas/WorkflowNodeResultEventState'
+      required:
+      - type
+      - value
+      - node_output_id
+      description: An output returned by a node that is of type STRING.
+      title: NodeOutputCompiledStringValue
+    ExecutionVellumValue:
+      oneOf:
+      - $ref: '#/components/schemas/ExecutionStringVellumValue'
+      - $ref: '#/components/schemas/ExecutionNumberVellumValue'
+      - $ref: '#/components/schemas/ExecutionJsonVellumValue'
+      - $ref: '#/components/schemas/ExecutionChatHistoryVellumValue'
+      - $ref: '#/components/schemas/ExecutionSearchResultsVellumValue'
+      - $ref: '#/components/schemas/ExecutionErrorVellumValue'
+      - $ref: '#/components/schemas/ExecutionArrayVellumValue'
+      - $ref: '#/components/schemas/ExecutionFunctionCallVellumValue'
+      - $ref: '#/components/schemas/ExecutionThinkingVellumValue'
+      - $ref: '#/components/schemas/ExecutionAudioVellumValue'
+      - $ref: '#/components/schemas/ExecutionVideoVellumValue'
+      - $ref: '#/components/schemas/ExecutionImageVellumValue'
+      - $ref: '#/components/schemas/ExecutionDocumentVellumValue'
+      title: ExecutionVellumValue
+    ArrayChatMessageContent:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ArrayEnum'
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/ArrayChatMessageContentItem'
+      required:
+      - type
+      - value
+      description: A list of chat message content items.
+      title: ArrayChatMessageContent
+    CodeExecutionNodeResult:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/CodeExecutionEnum'
+        data:
+          $ref: '#/components/schemas/CodeExecutionNodeResultData'
+      required:
+      - type
+      - data
+      description: A Node Result Event emitted from a Code Execution Node.
+      title: CodeExecutionNodeResult
+    SearchRequestBodyRequest:
+      type: object
+      properties:
+        index_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of the index to search against. Must provide either this, index_name or document_index.
+        index_name:
+          type:
+          - string
+          - 'null'
+          description: The name of the index to search against. Must provide either this, index_id or document_index.
+        query:
+          type: string
+          description: The query to search for.
+        options:
+          oneOf:
+          - $ref: '#/components/schemas/SearchRequestOptionsRequest'
+          - type: 'null'
+          description: Configuration options for the search.
+        document_index:
+          type:
+          - string
+          - 'null'
+          description: Either the index name or index ID to search against. Must provide either this, index_id or index_name.
+      required:
+      - query
+      title: SearchRequestBodyRequest
+    SearchResultMetaRequest:
+      type: object
+      properties:
+        source:
+          oneOf:
+          - $ref: '#/components/schemas/SearchResultMetaSourceRequest'
+          - type: 'null'
+      title: SearchResultMetaRequest
+    ExecutionAudioVellumValue:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The variable's uniquely identifying internal id.
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/AudioEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumAudio'
+          - type: 'null'
+      required:
+      - id
+      - name
+      - type
+      - value
+      description: A base Vellum primitive value representing audio.
+      title: ExecutionAudioVellumValue
+    WorkflowOutputJSON:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          description: The output's name, as defined in the workflow
+        type:
+          $ref: '#/components/schemas/JsonEnum'
+        value:
+          oneOf:
+          - description: Any type
+          - type: 'null'
+      required:
+      - id
+      - name
+      - type
+      - value
+      description: A JSON output from a Workflow execution.
+      title: WorkflowOutputJSON
+    SearchErrorResponse:
+      type: object
+      properties:
+        detail:
+          type: string
+          description: Details about why the request failed.
+      required:
+      - detail
+      title: SearchErrorResponse
+    StringVellumValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/StringEnum'
+        value:
+          type:
+          - string
+          - 'null'
+      required:
+      - type
+      - value
+      description: A value representing a string.
+      title: StringVellumValue
+    TemplatingNodeResultData:
+      type: object
+      properties:
+        output:
+          $ref: '#/components/schemas/TemplatingNodeResultOutput'
+      required:
+      - output
+      title: TemplatingNodeResultData
+    NodeOutputCompiledSearchResultsValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/SearchResultsEnum'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SearchResult'
+        node_output_id:
+          type: string
+        state:
+          $ref: '#/components/schemas/WorkflowNodeResultEventState'
+      required:
+      - type
+      - value
+      - node_output_id
+      description: An output returned by a node that is of type SEARCH_RESULTS.
+      title: NodeOutputCompiledSearchResultsValue
+    TerminalEnum:
+      type: string
+      enum:
+      - TERMINAL
+      title: TerminalEnum
+    MergeNodeResult:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/MergeEnum'
+        data:
+          $ref: '#/components/schemas/MergeNodeResultData'
+      required:
+      - type
+      - data
+      description: A Node Result Event emitted from a Merge Node.
+      title: MergeNodeResult
+    NodeInputCompiledNumberValue:
+      type: object
+      properties:
+        node_input_id:
+          type: string
+        key:
+          type: string
+        type:
+          $ref: '#/components/schemas/NumberEnum'
+        value:
+          type:
+          - number
+          - 'null'
+          format: double
+      required:
+      - node_input_id
+      - key
+      - type
+      - value
+      title: NodeInputCompiledNumberValue
+    WorkflowEnum:
+      type: string
+      enum:
+      - WORKFLOW
+      title: WorkflowEnum
+    MetadataFilterConfigRequest:
+      type: object
+      properties:
+        combinator:
+          oneOf:
+          - $ref: '#/components/schemas/MetadataFilterRuleCombinator'
+          - type: 'null'
+        negated:
+          type:
+          - boolean
+          - 'null'
+        rules:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/MetadataFilterRuleRequest'
+        field:
+          type:
+          - string
+          - 'null'
+        operator:
+          oneOf:
+          - $ref: '#/components/schemas/LogicalOperator'
+          - type: 'null'
+        value:
+          type:
+          - string
+          - 'null'
+      description: A deprecated pattern for filtering on metadata. Please use MetadataFilters instead.
+      title: MetadataFilterConfigRequest
+    RejectedExecutePromptResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/PromptExecutionMeta'
+        raw:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: The subset of the raw response from the model that the request opted into with `expand_raw`.
+        execution_id:
+          type: string
+          description: The ID of the execution.
+        state:
+          $ref: '#/components/schemas/RejectedEnum'
+        error:
+          $ref: '#/components/schemas/VellumError'
+      required:
+      - execution_id
+      - state
+      - error
+      description: The unsuccessful response from the model containing an error of what went wrong.
+      title: RejectedExecutePromptResponse
+    ExecutionVideoVellumValue:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The variable's uniquely identifying internal id.
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/VideoEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumVideo'
+          - type: 'null'
+      required:
+      - id
+      - name
+      - type
+      - value
+      description: A base Vellum primitive value representing a video.
+      title: ExecutionVideoVellumValue
+    TerminalNodeResultOutput:
+      oneOf:
+      - $ref: '#/components/schemas/TerminalNodeStringResult'
+      - $ref: '#/components/schemas/TerminalNodeNumberResult'
+      - $ref: '#/components/schemas/TerminalNodeJsonResult'
+      - $ref: '#/components/schemas/TerminalNodeChatHistoryResult'
+      - $ref: '#/components/schemas/TerminalNodeSearchResultsResult'
+      - $ref: '#/components/schemas/TerminalNodeErrorResult'
+      - $ref: '#/components/schemas/TerminalNodeArrayResult'
+      - $ref: '#/components/schemas/TerminalNodeFunctionCallResult'
+      title: TerminalNodeResultOutput
+    WorkflowOutputString:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          description: The output's name, as defined in the workflow
+        type:
+          $ref: '#/components/schemas/StringEnum'
+        value:
+          type:
+          - string
+          - 'null'
+      required:
+      - id
+      - name
+      - type
+      - value
+      description: A string output from a Workflow execution.
+      title: WorkflowOutputString
+    FunctionCall:
+      type: object
+      properties:
+        arguments:
+          type: object
+          additionalProperties:
+            description: Any type
+        id:
+          type:
+          - string
+          - 'null'
+        name:
+          type: string
+      required:
+      - arguments
+      - name
+      description: The final resolved function call value.
+      title: FunctionCall
+    JsonVellumValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/JsonEnum'
+        value:
+          oneOf:
+          - description: Any type
+          - type: 'null'
+      required:
+      - type
+      - value
+      description: A value representing a JSON object.
+      title: JsonVellumValue
+    NodeInputCompiledSecretValue:
+      type: object
+      properties:
+        node_input_id:
+          type: string
+        key:
+          type: string
+        type:
+          $ref: '#/components/schemas/SecretEnum'
+        value:
+          $ref: '#/components/schemas/VellumSecret'
+      required:
+      - node_input_id
+      - key
+      - type
+      - value
+      title: NodeInputCompiledSecretValue
+    WorkflowOutputFunctionCall:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          description: The output's name, as defined in the workflow
+        type:
+          $ref: '#/components/schemas/FunctionCallEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/FunctionCall'
+          - type: 'null'
+      required:
+      - id
+      - name
+      - type
+      - value
+      description: A function call output from a Workflow execution.
+      title: WorkflowOutputFunctionCall
+    VellumValueLogicalConditionRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/LogicalConditionEnum'
+        lhs_variable:
+          $ref: '#/components/schemas/VellumValueRequest'
+        operator:
+          $ref: '#/components/schemas/LogicalOperator'
+        rhs_variable:
+          $ref: '#/components/schemas/VellumValueRequest'
+      required:
+      - type
+      - lhs_variable
+      - operator
+      - rhs_variable
+      description: A basic condition comparing two Vellum values.
+      title: VellumValueLogicalConditionRequest
+    DocumentChatMessageContent:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/DocumentEnum'
+        value:
+          $ref: '#/components/schemas/VellumDocument'
+      required:
+      - type
+      - value
+      description: A document value that is used in a chat message.
+      title: DocumentChatMessageContent
+    ApiEnum:
+      type: string
+      enum:
+      - API
+      title: ApiEnum
+    FunctionCallChatMessageContentRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/FunctionCallEnum'
+        value:
+          $ref: '#/components/schemas/FunctionCallChatMessageContentValueRequest'
+      required:
+      - type
+      - value
+      description: A function call value that is used in a chat message.
+      title: FunctionCallChatMessageContentRequest
+    UnitEnum:
+      type: string
+      enum:
+      - USD
+      description: '* `USD` - USD'
+      title: UnitEnum
+    DocumentVellumValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/DocumentEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumDocument'
+          - type: 'null'
+      required:
+      - type
+      - value
+      description: A base Vellum primitive value representing a document.
+      title: DocumentVellumValue
+    WorkflowRequestDocumentInputRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The variable's name, as defined in the Workflow.
+        type:
+          $ref: '#/components/schemas/DocumentEnum'
+        value:
+          $ref: '#/components/schemas/VellumDocumentRequest'
+      required:
+      - name
+      - type
+      - value
+      description: The input for a document variable in a Workflow.
+      title: WorkflowRequestDocumentInputRequest
+    ImageInputRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The variable's name
+        type:
+          $ref: '#/components/schemas/ImageEnum'
+        value:
+          $ref: '#/components/schemas/VellumImageRequest'
+      required:
+      - name
+      - type
+      - value
+      description: A user input representing a Vellum Image value
+      title: ImageInputRequest
+    TerminalNodeResultData:
+      type: object
+      properties:
+        output:
+          $ref: '#/components/schemas/TerminalNodeResultOutput'
+      required:
+      - output
+      title: TerminalNodeResultData
+    FunctionCallVellumValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/FunctionCallEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/FunctionCall'
+          - type: 'null'
+      required:
+      - type
+      - value
+      description: A value representing a Function Call.
+      title: FunctionCallVellumValue
+    SearchResultsVellumValueRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/SearchResultsEnum'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SearchResultRequest'
+      required:
+      - type
+      - value
+      description: A value representing Search Results.
+      title: SearchResultsVellumValueRequest
+    WorkflowResultEventOutputDataChatHistory:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        name:
+          type: string
+        state:
+          $ref: '#/components/schemas/WorkflowNodeResultEventState'
+        node_id:
+          type:
+          - string
+          - 'null'
+        delta:
+          type:
+          - string
+          - 'null'
+          description: The newly output string value. Only relevant for string outputs with a state of STREAMING.
+        type:
+          $ref: '#/components/schemas/ChatHistoryEnum'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ChatMessage'
+      required:
+      - name
+      - state
+      - delta
+      - type
+      - value
+      description: A Chat History output streamed from a Workflow execution.
+      title: WorkflowResultEventOutputDataChatHistory
+    ImageVellumValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ImageEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumImage'
+          - type: 'null'
+      required:
+      - type
+      - value
+      description: A base Vellum primitive value representing an image.
+      title: ImageVellumValue
+    PromptOutput:
+      oneOf:
+      - $ref: '#/components/schemas/StringVellumValue'
+      - $ref: '#/components/schemas/JsonVellumValue'
+      - $ref: '#/components/schemas/ErrorVellumValue'
+      - $ref: '#/components/schemas/FunctionCallVellumValue'
+      - $ref: '#/components/schemas/ThinkingVellumValue'
+      title: PromptOutput
+    SearchResultDocumentRequest:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of the document.
+        label:
+          type: string
+          description: The human-readable name for the document.
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: The unique ID of the document as represented in an external system and specified when it was originally uploaded.
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+          description: A previously supplied JSON object containing metadata that can be filtered on when searching.
+      required:
+      - label
+      title: SearchResultDocumentRequest
+    TerminalNodeFunctionCallResult:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        name:
+          type: string
+          description: The unique name given to the terminal node that produced this output.
+        type:
+          $ref: '#/components/schemas/FunctionCallEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/FunctionCall'
+          - type: 'null'
+      required:
+      - name
+      - type
+      - value
+      title: TerminalNodeFunctionCallResult
+    ExecuteWorkflowStreamRequest:
+      type: object
+      properties:
+        inputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkflowRequestInputRequest'
+          description: The list of inputs defined in the Workflow's Deployment with their corresponding values.
+        expand_meta:
+          oneOf:
+          - $ref: '#/components/schemas/WorkflowExpandMetaRequest'
+          - type: 'null'
+          description: An optionally specified configuration used to opt in to including additional metadata about this workflow execution in the API response. Corresponding values will be returned under the `execution_meta` key within NODE events in the response stream.
+        workflow_deployment_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of the Workflow Deployment. Must provide either this or workflow_deployment_name.
+        workflow_deployment_name:
+          type:
+          - string
+          - 'null'
+          description: The name of the Workflow Deployment. Must provide either this or workflow_deployment_id.
+        release_tag:
+          type:
+          - string
+          - 'null'
+          description: Optionally specify a release tag if you want to pin to a specific release of the Workflow Deployment
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: Optionally include a unique identifier for tracking purposes. Must be unique within a given Workspace.
+        event_types:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkflowExecutionEventType'
+          description: Optionally specify which events you want to receive. Defaults to only WORKFLOW events. Note that the schema of non-WORKFLOW events is unstable and should be used with caution.
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+          description: Arbitrary JSON metadata associated with this request. Can be used to capture additional monitoring data such as user id, session id, etc. for future analysis.
+        previous_execution_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of a previous Workflow Execution to reference for initial State loading.
+      required:
+      - inputs
+      description: The request to stream a Workflow Deployment execution.
+      title: ExecuteWorkflowStreamRequest
+    VellumValueRequest:
+      oneOf:
+      - $ref: '#/components/schemas/StringVellumValueRequest'
+      - $ref: '#/components/schemas/NumberVellumValueRequest'
+      - $ref: '#/components/schemas/JsonVellumValueRequest'
+      - $ref: '#/components/schemas/AudioVellumValueRequest'
+      - $ref: '#/components/schemas/VideoVellumValueRequest'
+      - $ref: '#/components/schemas/ImageVellumValueRequest'
+      - $ref: '#/components/schemas/DocumentVellumValueRequest'
+      - $ref: '#/components/schemas/FunctionCallVellumValueRequest'
+      - $ref: '#/components/schemas/ErrorVellumValueRequest'
+      - $ref: '#/components/schemas/ArrayVellumValueRequest'
+      - $ref: '#/components/schemas/ChatHistoryVellumValueRequest'
+      - $ref: '#/components/schemas/SearchResultsVellumValueRequest'
+      - $ref: '#/components/schemas/ThinkingVellumValueRequest'
+      title: VellumValueRequest
+    VellumErrorRequest:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/VellumErrorCodeEnum'
+        message:
+          type: string
+        raw_data:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - code
+      - message
+      title: VellumErrorRequest
+    SearchNodeResultData:
+      type: object
+      properties:
+        results_output_id:
+          type: string
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/SearchResult'
+          description: The results of the search. Each result represents a chunk that matches the search query.
+        text_output_id:
+          type: string
+        text:
+          type:
+          - string
+          - 'null'
+      required:
+      - results_output_id
+      - results
+      - text_output_id
+      title: SearchNodeResultData
+    VellumVideo:
+      type: object
+      properties:
+        src:
+          type: string
+          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - src
+      title: VellumVideo
+    TemplatingNodeFunctionCallResult:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/FunctionCallEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/FunctionCall'
+          - type: 'null'
+      required:
+      - id
+      - type
+      - value
+      title: TemplatingNodeFunctionCallResult
+    ChatMessageRequest:
+      type: object
+      properties:
+        text:
+          type:
+          - string
+          - 'null'
+        role:
+          $ref: '#/components/schemas/ChatMessageRole'
+        content:
+          oneOf:
+          - $ref: '#/components/schemas/ChatMessageContentRequest'
+          - type: 'null'
+        source:
+          type:
+          - string
+          - 'null'
+          description: An optional identifier representing who or what generated this message.
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - role
+      title: ChatMessageRequest
+    DocumentInputRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The variable's name
+        type:
+          $ref: '#/components/schemas/DocumentEnum'
+        value:
+          $ref: '#/components/schemas/VellumDocumentRequest'
+      required:
+      - name
+      - type
+      - value
+      description: A user input representing a Vellum Document value
+      title: DocumentInputRequest
+    NumberVellumValueRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/NumberEnum'
+        value:
+          type:
+          - number
+          - 'null'
+          format: double
+      required:
+      - type
+      - value
+      description: A value representing a number.
+      title: NumberVellumValueRequest
+    CodeExecutionNodeJsonResult:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/JsonEnum'
+        value:
+          oneOf:
+          - description: Any type
+          - type: 'null'
+      required:
+      - id
+      - type
+      - value
+      title: CodeExecutionNodeJsonResult
+    NodeInputCompiledDocumentValue:
+      type: object
+      properties:
+        node_input_id:
+          type: string
+        key:
+          type: string
+        type:
+          $ref: '#/components/schemas/DocumentEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumDocument'
+          - type: 'null'
+      required:
+      - node_input_id
+      - key
+      - type
+      - value
+      title: NodeInputCompiledDocumentValue
+    CodeExecutionNodeFunctionCallResult:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/FunctionCallEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/FunctionCall'
+          - type: 'null'
+      required:
+      - id
+      - type
+      - value
+      title: CodeExecutionNodeFunctionCallResult
+    PromptExecutionMeta:
+      type: object
+      properties:
+        model_name:
+          type:
+          - string
+          - 'null'
+        latency:
+          type:
+          - integer
+          - 'null'
+        deployment_release_tag:
+          type:
+          - string
+          - 'null'
+        prompt_version_id:
+          type:
+          - string
+          - 'null'
+        finish_reason:
+          oneOf:
+          - $ref: '#/components/schemas/FinishReasonEnum'
+          - type: 'null'
+        usage:
+          oneOf:
+          - $ref: '#/components/schemas/MLModelUsage'
+          - type: 'null'
+        cost:
+          oneOf:
+          - $ref: '#/components/schemas/Price'
+          - type: 'null'
+      description: The subset of the metadata tracked by Vellum during prompt execution that the request opted into with `expand_meta`.
+      title: PromptExecutionMeta
+    ChatHistoryEnum:
+      type: string
+      enum:
+      - CHAT_HISTORY
+      title: ChatHistoryEnum
+    SearchNodeResult:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/SearchEnum'
+        data:
+          $ref: '#/components/schemas/SearchNodeResultData'
+      required:
+      - type
+      - data
+      description: A Node Result Event emitted from a Search Node.
+      title: SearchNodeResult
+    ImageChatMessageContent:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ImageEnum'
+        value:
+          $ref: '#/components/schemas/VellumImage'
+      required:
+      - type
+      - value
+      description: An image value that is used in a chat message.
+      title: ImageChatMessageContent
+    TerminalNodeJsonResult:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        name:
+          type: string
+          description: The unique name given to the terminal node that produced this output.
+        type:
+          $ref: '#/components/schemas/JsonEnum'
+        value:
+          oneOf:
+          - description: Any type
+          - type: 'null'
+      required:
+      - name
+      - type
+      - value
+      title: TerminalNodeJsonResult
+    ChatMessageContentRequest:
+      oneOf:
+      - $ref: '#/components/schemas/StringChatMessageContentRequest'
+      - $ref: '#/components/schemas/FunctionCallChatMessageContentRequest'
+      - $ref: '#/components/schemas/ArrayChatMessageContentRequest'
+      - $ref: '#/components/schemas/AudioChatMessageContentRequest'
+      - $ref: '#/components/schemas/VideoChatMessageContentRequest'
+      - $ref: '#/components/schemas/ImageChatMessageContentRequest'
+      - $ref: '#/components/schemas/DocumentChatMessageContentRequest'
+      title: ChatMessageContentRequest
+    WorkflowResultEventOutputDataNumber:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        name:
+          type: string
+        state:
+          $ref: '#/components/schemas/WorkflowNodeResultEventState'
+        node_id:
+          type:
+          - string
+          - 'null'
+        delta:
+          type:
+          - string
+          - 'null'
+          description: The newly output string value. Only relevant for string outputs with a state of STREAMING.
+        type:
+          $ref: '#/components/schemas/NumberEnum'
+        value:
+          type:
+          - number
+          - 'null'
+          format: double
+      required:
+      - name
+      - state
+      - delta
+      - type
+      - value
+      description: A number output streamed from a Workflow execution.
+      title: WorkflowResultEventOutputDataNumber
+    CodeExecutionNodeChatHistoryResult:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/ChatHistoryEnum'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ChatMessage'
+      required:
+      - id
+      - type
+      - value
+      title: CodeExecutionNodeChatHistoryResult
+    ArrayChatMessageContentItem:
+      oneOf:
+      - $ref: '#/components/schemas/StringChatMessageContent'
+      - $ref: '#/components/schemas/FunctionCallChatMessageContent'
+      - $ref: '#/components/schemas/AudioChatMessageContent'
+      - $ref: '#/components/schemas/VideoChatMessageContent'
+      - $ref: '#/components/schemas/ImageChatMessageContent'
+      - $ref: '#/components/schemas/DocumentChatMessageContent'
+      title: ArrayChatMessageContentItem
+    NodeInputCompiledJsonValue:
+      type: object
+      properties:
+        node_input_id:
+          type: string
+        key:
+          type: string
+        type:
+          $ref: '#/components/schemas/JsonEnum'
+        value:
+          oneOf:
+          - description: Any type
+          - type: 'null'
+      required:
+      - node_input_id
+      - key
+      - type
+      - value
+      title: NodeInputCompiledJsonValue
+    InitiatedPromptExecutionMeta:
+      type: object
+      properties:
+        model_name:
+          type:
+          - string
+          - 'null'
+        latency:
+          type:
+          - integer
+          - 'null'
+        deployment_release_tag:
+          type:
+          - string
+          - 'null'
+        prompt_version_id:
+          type:
+          - string
+          - 'null'
+      description: The subset of the metadata tracked by Vellum during prompt execution that the request opted into with `expand_meta`.
+      title: InitiatedPromptExecutionMeta
+    SearchResultMetaSourceRequest:
+      oneOf:
+      - $ref: '#/components/schemas/PdfSearchResultMetaSourceRequest'
+      title: SearchResultMetaSourceRequest
+  securitySchemes:
+    default:
+      type: apiKey
+      in: header
+      name: X-API-KEY

@@ -1,0 +1,72 @@
+openapi: 3.1.0
+info:
+  title: Client SDK subpackage_uploadedFiles API
+  version: 1.0.0
+servers:
+- url: https://predict.vellum.ai
+- url: https://api.vellum.ai
+- url: https://documents.vellum.ai
+tags:
+- name: subpackage_uploadedFiles
+paths:
+  /v1/uploaded-files/{id}:
+    get:
+      operationId: retrieve
+      summary: Retrieve
+      description: Retrieve a previously uploaded file by its ID
+      tags:
+      - subpackage_uploadedFiles
+      parameters:
+      - name: id
+        in: path
+        description: A UUID string identifying this uploaded file.
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: expiry_seconds
+        in: query
+        description: The number of seconds until the signed URL expires. Must be > 0 and <= 2592000 (30 days). Non-numeric or out-of-range values fall back to the default (604800 seconds or 7 days).
+        required: false
+        schema:
+          type: integer
+      - name: X-API-KEY
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-API-Version
+        in: header
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadedFileRead'
+components:
+  schemas:
+    UploadedFileRead:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        file_url:
+          type:
+          - string
+          - 'null'
+          description: A signed URL to download the uploaded file.
+      required:
+      - id
+      - file_url
+      description: Represents a file that has been uploaded to a Vellum Workspace.
+      title: UploadedFileRead
+  securitySchemes:
+    default:
+      type: apiKey
+      in: header
+      name: X-API-KEY

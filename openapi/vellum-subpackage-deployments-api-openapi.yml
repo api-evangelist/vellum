@@ -1,0 +1,2056 @@
+openapi: 3.1.0
+info:
+  title: Client SDK subpackage_deployments API
+  version: 1.0.0
+servers:
+- url: https://predict.vellum.ai
+- url: https://api.vellum.ai
+- url: https://documents.vellum.ai
+tags:
+- name: subpackage_deployments
+paths:
+  /v1/deployments/provider-payload:
+    post:
+      operationId: retrieve-provider-payload
+      summary: Retrieve Provider Payload
+      description: 'Given a set of input variable values, compile the exact payload that Vellum would send to the configured model provider
+
+        for execution if the execute-prompt endpoint had been invoked. Note that this endpoint does not actually execute the
+
+        prompt or make an API call to the model provider.
+
+
+        This endpoint is useful if you don''t want to proxy LLM provider requests through Vellum and prefer to send them directly
+
+        to the provider yourself. Note that no guarantees are made on the format of this API''s response schema, other than
+
+        that it will be a valid payload for the configured model provider. It''s not recommended that you try to parse or
+
+        derive meaning from the response body and instead, should simply pass it directly to the model provider as is.
+
+
+        We encourage you to seek advise from Vellum Support before integrating with this API for production use.
+
+        '
+      tags:
+      - subpackage_deployments
+      parameters:
+      - name: X-API-KEY
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-API-Version
+        in: header
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentProviderPayloadResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecutePromptApiErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecutePromptApiErrorResponse'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecutePromptApiErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecutePromptApiErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeploymentProviderPayloadRequest'
+  /v1/deployments:
+    get:
+      operationId: list
+      summary: List
+      description: Used to list all Prompt Deployments.
+      tags:
+      - subpackage_deployments
+      parameters:
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        required: false
+        schema:
+          type: integer
+      - name: ordering
+        in: query
+        description: Which field to use when ordering the results.
+        required: false
+        schema:
+          type: string
+      - name: status
+        in: query
+        description: status
+        required: false
+        schema:
+          $ref: '#/components/schemas/V1DeploymentsGetParametersStatus'
+      - name: X-API-KEY
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-API-Version
+        in: header
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedSlimDeploymentReadList'
+  /v1/deployments/{id}:
+    get:
+      operationId: retrieve
+      summary: Retrieve
+      description: Used to retrieve a Prompt Deployment given its ID or name.
+      tags:
+      - subpackage_deployments
+      parameters:
+      - name: id
+        in: path
+        description: Either the Prompt Deployment's ID or its unique name
+        required: true
+        schema:
+          type: string
+      - name: X-API-KEY
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-API-Version
+        in: header
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentRead'
+  /v1/deployments/{id}/releases/{release_id_or_release_tag}:
+    get:
+      operationId: retrieve-prompt-deployment-release
+      summary: Retrieve Prompt Deployment Release
+      description: Retrieve a specific Prompt Deployment Release by either its UUID or the name of a Release Tag that points to it.
+      tags:
+      - subpackage_deployments
+      parameters:
+      - name: id
+        in: path
+        description: Either the Prompt Deployment's ID or its unique name
+        required: true
+        schema:
+          type: string
+      - name: release_id_or_release_tag
+        in: path
+        description: Either the UUID of Prompt Deployment Release you'd like to retrieve, or the name of a Release Tag that's pointing to the Prompt Deployment Release you'd like to retrieve.
+        required: true
+        schema:
+          type: string
+      - name: X-API-KEY
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-API-Version
+        in: header
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PromptDeploymentRelease'
+  /v1/deployments/{id}/release-tags/{name}:
+    get:
+      operationId: retrieve-deployment-release-tag
+      summary: Retrieve Deployment Release Tag
+      description: Retrieve a Deployment Release Tag by tag name, associated with a specified Deployment.
+      tags:
+      - subpackage_deployments
+      parameters:
+      - name: id
+        in: path
+        description: Either the Prompt Deployment's ID or its unique name
+        required: true
+        schema:
+          type: string
+      - name: name
+        in: path
+        description: The name of the Release Tag associated with this Deployment that you'd like to retrieve.
+        required: true
+        schema:
+          type: string
+      - name: X-API-KEY
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-API-Version
+        in: header
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentReleaseTagRead'
+    patch:
+      operationId: update-deployment-release-tag
+      summary: Update Deployment Release Tag
+      description: Updates an existing Release Tag associated with the specified Prompt Deployment.
+      tags:
+      - subpackage_deployments
+      parameters:
+      - name: id
+        in: path
+        description: Either the Prompt Deployment's ID or its unique name
+        required: true
+        schema:
+          type: string
+      - name: name
+        in: path
+        description: The name of the Release Tag associated with this Deployment that you'd like to update.
+        required: true
+        schema:
+          type: string
+      - name: X-API-KEY
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-API-Version
+        in: header
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentReleaseTagRead'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedDeploymentReleaseTagUpdateRequest'
+  /v1/deployments/{id}/release-tags:
+    get:
+      operationId: list-deployment-release-tags
+      summary: List Deployment Release Tags
+      description: List Release Tags associated with the specified Prompt Deployment
+      tags:
+      - subpackage_deployments
+      parameters:
+      - name: id
+        in: path
+        description: Either the Prompt Deployment's ID or its unique name
+        required: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        required: false
+        schema:
+          type: integer
+      - name: ordering
+        in: query
+        description: Which field to use when ordering the results.
+        required: false
+        schema:
+          type: string
+      - name: source
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/V1DeploymentsIdReleaseTagsGetParametersSource'
+      - name: X-API-KEY
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-API-Version
+        in: header
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedDeploymentReleaseTagReadList'
+  /v1/deployments/{id}/history/{history_id_or_release_tag}:
+    get:
+      operationId: deployment-history-item-retrieve
+      summary: Deployment History Item Retrieve
+      description: 'DEPRECATED: This endpoint is deprecated and will be removed in a future release. Please use the
+
+        `retrieve_prompt_deployment_release` xendpoint instead.'
+      tags:
+      - subpackage_deployments
+      parameters:
+      - name: history_id_or_release_tag
+        in: path
+        description: Either the UUID of Deployment History Item you'd like to retrieve, or the name of a Release Tag that's pointing to the Deployment History Item you'd like to retrieve.
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: id
+        in: path
+        description: Either the Prompt Deployment's ID or its unique name
+        required: true
+        schema:
+          type: string
+      - name: X-API-KEY
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-API-Version
+        in: header
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentHistoryItem'
+components:
+  schemas:
+    ArrayChatMessageContentRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ArrayEnum'
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/ArrayChatMessageContentItemRequest'
+      required:
+      - type
+      - value
+      description: A list of chat message content items.
+      title: ArrayChatMessageContentRequest
+    ErrorVellumValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ErrorEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumError'
+          - type: 'null'
+      required:
+      - type
+      - value
+      description: A value representing an Error.
+      title: ErrorVellumValue
+    EntityStatus:
+      type: string
+      enum:
+      - ACTIVE
+      - ARCHIVED
+      - PENDING_DELETION
+      description: '* `ACTIVE` - Active
+
+        * `ARCHIVED` - Archived
+
+        * `PENDING_DELETION` - Pending Deletion'
+      title: EntityStatus
+    PdfEnum:
+      type: string
+      enum:
+      - PDF
+      title: PdfEnum
+    ReleaseReviewReviewer:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        full_name:
+          type: string
+      required:
+      - id
+      title: ReleaseReviewReviewer
+    PatchedDeploymentReleaseTagUpdateRequest:
+      type: object
+      properties:
+        history_item_id:
+          type: string
+          format: uuid
+          description: The ID of the Release to tag
+      title: PatchedDeploymentReleaseTagUpdateRequest
+    SearchResultsVellumValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/SearchResultsEnum'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SearchResult'
+      required:
+      - type
+      - value
+      description: A value representing Search Results.
+      title: SearchResultsVellumValue
+    ChatHistoryVellumValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ChatHistoryEnum'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ChatMessage'
+      required:
+      - type
+      - value
+      description: A value representing Chat History.
+      title: ChatHistoryVellumValue
+    ArrayVellumValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ArrayEnum'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/VellumValue'
+      required:
+      - type
+      - value
+      description: A value representing an array of Vellum variable values.
+      title: ArrayVellumValue
+    VellumVariableType:
+      type: string
+      enum:
+      - STRING
+      - NUMBER
+      - JSON
+      - CHAT_HISTORY
+      - SEARCH_RESULTS
+      - ERROR
+      - ARRAY
+      - FUNCTION_CALL
+      - AUDIO
+      - VIDEO
+      - IMAGE
+      - DOCUMENT
+      - 'NULL'
+      - THINKING
+      - REFERENCE
+      description: '* `STRING` - STRING
+
+        * `NUMBER` - NUMBER
+
+        * `JSON` - JSON
+
+        * `CHAT_HISTORY` - CHAT_HISTORY
+
+        * `SEARCH_RESULTS` - SEARCH_RESULTS
+
+        * `ERROR` - ERROR
+
+        * `ARRAY` - ARRAY
+
+
+        * `FUNCTION_CALL` - FUNCTION_CALL
+
+        * `AUDIO` - AUDIO
+
+        * `VIDEO` - VIDEO
+
+        * `IMAGE` - IMAGE
+
+        * `DOCUMENT` - DOCUMENT
+
+        * `NULL` - NULL
+
+        * `THINKING` - THINKING
+
+        * `REFERENCE` - REFERENCE'
+      title: VellumVariableType
+    CompilePromptMeta:
+      type: object
+      properties:
+        model_name:
+          type:
+          - string
+          - 'null'
+        deployment_release_tag:
+          type:
+          - string
+          - 'null'
+        prompt_version_id:
+          type:
+          - string
+          - 'null'
+      description: The subset of the metadata tracked by Vellum during Prompt Deployment compilation that the request opted into with `expand_meta`.
+      title: CompilePromptMeta
+    VideoInputRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The variable's name
+        type:
+          $ref: '#/components/schemas/VideoEnum'
+        value:
+          $ref: '#/components/schemas/VellumVideoRequest'
+      required:
+      - name
+      - type
+      - value
+      description: A user input representing a Vellum Video value
+      title: VideoInputRequest
+    V1DeploymentsIdReleaseTagsGetParametersSource:
+      type: string
+      enum:
+      - SYSTEM
+      - USER
+      title: V1DeploymentsIdReleaseTagsGetParametersSource
+    VideoEnum:
+      type: string
+      enum:
+      - VIDEO
+      title: VideoEnum
+    DocumentChatMessageContentRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/DocumentEnum'
+        value:
+          $ref: '#/components/schemas/VellumDocumentRequest'
+      required:
+      - type
+      - value
+      description: A document value that is used in a chat message.
+      title: DocumentChatMessageContentRequest
+    VideoChatMessageContent:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/VideoEnum'
+        value:
+          $ref: '#/components/schemas/VellumVideo'
+      required:
+      - type
+      - value
+      description: A video value that is used in a chat message.
+      title: VideoChatMessageContent
+    FunctionCallChatMessageContentValueRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        arguments:
+          type: object
+          additionalProperties:
+            description: Any type
+        id:
+          type:
+          - string
+          - 'null'
+      required:
+      - name
+      - arguments
+      description: The final resolved function call value.
+      title: FunctionCallChatMessageContentValueRequest
+    PromptVersionBuildConfig:
+      oneOf:
+      - $ref: '#/components/schemas/PromptVersionBuildConfigSandbox'
+      title: PromptVersionBuildConfig
+    SearchResultMeta:
+      type: object
+      properties:
+        source:
+          oneOf:
+          - $ref: '#/components/schemas/SearchResultMetaSource'
+          - type: 'null'
+      title: SearchResultMeta
+    ReleaseReviewState:
+      type: string
+      enum:
+      - APPROVED
+      - CHANGES_REQUESTED
+      - COMMENTED
+      description: '* `APPROVED` - Approved
+
+        * `CHANGES_REQUESTED` - Changes Requested
+
+        * `COMMENTED` - Commented'
+      title: ReleaseReviewState
+    VideoChatMessageContentRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/VideoEnum'
+        value:
+          $ref: '#/components/schemas/VellumVideoRequest'
+      required:
+      - type
+      - value
+      description: A video value that is used in a chat message.
+      title: VideoChatMessageContentRequest
+    AudioVellumValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/AudioEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumAudio'
+          - type: 'null'
+      required:
+      - type
+      - value
+      description: A base Vellum primitive value representing audio.
+      title: AudioVellumValue
+    ArrayChatMessageContent:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ArrayEnum'
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/ArrayChatMessageContentItem'
+      required:
+      - type
+      - value
+      description: A list of chat message content items.
+      title: ArrayChatMessageContent
+    StringInputRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The variable's name
+        type:
+          $ref: '#/components/schemas/StringEnum'
+        value:
+          type: string
+      required:
+      - name
+      - type
+      - value
+      description: A user input representing a string value
+      title: StringInputRequest
+    ChatMessageRole:
+      type: string
+      enum:
+      - SYSTEM
+      - ASSISTANT
+      - USER
+      - FUNCTION
+      description: '* `SYSTEM` - System
+
+        * `ASSISTANT` - Assistant
+
+        * `USER` - User
+
+        * `FUNCTION` - Function'
+      title: ChatMessageRole
+    NumberEnum:
+      type: string
+      enum:
+      - NUMBER
+      title: NumberEnum
+    ReleaseTagRelease:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        timestamp:
+          type: string
+          format: date-time
+      required:
+      - id
+      - timestamp
+      title: ReleaseTagRelease
+    ArrayChatMessageContentItemRequest:
+      oneOf:
+      - $ref: '#/components/schemas/StringChatMessageContentRequest'
+      - $ref: '#/components/schemas/FunctionCallChatMessageContentRequest'
+      - $ref: '#/components/schemas/AudioChatMessageContentRequest'
+      - $ref: '#/components/schemas/VideoChatMessageContentRequest'
+      - $ref: '#/components/schemas/ImageChatMessageContentRequest'
+      - $ref: '#/components/schemas/DocumentChatMessageContentRequest'
+      title: ArrayChatMessageContentItemRequest
+    StringChatMessageContentRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/StringEnum'
+        value:
+          type: string
+      required:
+      - type
+      - value
+      description: A string value that is used in a chat message.
+      title: StringChatMessageContentRequest
+    VellumImage:
+      type: object
+      properties:
+        src:
+          type: string
+          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - src
+      title: VellumImage
+    StringVellumValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/StringEnum'
+        value:
+          type:
+          - string
+          - 'null'
+      required:
+      - type
+      - value
+      description: A value representing a string.
+      title: StringVellumValue
+    SlimReleaseReview:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        created:
+          type: string
+          format: date-time
+        reviewer:
+          $ref: '#/components/schemas/ReleaseReviewReviewer'
+        state:
+          $ref: '#/components/schemas/ReleaseReviewState'
+      required:
+      - id
+      - created
+      - reviewer
+      - state
+      title: SlimReleaseReview
+    ExecutePromptApiErrorResponse:
+      type: object
+      properties:
+        detail:
+          type: string
+          description: Details about why the request failed.
+        raw_data:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+          description: The raw error data structure, if available.
+      required:
+      - detail
+      title: ExecutePromptApiErrorResponse
+    PromptDeploymentReleasePromptVersion:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        ml_model_to_workspace_id:
+          type: string
+          format: uuid
+        build_config:
+          $ref: '#/components/schemas/PromptVersionBuildConfig'
+          description: Configuration used to build this prompt version.
+      required:
+      - id
+      - ml_model_to_workspace_id
+      - build_config
+      title: PromptDeploymentReleasePromptVersion
+    DeploymentProviderPayloadResponse:
+      type: object
+      properties:
+        payload:
+          $ref: '#/components/schemas/DeploymentProviderPayloadResponsePayload'
+        meta:
+          oneOf:
+          - $ref: '#/components/schemas/CompilePromptMeta'
+          - type: 'null'
+      required:
+      - payload
+      - meta
+      title: DeploymentProviderPayloadResponse
+    VellumDocumentRequest:
+      type: object
+      properties:
+        src:
+          type: string
+          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - src
+      title: VellumDocumentRequest
+    ChatHistoryInputRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The variable's name, as defined in the deployment.
+        type:
+          $ref: '#/components/schemas/ChatHistoryEnum'
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChatMessageRequest'
+      required:
+      - name
+      - type
+      - value
+      description: A user input representing a list of chat messages
+      title: ChatHistoryInputRequest
+    VellumDocument:
+      type: object
+      properties:
+        src:
+          type: string
+          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - src
+      title: VellumDocument
+    PromptDeploymentInputRequest:
+      oneOf:
+      - $ref: '#/components/schemas/StringInputRequest'
+      - $ref: '#/components/schemas/JSONInputRequest'
+      - $ref: '#/components/schemas/ChatHistoryInputRequest'
+      - $ref: '#/components/schemas/AudioInputRequest'
+      - $ref: '#/components/schemas/VideoInputRequest'
+      - $ref: '#/components/schemas/ImageInputRequest'
+      - $ref: '#/components/schemas/DocumentInputRequest'
+      title: PromptDeploymentInputRequest
+    VideoVellumValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/VideoEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumVideo'
+          - type: 'null'
+      required:
+      - type
+      - value
+      description: A base Vellum primitive value representing a video.
+      title: VideoVellumValue
+    PdfSearchResultMetaSource:
+      type: object
+      properties:
+        document_type:
+          $ref: '#/components/schemas/PdfEnum'
+        start_page_num:
+          type:
+          - integer
+          - 'null'
+          description: The 1-indexed page number where the chunk starts in the document. Only available for supported chunking strategies and document types.
+        end_page_num:
+          type:
+          - integer
+          - 'null'
+          description: The 1-indexed page number where the chunk ends in the document. Only available for supported chunking strategies and document types.
+      required:
+      - document_type
+      - start_page_num
+      - end_page_num
+      description: The source of a search result from a PDF document.
+      title: PdfSearchResultMetaSource
+    AudioInputRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The variable's name
+        type:
+          $ref: '#/components/schemas/AudioEnum'
+        value:
+          $ref: '#/components/schemas/VellumAudioRequest'
+      required:
+      - name
+      - type
+      - value
+      description: A user input representing a Vellum Audio value
+      title: AudioInputRequest
+    PromptDeploymentRelease:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        created:
+          type: string
+          format: date-time
+        environment:
+          $ref: '#/components/schemas/ReleaseEnvironment'
+        created_by:
+          oneOf:
+          - $ref: '#/components/schemas/ReleaseCreatedBy'
+          - type: 'null'
+        prompt_version:
+          $ref: '#/components/schemas/PromptDeploymentReleasePromptVersion'
+        deployment:
+          $ref: '#/components/schemas/PromptDeploymentReleasePromptDeployment'
+        description:
+          type: string
+        release_tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReleaseReleaseTag'
+        reviews:
+          type: array
+          items:
+            $ref: '#/components/schemas/SlimReleaseReview'
+      required:
+      - id
+      - created
+      - environment
+      - created_by
+      - prompt_version
+      - deployment
+      - release_tags
+      - reviews
+      title: PromptDeploymentRelease
+    ImageChatMessageContentRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ImageEnum'
+        value:
+          $ref: '#/components/schemas/VellumImageRequest'
+      required:
+      - type
+      - value
+      description: An image value that is used in a chat message.
+      title: ImageChatMessageContentRequest
+    DeploymentProviderPayloadResponsePayload:
+      oneOf:
+      - type: object
+        additionalProperties:
+          description: Any type
+      - type: string
+      title: DeploymentProviderPayloadResponsePayload
+    VellumVariableExtensions:
+      type: object
+      properties:
+        color:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+      description: A set of fields with additional properties for use in Vellum Variables.
+      title: VellumVariableExtensions
+    AudioEnum:
+      type: string
+      enum:
+      - AUDIO
+      title: AudioEnum
+    DeploymentReleaseTagDeploymentHistoryItem:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        timestamp:
+          type: string
+          format: date-time
+      required:
+      - id
+      - timestamp
+      title: DeploymentReleaseTagDeploymentHistoryItem
+    ImageEnum:
+      type: string
+      enum:
+      - IMAGE
+      title: ImageEnum
+    FunctionCall:
+      type: object
+      properties:
+        arguments:
+          type: object
+          additionalProperties:
+            description: Any type
+        id:
+          type:
+          - string
+          - 'null'
+        name:
+          type: string
+      required:
+      - arguments
+      - name
+      description: The final resolved function call value.
+      title: FunctionCall
+    JsonVellumValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/JsonEnum'
+        value:
+          oneOf:
+          - description: Any type
+          - type: 'null'
+      required:
+      - type
+      - value
+      description: A value representing a JSON object.
+      title: JsonVellumValue
+    StringChatMessageContent:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/StringEnum'
+        value:
+          type: string
+      required:
+      - type
+      - value
+      description: A string value that is used in a chat message.
+      title: StringChatMessageContent
+    VellumError:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/VellumErrorCodeEnum'
+        message:
+          type: string
+        raw_data:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - code
+      - message
+      title: VellumError
+    EnvironmentEnum:
+      type: string
+      enum:
+      - DEVELOPMENT
+      - STAGING
+      - PRODUCTION
+      title: EnvironmentEnum
+    ReleaseReleaseTag:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the Release Tag
+        source:
+          $ref: '#/components/schemas/ReleaseTagSource'
+          description: 'The source of how the Release Tag was originally created
+
+
+            * `SYSTEM` - System
+
+            * `USER` - User'
+      required:
+      - name
+      - source
+      title: ReleaseReleaseTag
+    FunctionCallChatMessageContentValue:
+      type: object
+      properties:
+        name:
+          type: string
+        arguments:
+          type: object
+          additionalProperties:
+            description: Any type
+        id:
+          type:
+          - string
+          - 'null'
+      required:
+      - name
+      - arguments
+      description: The final resolved function call value.
+      title: FunctionCallChatMessageContentValue
+    DocumentChatMessageContent:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/DocumentEnum'
+        value:
+          $ref: '#/components/schemas/VellumDocument'
+      required:
+      - type
+      - value
+      description: A document value that is used in a chat message.
+      title: DocumentChatMessageContent
+    FunctionCallChatMessageContentRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/FunctionCallEnum'
+        value:
+          $ref: '#/components/schemas/FunctionCallChatMessageContentValueRequest'
+      required:
+      - type
+      - value
+      description: A function call value that is used in a chat message.
+      title: FunctionCallChatMessageContentRequest
+    PaginatedSlimDeploymentReadList:
+      type: object
+      properties:
+        count:
+          type: integer
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/SlimDeploymentRead'
+      title: PaginatedSlimDeploymentReadList
+    ReleaseEnvironment:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        label:
+          type: string
+      required:
+      - id
+      - name
+      - label
+      title: ReleaseEnvironment
+    ChatMessageContent:
+      oneOf:
+      - $ref: '#/components/schemas/StringChatMessageContent'
+      - $ref: '#/components/schemas/FunctionCallChatMessageContent'
+      - $ref: '#/components/schemas/ArrayChatMessageContent'
+      - $ref: '#/components/schemas/AudioChatMessageContent'
+      - $ref: '#/components/schemas/VideoChatMessageContent'
+      - $ref: '#/components/schemas/ImageChatMessageContent'
+      - $ref: '#/components/schemas/DocumentChatMessageContent'
+      title: ChatMessageContent
+    CompilePromptDeploymentExpandMetaRequest:
+      type: object
+      properties:
+        model_name:
+          type:
+          - boolean
+          - 'null'
+          description: If enabled, the response will include the model identifier representing the ML Model invoked by the Prompt.
+        deployment_release_tag:
+          type:
+          - boolean
+          - 'null'
+          description: If enabled, the response will include the release tag of the Prompt Deployment.
+        prompt_version_id:
+          type:
+          - boolean
+          - 'null'
+          description: If enabled, the response will include the ID of the Prompt Version backing the deployment.
+      title: CompilePromptDeploymentExpandMetaRequest
+    VellumVideoRequest:
+      type: object
+      properties:
+        src:
+          type: string
+          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - src
+      title: VellumVideoRequest
+    StringEnum:
+      type: string
+      enum:
+      - STRING
+      title: StringEnum
+    DocumentVellumValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/DocumentEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumDocument'
+          - type: 'null'
+      required:
+      - type
+      - value
+      description: A base Vellum primitive value representing a document.
+      title: DocumentVellumValue
+    NumberVellumValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/NumberEnum'
+        value:
+          type:
+          - number
+          - 'null'
+          format: double
+      required:
+      - type
+      - value
+      description: A value representing a number.
+      title: NumberVellumValue
+    ImageInputRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The variable's name
+        type:
+          $ref: '#/components/schemas/ImageEnum'
+        value:
+          $ref: '#/components/schemas/VellumImageRequest'
+      required:
+      - name
+      - type
+      - value
+      description: A user input representing a Vellum Image value
+      title: ImageInputRequest
+    ThinkingEnum:
+      type: string
+      enum:
+      - THINKING
+      title: ThinkingEnum
+    FunctionCallVellumValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/FunctionCallEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/FunctionCall'
+          - type: 'null'
+      required:
+      - type
+      - value
+      description: A value representing a Function Call.
+      title: FunctionCallVellumValue
+    VellumVariable:
+      type: object
+      properties:
+        id:
+          type: string
+        key:
+          type: string
+        type:
+          $ref: '#/components/schemas/VellumVariableType'
+        required:
+          type:
+          - boolean
+          - 'null'
+        default:
+          oneOf:
+          - $ref: '#/components/schemas/VellumValue'
+          - type: 'null'
+        extensions:
+          oneOf:
+          - $ref: '#/components/schemas/VellumVariableExtensions'
+          - type: 'null'
+        schema:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - id
+      - key
+      - type
+      title: VellumVariable
+    AudioChatMessageContentRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/AudioEnum'
+        value:
+          $ref: '#/components/schemas/VellumAudioRequest'
+      required:
+      - type
+      - value
+      description: An audio value that is used in a chat message.
+      title: AudioChatMessageContentRequest
+    ImageVellumValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ImageEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumImage'
+          - type: 'null'
+      required:
+      - type
+      - value
+      description: A base Vellum primitive value representing an image.
+      title: ImageVellumValue
+    JsonEnum:
+      type: string
+      enum:
+      - JSON
+      title: JsonEnum
+    V1DeploymentsGetParametersStatus:
+      type: string
+      enum:
+      - ACTIVE
+      - ARCHIVED
+      - PENDING_DELETION
+      title: V1DeploymentsGetParametersStatus
+    ReleaseTagSource:
+      type: string
+      enum:
+      - SYSTEM
+      - USER
+      description: '* `SYSTEM` - System
+
+        * `USER` - User'
+      title: ReleaseTagSource
+    FunctionCallEnum:
+      type: string
+      enum:
+      - FUNCTION_CALL
+      title: FunctionCallEnum
+    SearchResultsEnum:
+      type: string
+      enum:
+      - SEARCH_RESULTS
+      title: SearchResultsEnum
+    VellumAudioRequest:
+      type: object
+      properties:
+        src:
+          type: string
+          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - src
+      title: VellumAudioRequest
+    ArrayEnum:
+      type: string
+      enum:
+      - ARRAY
+      title: ArrayEnum
+    VellumErrorCodeEnum:
+      type: string
+      enum:
+      - INVALID_REQUEST
+      - INVALID_INPUTS
+      - PROVIDER_ERROR
+      - PROVIDER_CREDENTIALS_UNAVAILABLE
+      - INTEGRATION_CREDENTIALS_UNAVAILABLE
+      - REQUEST_TIMEOUT
+      - INTERNAL_SERVER_ERROR
+      - USER_DEFINED_ERROR
+      - WORKFLOW_CANCELLED
+      - NODE_CANCELLED
+      - PROVIDER_QUOTA_EXCEEDED
+      - CHAT_QUOTA_EXCEEDED
+      description: '* `INVALID_REQUEST` - INVALID_REQUEST
+
+        * `INVALID_INPUTS` - INVALID_INPUTS
+
+        * `PROVIDER_ERROR` - PROVIDER_ERROR
+
+        * `PROVIDER_CREDENTIALS_UNAVAILABLE` - PROVIDER_CREDENTIALS_UNAVAILABLE
+
+        * `INTEGRATION_CREDENTIALS_UNAVAILABLE` - INTEGRATION_CREDENTIALS_UNAVAILABLE
+
+        * `REQUEST_TIMEOUT` - REQUEST_TIMEOUT
+
+        * `INTERNAL_SERVER_ERROR` - INTERNAL_SERVER_ERROR
+
+        * `USER_DEFINED_ERROR` - USER_DEFINED_ERROR
+
+        * `WORKFLOW_CANCELLED` - WORKFLOW_CANCELLED
+
+        * `NODE_CANCELLED` - NODE_CANCELLED
+
+        * `PROVIDER_QUOTA_EXCEEDED` - PROVIDER_QUOTA_EXCEEDED
+
+        * `CHAT_QUOTA_EXCEEDED` - CHAT_QUOTA_EXCEEDED'
+      title: VellumErrorCodeEnum
+    VellumVideo:
+      type: object
+      properties:
+        src:
+          type: string
+          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - src
+      title: VellumVideo
+    ErrorEnum:
+      type: string
+      enum:
+      - ERROR
+      title: ErrorEnum
+    DeploymentHistoryItem:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        deployment_id:
+          type: string
+          format: uuid
+        timestamp:
+          type: string
+          format: date-time
+        label:
+          type: string
+          description: A human-readable label for the deployment
+        name:
+          type: string
+          description: A name that uniquely identifies this deployment within its workspace
+        input_variables:
+          type: array
+          items:
+            $ref: '#/components/schemas/VellumVariable'
+        description:
+          type:
+          - string
+          - 'null'
+          description: A human-readable description of the deployment
+      required:
+      - id
+      - deployment_id
+      - timestamp
+      - label
+      - name
+      - input_variables
+      title: DeploymentHistoryItem
+    ChatMessageRequest:
+      type: object
+      properties:
+        text:
+          type:
+          - string
+          - 'null'
+        role:
+          $ref: '#/components/schemas/ChatMessageRole'
+        content:
+          oneOf:
+          - $ref: '#/components/schemas/ChatMessageContentRequest'
+          - type: 'null'
+        source:
+          type:
+          - string
+          - 'null'
+          description: An optional identifier representing who or what generated this message.
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - role
+      title: ChatMessageRequest
+    DocumentInputRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The variable's name
+        type:
+          $ref: '#/components/schemas/DocumentEnum'
+        value:
+          $ref: '#/components/schemas/VellumDocumentRequest'
+      required:
+      - name
+      - type
+      - value
+      description: A user input representing a Vellum Document value
+      title: DocumentInputRequest
+    ChatMessage:
+      type: object
+      properties:
+        text:
+          type:
+          - string
+          - 'null'
+        role:
+          $ref: '#/components/schemas/ChatMessageRole'
+        content:
+          oneOf:
+          - $ref: '#/components/schemas/ChatMessageContent'
+          - type: 'null'
+        source:
+          type:
+          - string
+          - 'null'
+          description: An optional identifier representing who or what generated this message.
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - role
+      title: ChatMessage
+    ReleaseCreatedBy:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        full_name:
+          type: string
+        email:
+          type: string
+          format: email
+      required:
+      - id
+      - email
+      title: ReleaseCreatedBy
+    SandboxEnum:
+      type: string
+      enum:
+      - SANDBOX
+      title: SandboxEnum
+    AudioChatMessageContent:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/AudioEnum'
+        value:
+          $ref: '#/components/schemas/VellumAudio'
+      required:
+      - type
+      - value
+      description: An audio value that is used in a chat message.
+      title: AudioChatMessageContent
+    DeploymentProviderPayloadRequest:
+      type: object
+      properties:
+        deployment_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of the deployment. Must provide either this or deployment_name.
+        deployment_name:
+          type:
+          - string
+          - 'null'
+          description: The name of the deployment. Must provide either this or deployment_id.
+        inputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/PromptDeploymentInputRequest'
+          description: The list of inputs defined in the Prompt's deployment with their corresponding values.
+        release_tag:
+          type:
+          - string
+          - 'null'
+          description: Optionally specify a release tag if you want to pin to a specific release of the Workflow Deployment
+        expand_meta:
+          oneOf:
+          - $ref: '#/components/schemas/CompilePromptDeploymentExpandMetaRequest'
+          - type: 'null'
+      required:
+      - inputs
+      title: DeploymentProviderPayloadRequest
+    DocumentEnum:
+      type: string
+      enum:
+      - DOCUMENT
+      title: DocumentEnum
+    VellumImageRequest:
+      type: object
+      properties:
+        src:
+          type: string
+          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - src
+      title: VellumImageRequest
+    PromptDeploymentReleasePromptDeployment:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+      required:
+      - id
+      - name
+      title: PromptDeploymentReleasePromptDeployment
+    ChatHistoryEnum:
+      type: string
+      enum:
+      - CHAT_HISTORY
+      title: ChatHistoryEnum
+    FunctionCallChatMessageContent:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/FunctionCallEnum'
+        value:
+          $ref: '#/components/schemas/FunctionCallChatMessageContentValue'
+      required:
+      - type
+      - value
+      description: A function call value that is used in a chat message.
+      title: FunctionCallChatMessageContent
+    ImageChatMessageContent:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ImageEnum'
+        value:
+          $ref: '#/components/schemas/VellumImage'
+      required:
+      - type
+      - value
+      description: An image value that is used in a chat message.
+      title: ImageChatMessageContent
+    SearchResult:
+      type: object
+      properties:
+        text:
+          type: string
+          description: The text of the chunk that matched the search query.
+        score:
+          type: number
+          format: double
+          description: A score representing how well the chunk matches the search query.
+        keywords:
+          type: array
+          items:
+            type: string
+        document:
+          $ref: '#/components/schemas/SearchResultDocument'
+          description: The document that contains the chunk that matched the search query.
+        meta:
+          oneOf:
+          - $ref: '#/components/schemas/SearchResultMeta'
+          - type: 'null'
+          description: Additional information about the search result.
+      required:
+      - text
+      - score
+      - keywords
+      - document
+      title: SearchResult
+    JSONInputRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The variable's name
+        type:
+          $ref: '#/components/schemas/JsonEnum'
+        value:
+          oneOf:
+          - description: Any type
+          - type: 'null'
+      required:
+      - name
+      - type
+      - value
+      description: A user input representing a JSON object
+      title: JSONInputRequest
+    PaginatedDeploymentReleaseTagReadList:
+      type: object
+      properties:
+        count:
+          type: integer
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/DeploymentReleaseTagRead'
+      title: PaginatedDeploymentReleaseTagReadList
+    SlimDeploymentRead:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        created:
+          type: string
+          format: date-time
+        label:
+          type: string
+          description: A human-readable label for the deployment
+        name:
+          type: string
+          description: A name that uniquely identifies this deployment within its workspace
+        status:
+          $ref: '#/components/schemas/EntityStatus'
+          description: 'The current status of the deployment
+
+
+            * `ACTIVE` - Active
+
+            * `ARCHIVED` - Archived
+
+            * `PENDING_DELETION` - Pending Deletion'
+        environment:
+          oneOf:
+          - $ref: '#/components/schemas/EnvironmentEnum'
+          - type: 'null'
+          description: Deprecated. The value returned will always be 'PRODUCTION'.
+        last_deployed_on:
+          type: string
+          format: date-time
+        input_variables:
+          type: array
+          items:
+            $ref: '#/components/schemas/VellumVariable'
+        description:
+          type:
+          - string
+          - 'null'
+          description: A human-readable description of the deployment
+      required:
+      - id
+      - created
+      - label
+      - name
+      - last_deployed_on
+      - input_variables
+      description: A subset of a Prompt Deployment's full details.
+      title: SlimDeploymentRead
+    ChatMessageContentRequest:
+      oneOf:
+      - $ref: '#/components/schemas/StringChatMessageContentRequest'
+      - $ref: '#/components/schemas/FunctionCallChatMessageContentRequest'
+      - $ref: '#/components/schemas/ArrayChatMessageContentRequest'
+      - $ref: '#/components/schemas/AudioChatMessageContentRequest'
+      - $ref: '#/components/schemas/VideoChatMessageContentRequest'
+      - $ref: '#/components/schemas/ImageChatMessageContentRequest'
+      - $ref: '#/components/schemas/DocumentChatMessageContentRequest'
+      title: ChatMessageContentRequest
+    DeploymentReleaseTagRead:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the Release Tag
+        source:
+          $ref: '#/components/schemas/ReleaseTagSource'
+          description: 'The source of how the Release Tag was originally created
+
+
+            * `SYSTEM` - System
+
+            * `USER` - User'
+        history_item:
+          $ref: '#/components/schemas/DeploymentReleaseTagDeploymentHistoryItem'
+          description: Deprecated. Reference the `release` field instead.
+        release:
+          $ref: '#/components/schemas/ReleaseTagRelease'
+          description: The Release that this Release Tag points to.
+      required:
+      - name
+      - source
+      - history_item
+      - release
+      title: DeploymentReleaseTagRead
+    ThinkingVellumValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ThinkingEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/StringVellumValue'
+          - type: 'null'
+      required:
+      - type
+      - value
+      description: A value representing Thinking mode output.
+      title: ThinkingVellumValue
+    VellumAudio:
+      type: object
+      properties:
+        src:
+          type: string
+          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - src
+      title: VellumAudio
+    SearchResultDocument:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of the document.
+        label:
+          type: string
+          description: The human-readable name for the document.
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: The unique ID of the document as represented in an external system and specified when it was originally uploaded.
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+          description: A previously supplied JSON object containing metadata that can be filtered on when searching.
+      required:
+      - label
+      title: SearchResultDocument
+    SearchResultMetaSource:
+      oneOf:
+      - $ref: '#/components/schemas/PdfSearchResultMetaSource'
+      title: SearchResultMetaSource
+    VellumValue:
+      oneOf:
+      - $ref: '#/components/schemas/StringVellumValue'
+      - $ref: '#/components/schemas/NumberVellumValue'
+      - $ref: '#/components/schemas/JsonVellumValue'
+      - $ref: '#/components/schemas/AudioVellumValue'
+      - $ref: '#/components/schemas/VideoVellumValue'
+      - $ref: '#/components/schemas/ImageVellumValue'
+      - $ref: '#/components/schemas/DocumentVellumValue'
+      - $ref: '#/components/schemas/FunctionCallVellumValue'
+      - $ref: '#/components/schemas/ErrorVellumValue'
+      - $ref: '#/components/schemas/ArrayVellumValue'
+      - $ref: '#/components/schemas/ChatHistoryVellumValue'
+      - $ref: '#/components/schemas/SearchResultsVellumValue'
+      - $ref: '#/components/schemas/ThinkingVellumValue'
+      title: VellumValue
+    ArrayChatMessageContentItem:
+      oneOf:
+      - $ref: '#/components/schemas/StringChatMessageContent'
+      - $ref: '#/components/schemas/FunctionCallChatMessageContent'
+      - $ref: '#/components/schemas/AudioChatMessageContent'
+      - $ref: '#/components/schemas/VideoChatMessageContent'
+      - $ref: '#/components/schemas/ImageChatMessageContent'
+      - $ref: '#/components/schemas/DocumentChatMessageContent'
+      title: ArrayChatMessageContentItem
+    PromptVersionBuildConfigSandbox:
+      type: object
+      properties:
+        source:
+          $ref: '#/components/schemas/SandboxEnum'
+        sandbox_id:
+          type: string
+          format: uuid
+        sandbox_snapshot_id:
+          type: string
+          format: uuid
+        prompt_id:
+          type: string
+      required:
+      - source
+      - sandbox_id
+      - sandbox_snapshot_id
+      - prompt_id
+      title: PromptVersionBuildConfigSandbox
+    DeploymentRead:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        created:
+          type: string
+          format: date-time
+        label:
+          type: string
+          description: A human-readable label for the deployment
+        name:
+          type: string
+          description: A name that uniquely identifies this deployment within its workspace
+        status:
+          $ref: '#/components/schemas/EntityStatus'
+          description: 'The current status of the deployment
+
+
+            * `ACTIVE` - Active
+
+            * `ARCHIVED` - Archived
+
+            * `PENDING_DELETION` - Pending Deletion'
+        environment:
+          oneOf:
+          - $ref: '#/components/schemas/EnvironmentEnum'
+          - type: 'null'
+          description: Deprecated. The value returned will always be 'PRODUCTION'.
+        last_deployed_on:
+          type: string
+          format: date-time
+        input_variables:
+          type: array
+          items:
+            $ref: '#/components/schemas/VellumVariable'
+        description:
+          type:
+          - string
+          - 'null'
+          description: A human-readable description of the deployment
+        active_model_version_ids:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: uuid
+          description: Deprecated. This now always returns an empty array.
+        last_deployed_history_item_id:
+          type: string
+          format: uuid
+          description: The ID of the history item associated with this Deployment's LATEST Release Tag
+      required:
+      - id
+      - created
+      - label
+      - name
+      - last_deployed_on
+      - input_variables
+      - active_model_version_ids
+      - last_deployed_history_item_id
+      description: A Prompt Deployment's full details.
+      title: DeploymentRead
+  securitySchemes:
+    default:
+      type: apiKey
+      in: header
+      name: X-API-KEY

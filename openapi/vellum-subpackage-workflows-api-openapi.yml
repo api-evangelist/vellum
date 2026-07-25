@@ -1,0 +1,182 @@
+openapi: 3.1.0
+info:
+  title: Client SDK subpackage_workflows API
+  version: 1.0.0
+servers:
+- url: https://predict.vellum.ai
+- url: https://api.vellum.ai
+- url: https://documents.vellum.ai
+tags:
+- name: subpackage_workflows
+paths:
+  /v1/workflows/executions/{execution_id}/status:
+    get:
+      operationId: workflow-execution-status
+      summary: Workflow Execution Status
+      description: 'Checks if a workflow execution is currently executing (not fulfilled, not rejected, and has no end time).
+
+        Uses the ClickHouse Prime summary materialized view.'
+      tags:
+      - subpackage_workflows
+      parameters:
+      - name: execution_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-API-KEY
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-API-Version
+        in: header
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckWorkflowExecutionStatusResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckWorkflowExecutionStatusErrorResponse'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckWorkflowExecutionStatusErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckWorkflowExecutionStatusErrorResponse'
+components:
+  schemas:
+    CheckWorkflowExecutionStatusResponse:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/WorkflowResultEventState'
+        outputs:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+        error:
+          oneOf:
+          - $ref: '#/components/schemas/CheckWorkflowExecutionStatusError'
+          - type: 'null'
+        execution_id:
+          type: string
+        execution_detail_url:
+          type:
+          - string
+          - 'null'
+      required:
+      - status
+      - execution_id
+      description: Response serializer for workflow execution status check.
+      title: CheckWorkflowExecutionStatusResponse
+    CheckWorkflowExecutionStatusErrorResponse:
+      type: object
+      properties:
+        detail:
+          type: string
+      required:
+      - detail
+      description: Error response for workflow execution status check.
+      title: CheckWorkflowExecutionStatusErrorResponse
+    CheckWorkflowExecutionStatusError:
+      type: object
+      properties:
+        message:
+          type:
+          - string
+          - 'null'
+        code:
+          oneOf:
+          - $ref: '#/components/schemas/WorkflowExecutionEventErrorCode'
+          - type: 'null'
+      title: CheckWorkflowExecutionStatusError
+    WorkflowResultEventState:
+      type: string
+      enum:
+      - INITIATED
+      - STREAMING
+      - FULFILLED
+      - REJECTED
+      - PENDING
+      description: '* `INITIATED` - Initiated
+
+        * `STREAMING` - Streaming
+
+        * `FULFILLED` - Fulfilled
+
+        * `REJECTED` - Rejected
+
+        * `PENDING` - Pending'
+      title: WorkflowResultEventState
+    WorkflowExecutionEventErrorCode:
+      type: string
+      enum:
+      - WORKFLOW_INITIALIZATION
+      - WORKFLOW_CANCELLED
+      - WORKFLOW_TIMEOUT
+      - PROVIDER_CREDENTIALS_UNAVAILABLE
+      - INTEGRATION_CREDENTIALS_UNAVAILABLE
+      - NODE_EXECUTION_COUNT_LIMIT_REACHED
+      - INTERNAL_SERVER_ERROR
+      - NODE_EXECUTION
+      - NODE_CANCELLED
+      - NODE_TIMEOUT
+      - LLM_PROVIDER
+      - INVALID_TEMPLATE
+      - INVALID_INPUTS
+      - PROVIDER_QUOTA_EXCEEDED
+      - USER_DEFINED_ERROR
+      description: '* `WORKFLOW_INITIALIZATION` - WORKFLOW_INITIALIZATION
+
+        * `WORKFLOW_CANCELLED` - WORKFLOW_CANCELLED
+
+        * `WORKFLOW_TIMEOUT` - WORKFLOW_TIMEOUT
+
+        * `PROVIDER_CREDENTIALS_UNAVAILABLE` - PROVIDER_CREDENTIALS_UNAVAILABLE
+
+        * `INTEGRATION_CREDENTIALS_UNAVAILABLE` - INTEGRATION_CREDENTIALS_UNAVAILABLE
+
+        * `NODE_EXECUTION_COUNT_LIMIT_REACHED` - NODE_EXECUTION_COUNT_LIMIT_REACHED
+
+        * `INTERNAL_SERVER_ERROR` - INTERNAL_SERVER_ERROR
+
+        * `NODE_EXECUTION` - NODE_EXECUTION
+
+        * `NODE_CANCELLED` - NODE_CANCELLED
+
+        * `NODE_TIMEOUT` - NODE_TIMEOUT
+
+        * `LLM_PROVIDER` - LLM_PROVIDER
+
+        * `INVALID_TEMPLATE` - INVALID_TEMPLATE
+
+        * `INVALID_INPUTS` - INVALID_INPUTS
+
+        * `PROVIDER_QUOTA_EXCEEDED` - PROVIDER_QUOTA_EXCEEDED
+
+        * `USER_DEFINED_ERROR` - USER_DEFINED_ERROR'
+      title: WorkflowExecutionEventErrorCode
+  securitySchemes:
+    default:
+      type: apiKey
+      in: header
+      name: X-API-KEY

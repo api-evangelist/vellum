@@ -1,0 +1,1149 @@
+openapi: 3.1.0
+info:
+  title: Client SDK subpackage_documentIndexes API
+  version: 1.0.0
+servers:
+- url: https://predict.vellum.ai
+- url: https://api.vellum.ai
+- url: https://documents.vellum.ai
+tags:
+- name: subpackage_documentIndexes
+paths:
+  /v1/document-indexes/{id}/documents/{document_id}:
+    post:
+      operationId: add-document
+      summary: Add Document
+      description: Adds a previously uploaded Document to the specified Document Index.
+      tags:
+      - subpackage_documentIndexes
+      parameters:
+      - name: document_id
+        in: path
+        description: Either the Vellum-generated ID or the originally supplied external_id that uniquely identifies the Document you'd like to add.
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: Either the Vellum-generated ID or the originally specified name that uniquely identifies the Document Index to which you'd like to add the Document.
+        required: true
+        schema:
+          type: string
+      - name: X-API-KEY
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-API-Version
+        in: header
+        required: false
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No response body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/document-indexes_add_document_Response_204'
+    delete:
+      operationId: remove-document
+      summary: Remove Document
+      description: Removes a Document from a Document Index without deleting the Document itself.
+      tags:
+      - subpackage_documentIndexes
+      parameters:
+      - name: document_id
+        in: path
+        description: Either the Vellum-generated ID or the originally supplied external_id that uniquely identifies the Document you'd like to remove.
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: Either the Vellum-generated ID or the originally specified name that uniquely identifies the Document Index from which you'd like to remove a Document.
+        required: true
+        schema:
+          type: string
+      - name: X-API-KEY
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-API-Version
+        in: header
+        required: false
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No response body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/document-indexes_remove_document_Response_204'
+  /v1/document-indexes:
+    post:
+      operationId: create
+      summary: Create
+      description: Creates a new document index.
+      tags:
+      - subpackage_documentIndexes
+      parameters:
+      - name: X-API-KEY
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-API-Version
+        in: header
+        required: false
+        schema:
+          type: string
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentIndexRead'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DocumentIndexCreateRequest'
+    get:
+      operationId: list
+      summary: List
+      description: Used to retrieve a list of Document Indexes.
+      tags:
+      - subpackage_documentIndexes
+      parameters:
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        required: false
+        schema:
+          type: integer
+      - name: ordering
+        in: query
+        description: Which field to use when ordering the results.
+        required: false
+        schema:
+          type: string
+      - name: search
+        in: query
+        description: Search for document indices by name or label
+        required: false
+        schema:
+          type: string
+      - name: status
+        in: query
+        description: 'Filter down to only document indices that have a status matching the status specified
+
+
+          * `ACTIVE` - Active
+
+          * `ARCHIVED` - Archived
+
+          * `PENDING_DELETION` - Pending Deletion'
+        required: false
+        schema:
+          $ref: '#/components/schemas/V1DocumentIndexesGetParametersStatus'
+      - name: X-API-KEY
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-API-Version
+        in: header
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedDocumentIndexReadList'
+  /v1/document-indexes/{id}:
+    get:
+      operationId: retrieve
+      summary: Retrieve
+      description: Used to retrieve a Document Index given its ID or name.
+      tags:
+      - subpackage_documentIndexes
+      parameters:
+      - name: id
+        in: path
+        description: Either the Document Index's ID or its unique name
+        required: true
+        schema:
+          type: string
+      - name: mask_indexing_config
+        in: query
+        description: Whether to mask the indexing configuration in the response
+        required: false
+        schema:
+          type: boolean
+      - name: X-API-KEY
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-API-Version
+        in: header
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentIndexRead'
+    patch:
+      operationId: partial-update
+      summary: Partial Update
+      description: Used to partial update a Document Index given its ID or name.
+      tags:
+      - subpackage_documentIndexes
+      parameters:
+      - name: id
+        in: path
+        description: Either the Document Index's ID or its unique name
+        required: true
+        schema:
+          type: string
+      - name: X-API-KEY
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-API-Version
+        in: header
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentIndexRead'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedDocumentIndexUpdateRequest'
+    put:
+      operationId: update
+      summary: Update
+      description: Used to fully update a Document Index given its ID or name.
+      tags:
+      - subpackage_documentIndexes
+      parameters:
+      - name: id
+        in: path
+        description: Either the Document Index's ID or its unique name
+        required: true
+        schema:
+          type: string
+      - name: X-API-KEY
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-API-Version
+        in: header
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentIndexRead'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DocumentIndexUpdateRequest'
+    delete:
+      operationId: destroy
+      summary: Destroy
+      description: Used to delete a Document Index given its ID or name.
+      tags:
+      - subpackage_documentIndexes
+      parameters:
+      - name: id
+        in: path
+        description: Either the Document Index's ID or its unique name
+        required: true
+        schema:
+          type: string
+      - name: X-API-KEY
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-API-Version
+        in: header
+        required: false
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No response body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/document-indexes_destroy_Response_204'
+components:
+  schemas:
+    text-embedding-3-smallEnum:
+      type: string
+      enum:
+      - text-embedding-3-small
+      title: text-embedding-3-smallEnum
+    DocumentIndexChunking:
+      oneOf:
+      - $ref: '#/components/schemas/ReductoChunking'
+      - $ref: '#/components/schemas/SentenceChunking'
+      - $ref: '#/components/schemas/TokenOverlappingWindowChunking'
+      - $ref: '#/components/schemas/DelimiterChunking'
+      title: DocumentIndexChunking
+    EntityStatus:
+      type: string
+      enum:
+      - ACTIVE
+      - ARCHIVED
+      - PENDING_DELETION
+      description: '* `ACTIVE` - Active
+
+        * `ARCHIVED` - Archived
+
+        * `PENDING_DELETION` - Pending Deletion'
+      title: EntityStatus
+    DelimiterChunkerConfigRequest:
+      type: object
+      properties:
+        delimiter:
+          type: string
+          default: \n\n
+        is_regex:
+          type: boolean
+          default: false
+      title: DelimiterChunkerConfigRequest
+    HkunlpInstructorXlVectorizer:
+      type: object
+      properties:
+        model_name:
+          $ref: '#/components/schemas/hkunlp-instructor-xlEnum'
+        config:
+          $ref: '#/components/schemas/InstructorVectorizerConfig'
+      required:
+      - model_name
+      - config
+      description: Vectorizer for hkunlp/instructor-xl.
+      title: HkunlpInstructorXlVectorizer
+    BasicVectorizerSentenceTransformersMultiQaMpnetBaseDotV1Request:
+      type: object
+      properties:
+        model_name:
+          $ref: '#/components/schemas/sentence-transformers-multi-qa-mpnet-base-dot-v1Enum'
+        config:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - model_name
+      description: Basic vectorizer for sentence-transformers/multi-qa-mpnet-base-dot-v1.
+      title: BasicVectorizerSentenceTransformersMultiQaMpnetBaseDotV1Request
+    IndexingConfigVectorizer:
+      oneOf:
+      - $ref: '#/components/schemas/OpenAIVectorizerTextEmbedding3Small'
+      - $ref: '#/components/schemas/OpenAIVectorizerTextEmbedding3Large'
+      - $ref: '#/components/schemas/OpenAIVectorizerTextEmbeddingAda002'
+      - $ref: '#/components/schemas/BasicVectorizerIntfloatMultilingualE5Large'
+      - $ref: '#/components/schemas/BasicVectorizerSentenceTransformersMultiQaMpnetBaseCosV1'
+      - $ref: '#/components/schemas/BasicVectorizerSentenceTransformersMultiQaMpnetBaseDotV1'
+      - $ref: '#/components/schemas/HkunlpInstructorXlVectorizer'
+      - $ref: '#/components/schemas/GoogleVertexAIVectorizerTextEmbedding004'
+      - $ref: '#/components/schemas/GoogleVertexAIVectorizerTextMultilingualEmbedding002'
+      - $ref: '#/components/schemas/GoogleVertexAIVectorizerGeminiEmbedding001'
+      - $ref: '#/components/schemas/FastEmbedVectorizerBAAIBgeSmallEnV15'
+      - $ref: '#/components/schemas/PrivateVectorizer'
+      title: IndexingConfigVectorizer
+    sentence-transformers-multi-qa-mpnet-base-cos-v1Enum:
+      type: string
+      enum:
+      - sentence-transformers/multi-qa-mpnet-base-cos-v1
+      title: sentence-transformers-multi-qa-mpnet-base-cos-v1Enum
+    SentenceChunkerConfig:
+      type: object
+      properties:
+        character_limit:
+          type: integer
+          default: 1000
+        min_overlap_ratio:
+          type: number
+          format: double
+          default: 0.5
+      description: Configuration for sentence chunking
+      title: SentenceChunkerConfig
+    GoogleVertexAIVectorizerTextMultilingualEmbedding002Request:
+      type: object
+      properties:
+        model_name:
+          $ref: '#/components/schemas/text-multilingual-embedding-002Enum'
+        config:
+          $ref: '#/components/schemas/GoogleVertexAIVectorizerConfigRequest'
+      required:
+      - model_name
+      - config
+      title: GoogleVertexAIVectorizerTextMultilingualEmbedding002Request
+    AddOpenaiApiKeyEnum:
+      type: boolean
+      description: '* `True` - True'
+      title: AddOpenaiApiKeyEnum
+    sentence-chunkerEnum:
+      type: string
+      enum:
+      - sentence-chunker
+      title: sentence-chunkerEnum
+    TokenOverlappingWindowChunkerConfig:
+      type: object
+      properties:
+        token_limit:
+          type: integer
+          default: 250
+        overlap_ratio:
+          type: number
+          format: double
+          default: 0.5
+      description: Configuration for token overlapping window chunking
+      title: TokenOverlappingWindowChunkerConfig
+    SentenceChunking:
+      type: object
+      properties:
+        chunker_name:
+          $ref: '#/components/schemas/sentence-chunkerEnum'
+        chunker_config:
+          $ref: '#/components/schemas/SentenceChunkerConfig'
+      required:
+      - chunker_name
+      description: Sentence chunking
+      title: SentenceChunking
+    text-multilingual-embedding-002Enum:
+      type: string
+      enum:
+      - text-multilingual-embedding-002
+      title: text-multilingual-embedding-002Enum
+    OpenAIVectorizerTextEmbedding3Large:
+      type: object
+      properties:
+        config:
+          $ref: '#/components/schemas/OpenAIVectorizerConfig'
+        model_name:
+          $ref: '#/components/schemas/text-embedding-3-largeEnum'
+      required:
+      - config
+      - model_name
+      description: OpenAI vectorizer for text-embedding-3-large.
+      title: OpenAIVectorizerTextEmbedding3Large
+    DelimiterChunkingRequest:
+      type: object
+      properties:
+        chunker_name:
+          $ref: '#/components/schemas/delimiter-chunkerEnum'
+        chunker_config:
+          $ref: '#/components/schemas/DelimiterChunkerConfigRequest'
+      required:
+      - chunker_name
+      title: DelimiterChunkingRequest
+    PatchedDocumentIndexUpdateRequest:
+      type: object
+      properties:
+        label:
+          type: string
+          description: A human-readable label for the document index
+        status:
+          $ref: '#/components/schemas/EntityStatus'
+          description: 'The current status of the document index
+
+
+            * `ACTIVE` - Active
+
+            * `ARCHIVED` - Archived
+
+            * `PENDING_DELETION` - Pending Deletion'
+      title: PatchedDocumentIndexUpdateRequest
+    PaginatedDocumentIndexReadList:
+      type: object
+      properties:
+        count:
+          type: integer
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentIndexRead'
+      title: PaginatedDocumentIndexReadList
+    OpenAIVectorizerConfig:
+      type: object
+      properties:
+        add_openai_api_key:
+          $ref: '#/components/schemas/AddOpenaiApiKeyEnum'
+      description: Configuration for using an OpenAI vectorizer.
+      title: OpenAIVectorizerConfig
+    GoogleVertexAIVectorizerGeminiEmbedding001Request:
+      type: object
+      properties:
+        model_name:
+          $ref: '#/components/schemas/gemini-embedding-001Enum'
+        config:
+          $ref: '#/components/schemas/GoogleVertexAIVectorizerConfigRequest'
+      required:
+      - model_name
+      - config
+      title: GoogleVertexAIVectorizerGeminiEmbedding001Request
+    PrivateVectorizerRequest:
+      type: object
+      properties:
+        model_name:
+          $ref: '#/components/schemas/private-vectorizerEnum'
+      required:
+      - model_name
+      description: Serializer for private vectorizer.
+      title: PrivateVectorizerRequest
+    gemini-embedding-001Enum:
+      type: string
+      enum:
+      - gemini-embedding-001
+      title: gemini-embedding-001Enum
+    DocumentIndexIndexingConfig:
+      type: object
+      properties:
+        vectorizer:
+          $ref: '#/components/schemas/IndexingConfigVectorizer'
+        chunking:
+          oneOf:
+          - $ref: '#/components/schemas/DocumentIndexChunking'
+          - type: 'null'
+      required:
+      - vectorizer
+      title: DocumentIndexIndexingConfig
+    hkunlp-instructor-xlEnum:
+      type: string
+      enum:
+      - hkunlp/instructor-xl
+      title: hkunlp-instructor-xlEnum
+    GoogleVertexAIVectorizerGeminiEmbedding001:
+      type: object
+      properties:
+        model_name:
+          $ref: '#/components/schemas/gemini-embedding-001Enum'
+        config:
+          $ref: '#/components/schemas/GoogleVertexAIVectorizerConfig'
+      required:
+      - model_name
+      - config
+      title: GoogleVertexAIVectorizerGeminiEmbedding001
+    DocumentIndexRead:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        created:
+          type: string
+          format: date-time
+        label:
+          type: string
+          description: A human-readable label for the document index
+        name:
+          type: string
+          description: A name that uniquely identifies this index within its workspace
+        status:
+          $ref: '#/components/schemas/EntityStatus'
+          description: 'The current status of the document index
+
+
+            * `ACTIVE` - Active
+
+            * `ARCHIVED` - Archived
+
+            * `PENDING_DELETION` - Pending Deletion'
+        indexing_config:
+          $ref: '#/components/schemas/DocumentIndexIndexingConfig'
+      required:
+      - id
+      - created
+      - label
+      - name
+      - indexing_config
+      title: DocumentIndexRead
+    ReductoChunkerConfig:
+      type: object
+      properties:
+        character_limit:
+          type: integer
+          default: 1000
+      description: Configuration for Reducto chunking
+      title: ReductoChunkerConfig
+    SentenceChunkerConfigRequest:
+      type: object
+      properties:
+        character_limit:
+          type: integer
+          default: 1000
+        min_overlap_ratio:
+          type: number
+          format: double
+          default: 0.5
+      description: Configuration for sentence chunking
+      title: SentenceChunkerConfigRequest
+    GoogleVertexAIVectorizerConfigRequest:
+      type: object
+      properties:
+        project_id:
+          type: string
+        region:
+          type: string
+      required:
+      - project_id
+      - region
+      title: GoogleVertexAIVectorizerConfigRequest
+    BasicVectorizerIntfloatMultilingualE5Large:
+      type: object
+      properties:
+        config:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+        model_name:
+          $ref: '#/components/schemas/intfloat-multilingual-e5-largeEnum'
+      required:
+      - model_name
+      description: Basic vectorizer for intfloat/multilingual-e5-large.
+      title: BasicVectorizerIntfloatMultilingualE5Large
+    TokenOverlappingWindowChunkerConfigRequest:
+      type: object
+      properties:
+        token_limit:
+          type: integer
+          default: 250
+        overlap_ratio:
+          type: number
+          format: double
+          default: 0.5
+      description: Configuration for token overlapping window chunking
+      title: TokenOverlappingWindowChunkerConfigRequest
+    BasicVectorizerSentenceTransformersMultiQaMpnetBaseCosV1Request:
+      type: object
+      properties:
+        config:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+        model_name:
+          $ref: '#/components/schemas/sentence-transformers-multi-qa-mpnet-base-cos-v1Enum'
+      required:
+      - model_name
+      description: Basic vectorizer for sentence-transformers/multi-qa-mpnet-base-cos-v1.
+      title: BasicVectorizerSentenceTransformersMultiQaMpnetBaseCosV1Request
+    text-embedding-ada-002Enum:
+      type: string
+      enum:
+      - text-embedding-ada-002
+      title: text-embedding-ada-002Enum
+    OpenAIVectorizerConfigRequest:
+      type: object
+      properties:
+        add_openai_api_key:
+          $ref: '#/components/schemas/AddOpenaiApiKeyEnum'
+      description: Configuration for using an OpenAI vectorizer.
+      title: OpenAIVectorizerConfigRequest
+    OpenAIVectorizerTextEmbedding3SmallRequest:
+      type: object
+      properties:
+        config:
+          $ref: '#/components/schemas/OpenAIVectorizerConfigRequest'
+        model_name:
+          $ref: '#/components/schemas/text-embedding-3-smallEnum'
+      required:
+      - config
+      - model_name
+      description: OpenAI vectorizer for text-embedding-3-small.
+      title: OpenAIVectorizerTextEmbedding3SmallRequest
+    reducto-chunkerEnum:
+      type: string
+      enum:
+      - reducto-chunker
+      title: reducto-chunkerEnum
+    BasicVectorizerSentenceTransformersMultiQaMpnetBaseCosV1:
+      type: object
+      properties:
+        config:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+        model_name:
+          $ref: '#/components/schemas/sentence-transformers-multi-qa-mpnet-base-cos-v1Enum'
+      required:
+      - model_name
+      description: Basic vectorizer for sentence-transformers/multi-qa-mpnet-base-cos-v1.
+      title: BasicVectorizerSentenceTransformersMultiQaMpnetBaseCosV1
+    TokenOverlappingWindowChunking:
+      type: object
+      properties:
+        chunker_name:
+          $ref: '#/components/schemas/token-overlapping-window-chunkerEnum'
+        chunker_config:
+          $ref: '#/components/schemas/TokenOverlappingWindowChunkerConfig'
+      required:
+      - chunker_name
+      description: Token overlapping window chunking
+      title: TokenOverlappingWindowChunking
+    DelimiterChunkerConfig:
+      type: object
+      properties:
+        delimiter:
+          type: string
+          default: \n\n
+        is_regex:
+          type: boolean
+          default: false
+      title: DelimiterChunkerConfig
+    OpenAIVectorizerTextEmbedding3LargeRequest:
+      type: object
+      properties:
+        config:
+          $ref: '#/components/schemas/OpenAIVectorizerConfigRequest'
+        model_name:
+          $ref: '#/components/schemas/text-embedding-3-largeEnum'
+      required:
+      - config
+      - model_name
+      description: OpenAI vectorizer for text-embedding-3-large.
+      title: OpenAIVectorizerTextEmbedding3LargeRequest
+    GoogleVertexAIVectorizerTextEmbedding004Request:
+      type: object
+      properties:
+        model_name:
+          $ref: '#/components/schemas/text-embedding-004Enum'
+        config:
+          $ref: '#/components/schemas/GoogleVertexAIVectorizerConfigRequest'
+      required:
+      - model_name
+      - config
+      title: GoogleVertexAIVectorizerTextEmbedding004Request
+    FastEmbedVectorizerBAAIBgeSmallEnV15Request:
+      type: object
+      properties:
+        model_name:
+          $ref: '#/components/schemas/baai-bge-small-en-v1.5Enum'
+      required:
+      - model_name
+      description: FastEmbed vectorizer for BAAI/bge-small-en-v1.5.
+      title: FastEmbedVectorizerBAAIBgeSmallEnV15Request
+    ReductoChunkingRequest:
+      type: object
+      properties:
+        chunker_name:
+          $ref: '#/components/schemas/reducto-chunkerEnum'
+        chunker_config:
+          $ref: '#/components/schemas/ReductoChunkerConfigRequest'
+      required:
+      - chunker_name
+      description: Reducto chunking
+      title: ReductoChunkingRequest
+    text-embedding-004Enum:
+      type: string
+      enum:
+      - text-embedding-004
+      title: text-embedding-004Enum
+    ReductoChunking:
+      type: object
+      properties:
+        chunker_name:
+          $ref: '#/components/schemas/reducto-chunkerEnum'
+        chunker_config:
+          $ref: '#/components/schemas/ReductoChunkerConfig'
+      required:
+      - chunker_name
+      description: Reducto chunking
+      title: ReductoChunking
+    OpenAIVectorizerTextEmbeddingAda002Request:
+      type: object
+      properties:
+        config:
+          $ref: '#/components/schemas/OpenAIVectorizerConfigRequest'
+        model_name:
+          $ref: '#/components/schemas/text-embedding-ada-002Enum'
+      required:
+      - config
+      - model_name
+      description: OpenAI vectorizer for text-embedding-ada-002.
+      title: OpenAIVectorizerTextEmbeddingAda002Request
+    DocumentIndexUpdateRequest:
+      type: object
+      properties:
+        label:
+          type: string
+          description: A human-readable label for the document index
+        status:
+          $ref: '#/components/schemas/EntityStatus'
+          description: 'The current status of the document index
+
+
+            * `ACTIVE` - Active
+
+            * `ARCHIVED` - Archived
+
+            * `PENDING_DELETION` - Pending Deletion'
+      required:
+      - label
+      title: DocumentIndexUpdateRequest
+    ReductoChunkerConfigRequest:
+      type: object
+      properties:
+        character_limit:
+          type: integer
+          default: 1000
+      description: Configuration for Reducto chunking
+      title: ReductoChunkerConfigRequest
+    V1DocumentIndexesGetParametersStatus:
+      type: string
+      enum:
+      - ACTIVE
+      - ARCHIVED
+      - PENDING_DELETION
+      title: V1DocumentIndexesGetParametersStatus
+    GoogleVertexAIVectorizerTextEmbedding004:
+      type: object
+      properties:
+        model_name:
+          $ref: '#/components/schemas/text-embedding-004Enum'
+        config:
+          $ref: '#/components/schemas/GoogleVertexAIVectorizerConfig'
+      required:
+      - model_name
+      - config
+      title: GoogleVertexAIVectorizerTextEmbedding004
+    DocumentIndexIndexingConfigRequest:
+      type: object
+      properties:
+        vectorizer:
+          $ref: '#/components/schemas/IndexingConfigVectorizerRequest'
+        chunking:
+          oneOf:
+          - $ref: '#/components/schemas/DocumentIndexChunkingRequest'
+          - type: 'null'
+      required:
+      - vectorizer
+      title: DocumentIndexIndexingConfigRequest
+    InstructorVectorizerConfigRequest:
+      type: object
+      properties:
+        instruction_domain:
+          type: string
+        instruction_query_text_type:
+          type: string
+        instruction_document_text_type:
+          type: string
+      required:
+      - instruction_domain
+      - instruction_query_text_type
+      - instruction_document_text_type
+      description: Configuration for using an Instructor vectorizer.
+      title: InstructorVectorizerConfigRequest
+    DocumentIndexChunkingRequest:
+      oneOf:
+      - $ref: '#/components/schemas/ReductoChunkingRequest'
+      - $ref: '#/components/schemas/SentenceChunkingRequest'
+      - $ref: '#/components/schemas/TokenOverlappingWindowChunkingRequest'
+      - $ref: '#/components/schemas/DelimiterChunkingRequest'
+      title: DocumentIndexChunkingRequest
+    text-embedding-3-largeEnum:
+      type: string
+      enum:
+      - text-embedding-3-large
+      title: text-embedding-3-largeEnum
+    DelimiterChunking:
+      type: object
+      properties:
+        chunker_name:
+          $ref: '#/components/schemas/delimiter-chunkerEnum'
+        chunker_config:
+          $ref: '#/components/schemas/DelimiterChunkerConfig'
+      required:
+      - chunker_name
+      title: DelimiterChunking
+    BasicVectorizerSentenceTransformersMultiQaMpnetBaseDotV1:
+      type: object
+      properties:
+        model_name:
+          $ref: '#/components/schemas/sentence-transformers-multi-qa-mpnet-base-dot-v1Enum'
+        config:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - model_name
+      description: Basic vectorizer for sentence-transformers/multi-qa-mpnet-base-dot-v1.
+      title: BasicVectorizerSentenceTransformersMultiQaMpnetBaseDotV1
+    SentenceChunkingRequest:
+      type: object
+      properties:
+        chunker_name:
+          $ref: '#/components/schemas/sentence-chunkerEnum'
+        chunker_config:
+          $ref: '#/components/schemas/SentenceChunkerConfigRequest'
+      required:
+      - chunker_name
+      description: Sentence chunking
+      title: SentenceChunkingRequest
+    BasicVectorizerIntfloatMultilingualE5LargeRequest:
+      type: object
+      properties:
+        config:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+        model_name:
+          $ref: '#/components/schemas/intfloat-multilingual-e5-largeEnum'
+      required:
+      - model_name
+      description: Basic vectorizer for intfloat/multilingual-e5-large.
+      title: BasicVectorizerIntfloatMultilingualE5LargeRequest
+    GoogleVertexAIVectorizerTextMultilingualEmbedding002:
+      type: object
+      properties:
+        model_name:
+          $ref: '#/components/schemas/text-multilingual-embedding-002Enum'
+        config:
+          $ref: '#/components/schemas/GoogleVertexAIVectorizerConfig'
+      required:
+      - model_name
+      - config
+      title: GoogleVertexAIVectorizerTextMultilingualEmbedding002
+    FastEmbedVectorizerBAAIBgeSmallEnV15:
+      type: object
+      properties:
+        model_name:
+          $ref: '#/components/schemas/baai-bge-small-en-v1.5Enum'
+      required:
+      - model_name
+      description: FastEmbed vectorizer for BAAI/bge-small-en-v1.5.
+      title: FastEmbedVectorizerBAAIBgeSmallEnV15
+    DocumentIndexCreateRequest:
+      type: object
+      properties:
+        label:
+          type: string
+          description: A human-readable label for the document index
+        name:
+          type: string
+          description: A name that uniquely identifies this index within its workspace
+        status:
+          $ref: '#/components/schemas/EntityStatus'
+          description: 'The current status of the document index
+
+
+            * `ACTIVE` - Active
+
+            * `ARCHIVED` - Archived
+
+            * `PENDING_DELETION` - Pending Deletion'
+        indexing_config:
+          $ref: '#/components/schemas/DocumentIndexIndexingConfigRequest'
+        copy_documents_from_index_id:
+          type: string
+          format: uuid
+          description: Optionally specify the id of a document index from which you'd like to copy and re-index its documents into this newly created index
+      required:
+      - label
+      - name
+      - indexing_config
+      title: DocumentIndexCreateRequest
+    private-vectorizerEnum:
+      type: string
+      enum:
+      - private-vectorizer
+      title: private-vectorizerEnum
+    IndexingConfigVectorizerRequest:
+      oneOf:
+      - $ref: '#/components/schemas/OpenAIVectorizerTextEmbedding3SmallRequest'
+      - $ref: '#/components/schemas/OpenAIVectorizerTextEmbedding3LargeRequest'
+      - $ref: '#/components/schemas/OpenAIVectorizerTextEmbeddingAda002Request'
+      - $ref: '#/components/schemas/BasicVectorizerIntfloatMultilingualE5LargeRequest'
+      - $ref: '#/components/schemas/BasicVectorizerSentenceTransformersMultiQaMpnetBaseCosV1Request'
+      - $ref: '#/components/schemas/BasicVectorizerSentenceTransformersMultiQaMpnetBaseDotV1Request'
+      - $ref: '#/components/schemas/HkunlpInstructorXlVectorizerRequest'
+      - $ref: '#/components/schemas/GoogleVertexAIVectorizerTextEmbedding004Request'
+      - $ref: '#/components/schemas/GoogleVertexAIVectorizerTextMultilingualEmbedding002Request'
+      - $ref: '#/components/schemas/GoogleVertexAIVectorizerGeminiEmbedding001Request'
+      - $ref: '#/components/schemas/FastEmbedVectorizerBAAIBgeSmallEnV15Request'
+      - $ref: '#/components/schemas/PrivateVectorizerRequest'
+      title: IndexingConfigVectorizerRequest
+    InstructorVectorizerConfig:
+      type: object
+      properties:
+        instruction_domain:
+          type: string
+        instruction_query_text_type:
+          type: string
+        instruction_document_text_type:
+          type: string
+      required:
+      - instruction_domain
+      - instruction_query_text_type
+      - instruction_document_text_type
+      description: Configuration for using an Instructor vectorizer.
+      title: InstructorVectorizerConfig
+    delimiter-chunkerEnum:
+      type: string
+      enum:
+      - delimiter-chunker
+      title: delimiter-chunkerEnum
+    GoogleVertexAIVectorizerConfig:
+      type: object
+      properties:
+        project_id:
+          type: string
+        region:
+          type: string
+      required:
+      - project_id
+      - region
+      title: GoogleVertexAIVectorizerConfig
+    HkunlpInstructorXlVectorizerRequest:
+      type: object
+      properties:
+        model_name:
+          $ref: '#/components/schemas/hkunlp-instructor-xlEnum'
+        config:
+          $ref: '#/components/schemas/InstructorVectorizerConfigRequest'
+      required:
+      - model_name
+      - config
+      description: Vectorizer for hkunlp/instructor-xl.
+      title: HkunlpInstructorXlVectorizerRequest
+    document-indexes_remove_document_Response_204:
+      type: object
+      properties: {}
+      description: Empty response body
+      title: document-indexes_remove_document_Response_204
+    sentence-transformers-multi-qa-mpnet-base-dot-v1Enum:
+      type: string
+      enum:
+      - sentence-transformers/multi-qa-mpnet-base-dot-v1
+      title: sentence-transformers-multi-qa-mpnet-base-dot-v1Enum
+    token-overlapping-window-chunkerEnum:
+      type: string
+      enum:
+      - token-overlapping-window-chunker
+      title: token-overlapping-window-chunkerEnum
+    document-indexes_destroy_Response_204:
+      type: object
+      properties: {}
+      description: Empty response body
+      title: document-indexes_destroy_Response_204
+    baai-bge-small-en-v1.5Enum:
+      type: string
+      enum:
+      - BAAI/bge-small-en-v1.5
+      title: baai-bge-small-en-v1.5Enum
+    PrivateVectorizer:
+      type: object
+      properties:
+        model_name:
+          $ref: '#/components/schemas/private-vectorizerEnum'
+      required:
+      - model_name
+      description: Serializer for private vectorizer.
+      title: PrivateVectorizer
+    OpenAIVectorizerTextEmbedding3Small:
+      type: object
+      properties:
+        config:
+          $ref: '#/components/schemas/OpenAIVectorizerConfig'
+        model_name:
+          $ref: '#/components/schemas/text-embedding-3-smallEnum'
+      required:
+      - config
+      - model_name
+      description: OpenAI vectorizer for text-embedding-3-small.
+      title: OpenAIVectorizerTextEmbedding3Small
+    OpenAIVectorizerTextEmbeddingAda002:
+      type: object
+      properties:
+        config:
+          $ref: '#/components/schemas/OpenAIVectorizerConfig'
+        model_name:
+          $ref: '#/components/schemas/text-embedding-ada-002Enum'
+      required:
+      - config
+      - model_name
+      description: OpenAI vectorizer for text-embedding-ada-002.
+      title: OpenAIVectorizerTextEmbeddingAda002
+    TokenOverlappingWindowChunkingRequest:
+      type: object
+      properties:
+        chunker_name:
+          $ref: '#/components/schemas/token-overlapping-window-chunkerEnum'
+        chunker_config:
+          $ref: '#/components/schemas/TokenOverlappingWindowChunkerConfigRequest'
+      required:
+      - chunker_name
+      description: Token overlapping window chunking
+      title: TokenOverlappingWindowChunkingRequest
+    document-indexes_add_document_Response_204:
+      type: object
+      properties: {}
+      description: Empty response body
+      title: document-indexes_add_document_Response_204
+    intfloat-multilingual-e5-largeEnum:
+      type: string
+      enum:
+      - intfloat/multilingual-e5-large
+      title: intfloat-multilingual-e5-largeEnum
+  securitySchemes:
+    default:
+      type: apiKey
+      in: header
+      name: X-API-KEY

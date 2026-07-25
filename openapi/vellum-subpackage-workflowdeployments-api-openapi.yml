@@ -1,0 +1,4621 @@
+openapi: 3.1.0
+info:
+  title: Client SDK subpackage_workflowDeployments API
+  version: 1.0.0
+servers:
+- url: https://predict.vellum.ai
+- url: https://api.vellum.ai
+- url: https://documents.vellum.ai
+tags:
+- name: subpackage_workflowDeployments
+paths:
+  /v1/workflow-deployments/{id}/execute-stream:
+    post:
+      operationId: execute-stream
+      summary: Execute Stream
+      description: Executes a deployed Workflow and streams back its results.
+      tags:
+      - subpackage_workflowDeployments
+      parameters:
+      - name: id
+        in: path
+        description: Either the Workflow Deployment's ID or its unique name
+        required: true
+        schema:
+          type: string
+      - name: X-API-KEY
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-API-Version
+        in: header
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            text/event-stream:
+              schema:
+                $ref: '#/components/schemas/WorkflowEvent'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  description: Any type
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  description: Any type
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  description: Any type
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExecuteWorkflowDeploymentStreamRequest'
+  /v1/workflow-deployments:
+    get:
+      operationId: list
+      summary: List
+      description: Used to list all Workflow Deployments.
+      tags:
+      - subpackage_workflowDeployments
+      parameters:
+      - name: has_story_config
+        in: query
+        description: has_story_config
+        required: false
+        schema:
+          type: string
+      - name: is_public
+        in: query
+        description: is_public
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        required: false
+        schema:
+          type: integer
+      - name: ordering
+        in: query
+        description: 'Specifies the ordering of the returned Workflow Deployments. Valid values are:
+
+          - `created` - Orders by creation time in ascending order.
+
+          - `-created` - Orders by creation time in descending order. (default)
+
+          - `name` - Orders by name in ascending order.
+
+          - `-name` - Orders by name in descending order.
+
+
+          Compound orderings are supported by separating fields with commas, e.g., `-created,name`.
+
+          '
+        required: false
+        schema:
+          type: string
+      - name: owned_by
+        in: query
+        description: owned_by
+        required: false
+        schema:
+          type: string
+      - name: status
+        in: query
+        description: status
+        required: false
+        schema:
+          $ref: '#/components/schemas/V1WorkflowDeploymentsGetParametersStatus'
+      - name: X-API-KEY
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-API-Version
+        in: header
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedSlimWorkflowDeploymentList'
+  /v1/workflow-deployments/{id}/releases:
+    get:
+      operationId: list-workflow-deployment-releases
+      summary: List Workflow Deployment Releases
+      description: List the Releases of the specified Workflow Deployment for the current Environment.
+      tags:
+      - subpackage_workflowDeployments
+      parameters:
+      - name: id
+        in: path
+        description: Either the Workflow Deployment's ID or its unique name
+        required: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        required: false
+        schema:
+          type: integer
+      - name: ordering
+        in: query
+        description: Which field to use when ordering the results.
+        required: false
+        schema:
+          type: string
+      - name: X-API-KEY
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-API-Version
+        in: header
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedWorkflowDeploymentReleaseList'
+  /v1/workflow-deployments/{id}:
+    get:
+      operationId: retrieve
+      summary: Retrieve
+      description: Used to retrieve a workflow deployment given its ID or name.
+      tags:
+      - subpackage_workflowDeployments
+      parameters:
+      - name: id
+        in: path
+        description: Either the Workflow Deployment's ID or its unique name
+        required: true
+        schema:
+          type: string
+      - name: X-API-KEY
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-API-Version
+        in: header
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowDeploymentRead'
+  /v1/workflow-deployments/{id}/releases/{release_id_or_release_tag}:
+    get:
+      operationId: retrieve-workflow-deployment-release
+      summary: Retrieve Workflow Deployment Release
+      description: Retrieve a specific Workflow Deployment Release by either its UUID or the name of a Release Tag that points to it.
+      tags:
+      - subpackage_workflowDeployments
+      parameters:
+      - name: id
+        in: path
+        description: Either the Workflow Deployment's ID or its unique name
+        required: true
+        schema:
+          type: string
+      - name: release_id_or_release_tag
+        in: path
+        description: Either the UUID of Workflow Deployment Release you'd like to retrieve, or the name of a Release Tag that's pointing to the Workflow Deployment Release you'd like to retrieve.
+        required: true
+        schema:
+          type: string
+      - name: X-API-KEY
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-API-Version
+        in: header
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowDeploymentRelease'
+  /v1/workflow-deployments/{id}/release-tags/{name}:
+    get:
+      operationId: retrieve-workflow-release-tag
+      summary: Retrieve Workflow Release Tag
+      description: Retrieve a Workflow Release Tag by tag name, associated with a specified Workflow Deployment.
+      tags:
+      - subpackage_workflowDeployments
+      parameters:
+      - name: id
+        in: path
+        description: Either the Workflow Deployment's ID or its unique name
+        required: true
+        schema:
+          type: string
+      - name: name
+        in: path
+        description: The name of the Release Tag associated with this Workflow Deployment that you'd like to retrieve.
+        required: true
+        schema:
+          type: string
+      - name: X-API-KEY
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-API-Version
+        in: header
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowReleaseTagRead'
+    patch:
+      operationId: update-workflow-release-tag
+      summary: Update Workflow Release Tag
+      description: Updates an existing Release Tag associated with the specified Workflow Deployment.
+      tags:
+      - subpackage_workflowDeployments
+      parameters:
+      - name: id
+        in: path
+        description: Either the Workflow Deployment's ID or its unique name
+        required: true
+        schema:
+          type: string
+      - name: name
+        in: path
+        description: The name of the Release Tag associated with this Workflow Deployment that you'd like to update.
+        required: true
+        schema:
+          type: string
+      - name: X-API-KEY
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-API-Version
+        in: header
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowReleaseTagRead'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedWorkflowReleaseTagUpdateRequest'
+  /v1/workflow-deployments/{id}/release-tags:
+    get:
+      operationId: list-workflow-release-tags
+      summary: List Workflow Release Tags
+      description: List Release Tags associated with the specified Workflow Deployment
+      tags:
+      - subpackage_workflowDeployments
+      parameters:
+      - name: id
+        in: path
+        description: Either the Workflow Deployment's ID or its unique name
+        required: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        required: false
+        schema:
+          type: integer
+      - name: ordering
+        in: query
+        description: Which field to use when ordering the results.
+        required: false
+        schema:
+          type: string
+      - name: source
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/V1WorkflowDeploymentsIdReleaseTagsGetParametersSource'
+      - name: X-API-KEY
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-API-Version
+        in: header
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedWorkflowReleaseTagReadList'
+  /v1/workflow-deployments/{id}/history/{history_id_or_release_tag}:
+    get:
+      operationId: workflow-deployment-history-item-retrieve
+      summary: Workflow Deployment History Item Retrieve
+      description: 'DEPRECATED: This endpoint is deprecated and will be removed in a future release. Please use the
+
+        `retrieve_workflow_deployment_release` endpoint instead.'
+      tags:
+      - subpackage_workflowDeployments
+      parameters:
+      - name: history_id_or_release_tag
+        in: path
+        description: Either the UUID of Workflow Deployment History Item you'd like to retrieve, or the name of a Release Tag that's pointing to the Workflow Deployment History Item you'd like to retrieve.
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: id
+        in: path
+        description: Either the Workflow Deployment's ID or its unique name
+        required: true
+        schema:
+          type: string
+      - name: X-API-KEY
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-API-Version
+        in: header
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowDeploymentHistoryItem'
+  /v1/workflow-deployments/{id}/execution-events:
+    get:
+      operationId: list-workflow-deployment-event-executions
+      summary: List Workflow Deployment Event Executions
+      tags:
+      - subpackage_workflowDeployments
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: filters
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of executions to return per page.
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the executions.
+        required: false
+        schema:
+          type: integer
+      - name: ordering
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: X-API-KEY
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-API-Version
+        in: header
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowDeploymentEventExecutionsResponse'
+  /v1/workflow-deployments/{id}/execution-events/{execution_id}:
+    get:
+      operationId: workflow-deployment-event-execution
+      summary: Workflow Deployment Event Execution
+      tags:
+      - subpackage_workflowDeployments
+      parameters:
+      - name: execution_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-API-KEY
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-API-Version
+        in: header
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowEventExecutionRead'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailResponse'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailResponse'
+        '421':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateActiveWorkspaceResponse'
+components:
+  schemas:
+    WorkflowNodeEnum:
+      type: string
+      enum:
+      - WORKFLOW_NODE
+      title: WorkflowNodeEnum
+    ErrorVellumValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ErrorEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumError'
+          - type: 'null'
+      required:
+      - type
+      - value
+      description: A value representing an Error.
+      title: ErrorVellumValue
+    PdfEnum:
+      type: string
+      enum:
+      - PDF
+      title: PdfEnum
+    EntityStatus:
+      type: string
+      enum:
+      - ACTIVE
+      - ARCHIVED
+      - PENDING_DELETION
+      description: '* `ACTIVE` - Active
+
+        * `ARCHIVED` - Archived
+
+        * `PENDING_DELETION` - Pending Deletion'
+      title: EntityStatus
+    workflow.execution.snapshottedEnum:
+      type: string
+      enum:
+      - workflow.execution.snapshotted
+      title: workflow.execution.snapshottedEnum
+    ReleaseReviewReviewer:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        full_name:
+          type: string
+      required:
+      - id
+      title: ReleaseReviewReviewer
+    SearchResultsVellumValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/SearchResultsEnum'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SearchResult'
+      required:
+      - type
+      - value
+      description: A value representing Search Results.
+      title: SearchResultsVellumValue
+    WorkflowModelProviderDependency:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ModelProviderEnum'
+        name:
+          $ref: '#/components/schemas/MLModelHostingInterface'
+        label:
+          type:
+          - string
+          - 'null'
+        model_name:
+          type: string
+      required:
+      - type
+      - name
+      - model_name
+      title: WorkflowModelProviderDependency
+    ChatHistoryVellumValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ChatHistoryEnum'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ChatMessage'
+      required:
+      - type
+      - value
+      description: A value representing Chat History.
+      title: ChatHistoryVellumValue
+    ArrayVellumValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ArrayEnum'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/VellumValue'
+      required:
+      - type
+      - value
+      description: A value representing an array of Vellum variable values.
+      title: ArrayVellumValue
+    WorkflowExecutionActual:
+      type: object
+      properties:
+        output:
+          $ref: '#/components/schemas/ExecutionVellumValue'
+        timestamp:
+          type: string
+          format: date-time
+        quality:
+          type:
+          - number
+          - 'null'
+          format: double
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - output
+      - timestamp
+      - metadata
+      title: WorkflowExecutionActual
+    VellumVariableType:
+      type: string
+      enum:
+      - STRING
+      - NUMBER
+      - JSON
+      - CHAT_HISTORY
+      - SEARCH_RESULTS
+      - ERROR
+      - ARRAY
+      - FUNCTION_CALL
+      - AUDIO
+      - VIDEO
+      - IMAGE
+      - DOCUMENT
+      - 'NULL'
+      - THINKING
+      - REFERENCE
+      description: '* `STRING` - STRING
+
+        * `NUMBER` - NUMBER
+
+        * `JSON` - JSON
+
+        * `CHAT_HISTORY` - CHAT_HISTORY
+
+        * `SEARCH_RESULTS` - SEARCH_RESULTS
+
+        * `ERROR` - ERROR
+
+        * `ARRAY` - ARRAY
+
+
+        * `FUNCTION_CALL` - FUNCTION_CALL
+
+        * `AUDIO` - AUDIO
+
+        * `VIDEO` - VIDEO
+
+        * `IMAGE` - IMAGE
+
+        * `DOCUMENT` - DOCUMENT
+
+        * `NULL` - NULL
+
+        * `THINKING` - THINKING
+
+        * `REFERENCE` - REFERENCE'
+      title: VellumVariableType
+    NodeParentContext:
+      type: object
+      properties:
+        parent:
+          oneOf:
+          - $ref: '#/components/schemas/ParentContext'
+          - type: 'null'
+        links:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SpanLink'
+        node_definition:
+          $ref: '#/components/schemas/VellumCodeResourceDefinition'
+        type:
+          $ref: '#/components/schemas/WorkflowNodeEnum'
+        span_id:
+          type: string
+          format: uuid
+      required:
+      - node_definition
+      - type
+      - span_id
+      title: NodeParentContext
+    ModelProviderEnum:
+      type: string
+      enum:
+      - MODEL_PROVIDER
+      title: ModelProviderEnum
+    PatchedWorkflowReleaseTagUpdateRequest:
+      type: object
+      properties:
+        history_item_id:
+          type: string
+          format: uuid
+          description: The ID of the Workflow Deployment History Item to tag
+      title: PatchedWorkflowReleaseTagUpdateRequest
+    IntegrationEnum:
+      type: string
+      enum:
+      - INTEGRATION
+      title: IntegrationEnum
+    WorkflowDeploymentReleaseWorkflowDeployment:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+      required:
+      - id
+      - name
+      title: WorkflowDeploymentReleaseWorkflowDeployment
+    WorkflowIntegrationDependency:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/IntegrationEnum'
+        name:
+          $ref: '#/components/schemas/IntegrationName'
+        provider:
+          type: string
+        label:
+          type:
+          - string
+          - 'null'
+      required:
+      - type
+      - name
+      - provider
+      title: WorkflowIntegrationDependency
+    WorkflowExecutionUsageCalculationError:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/WorkflowExecutionUsageCalculationErrorCodeEnum'
+        message:
+          type: string
+      required:
+      - code
+      - message
+      title: WorkflowExecutionUsageCalculationError
+    VellumSpan:
+      oneOf:
+      - $ref: '#/components/schemas/WorkflowExecutionSpan'
+      - $ref: '#/components/schemas/NodeExecutionSpan'
+      title: VellumSpan
+    workflow.execution.rejectedEnum:
+      type: string
+      enum:
+      - workflow.execution.rejected
+      title: workflow.execution.rejectedEnum
+    VideoEnum:
+      type: string
+      enum:
+      - VIDEO
+      title: VideoEnum
+    NodeExecutionFulfilledBody:
+      type: object
+      properties:
+        node_definition:
+          $ref: '#/components/schemas/VellumCodeResourceDefinition'
+        invoked_ports:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/InvokedPort'
+        outputs:
+          type: object
+          additionalProperties:
+            description: Any type
+        mocked:
+          type:
+          - boolean
+          - 'null'
+        redacted:
+          type:
+          - boolean
+          - 'null'
+      required:
+      - node_definition
+      - outputs
+      title: NodeExecutionFulfilledBody
+    PaginatedWorkflowReleaseTagReadList:
+      type: object
+      properties:
+        count:
+          type: integer
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkflowReleaseTagRead'
+      title: PaginatedWorkflowReleaseTagReadList
+    VideoChatMessageContent:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/VideoEnum'
+        value:
+          $ref: '#/components/schemas/VellumVideo'
+      required:
+      - type
+      - value
+      description: A video value that is used in a chat message.
+      title: VideoChatMessageContent
+    UpdateActiveWorkspaceResponse:
+      type: object
+      properties:
+        update_active_workspace_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The id of the workspace that the user should update to, or null if no workspace change needed.
+        update_active_environment_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The id of the environment that the user should update to, or null if no environment change needed.
+        is_staff:
+          type: boolean
+          description: Whether or not the user is a staff member of Vellum.
+      required:
+      - update_active_workspace_id
+      - update_active_environment_id
+      title: UpdateActiveWorkspaceResponse
+    ExecutionImageVellumValue:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The variable's uniquely identifying internal id.
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/ImageEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumImage'
+          - type: 'null'
+      required:
+      - id
+      - name
+      - type
+      - value
+      description: A base Vellum primitive value representing an image.
+      title: ExecutionImageVellumValue
+    WorkflowExecutionSnapshottedBody:
+      type: object
+      properties:
+        workflow_definition:
+          $ref: '#/components/schemas/VellumCodeResourceDefinition'
+        edited_by:
+          oneOf:
+          - $ref: '#/components/schemas/VellumCodeResourceDefinition'
+          - type: 'null'
+        state:
+          type: object
+          additionalProperties:
+            description: Any type
+      required:
+      - workflow_definition
+      - state
+      title: WorkflowExecutionSnapshottedBody
+    SlimWorkflowDeployment:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+          description: A name that uniquely identifies this workflow deployment within its workspace
+        label:
+          type: string
+          description: A human-readable label for the workflow deployment
+        status:
+          $ref: '#/components/schemas/EntityStatus'
+          description: 'The current status of the workflow deployment
+
+
+            * `ACTIVE` - Active
+
+            * `ARCHIVED` - Archived
+
+            * `PENDING_DELETION` - Pending Deletion'
+        environment:
+          oneOf:
+          - $ref: '#/components/schemas/EnvironmentEnum'
+          - type: 'null'
+          description: Deprecated. The value returned will always be 'PRODUCTION'.
+        created:
+          type: string
+          format: date-time
+        last_deployed_on:
+          type: string
+          format: date-time
+        input_variables:
+          type: array
+          items:
+            $ref: '#/components/schemas/VellumVariable'
+          description: The input variables this Workflow Deployment expects to receive values for when it is executed.
+        output_variables:
+          type: array
+          items:
+            $ref: '#/components/schemas/VellumVariable'
+          description: The output variables this Workflow Deployment will produce when it is executed.
+        description:
+          type:
+          - string
+          - 'null'
+          description: A human-readable description of the workflow deployment
+      required:
+      - id
+      - name
+      - label
+      - created
+      - last_deployed_on
+      - input_variables
+      - output_variables
+      description: A subset of a Workflow Deployment's full details.
+      title: SlimWorkflowDeployment
+    SearchResultMeta:
+      type: object
+      properties:
+        source:
+          oneOf:
+          - $ref: '#/components/schemas/SearchResultMetaSource'
+          - type: 'null'
+      title: SearchResultMeta
+    ReleaseReviewState:
+      type: string
+      enum:
+      - APPROVED
+      - CHANGES_REQUESTED
+      - COMMENTED
+      description: '* `APPROVED` - Approved
+
+        * `CHANGES_REQUESTED` - Changes Requested
+
+        * `COMMENTED` - Commented'
+      title: ReleaseReviewState
+    AudioVellumValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/AudioEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumAudio'
+          - type: 'null'
+      required:
+      - type
+      - value
+      description: A base Vellum primitive value representing audio.
+      title: AudioVellumValue
+    node.executionEnum:
+      type: string
+      enum:
+      - node.execution
+      title: node.executionEnum
+    VellumSdkErrorCodeEnum:
+      type: string
+      enum:
+      - INVALID_WORKFLOW
+      - INVALID_INPUTS
+      - INVALID_OUTPUTS
+      - INVALID_STATE
+      - INVALID_CODE
+      - INVALID_TEMPLATE
+      - INTERNAL_ERROR
+      - PROVIDER_CREDENTIALS_UNAVAILABLE
+      - INTEGRATION_CREDENTIALS_UNAVAILABLE
+      - PROVIDER_ERROR
+      - PROVIDER_QUOTA_EXCEEDED
+      - USER_DEFINED_ERROR
+      - WORKFLOW_CANCELLED
+      - WORKFLOW_TIMEOUT
+      - NODE_CANCELLED
+      - NODE_TIMEOUT
+      - NODE_EXECUTION
+      description: '* `INVALID_WORKFLOW` - INVALID_WORKFLOW
+
+        * `INVALID_INPUTS` - INVALID_INPUTS
+
+        * `INVALID_OUTPUTS` - INVALID_OUTPUTS
+
+        * `INVALID_STATE` - INVALID_STATE
+
+        * `INVALID_CODE` - INVALID_CODE
+
+        * `INVALID_TEMPLATE` - INVALID_TEMPLATE
+
+        * `INTERNAL_ERROR` - INTERNAL_ERROR
+
+        * `PROVIDER_CREDENTIALS_UNAVAILABLE` - PROVIDER_CREDENTIALS_UNAVAILABLE
+
+        * `INTEGRATION_CREDENTIALS_UNAVAILABLE` - INTEGRATION_CREDENTIALS_UNAVAILABLE
+
+        * `PROVIDER_ERROR` - PROVIDER_ERROR
+
+        * `PROVIDER_QUOTA_EXCEEDED` - PROVIDER_QUOTA_EXCEEDED
+
+        * `USER_DEFINED_ERROR` - USER_DEFINED_ERROR
+
+        * `WORKFLOW_CANCELLED` - WORKFLOW_CANCELLED
+
+        * `WORKFLOW_TIMEOUT` - WORKFLOW_TIMEOUT
+
+        * `NODE_CANCELLED` - NODE_CANCELLED
+
+        * `NODE_TIMEOUT` - NODE_TIMEOUT
+
+        * `NODE_EXECUTION` - NODE_EXECUTION'
+      title: VellumSdkErrorCodeEnum
+    ExecutionVellumValue:
+      oneOf:
+      - $ref: '#/components/schemas/ExecutionStringVellumValue'
+      - $ref: '#/components/schemas/ExecutionNumberVellumValue'
+      - $ref: '#/components/schemas/ExecutionJsonVellumValue'
+      - $ref: '#/components/schemas/ExecutionChatHistoryVellumValue'
+      - $ref: '#/components/schemas/ExecutionSearchResultsVellumValue'
+      - $ref: '#/components/schemas/ExecutionErrorVellumValue'
+      - $ref: '#/components/schemas/ExecutionArrayVellumValue'
+      - $ref: '#/components/schemas/ExecutionFunctionCallVellumValue'
+      - $ref: '#/components/schemas/ExecutionThinkingVellumValue'
+      - $ref: '#/components/schemas/ExecutionAudioVellumValue'
+      - $ref: '#/components/schemas/ExecutionVideoVellumValue'
+      - $ref: '#/components/schemas/ExecutionImageVellumValue'
+      - $ref: '#/components/schemas/ExecutionDocumentVellumValue'
+      title: ExecutionVellumValue
+    WorkflowInitializationError:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+      - code
+      - message
+      description: Workflow initialization error.
+      title: WorkflowInitializationError
+    ArrayChatMessageContent:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ArrayEnum'
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/ArrayChatMessageContentItem'
+      required:
+      - type
+      - value
+      description: A list of chat message content items.
+      title: ArrayChatMessageContent
+    workflow.execution.resumedEnum:
+      type: string
+      enum:
+      - workflow.execution.resumed
+      title: workflow.execution.resumedEnum
+    ChatMessageRole:
+      type: string
+      enum:
+      - SYSTEM
+      - ASSISTANT
+      - USER
+      - FUNCTION
+      description: '* `SYSTEM` - System
+
+        * `ASSISTANT` - Assistant
+
+        * `USER` - User
+
+        * `FUNCTION` - Function'
+      title: ChatMessageRole
+    node.execution.rejectedEnum:
+      type: string
+      enum:
+      - node.execution.rejected
+      title: node.execution.rejectedEnum
+    NodeExecutionResumedEvent:
+      type: object
+      properties:
+        parent:
+          oneOf:
+          - $ref: '#/components/schemas/ParentContext'
+          - type: 'null'
+        links:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SpanLink'
+        name:
+          $ref: '#/components/schemas/node.execution.resumedEnum'
+        body:
+          $ref: '#/components/schemas/NodeExecutionResumedBody'
+        id:
+          type: string
+          format: uuid
+        timestamp:
+          type: string
+          format: date-time
+        api_version:
+          $ref: '#/components/schemas/ApiVersionEnum'
+        trace_id:
+          type: string
+          format: uuid
+        span_id:
+          type: string
+          format: uuid
+      required:
+      - name
+      - body
+      - id
+      - timestamp
+      - trace_id
+      - span_id
+      title: NodeExecutionResumedEvent
+    WorkflowExecutionStreamingEvent:
+      type: object
+      properties:
+        parent:
+          oneOf:
+          - $ref: '#/components/schemas/ParentContext'
+          - type: 'null'
+        links:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SpanLink'
+        name:
+          $ref: '#/components/schemas/workflow.execution.streamingEnum'
+        body:
+          $ref: '#/components/schemas/WorkflowExecutionStreamingBody'
+        id:
+          type: string
+          format: uuid
+        timestamp:
+          type: string
+          format: date-time
+        api_version:
+          $ref: '#/components/schemas/ApiVersionEnum'
+        trace_id:
+          type: string
+          format: uuid
+        span_id:
+          type: string
+          format: uuid
+      required:
+      - name
+      - body
+      - id
+      - timestamp
+      - trace_id
+      - span_id
+      title: WorkflowExecutionStreamingEvent
+    NodeExecutionPausedEvent:
+      type: object
+      properties:
+        parent:
+          oneOf:
+          - $ref: '#/components/schemas/ParentContext'
+          - type: 'null'
+        links:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SpanLink'
+        name:
+          $ref: '#/components/schemas/node.execution.pausedEnum'
+        body:
+          $ref: '#/components/schemas/NodeExecutionPausedBody'
+        id:
+          type: string
+          format: uuid
+        timestamp:
+          type: string
+          format: date-time
+        api_version:
+          $ref: '#/components/schemas/ApiVersionEnum'
+        trace_id:
+          type: string
+          format: uuid
+        span_id:
+          type: string
+          format: uuid
+      required:
+      - name
+      - body
+      - id
+      - timestamp
+      - trace_id
+      - span_id
+      title: NodeExecutionPausedEvent
+    WorkflowExecutionViewOnlineEvalMetricResult:
+      type: object
+      properties:
+        outputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExecutionVellumValue'
+        label:
+          type: string
+        metric_id:
+          type: string
+          format: uuid
+      required:
+      - outputs
+      - label
+      - metric_id
+      title: WorkflowExecutionViewOnlineEvalMetricResult
+    node.execution.pausedEnum:
+      type: string
+      enum:
+      - node.execution.paused
+      title: node.execution.pausedEnum
+    NumberEnum:
+      type: string
+      enum:
+      - NUMBER
+      title: NumberEnum
+    WorkflowDeploymentEventExecutionsResponse:
+      type: object
+      properties:
+        count:
+          type: integer
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/SlimWorkflowExecutionRead'
+      required:
+      - count
+      - results
+      title: WorkflowDeploymentEventExecutionsResponse
+    ExecuteWorkflowDeploymentStreamRequest:
+      type: object
+      properties:
+        inputs:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: A mapping from input name to value.
+        trigger:
+          type:
+          - string
+          - 'null'
+          description: The name or ID of a workflow trigger to use for this execution. If not specified, then a default manual trigger will be chosen.
+        release_tag:
+          type:
+          - string
+          - 'null'
+          description: Optionally specify a release tag if you want to pin to a specific release of the Workflow Deployment
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: Optionally include a unique identifier for tracking purposes. Must be unique within a given Workspace.
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+          description: Arbitrary JSON metadata associated with this request. Can be used to capture additional monitoring data such as user id, session id, etc. for future analysis.
+        previous_execution_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of a previous workflow execution to reference for context.
+      description: The request to execute a Workflow Deployment stream.
+      title: ExecuteWorkflowDeploymentStreamRequest
+    ReleaseTagRelease:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        timestamp:
+          type: string
+          format: date-time
+      required:
+      - id
+      - timestamp
+      title: ReleaseTagRelease
+    ExecutionAudioVellumValue:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The variable's uniquely identifying internal id.
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/AudioEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumAudio'
+          - type: 'null'
+      required:
+      - id
+      - name
+      - type
+      - value
+      description: A base Vellum primitive value representing audio.
+      title: ExecutionAudioVellumValue
+    V1WorkflowDeploymentsIdReleaseTagsGetParametersSource:
+      type: string
+      enum:
+      - SYSTEM
+      - USER
+      title: V1WorkflowDeploymentsIdReleaseTagsGetParametersSource
+    WorkflowDependency:
+      oneOf:
+      - $ref: '#/components/schemas/WorkflowIntegrationDependency'
+      - $ref: '#/components/schemas/WorkflowModelProviderDependency'
+      title: WorkflowDependency
+    node.execution.resumedEnum:
+      type: string
+      enum:
+      - node.execution.resumed
+      title: node.execution.resumedEnum
+    WorkflowExecutionUsageCalculationErrorCodeEnum:
+      type: string
+      enum:
+      - UNKNOWN
+      - DEPENDENCIES_FAILED
+      - NO_USAGE_CALCULATED
+      - INTERNAL_SERVER_ERROR
+      description: '* `UNKNOWN` - UNKNOWN
+
+        * `DEPENDENCIES_FAILED` - DEPENDENCIES_FAILED
+
+        * `NO_USAGE_CALCULATED` - NO_USAGE_CALCULATED
+
+        * `INTERNAL_SERVER_ERROR` - INTERNAL_SERVER_ERROR'
+      title: WorkflowExecutionUsageCalculationErrorCodeEnum
+    NodeExecutionPausedBody:
+      type: object
+      properties:
+        node_definition:
+          $ref: '#/components/schemas/VellumCodeResourceDefinition'
+      required:
+      - node_definition
+      title: NodeExecutionPausedBody
+    WorkflowExecutionSpan:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/workflow.executionEnum'
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/VellumWorkflowExecutionEvent'
+        attributes:
+          $ref: '#/components/schemas/WorkflowExecutionSpanAttributes'
+        usage_result:
+          oneOf:
+          - $ref: '#/components/schemas/WorkflowExecutionUsageCalculationFulfilledBody'
+          - type: 'null'
+        span_id:
+          type: string
+          format: uuid
+        start_ts:
+          type: string
+          format: date-time
+        end_ts:
+          type: string
+          format: date-time
+        parent_span_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+      required:
+      - name
+      - events
+      - attributes
+      - span_id
+      - start_ts
+      - end_ts
+      - parent_span_id
+      title: WorkflowExecutionSpan
+    VellumImage:
+      type: object
+      properties:
+        src:
+          type: string
+          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - src
+      title: VellumImage
+    WorkflowExecutionFulfilledEvent:
+      type: object
+      properties:
+        parent:
+          oneOf:
+          - $ref: '#/components/schemas/ParentContext'
+          - type: 'null'
+        links:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SpanLink'
+        name:
+          $ref: '#/components/schemas/workflow.execution.fulfilledEnum'
+        body:
+          $ref: '#/components/schemas/WorkflowExecutionFulfilledBody'
+        id:
+          type: string
+          format: uuid
+        timestamp:
+          type: string
+          format: date-time
+        api_version:
+          $ref: '#/components/schemas/ApiVersionEnum'
+        trace_id:
+          type: string
+          format: uuid
+        span_id:
+          type: string
+          format: uuid
+      required:
+      - name
+      - body
+      - id
+      - timestamp
+      - trace_id
+      - span_id
+      title: WorkflowExecutionFulfilledEvent
+    IntegrationTriggerContext:
+      type: object
+      properties:
+        parent:
+          oneOf:
+          - $ref: '#/components/schemas/ParentContext'
+          - type: 'null'
+        links:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SpanLink'
+        type:
+          $ref: '#/components/schemas/IntegrationEnum'
+        trigger_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        span_id:
+          type: string
+          format: uuid
+      required:
+      - type
+      - span_id
+      title: IntegrationTriggerContext
+    SpanLink:
+      type: object
+      properties:
+        trace_id:
+          type: string
+          format: uuid
+        type:
+          $ref: '#/components/schemas/SpanLinkTypeEnum'
+        span_context:
+          $ref: '#/components/schemas/ParentContext'
+      required:
+      - trace_id
+      - type
+      - span_context
+      title: SpanLink
+    StringVellumValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/StringEnum'
+        value:
+          type:
+          - string
+          - 'null'
+      required:
+      - type
+      - value
+      description: A value representing a string.
+      title: StringVellumValue
+    ExecutionErrorVellumValue:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The variable's uniquely identifying internal id.
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/ErrorEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumError'
+          - type: 'null'
+      required:
+      - id
+      - name
+      - type
+      - value
+      description: A value representing an Error.
+      title: ExecutionErrorVellumValue
+    VellumCodeResourceDefinition:
+      type: object
+      properties:
+        name:
+          type: string
+        module:
+          type: array
+          items:
+            type: string
+          description: The module that this resource is defined in.
+        exclude_from_monitoring:
+          type:
+          - boolean
+          - 'null'
+          description: Whether this node should be excluded from monitoring views.
+        id:
+          type: string
+          format: uuid
+      required:
+      - name
+      - module
+      - id
+      title: VellumCodeResourceDefinition
+    SlimReleaseReview:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        created:
+          type: string
+          format: date-time
+        reviewer:
+          $ref: '#/components/schemas/ReleaseReviewReviewer'
+        state:
+          $ref: '#/components/schemas/ReleaseReviewState'
+      required:
+      - id
+      - created
+      - reviewer
+      - state
+      title: SlimReleaseReview
+    BaseOutput:
+      type: object
+      properties:
+        value:
+          oneOf:
+          - description: Any type
+          - type: 'null'
+        delta:
+          oneOf:
+          - description: Any type
+          - type: 'null'
+        name:
+          type: string
+      required:
+      - name
+      title: BaseOutput
+    WorkflowExecutionPausedBody:
+      type: object
+      properties:
+        workflow_definition:
+          $ref: '#/components/schemas/VellumCodeResourceDefinition'
+        external_inputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExternalInputDescriptor'
+      required:
+      - workflow_definition
+      - external_inputs
+      title: WorkflowExecutionPausedBody
+    NodeExecutionFulfilledEvent:
+      type: object
+      properties:
+        parent:
+          oneOf:
+          - $ref: '#/components/schemas/ParentContext'
+          - type: 'null'
+        links:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SpanLink'
+        name:
+          $ref: '#/components/schemas/node.execution.fulfilledEnum'
+        body:
+          $ref: '#/components/schemas/NodeExecutionFulfilledBody'
+        id:
+          type: string
+          format: uuid
+        timestamp:
+          type: string
+          format: date-time
+        api_version:
+          $ref: '#/components/schemas/ApiVersionEnum'
+        trace_id:
+          type: string
+          format: uuid
+        span_id:
+          type: string
+          format: uuid
+      required:
+      - name
+      - body
+      - id
+      - timestamp
+      - trace_id
+      - span_id
+      title: NodeExecutionFulfilledEvent
+    WorkflowExecutionResumedBody:
+      type: object
+      properties:
+        workflow_definition:
+          $ref: '#/components/schemas/VellumCodeResourceDefinition'
+      required:
+      - workflow_definition
+      title: WorkflowExecutionResumedBody
+    NodeExecutionLogEvent:
+      type: object
+      properties:
+        parent:
+          oneOf:
+          - $ref: '#/components/schemas/ParentContext'
+          - type: 'null'
+        links:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SpanLink'
+        name:
+          $ref: '#/components/schemas/node.execution.logEnum'
+        body:
+          $ref: '#/components/schemas/NodeExecutionLogBody'
+        id:
+          type: string
+          format: uuid
+        timestamp:
+          type: string
+          format: date-time
+        api_version:
+          $ref: '#/components/schemas/ApiVersionEnum'
+        trace_id:
+          type: string
+          format: uuid
+        span_id:
+          type: string
+          format: uuid
+      required:
+      - name
+      - body
+      - id
+      - timestamp
+      - trace_id
+      - span_id
+      title: NodeExecutionLogEvent
+    WorkflowError:
+      oneOf:
+      - $ref: '#/components/schemas/WorkflowEventError'
+      - $ref: '#/components/schemas/WorkflowInitializationError'
+      title: WorkflowError
+    node.execution.logEnum:
+      type: string
+      enum:
+      - node.execution.log
+      title: node.execution.logEnum
+    WorkflowExecutionRejectedEvent:
+      type: object
+      properties:
+        parent:
+          oneOf:
+          - $ref: '#/components/schemas/ParentContext'
+          - type: 'null'
+        links:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SpanLink'
+        name:
+          $ref: '#/components/schemas/workflow.execution.rejectedEnum'
+        body:
+          $ref: '#/components/schemas/WorkflowExecutionRejectedBody'
+        id:
+          type: string
+          format: uuid
+        timestamp:
+          type: string
+          format: date-time
+        api_version:
+          $ref: '#/components/schemas/ApiVersionEnum'
+        trace_id:
+          type: string
+          format: uuid
+        span_id:
+          type: string
+          format: uuid
+      required:
+      - name
+      - body
+      - id
+      - timestamp
+      - trace_id
+      - span_id
+      title: WorkflowExecutionRejectedEvent
+    ExecutionFunctionCallVellumValue:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The variable's uniquely identifying internal id.
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/FunctionCallEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/FunctionCall'
+          - type: 'null'
+      required:
+      - id
+      - name
+      - type
+      - value
+      description: A value representing a Function Call.
+      title: ExecutionFunctionCallVellumValue
+    workflow.execution.streamingEnum:
+      type: string
+      enum:
+      - workflow.execution.streaming
+      title: workflow.execution.streamingEnum
+    WorkflowEnum:
+      type: string
+      enum:
+      - WORKFLOW
+      title: WorkflowEnum
+    MLModelUsageWrapper:
+      type: object
+      properties:
+        ml_model_name:
+          type: string
+        ml_model_usage:
+          $ref: '#/components/schemas/MLModelUsage'
+      required:
+      - ml_model_name
+      - ml_model_usage
+      title: MLModelUsageWrapper
+    VellumDocument:
+      type: object
+      properties:
+        src:
+          type: string
+          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - src
+      title: VellumDocument
+    Price:
+      type: object
+      properties:
+        value:
+          type: number
+          format: double
+        unit:
+          $ref: '#/components/schemas/UnitEnum'
+      required:
+      - value
+      - unit
+      title: Price
+    node.execution.fulfilledEnum:
+      type: string
+      enum:
+      - node.execution.fulfilled
+      title: node.execution.fulfilledEnum
+    VideoVellumValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/VideoEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumVideo'
+          - type: 'null'
+      required:
+      - type
+      - value
+      description: A base Vellum primitive value representing a video.
+      title: VideoVellumValue
+    PdfSearchResultMetaSource:
+      type: object
+      properties:
+        document_type:
+          $ref: '#/components/schemas/PdfEnum'
+        start_page_num:
+          type:
+          - integer
+          - 'null'
+          description: The 1-indexed page number where the chunk starts in the document. Only available for supported chunking strategies and document types.
+        end_page_num:
+          type:
+          - integer
+          - 'null'
+          description: The 1-indexed page number where the chunk ends in the document. Only available for supported chunking strategies and document types.
+      required:
+      - document_type
+      - start_page_num
+      - end_page_num
+      description: The source of a search result from a PDF document.
+      title: PdfSearchResultMetaSource
+    ExecutionVideoVellumValue:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The variable's uniquely identifying internal id.
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/VideoEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumVideo'
+          - type: 'null'
+      required:
+      - id
+      - name
+      - type
+      - value
+      description: A base Vellum primitive value representing a video.
+      title: ExecutionVideoVellumValue
+    WorkflowEventExecutionRead:
+      type: object
+      properties:
+        span_id:
+          type: string
+          format: uuid
+        start:
+          type: string
+          format: date-time
+        end:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        inputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExecutionVellumValue'
+        outputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExecutionVellumValue'
+        error:
+          oneOf:
+          - $ref: '#/components/schemas/WorkflowError'
+          - type: 'null'
+        usage_results:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/WorkflowExecutionUsageResult'
+        parent_context:
+          oneOf:
+          - $ref: '#/components/schemas/WorkflowDeploymentParentContext'
+          - type: 'null'
+        latest_actual:
+          oneOf:
+          - $ref: '#/components/schemas/WorkflowExecutionActual'
+          - type: 'null'
+        metric_results:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkflowExecutionViewOnlineEvalMetricResult'
+        spans:
+          type: array
+          items:
+            $ref: '#/components/schemas/VellumSpan'
+        state:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - span_id
+      - start
+      - end
+      - inputs
+      - outputs
+      - error
+      - usage_results
+      - parent_context
+      - latest_actual
+      - metric_results
+      - spans
+      title: WorkflowEventExecutionRead
+    WorkflowDeploymentReleaseWorkflowVersion:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        input_variables:
+          type: array
+          items:
+            $ref: '#/components/schemas/VellumVariable'
+        output_variables:
+          type: array
+          items:
+            $ref: '#/components/schemas/VellumVariable'
+        dependencies:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/WorkflowDependency'
+      required:
+      - id
+      - input_variables
+      - output_variables
+      description: The workflow version associated with a workflow deployment release.
+      title: WorkflowDeploymentReleaseWorkflowVersion
+    ScheduledEnum:
+      type: string
+      enum:
+      - SCHEDULED
+      title: ScheduledEnum
+    workflow.execution.pausedEnum:
+      type: string
+      enum:
+      - workflow.execution.paused
+      title: workflow.execution.pausedEnum
+    PaginatedSlimWorkflowDeploymentList:
+      type: object
+      properties:
+        count:
+          type: integer
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/SlimWorkflowDeployment'
+      title: PaginatedSlimWorkflowDeploymentList
+    SpanLinkTypeEnum:
+      type: string
+      enum:
+      - TRIGGERED_BY
+      - PREVIOUS_SPAN
+      - ROOT_SPAN
+      description: '* `TRIGGERED_BY` - TRIGGERED_BY
+
+        * `PREVIOUS_SPAN` - PREVIOUS_SPAN
+
+        * `ROOT_SPAN` - ROOT_SPAN'
+      title: SpanLinkTypeEnum
+    NodeExecutionInitiatedEvent:
+      type: object
+      properties:
+        parent:
+          oneOf:
+          - $ref: '#/components/schemas/ParentContext'
+          - type: 'null'
+        links:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SpanLink'
+        name:
+          $ref: '#/components/schemas/node.execution.initiatedEnum'
+        body:
+          $ref: '#/components/schemas/NodeExecutionInitiatedBody'
+        id:
+          type: string
+          format: uuid
+        timestamp:
+          type: string
+          format: date-time
+        api_version:
+          $ref: '#/components/schemas/ApiVersionEnum'
+        trace_id:
+          type: string
+          format: uuid
+        span_id:
+          type: string
+          format: uuid
+      required:
+      - name
+      - body
+      - id
+      - timestamp
+      - trace_id
+      - span_id
+      title: NodeExecutionInitiatedEvent
+    WorkflowExecutionFulfilledBody:
+      type: object
+      properties:
+        workflow_definition:
+          $ref: '#/components/schemas/VellumCodeResourceDefinition'
+        outputs:
+          type: object
+          additionalProperties:
+            description: Any type
+        final_state:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+        server_metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+        redacted:
+          type:
+          - boolean
+          - 'null'
+      required:
+      - workflow_definition
+      - outputs
+      title: WorkflowExecutionFulfilledBody
+    ExecutionStringVellumValue:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The variable's uniquely identifying internal id.
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/StringEnum'
+        value:
+          type:
+          - string
+          - 'null'
+      required:
+      - id
+      - name
+      - type
+      - value
+      description: A value representing a string.
+      title: ExecutionStringVellumValue
+    VellumVariableExtensions:
+      type: object
+      properties:
+        color:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+      description: A set of fields with additional properties for use in Vellum Variables.
+      title: VellumVariableExtensions
+    AudioEnum:
+      type: string
+      enum:
+      - AUDIO
+      title: AudioEnum
+    ExternalParentContext:
+      type: object
+      properties:
+        parent:
+          oneOf:
+          - $ref: '#/components/schemas/ParentContext'
+          - type: 'null'
+        links:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SpanLink'
+        type:
+          $ref: '#/components/schemas/ExternalEnum'
+        span_id:
+          type: string
+          format: uuid
+      required:
+      - type
+      - span_id
+      title: ExternalParentContext
+    ImageEnum:
+      type: string
+      enum:
+      - IMAGE
+      title: ImageEnum
+    NodeExecutionLogBody:
+      type: object
+      properties:
+        node_definition:
+          $ref: '#/components/schemas/VellumCodeResourceDefinition'
+        message:
+          type: string
+        attributes:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+        severity:
+          $ref: '#/components/schemas/SeverityEnum'
+      required:
+      - node_definition
+      - message
+      - severity
+      title: NodeExecutionLogBody
+    FunctionCall:
+      type: object
+      properties:
+        arguments:
+          type: object
+          additionalProperties:
+            description: Any type
+        id:
+          type:
+          - string
+          - 'null'
+        name:
+          type: string
+      required:
+      - arguments
+      - name
+      description: The final resolved function call value.
+      title: FunctionCall
+    JsonVellumValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/JsonEnum'
+        value:
+          oneOf:
+          - description: Any type
+          - type: 'null'
+      required:
+      - type
+      - value
+      description: A value representing a JSON object.
+      title: JsonVellumValue
+    StringChatMessageContent:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/StringEnum'
+        value:
+          type: string
+      required:
+      - type
+      - value
+      description: A string value that is used in a chat message.
+      title: StringChatMessageContent
+    VellumError:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/VellumErrorCodeEnum'
+        message:
+          type: string
+        raw_data:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - code
+      - message
+      title: VellumError
+    EnvironmentEnum:
+      type: string
+      enum:
+      - DEVELOPMENT
+      - STAGING
+      - PRODUCTION
+      title: EnvironmentEnum
+    ReleaseReleaseTag:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the Release Tag
+        source:
+          $ref: '#/components/schemas/ReleaseTagSource'
+          description: 'The source of how the Release Tag was originally created
+
+
+            * `SYSTEM` - System
+
+            * `USER` - User'
+      required:
+      - name
+      - source
+      title: ReleaseReleaseTag
+    FunctionCallChatMessageContentValue:
+      type: object
+      properties:
+        name:
+          type: string
+        arguments:
+          type: object
+          additionalProperties:
+            description: Any type
+        id:
+          type:
+          - string
+          - 'null'
+      required:
+      - name
+      - arguments
+      description: The final resolved function call value.
+      title: FunctionCallChatMessageContentValue
+    ExternalInputDescriptor:
+      type: object
+      properties:
+        types:
+          type: array
+          items:
+            $ref: '#/components/schemas/CodeResourceDefinition'
+        inputs_class:
+          oneOf:
+          - $ref: '#/components/schemas/CodeResourceDefinition'
+          - type: 'null'
+        instance:
+          oneOf:
+          - description: Any type
+          - type: 'null'
+        name:
+          type: string
+      required:
+      - types
+      - name
+      title: ExternalInputDescriptor
+    node.execution.initiatedEnum:
+      type: string
+      enum:
+      - node.execution.initiated
+      title: node.execution.initiatedEnum
+    DocumentChatMessageContent:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/DocumentEnum'
+        value:
+          $ref: '#/components/schemas/VellumDocument'
+      required:
+      - type
+      - value
+      description: A document value that is used in a chat message.
+      title: DocumentChatMessageContent
+    WorkflowEventErrorRawData:
+      oneOf:
+      - type: object
+        additionalProperties:
+          description: Any type
+      - type: string
+      title: WorkflowEventErrorRawData
+    WorkflowExecutionEventErrorCode:
+      type: string
+      enum:
+      - WORKFLOW_INITIALIZATION
+      - WORKFLOW_CANCELLED
+      - WORKFLOW_TIMEOUT
+      - PROVIDER_CREDENTIALS_UNAVAILABLE
+      - INTEGRATION_CREDENTIALS_UNAVAILABLE
+      - NODE_EXECUTION_COUNT_LIMIT_REACHED
+      - INTERNAL_SERVER_ERROR
+      - NODE_EXECUTION
+      - NODE_CANCELLED
+      - NODE_TIMEOUT
+      - LLM_PROVIDER
+      - INVALID_TEMPLATE
+      - INVALID_INPUTS
+      - PROVIDER_QUOTA_EXCEEDED
+      - USER_DEFINED_ERROR
+      description: '* `WORKFLOW_INITIALIZATION` - WORKFLOW_INITIALIZATION
+
+        * `WORKFLOW_CANCELLED` - WORKFLOW_CANCELLED
+
+        * `WORKFLOW_TIMEOUT` - WORKFLOW_TIMEOUT
+
+        * `PROVIDER_CREDENTIALS_UNAVAILABLE` - PROVIDER_CREDENTIALS_UNAVAILABLE
+
+        * `INTEGRATION_CREDENTIALS_UNAVAILABLE` - INTEGRATION_CREDENTIALS_UNAVAILABLE
+
+        * `NODE_EXECUTION_COUNT_LIMIT_REACHED` - NODE_EXECUTION_COUNT_LIMIT_REACHED
+
+        * `INTERNAL_SERVER_ERROR` - INTERNAL_SERVER_ERROR
+
+        * `NODE_EXECUTION` - NODE_EXECUTION
+
+        * `NODE_CANCELLED` - NODE_CANCELLED
+
+        * `NODE_TIMEOUT` - NODE_TIMEOUT
+
+        * `LLM_PROVIDER` - LLM_PROVIDER
+
+        * `INVALID_TEMPLATE` - INVALID_TEMPLATE
+
+        * `INVALID_INPUTS` - INVALID_INPUTS
+
+        * `PROVIDER_QUOTA_EXCEEDED` - PROVIDER_QUOTA_EXCEEDED
+
+        * `USER_DEFINED_ERROR` - USER_DEFINED_ERROR'
+      title: WorkflowExecutionEventErrorCode
+    ReleaseEnvironment:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        label:
+          type: string
+      required:
+      - id
+      - name
+      - label
+      title: ReleaseEnvironment
+    ChatMessageContent:
+      oneOf:
+      - $ref: '#/components/schemas/StringChatMessageContent'
+      - $ref: '#/components/schemas/FunctionCallChatMessageContent'
+      - $ref: '#/components/schemas/ArrayChatMessageContent'
+      - $ref: '#/components/schemas/AudioChatMessageContent'
+      - $ref: '#/components/schemas/VideoChatMessageContent'
+      - $ref: '#/components/schemas/ImageChatMessageContent'
+      - $ref: '#/components/schemas/DocumentChatMessageContent'
+      title: ChatMessageContent
+    UnitEnum:
+      type: string
+      enum:
+      - USD
+      description: '* `USD` - USD'
+      title: UnitEnum
+    ParentContext:
+      oneOf:
+      - $ref: '#/components/schemas/WorkflowParentContext'
+      - $ref: '#/components/schemas/NodeParentContext'
+      - $ref: '#/components/schemas/WorkflowDeploymentParentContext'
+      - $ref: '#/components/schemas/WorkflowSandboxParentContext'
+      - $ref: '#/components/schemas/PromptDeploymentParentContext'
+      - $ref: '#/components/schemas/APIRequestParentContext'
+      - $ref: '#/components/schemas/ExternalParentContext'
+      - $ref: '#/components/schemas/ScheduledTriggerContext'
+      - $ref: '#/components/schemas/IntegrationTriggerContext'
+      title: ParentContext
+    DocumentVellumValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/DocumentEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumDocument'
+          - type: 'null'
+      required:
+      - type
+      - value
+      description: A base Vellum primitive value representing a document.
+      title: DocumentVellumValue
+    StringEnum:
+      type: string
+      enum:
+      - STRING
+      title: StringEnum
+    NumberVellumValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/NumberEnum'
+        value:
+          type:
+          - number
+          - 'null'
+          format: double
+      required:
+      - type
+      - value
+      description: A value representing a number.
+      title: NumberVellumValue
+    APIRequestParentContext:
+      type: object
+      properties:
+        parent:
+          oneOf:
+          - $ref: '#/components/schemas/ParentContext'
+          - type: 'null'
+        links:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SpanLink'
+        type:
+          $ref: '#/components/schemas/ApiRequestEnum'
+        span_id:
+          type: string
+          format: uuid
+        api_actor_id:
+          type:
+          - string
+          - 'null'
+        api_actor_type:
+          oneOf:
+          - $ref: '#/components/schemas/ApiActorTypeEnum'
+          - type: 'null'
+        api_actor_label:
+          type:
+          - string
+          - 'null'
+      required:
+      - type
+      - span_id
+      title: APIRequestParentContext
+    ExecutionSearchResultsVellumValue:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The variable's uniquely identifying internal id.
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/SearchResultsEnum'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SearchResult'
+      required:
+      - id
+      - name
+      - type
+      - value
+      description: A value representing Search Results.
+      title: ExecutionSearchResultsVellumValue
+    VellumSdkError:
+      type: object
+      properties:
+        message:
+          type: string
+        raw_data:
+          oneOf:
+          - $ref: '#/components/schemas/VellumSdkErrorRawData'
+          - type: 'null'
+        code:
+          $ref: '#/components/schemas/VellumSdkErrorCodeEnum'
+      required:
+      - message
+      - code
+      title: VellumSdkError
+    InvokedPort:
+      type: object
+      properties:
+        name:
+          type: string
+      required:
+      - name
+      title: InvokedPort
+    SeverityEnum:
+      type: string
+      enum:
+      - DEBUG
+      - INFO
+      - WARNING
+      - ERROR
+      description: '* `DEBUG` - DEBUG
+
+        * `INFO` - INFO
+
+        * `WARNING` - WARNING
+
+        * `ERROR` - ERROR'
+      title: SeverityEnum
+    ThinkingEnum:
+      type: string
+      enum:
+      - THINKING
+      title: ThinkingEnum
+    WorkflowReleaseTagRead:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the Release Tag
+        source:
+          $ref: '#/components/schemas/ReleaseTagSource'
+          description: 'The source of how the Release Tag was originally created
+
+
+            * `SYSTEM` - System
+
+            * `USER` - User'
+        history_item:
+          $ref: '#/components/schemas/WorkflowReleaseTagWorkflowDeploymentHistoryItem'
+          description: Deprecated. Reference the `release` field instead.
+        release:
+          $ref: '#/components/schemas/ReleaseTagRelease'
+          description: The Release that this Release Tag points to.
+      required:
+      - name
+      - source
+      - history_item
+      - release
+      title: WorkflowReleaseTagRead
+    ExecutionDocumentVellumValue:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The variable's uniquely identifying internal id.
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/DocumentEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumDocument'
+          - type: 'null'
+      required:
+      - id
+      - name
+      - type
+      - value
+      description: A base Vellum primitive value representing a document.
+      title: ExecutionDocumentVellumValue
+    V1WorkflowDeploymentsGetParametersStatus:
+      type: string
+      enum:
+      - ACTIVE
+      - ARCHIVED
+      - PENDING_DELETION
+      title: V1WorkflowDeploymentsGetParametersStatus
+    FunctionCallVellumValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/FunctionCallEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/FunctionCall'
+          - type: 'null'
+      required:
+      - type
+      - value
+      description: A value representing a Function Call.
+      title: FunctionCallVellumValue
+    NodeExecutionInitiatedBody:
+      type: object
+      properties:
+        node_definition:
+          $ref: '#/components/schemas/VellumCodeResourceDefinition'
+        inputs:
+          type: object
+          additionalProperties:
+            description: Any type
+      required:
+      - node_definition
+      - inputs
+      title: NodeExecutionInitiatedBody
+    VellumVariable:
+      type: object
+      properties:
+        id:
+          type: string
+        key:
+          type: string
+        type:
+          $ref: '#/components/schemas/VellumVariableType'
+        required:
+          type:
+          - boolean
+          - 'null'
+        default:
+          oneOf:
+          - $ref: '#/components/schemas/VellumValue'
+          - type: 'null'
+        extensions:
+          oneOf:
+          - $ref: '#/components/schemas/VellumVariableExtensions'
+          - type: 'null'
+        schema:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - id
+      - key
+      - type
+      title: VellumVariable
+    CodeResourceDefinition:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the resource, typically a class name.
+        module:
+          type: array
+          items:
+            type: string
+          description: The module that this resource is defined in.
+      required:
+      - name
+      - module
+      description: The definition of a resource defined in code.
+      title: CodeResourceDefinition
+    WorkflowReleaseTagEnum:
+      type: string
+      enum:
+      - WORKFLOW_RELEASE_TAG
+      title: WorkflowReleaseTagEnum
+    ImageVellumValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ImageEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumImage'
+          - type: 'null'
+      required:
+      - type
+      - value
+      description: A base Vellum primitive value representing an image.
+      title: ImageVellumValue
+    IntegrationName:
+      type: string
+      enum:
+      - SLACK
+      - NOTION
+      - GOOGLE
+      - CALENDLY
+      - CANVA
+      - CLICKUP
+      - CODA
+      - HUBSPOT
+      - INTERCOM
+      - INSTAGRAM
+      - LINEAR
+      - LINKUP
+      - LISTENNOTES
+      - LMNT
+      - LINKEDIN
+      - MAILCHIMP
+      - MIRO
+      - MEM0
+      - MONDAY
+      - NEON
+      - OUTLOOK
+      - MICROSOFT_TEAMS
+      - GITHUB
+      - GOOGLE_SHEETS
+      - GOOGLE_CALENDAR
+      - GOOGLE_CLASSROOM
+      - GOOGLE_DRIVE
+      - GMAIL
+      - GOOGLE_ADS
+      - GOOGLE_ANALYTICS
+      - GOOGLE_BIGQUERY
+      - GOOGLE_DOCS
+      - GOOGLE_PHOTOS
+      - GOOGLE_SEARCH_CONSOLE
+      - GOOGLE_SLIDES
+      - GOOGLE_TASKS
+      - ACCULYNX
+      - AFFINITY
+      - AGENCYZOOM
+      - AHREFS
+      - AIRTABLE
+      - APOLLO
+      - ASANA
+      - ATLASSIAN
+      - BITBUCKET
+      - BOX
+      - BREVO
+      - BREX
+      - BROWSERBASE_TOOL
+      - CAL
+      - CANVAS
+      - ELEVENLABS
+      - EXA
+      - GAMMA
+      - GITLAB
+      - GONG
+      - FIRECRAWL
+      - FIGMA
+      - FIREFLIES
+      - GOOGLE_MAPS
+      - GOOGLEMEET
+      - HEYGEN
+      - JIRA
+      - JUNGLESCOUT
+      - KLAVIYO
+      - PAGERDUTY
+      - PARSERA
+      - PEOPLEDATALABS
+      - PERPLEXITY
+      - POSTHOG
+      - PRODUCTBOARD
+      - QUICKBOOKS
+      - REDDIT
+      - SALESFORCE
+      - SEMRUSH
+      - SEMANTICSCHOLAR
+      - SENDGRID
+      - SERPAPI
+      - SHARE_POINT
+      - SHOPIFY
+      - SHORTCUT
+      - SLACKBOT
+      - SPOTIFY
+      - STRIPE
+      - SUPABASE
+      - TAVILY
+      - TELEGRAM
+      - TIKTOK
+      - TODOIST
+      - WEBFLOW
+      - YOUSEARCH
+      - ZENDESK
+      - ZENROWS
+      - DROPBOX
+      - EVENTBRITE
+      - FACEBOOK
+      - CONFLUENCE
+      - COINBASE
+      - DISCORD
+      - DOCUSIGN
+      - TRELLO
+      - TWITTER
+      - HEYREACH
+      - ACTIVE_CAMPAIGN
+      - CUSTOMER_IO
+      - SEGMENT
+      - WHATSAPP
+      - YOUTUBE
+      description: '* `SLACK` - Slack
+
+        * `NOTION` - Notion
+
+        * `GOOGLE` - Google
+
+        * `CALENDLY` - Calendly
+
+        * `CANVA` - Canva
+
+        * `CLICKUP` - ClickUp
+
+        * `CODA` - Coda
+
+        * `HUBSPOT` - Hubspot
+
+        * `INTERCOM` - Intercom
+
+        * `INSTAGRAM` - Instagram
+
+        * `LINEAR` - Linear
+
+        * `LINKUP` - Linkup
+
+        * `LISTENNOTES` - Listen Notes
+
+        * `LMNT` - LMNT
+
+        * `LINKEDIN` - LinkedIn
+
+        * `MAILCHIMP` - Mailchimp
+
+        * `MIRO` - Miro
+
+        * `MEM0` - Mem0
+
+        * `MONDAY` - Monday
+
+        * `NEON` - Neon
+
+        * `OUTLOOK` - Outlook
+
+        * `MICROSOFT_TEAMS` - Microsoft Teams
+
+        * `GITHUB` - Github
+
+        * `GOOGLE_SHEETS` - Google Sheets
+
+        * `GOOGLE_CALENDAR` - Google Calendar
+
+        * `GOOGLE_CLASSROOM` - Google Classroom
+
+        * `GOOGLE_DRIVE` - Google Drive
+
+        * `GMAIL` - Gmail
+
+        * `GOOGLE_ADS` - Google Ads
+
+        * `GOOGLE_ANALYTICS` - Google Analytics
+
+        * `GOOGLE_BIGQUERY` - Google BigQuery
+
+        * `GOOGLE_DOCS` - Google Docs
+
+        * `GOOGLE_PHOTOS` - Google Photos
+
+        * `GOOGLE_SEARCH_CONSOLE` - Google Search Console
+
+        * `GOOGLE_SLIDES` - Google Slides
+
+        * `GOOGLE_TASKS` - Google Tasks
+
+        * `ACCULYNX` - AccuLynx
+
+        * `AFFINITY` - Affinity
+
+        * `AGENCYZOOM` - AgencyZoom
+
+        * `AHREFS` - Ahrefs
+
+        * `AIRTABLE` - Airtable
+
+        * `APOLLO` - Apollo
+
+        * `ASANA` - Asana
+
+        * `ATLASSIAN` - Atlassian
+
+        * `BITBUCKET` - Bitbucket
+
+        * `BOX` - Box
+
+        * `BREVO` - Brevo
+
+        * `BREX` - Brex
+
+        * `BROWSERBASE_TOOL` - Browserbase Tool
+
+        * `CAL` - Cal
+
+        * `CANVAS` - Canvas
+
+        * `ELEVENLABS` - ElevenLabs
+
+        * `EXA` - Exa
+
+        * `GAMMA` - Gamma
+
+        * `GITLAB` - Gitlab
+
+        * `GONG` - Gong
+
+        * `FIRECRAWL` - Firecrawl
+
+        * `FIGMA` - Figma
+
+        * `FIREFLIES` - Fireflies
+
+        * `GOOGLE_MAPS` - Google Maps
+
+        * `GOOGLEMEET` - Google Meet
+
+        * `HEYGEN` - HeyGen
+
+        * `JIRA` - Jira
+
+        * `JUNGLESCOUT` - Jungle Scout
+
+        * `KLAVIYO` - Klaviyo
+
+        * `PAGERDUTY` - PagerDuty
+
+        * `PARSERA` - Parsera
+
+        * `PEOPLEDATALABS` - People Data Labs
+
+        * `PERPLEXITY` - Perplexity
+
+        * `POSTHOG` - PostHog
+
+        * `PRODUCTBOARD` - Productboard
+
+        * `QUICKBOOKS` - QuickBooks
+
+        * `REDDIT` - Reddit
+
+        * `SALESFORCE` - Salesforce
+
+        * `SEMRUSH` - Semrush
+
+        * `SEMANTICSCHOLAR` - Semantic Scholar
+
+        * `SENDGRID` - SendGrid
+
+        * `SERPAPI` - Serp Api
+
+        * `SHARE_POINT` - SharePoint
+
+        * `SHOPIFY` - Shopify
+
+        * `SHORTCUT` - Shortcut
+
+        * `SLACKBOT` - Slackbot
+
+        * `SPOTIFY` - Spotify
+
+        * `STRIPE` - Stripe
+
+        * `SUPABASE` - Supabase
+
+        * `TAVILY` - Tavily
+
+        * `TELEGRAM` - Telegram
+
+        * `TIKTOK` - TikTok
+
+        * `TODOIST` - Todoist
+
+        * `WEBFLOW` - Webflow
+
+        * `YOUSEARCH` - You Search
+
+        * `ZENDESK` - Zendesk
+
+        * `ZENROWS` - ZenRows
+
+        * `DROPBOX` - Dropbox
+
+        * `EVENTBRITE` - Eventbrite
+
+        * `FACEBOOK` - Facebook
+
+        * `CONFLUENCE` - Confluence
+
+        * `COINBASE` - Coinbase
+
+        * `DISCORD` - Discord
+
+        * `DOCUSIGN` - DocuSign
+
+        * `TRELLO` - Trello
+
+        * `TWITTER` - Twitter
+
+        * `HEYREACH` - HeyReach
+
+        * `ACTIVE_CAMPAIGN` - Active Campaign
+
+        * `CUSTOMER_IO` - Customer.io
+
+        * `SEGMENT` - Segment
+
+        * `WHATSAPP` - WhatsApp
+
+        * `YOUTUBE` - YouTube'
+      title: IntegrationName
+    JsonEnum:
+      type: string
+      enum:
+      - JSON
+      title: JsonEnum
+    WorkflowExecutionUsageCalculationFulfilledBody:
+      type: object
+      properties:
+        usage:
+          type: array
+          items:
+            $ref: '#/components/schemas/MLModelUsageWrapper'
+        cost:
+          type: array
+          items:
+            $ref: '#/components/schemas/Price'
+      required:
+      - usage
+      - cost
+      title: WorkflowExecutionUsageCalculationFulfilledBody
+    VellumSdkErrorRawData:
+      oneOf:
+      - type: object
+        additionalProperties:
+          description: Any type
+      - type: string
+      title: VellumSdkErrorRawData
+    ApiVersionEnum:
+      type: string
+      enum:
+      - '2024-10-25'
+      - '2025-07-30'
+      description: '* `2024-10-25` - V2024_10_25
+
+        * `2025-07-30` - V2025_07_30'
+      title: ApiVersionEnum
+    NodeExecutionStreamingBody:
+      type: object
+      properties:
+        node_definition:
+          $ref: '#/components/schemas/VellumCodeResourceDefinition'
+        output:
+          $ref: '#/components/schemas/BaseOutput'
+      required:
+      - node_definition
+      - output
+      title: NodeExecutionStreamingBody
+    WorkflowExecutionSnapshottedEvent:
+      type: object
+      properties:
+        parent:
+          oneOf:
+          - $ref: '#/components/schemas/ParentContext'
+          - type: 'null'
+        links:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SpanLink'
+        name:
+          $ref: '#/components/schemas/workflow.execution.snapshottedEnum'
+        body:
+          $ref: '#/components/schemas/WorkflowExecutionSnapshottedBody'
+        id:
+          type: string
+          format: uuid
+        timestamp:
+          type: string
+          format: date-time
+        api_version:
+          $ref: '#/components/schemas/ApiVersionEnum'
+        trace_id:
+          type: string
+          format: uuid
+        span_id:
+          type: string
+          format: uuid
+      required:
+      - name
+      - body
+      - id
+      - timestamp
+      - trace_id
+      - span_id
+      title: WorkflowExecutionSnapshottedEvent
+    NodeExecutionRejectedEvent:
+      type: object
+      properties:
+        parent:
+          oneOf:
+          - $ref: '#/components/schemas/ParentContext'
+          - type: 'null'
+        links:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SpanLink'
+        name:
+          $ref: '#/components/schemas/node.execution.rejectedEnum'
+        body:
+          $ref: '#/components/schemas/NodeExecutionRejectedBody'
+        id:
+          type: string
+          format: uuid
+        timestamp:
+          type: string
+          format: date-time
+        api_version:
+          $ref: '#/components/schemas/ApiVersionEnum'
+        trace_id:
+          type: string
+          format: uuid
+        span_id:
+          type: string
+          format: uuid
+      required:
+      - name
+      - body
+      - id
+      - timestamp
+      - trace_id
+      - span_id
+      title: NodeExecutionRejectedEvent
+    ReleaseTagSource:
+      type: string
+      enum:
+      - SYSTEM
+      - USER
+      description: '* `SYSTEM` - System
+
+        * `USER` - User'
+      title: ReleaseTagSource
+    NodeExecutionSpan:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/node.executionEnum'
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/VellumNodeExecutionEvent'
+        attributes:
+          $ref: '#/components/schemas/NodeExecutionSpanAttributes'
+        usage_result:
+          oneOf:
+          - $ref: '#/components/schemas/WorkflowExecutionUsageCalculationFulfilledBody'
+          - type: 'null'
+        span_id:
+          type: string
+          format: uuid
+        start_ts:
+          type: string
+          format: date-time
+        end_ts:
+          type: string
+          format: date-time
+        parent_span_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+      required:
+      - name
+      - events
+      - attributes
+      - span_id
+      - start_ts
+      - end_ts
+      - parent_span_id
+      title: NodeExecutionSpan
+    FunctionCallEnum:
+      type: string
+      enum:
+      - FUNCTION_CALL
+      title: FunctionCallEnum
+    SearchResultsEnum:
+      type: string
+      enum:
+      - SEARCH_RESULTS
+      title: SearchResultsEnum
+    node.execution.streamingEnum:
+      type: string
+      enum:
+      - node.execution.streaming
+      title: node.execution.streamingEnum
+    ArrayEnum:
+      type: string
+      enum:
+      - ARRAY
+      title: ArrayEnum
+    PaginatedWorkflowDeploymentReleaseList:
+      type: object
+      properties:
+        count:
+          type: integer
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkflowDeploymentRelease'
+      title: PaginatedWorkflowDeploymentReleaseList
+    MLModelHostingInterface:
+      type: string
+      enum:
+      - ANTHROPIC
+      - AWS_BEDROCK
+      - AZURE_AI_FOUNDRY
+      - AZURE_OPENAI
+      - BASETEN
+      - CEREBRAS
+      - COHERE
+      - CUSTOM
+      - DEEP_SEEK
+      - FIREWORKS_AI
+      - GOOGLE
+      - GOOGLE_VERTEX_AI
+      - GROQ
+      - HUGGINGFACE
+      - IBM_WATSONX
+      - MISTRAL_AI
+      - MOSAICML
+      - MYSTIC
+      - NVIDIA
+      - OPENAI
+      - OPEN_ROUTER
+      - OPENPIPE
+      - PERPLEXITY
+      - PYQ
+      - REPLICATE
+      - SAMBANOVA
+      - TOGETHER_AI
+      - X_AI
+      - FASTWEB
+      - SWISSCOM
+      description: '* `ANTHROPIC` - Anthropic
+
+        * `AWS_BEDROCK` - AWS Bedrock
+
+        * `AZURE_AI_FOUNDRY` - Azure AI Foundry
+
+        * `AZURE_OPENAI` - Azure OpenAI
+
+        * `BASETEN` - BaseTen
+
+        * `CEREBRAS` - Cerebras
+
+        * `COHERE` - Cohere
+
+        * `CUSTOM` - Custom
+
+        * `DEEP_SEEK` - DeepSeek
+
+        * `FIREWORKS_AI` - Fireworks AI
+
+        * `GOOGLE` - Google
+
+        * `GOOGLE_VERTEX_AI` - Google Vertex AI
+
+        * `GROQ` - Groq
+
+        * `HUGGINGFACE` - HuggingFace
+
+        * `IBM_WATSONX` - IBM WatsonX
+
+        * `MISTRAL_AI` - Mistral AI
+
+        * `MOSAICML` - MosaicML
+
+        * `MYSTIC` - Mystic
+
+        * `NVIDIA` - NVIDIA
+
+        * `OPENAI` - OpenAI
+
+        * `OPEN_ROUTER` - Open Router
+
+        * `OPENPIPE` - OpenPipe
+
+        * `PERPLEXITY` - Perplexity
+
+        * `PYQ` - Pyq
+
+        * `REPLICATE` - Replicate
+
+        * `SAMBANOVA` - SambaNova
+
+        * `TOGETHER_AI` - Together AI
+
+        * `X_AI` - xAI
+
+        * `FASTWEB` - Fastweb
+
+        * `SWISSCOM` - Swisscom'
+      title: MLModelHostingInterface
+    VellumErrorCodeEnum:
+      type: string
+      enum:
+      - INVALID_REQUEST
+      - INVALID_INPUTS
+      - PROVIDER_ERROR
+      - PROVIDER_CREDENTIALS_UNAVAILABLE
+      - INTEGRATION_CREDENTIALS_UNAVAILABLE
+      - REQUEST_TIMEOUT
+      - INTERNAL_SERVER_ERROR
+      - USER_DEFINED_ERROR
+      - WORKFLOW_CANCELLED
+      - NODE_CANCELLED
+      - PROVIDER_QUOTA_EXCEEDED
+      - CHAT_QUOTA_EXCEEDED
+      description: '* `INVALID_REQUEST` - INVALID_REQUEST
+
+        * `INVALID_INPUTS` - INVALID_INPUTS
+
+        * `PROVIDER_ERROR` - PROVIDER_ERROR
+
+        * `PROVIDER_CREDENTIALS_UNAVAILABLE` - PROVIDER_CREDENTIALS_UNAVAILABLE
+
+        * `INTEGRATION_CREDENTIALS_UNAVAILABLE` - INTEGRATION_CREDENTIALS_UNAVAILABLE
+
+        * `REQUEST_TIMEOUT` - REQUEST_TIMEOUT
+
+        * `INTERNAL_SERVER_ERROR` - INTERNAL_SERVER_ERROR
+
+        * `USER_DEFINED_ERROR` - USER_DEFINED_ERROR
+
+        * `WORKFLOW_CANCELLED` - WORKFLOW_CANCELLED
+
+        * `NODE_CANCELLED` - NODE_CANCELLED
+
+        * `PROVIDER_QUOTA_EXCEEDED` - PROVIDER_QUOTA_EXCEEDED
+
+        * `CHAT_QUOTA_EXCEEDED` - CHAT_QUOTA_EXCEEDED'
+      title: VellumErrorCodeEnum
+    WorkflowSandboxParentContext:
+      type: object
+      properties:
+        parent:
+          oneOf:
+          - $ref: '#/components/schemas/ParentContext'
+          - type: 'null'
+        links:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SpanLink'
+        type:
+          $ref: '#/components/schemas/WorkflowSandboxEnum'
+        span_id:
+          type: string
+          format: uuid
+        sandbox_id:
+          type: string
+          format: uuid
+        sandbox_history_item_id:
+          type: string
+          format: uuid
+        scenario_id:
+          type: string
+          format: uuid
+      required:
+      - type
+      - span_id
+      - sandbox_id
+      - sandbox_history_item_id
+      - scenario_id
+      title: WorkflowSandboxParentContext
+    VellumVideo:
+      type: object
+      properties:
+        src:
+          type: string
+          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - src
+      title: VellumVideo
+    ErrorEnum:
+      type: string
+      enum:
+      - ERROR
+      title: ErrorEnum
+    WorkflowParentContext:
+      type: object
+      properties:
+        parent:
+          oneOf:
+          - $ref: '#/components/schemas/ParentContext'
+          - type: 'null'
+        links:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SpanLink'
+        workflow_definition:
+          $ref: '#/components/schemas/VellumCodeResourceDefinition'
+        type:
+          $ref: '#/components/schemas/WorkflowEnum'
+        span_id:
+          type: string
+          format: uuid
+      required:
+      - workflow_definition
+      - type
+      - span_id
+      title: WorkflowParentContext
+    ExecutionChatHistoryVellumValue:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The variable's uniquely identifying internal id.
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/ChatHistoryEnum'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ChatMessage'
+      required:
+      - id
+      - name
+      - type
+      - value
+      description: A value representing Chat History.
+      title: ExecutionChatHistoryVellumValue
+    WorkflowExecutionUsageResult:
+      type: object
+      properties:
+        usage:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/MLModelUsageWrapper'
+        cost:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Price'
+        error:
+          oneOf:
+          - $ref: '#/components/schemas/WorkflowExecutionUsageCalculationError'
+          - type: 'null'
+      title: WorkflowExecutionUsageResult
+    ErrorDetailResponse:
+      type: object
+      properties:
+        detail:
+          type: string
+          description: Message informing the user of the error.
+      required:
+      - detail
+      title: ErrorDetailResponse
+    ExecutionThinkingVellumValue:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The variable's uniquely identifying internal id.
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/ThinkingEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/StringVellumValue'
+          - type: 'null'
+      required:
+      - id
+      - name
+      - type
+      - value
+      description: A value representing Thinking mode output.
+      title: ExecutionThinkingVellumValue
+    VellumWorkflowExecutionEvent:
+      oneOf:
+      - $ref: '#/components/schemas/WorkflowExecutionInitiatedEvent'
+      - $ref: '#/components/schemas/WorkflowExecutionStreamingEvent'
+      - $ref: '#/components/schemas/WorkflowExecutionFulfilledEvent'
+      - $ref: '#/components/schemas/WorkflowExecutionRejectedEvent'
+      - $ref: '#/components/schemas/WorkflowExecutionPausedEvent'
+      - $ref: '#/components/schemas/WorkflowExecutionResumedEvent'
+      - $ref: '#/components/schemas/WorkflowExecutionSnapshottedEvent'
+      title: VellumWorkflowExecutionEvent
+    ChatMessage:
+      type: object
+      properties:
+        text:
+          type:
+          - string
+          - 'null'
+        role:
+          $ref: '#/components/schemas/ChatMessageRole'
+        content:
+          oneOf:
+          - $ref: '#/components/schemas/ChatMessageContent'
+          - type: 'null'
+        source:
+          type:
+          - string
+          - 'null'
+          description: An optional identifier representing who or what generated this message.
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - role
+      title: ChatMessage
+    ReleaseCreatedBy:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        full_name:
+          type: string
+        email:
+          type: string
+          format: email
+      required:
+      - id
+      - email
+      title: ReleaseCreatedBy
+    WorkflowDeploymentHistoryItem:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        workflow_deployment_id:
+          type: string
+          format: uuid
+        timestamp:
+          type: string
+          format: date-time
+        label:
+          type: string
+          description: A human-readable label for the workflow deployment
+        name:
+          type: string
+          description: A name that uniquely identifies this workflow deployment within its workspace
+        input_variables:
+          type: array
+          items:
+            $ref: '#/components/schemas/VellumVariable'
+        output_variables:
+          type: array
+          items:
+            $ref: '#/components/schemas/VellumVariable'
+        description:
+          type:
+          - string
+          - 'null'
+          description: A human-readable description of the workflow deployment
+      required:
+      - id
+      - workflow_deployment_id
+      - timestamp
+      - label
+      - name
+      - input_variables
+      - output_variables
+      title: WorkflowDeploymentHistoryItem
+    WorkflowEvent:
+      oneOf:
+      - $ref: '#/components/schemas/NodeExecutionInitiatedEvent'
+      - $ref: '#/components/schemas/NodeExecutionStreamingEvent'
+      - $ref: '#/components/schemas/NodeExecutionFulfilledEvent'
+      - $ref: '#/components/schemas/NodeExecutionRejectedEvent'
+      - $ref: '#/components/schemas/NodeExecutionPausedEvent'
+      - $ref: '#/components/schemas/NodeExecutionResumedEvent'
+      - $ref: '#/components/schemas/NodeExecutionLogEvent'
+      - $ref: '#/components/schemas/WorkflowExecutionInitiatedEvent'
+      - $ref: '#/components/schemas/WorkflowExecutionStreamingEvent'
+      - $ref: '#/components/schemas/WorkflowExecutionRejectedEvent'
+      - $ref: '#/components/schemas/WorkflowExecutionFulfilledEvent'
+      - $ref: '#/components/schemas/WorkflowExecutionPausedEvent'
+      - $ref: '#/components/schemas/WorkflowExecutionResumedEvent'
+      - $ref: '#/components/schemas/WorkflowExecutionSnapshottedEvent'
+      title: WorkflowEvent
+    AudioChatMessageContent:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/AudioEnum'
+        value:
+          $ref: '#/components/schemas/VellumAudio'
+      required:
+      - type
+      - value
+      description: An audio value that is used in a chat message.
+      title: AudioChatMessageContent
+    DocumentEnum:
+      type: string
+      enum:
+      - DOCUMENT
+      title: DocumentEnum
+    WorkflowDeploymentDisplayData:
+      type: object
+      properties:
+        icon:
+          oneOf:
+          - $ref: '#/components/schemas/WorkflowDisplayIcon'
+          - type: 'null'
+          description: The icon associated with this Workflow Deployment.
+      description: Workflow Deployment display data
+      title: WorkflowDeploymentDisplayData
+    NodeExecutionResumedBody:
+      type: object
+      properties:
+        node_definition:
+          $ref: '#/components/schemas/VellumCodeResourceDefinition'
+      required:
+      - node_definition
+      title: NodeExecutionResumedBody
+    WorkflowExecutionRejectedBody:
+      type: object
+      properties:
+        workflow_definition:
+          $ref: '#/components/schemas/VellumCodeResourceDefinition'
+        error:
+          $ref: '#/components/schemas/VellumSdkError'
+        stacktrace:
+          type:
+          - string
+          - 'null'
+      required:
+      - workflow_definition
+      - error
+      title: WorkflowExecutionRejectedBody
+    WorkflowEventError:
+      type: object
+      properties:
+        message:
+          type: string
+        raw_data:
+          oneOf:
+          - $ref: '#/components/schemas/WorkflowEventErrorRawData'
+          - type: 'null'
+        code:
+          $ref: '#/components/schemas/WorkflowExecutionEventErrorCode'
+        stacktrace:
+          type:
+          - string
+          - 'null'
+      required:
+      - message
+      - code
+      title: WorkflowEventError
+    ExecutionJsonVellumValue:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The variable's uniquely identifying internal id.
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/JsonEnum'
+        value:
+          oneOf:
+          - description: Any type
+          - type: 'null'
+      required:
+      - id
+      - name
+      - type
+      - value
+      description: A value representing a JSON object.
+      title: ExecutionJsonVellumValue
+    workflow.execution.fulfilledEnum:
+      type: string
+      enum:
+      - workflow.execution.fulfilled
+      title: workflow.execution.fulfilledEnum
+    WorkflowReleaseTagWorkflowDeploymentHistoryItem:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        timestamp:
+          type: string
+          format: date-time
+      required:
+      - id
+      - timestamp
+      title: WorkflowReleaseTagWorkflowDeploymentHistoryItem
+    PromptReleaseTagEnum:
+      type: string
+      enum:
+      - PROMPT_RELEASE_TAG
+      title: PromptReleaseTagEnum
+    NodeExecutionRejectedBody:
+      type: object
+      properties:
+        node_definition:
+          $ref: '#/components/schemas/VellumCodeResourceDefinition'
+        error:
+          $ref: '#/components/schemas/VellumSdkError'
+        stacktrace:
+          type:
+          - string
+          - 'null'
+      required:
+      - node_definition
+      - error
+      title: NodeExecutionRejectedBody
+    ChatHistoryEnum:
+      type: string
+      enum:
+      - CHAT_HISTORY
+      title: ChatHistoryEnum
+    FunctionCallChatMessageContent:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/FunctionCallEnum'
+        value:
+          $ref: '#/components/schemas/FunctionCallChatMessageContentValue'
+      required:
+      - type
+      - value
+      description: A function call value that is used in a chat message.
+      title: FunctionCallChatMessageContent
+    ApiRequestEnum:
+      type: string
+      enum:
+      - API_REQUEST
+      title: ApiRequestEnum
+    SlimWorkflowExecutionRead:
+      type: object
+      properties:
+        span_id:
+          type: string
+          format: uuid
+        start:
+          type: string
+          format: date-time
+        end:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        inputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExecutionVellumValue'
+        outputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExecutionVellumValue'
+        error:
+          oneOf:
+          - $ref: '#/components/schemas/WorkflowError'
+          - type: 'null'
+        usage_results:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/WorkflowExecutionUsageResult'
+        parent_context:
+          oneOf:
+          - $ref: '#/components/schemas/WorkflowDeploymentParentContext'
+          - type: 'null'
+        latest_actual:
+          oneOf:
+          - $ref: '#/components/schemas/WorkflowExecutionActual'
+          - type: 'null'
+        metric_results:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkflowExecutionViewOnlineEvalMetricResult'
+      required:
+      - span_id
+      - start
+      - end
+      - inputs
+      - outputs
+      - error
+      - usage_results
+      - parent_context
+      - latest_actual
+      - metric_results
+      title: SlimWorkflowExecutionRead
+    WorkflowExecutionInitiatedEvent:
+      type: object
+      properties:
+        parent:
+          oneOf:
+          - $ref: '#/components/schemas/ParentContext'
+          - type: 'null'
+        links:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SpanLink'
+        name:
+          $ref: '#/components/schemas/workflow.execution.initiatedEnum'
+        body:
+          $ref: '#/components/schemas/WorkflowExecutionInitiatedBody'
+        id:
+          type: string
+          format: uuid
+        timestamp:
+          type: string
+          format: date-time
+        api_version:
+          $ref: '#/components/schemas/ApiVersionEnum'
+        trace_id:
+          type: string
+          format: uuid
+        span_id:
+          type: string
+          format: uuid
+      required:
+      - name
+      - body
+      - id
+      - timestamp
+      - trace_id
+      - span_id
+      title: WorkflowExecutionInitiatedEvent
+    ImageChatMessageContent:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ImageEnum'
+        value:
+          $ref: '#/components/schemas/VellumImage'
+      required:
+      - type
+      - value
+      description: An image value that is used in a chat message.
+      title: ImageChatMessageContent
+    SearchResult:
+      type: object
+      properties:
+        text:
+          type: string
+          description: The text of the chunk that matched the search query.
+        score:
+          type: number
+          format: double
+          description: A score representing how well the chunk matches the search query.
+        keywords:
+          type: array
+          items:
+            type: string
+        document:
+          $ref: '#/components/schemas/SearchResultDocument'
+          description: The document that contains the chunk that matched the search query.
+        meta:
+          oneOf:
+          - $ref: '#/components/schemas/SearchResultMeta'
+          - type: 'null'
+          description: Additional information about the search result.
+      required:
+      - text
+      - score
+      - keywords
+      - document
+      title: SearchResult
+    ThinkingVellumValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ThinkingEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/StringVellumValue'
+          - type: 'null'
+      required:
+      - type
+      - value
+      description: A value representing Thinking mode output.
+      title: ThinkingVellumValue
+    WorkflowDeploymentRelease:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        created:
+          type: string
+          format: date-time
+        environment:
+          $ref: '#/components/schemas/ReleaseEnvironment'
+        created_by:
+          oneOf:
+          - $ref: '#/components/schemas/ReleaseCreatedBy'
+          - type: 'null'
+        workflow_version:
+          $ref: '#/components/schemas/WorkflowDeploymentReleaseWorkflowVersion'
+        deployment:
+          $ref: '#/components/schemas/WorkflowDeploymentReleaseWorkflowDeployment'
+        description:
+          type: string
+        release_tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReleaseReleaseTag'
+        reviews:
+          type: array
+          items:
+            $ref: '#/components/schemas/SlimReleaseReview'
+      required:
+      - id
+      - created
+      - environment
+      - created_by
+      - workflow_version
+      - deployment
+      - release_tags
+      - reviews
+      title: WorkflowDeploymentRelease
+    VellumAudio:
+      type: object
+      properties:
+        src:
+          type: string
+          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - src
+      title: VellumAudio
+    SearchResultDocument:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of the document.
+        label:
+          type: string
+          description: The human-readable name for the document.
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: The unique ID of the document as represented in an external system and specified when it was originally uploaded.
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+          description: A previously supplied JSON object containing metadata that can be filtered on when searching.
+      required:
+      - label
+      title: SearchResultDocument
+    WorkflowExecutionResumedEvent:
+      type: object
+      properties:
+        parent:
+          oneOf:
+          - $ref: '#/components/schemas/ParentContext'
+          - type: 'null'
+        links:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SpanLink'
+        name:
+          $ref: '#/components/schemas/workflow.execution.resumedEnum'
+        body:
+          $ref: '#/components/schemas/WorkflowExecutionResumedBody'
+        id:
+          type: string
+          format: uuid
+        timestamp:
+          type: string
+          format: date-time
+        api_version:
+          $ref: '#/components/schemas/ApiVersionEnum'
+        trace_id:
+          type: string
+          format: uuid
+        span_id:
+          type: string
+          format: uuid
+      required:
+      - name
+      - body
+      - id
+      - timestamp
+      - trace_id
+      - span_id
+      title: WorkflowExecutionResumedEvent
+    WorkflowSandboxEnum:
+      type: string
+      enum:
+      - WORKFLOW_SANDBOX
+      title: WorkflowSandboxEnum
+    SearchResultMetaSource:
+      oneOf:
+      - $ref: '#/components/schemas/PdfSearchResultMetaSource'
+      title: SearchResultMetaSource
+    PromptDeploymentParentContext:
+      type: object
+      properties:
+        parent:
+          oneOf:
+          - $ref: '#/components/schemas/ParentContext'
+          - type: 'null'
+        links:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SpanLink'
+        type:
+          $ref: '#/components/schemas/PromptReleaseTagEnum'
+        span_id:
+          type: string
+          format: uuid
+        deployment_id:
+          type: string
+          format: uuid
+        deployment_name:
+          type: string
+        deployment_history_item_id:
+          type: string
+          format: uuid
+        release_tag_id:
+          type: string
+          format: uuid
+        release_tag_name:
+          type: string
+        external_id:
+          type:
+          - string
+          - 'null'
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+        prompt_version_id:
+          type: string
+          format: uuid
+      required:
+      - type
+      - span_id
+      - deployment_id
+      - deployment_name
+      - deployment_history_item_id
+      - release_tag_id
+      - release_tag_name
+      - prompt_version_id
+      title: PromptDeploymentParentContext
+    MLModelUsage:
+      type: object
+      properties:
+        output_token_count:
+          type:
+          - integer
+          - 'null'
+        input_token_count:
+          type:
+          - integer
+          - 'null'
+        input_char_count:
+          type:
+          - integer
+          - 'null'
+        output_char_count:
+          type:
+          - integer
+          - 'null'
+        compute_nanos:
+          type:
+          - integer
+          - 'null'
+        cache_creation_input_tokens:
+          type:
+          - integer
+          - 'null'
+        cache_read_input_tokens:
+          type:
+          - integer
+          - 'null'
+      title: MLModelUsage
+    WorkflowDeploymentRead:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+          description: A name that uniquely identifies this workflow deployment within its workspace
+        label:
+          type: string
+          description: A human-readable label for the workflow deployment
+        status:
+          $ref: '#/components/schemas/EntityStatus'
+          description: 'The current status of the workflow deployment
+
+
+            * `ACTIVE` - Active
+
+            * `ARCHIVED` - Archived
+
+            * `PENDING_DELETION` - Pending Deletion'
+        environment:
+          oneOf:
+          - $ref: '#/components/schemas/EnvironmentEnum'
+          - type: 'null'
+          description: Deprecated. The value returned will always be 'PRODUCTION'.
+        created:
+          type: string
+          format: date-time
+        last_deployed_on:
+          type: string
+          format: date-time
+        last_deployed_history_item_id:
+          type: string
+          format: uuid
+          description: The ID of the history item associated with this Workflow Deployment's LATEST Release Tag
+        input_variables:
+          type: array
+          items:
+            $ref: '#/components/schemas/VellumVariable'
+          description: The input variables this Workflow Deployment expects to receive values for when it is executed.
+        output_variables:
+          type: array
+          items:
+            $ref: '#/components/schemas/VellumVariable'
+          description: The output variables this Workflow Deployment produces values for when it's executed.
+        description:
+          type:
+          - string
+          - 'null'
+          description: A human-readable description of the workflow deployment
+        display_data:
+          oneOf:
+          - $ref: '#/components/schemas/WorkflowDeploymentDisplayData'
+          - type: 'null'
+          description: Information used to display this Workflow Deployment.
+      required:
+      - id
+      - name
+      - label
+      - created
+      - last_deployed_on
+      - last_deployed_history_item_id
+      - input_variables
+      - output_variables
+      description: A Workflow Deployment's full details.
+      title: WorkflowDeploymentRead
+    WorkflowExecutionInitiatedBody:
+      type: object
+      properties:
+        workflow_definition:
+          $ref: '#/components/schemas/VellumCodeResourceDefinition'
+        inputs:
+          type: object
+          additionalProperties:
+            description: Any type
+        trigger:
+          oneOf:
+          - $ref: '#/components/schemas/VellumCodeResourceDefinition'
+          - type: 'null'
+      required:
+      - workflow_definition
+      - inputs
+      title: WorkflowExecutionInitiatedBody
+    workflow.execution.initiatedEnum:
+      type: string
+      enum:
+      - workflow.execution.initiated
+      title: workflow.execution.initiatedEnum
+    ExecutionNumberVellumValue:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The variable's uniquely identifying internal id.
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/NumberEnum'
+        value:
+          type:
+          - number
+          - 'null'
+          format: double
+      required:
+      - id
+      - name
+      - type
+      - value
+      description: A value representing a number.
+      title: ExecutionNumberVellumValue
+    ExternalEnum:
+      type: string
+      enum:
+      - EXTERNAL
+      title: ExternalEnum
+    WorkflowExecutionSpanAttributes:
+      type: object
+      properties:
+        label:
+          type: string
+        workflow_id:
+          type: string
+          format: uuid
+      required:
+      - label
+      - workflow_id
+      title: WorkflowExecutionSpanAttributes
+    VellumValue:
+      oneOf:
+      - $ref: '#/components/schemas/StringVellumValue'
+      - $ref: '#/components/schemas/NumberVellumValue'
+      - $ref: '#/components/schemas/JsonVellumValue'
+      - $ref: '#/components/schemas/AudioVellumValue'
+      - $ref: '#/components/schemas/VideoVellumValue'
+      - $ref: '#/components/schemas/ImageVellumValue'
+      - $ref: '#/components/schemas/DocumentVellumValue'
+      - $ref: '#/components/schemas/FunctionCallVellumValue'
+      - $ref: '#/components/schemas/ErrorVellumValue'
+      - $ref: '#/components/schemas/ArrayVellumValue'
+      - $ref: '#/components/schemas/ChatHistoryVellumValue'
+      - $ref: '#/components/schemas/SearchResultsVellumValue'
+      - $ref: '#/components/schemas/ThinkingVellumValue'
+      title: VellumValue
+    NodeExecutionSpanAttributes:
+      type: object
+      properties:
+        label:
+          type: string
+        filepath:
+          type:
+          - string
+          - 'null'
+        node_id:
+          type: string
+          format: uuid
+      required:
+      - label
+      - node_id
+      title: NodeExecutionSpanAttributes
+    ArrayChatMessageContentItem:
+      oneOf:
+      - $ref: '#/components/schemas/StringChatMessageContent'
+      - $ref: '#/components/schemas/FunctionCallChatMessageContent'
+      - $ref: '#/components/schemas/AudioChatMessageContent'
+      - $ref: '#/components/schemas/VideoChatMessageContent'
+      - $ref: '#/components/schemas/ImageChatMessageContent'
+      - $ref: '#/components/schemas/DocumentChatMessageContent'
+      title: ArrayChatMessageContentItem
+    ScheduledTriggerContext:
+      type: object
+      properties:
+        parent:
+          oneOf:
+          - $ref: '#/components/schemas/ParentContext'
+          - type: 'null'
+        links:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SpanLink'
+        type:
+          $ref: '#/components/schemas/ScheduledEnum'
+        trigger_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        span_id:
+          type: string
+          format: uuid
+      required:
+      - type
+      - span_id
+      title: ScheduledTriggerContext
+    NodeExecutionStreamingEvent:
+      type: object
+      properties:
+        parent:
+          oneOf:
+          - $ref: '#/components/schemas/ParentContext'
+          - type: 'null'
+        links:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SpanLink'
+        name:
+          $ref: '#/components/schemas/node.execution.streamingEnum'
+        body:
+          $ref: '#/components/schemas/NodeExecutionStreamingBody'
+        id:
+          type: string
+          format: uuid
+        timestamp:
+          type: string
+          format: date-time
+        api_version:
+          $ref: '#/components/schemas/ApiVersionEnum'
+        trace_id:
+          type: string
+          format: uuid
+        span_id:
+          type: string
+          format: uuid
+      required:
+      - name
+      - body
+      - id
+      - timestamp
+      - trace_id
+      - span_id
+      title: NodeExecutionStreamingEvent
+    WorkflowExecutionStreamingBody:
+      type: object
+      properties:
+        workflow_definition:
+          $ref: '#/components/schemas/VellumCodeResourceDefinition'
+        output:
+          $ref: '#/components/schemas/BaseOutput'
+      required:
+      - workflow_definition
+      - output
+      title: WorkflowExecutionStreamingBody
+    workflow.executionEnum:
+      type: string
+      enum:
+      - workflow.execution
+      title: workflow.executionEnum
+    WorkflowDisplayIcon:
+      type: object
+      properties:
+        src:
+          type:
+          - string
+          - 'null'
+        color:
+          type:
+          - string
+          - 'null'
+      description: Icon to be used alongside a Workflow
+      title: WorkflowDisplayIcon
+    ExecutionArrayVellumValue:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The variable's uniquely identifying internal id.
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/ArrayEnum'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/VellumValue'
+      required:
+      - id
+      - name
+      - type
+      - value
+      description: A value representing an array of Vellum variable values.
+      title: ExecutionArrayVellumValue
+    WorkflowExecutionPausedEvent:
+      type: object
+      properties:
+        parent:
+          oneOf:
+          - $ref: '#/components/schemas/ParentContext'
+          - type: 'null'
+        links:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SpanLink'
+        name:
+          $ref: '#/components/schemas/workflow.execution.pausedEnum'
+        body:
+          $ref: '#/components/schemas/WorkflowExecutionPausedBody'
+        id:
+          type: string
+          format: uuid
+        timestamp:
+          type: string
+          format: date-time
+        api_version:
+          $ref: '#/components/schemas/ApiVersionEnum'
+        trace_id:
+          type: string
+          format: uuid
+        span_id:
+          type: string
+          format: uuid
+      required:
+      - name
+      - body
+      - id
+      - timestamp
+      - trace_id
+      - span_id
+      title: WorkflowExecutionPausedEvent
+    WorkflowDeploymentParentContext:
+      type: object
+      properties:
+        parent:
+          oneOf:
+          - $ref: '#/components/schemas/ParentContext'
+          - type: 'null'
+        links:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SpanLink'
+        type:
+          $ref: '#/components/schemas/WorkflowReleaseTagEnum'
+        span_id:
+          type: string
+          format: uuid
+        deployment_id:
+          type: string
+          format: uuid
+        deployment_name:
+          type: string
+        deployment_history_item_id:
+          type: string
+          format: uuid
+        release_tag_id:
+          type: string
+          format: uuid
+        release_tag_name:
+          type: string
+        external_id:
+          type:
+          - string
+          - 'null'
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+        workflow_version_id:
+          type: string
+          format: uuid
+      required:
+      - type
+      - span_id
+      - deployment_id
+      - deployment_name
+      - deployment_history_item_id
+      - release_tag_id
+      - release_tag_name
+      - workflow_version_id
+      title: WorkflowDeploymentParentContext
+    ApiActorTypeEnum:
+      type: string
+      enum:
+      - ANONYMOUS
+      - WORKSPACE_API_KEY
+      - ENVIRONMENT_API_KEY
+      - JWT
+      - SERVICE_TOKEN
+      description: '* `ANONYMOUS` - ANONYMOUS
+
+        * `WORKSPACE_API_KEY` - WORKSPACE_API_KEY
+
+        * `ENVIRONMENT_API_KEY` - ENVIRONMENT_API_KEY
+
+        * `JWT` - JWT
+
+        * `SERVICE_TOKEN` - SERVICE_TOKEN'
+      title: ApiActorTypeEnum
+    VellumNodeExecutionEvent:
+      oneOf:
+      - $ref: '#/components/schemas/NodeExecutionInitiatedEvent'
+      - $ref: '#/components/schemas/NodeExecutionStreamingEvent'
+      - $ref: '#/components/schemas/NodeExecutionFulfilledEvent'
+      - $ref: '#/components/schemas/NodeExecutionRejectedEvent'
+      - $ref: '#/components/schemas/NodeExecutionPausedEvent'
+      - $ref: '#/components/schemas/NodeExecutionResumedEvent'
+      - $ref: '#/components/schemas/NodeExecutionLogEvent'
+      title: VellumNodeExecutionEvent
+  securitySchemes:
+    default:
+      type: apiKey
+      in: header
+      name: X-API-KEY
