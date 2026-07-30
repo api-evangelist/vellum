@@ -15,9 +15,22 @@ description: >-
   has been refocused on a personal AI assistant product; the developer
   platform documented here remains the LLM application stack.
 type: Index
+accessModel:
+  pricing: free
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Free · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 position: Provider
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/vellum.png
 tags:
   - LLM Platform
   - Prompt Engineering
@@ -36,90 +49,248 @@ created: '2026-05-23'
 modified: '2026-05-23'
 specificationVersion: '0.20'
 apis:
-  - aid: vellum:llm-platform
-    name: Vellum LLM Platform API
-    description: >-
-      The Vellum REST API exposes prompts, workflows, evaluations, datasets,
-      document indexes, deployments, and execution endpoints so developers can
-      run versioned LLM pipelines from their own backends and capture logs and
-      metrics for production monitoring.
-    humanURL: https://docs.vellum.ai
-    baseURL: https://api.vellum.ai
-    tags:
-      - Prompts
-      - Workflows
-      - Evaluations
-      - Datasets
-      - Documents
-      - Deployments
-      - Executions
-      - Monitoring
-    properties:
-      - type: Documentation
-        url: https://docs.vellum.ai
-      - type: APIReference
-        url: https://docs.vellum.ai/api-reference
-      - type: GettingStarted
-        url: https://docs.vellum.ai/welcome/getting-started
-      - type: Signup
-        url: https://app.vellum.ai/signup
-      - type: SDKs
-        url: https://github.com/vellum-ai/vellum-client-python
-      - type: SDKs
-        url: https://github.com/vellum-ai/vellum-client-typescript
-      - type: GitHubOrganization
-        url: https://github.com/vellum-ai
-      - type: Pricing
-        url: https://www.vellum.ai/pricing
-      - type: Blog
-        url: https://www.vellum.ai/blog
-    features:
-      - name: Prompt Engineering Workbench
-        description: Versioned prompts, side-by-side model comparisons, and structured prompt variables.
-      - name: Workflows Builder
-        description: Visual builder for multi-step LLM pipelines including branching, tools, and RAG nodes.
-      - name: Evaluation Suites
-        description: Run dataset-driven evals with built-in and custom metrics for prompts and workflows.
-      - name: Dataset Management
-        description: Store labeled test cases and production examples to drive evaluations and fine-tuning.
-      - name: Document Indexes / RAG
-        description: Managed document ingestion, embeddings, and retrieval for grounded generation.
-      - name: Deployments and Versioning
-        description: Promote prompts and workflows through environments with rollback and traffic splits.
-      - name: Production Monitoring
-        description: Logs, traces, latency, cost, and quality metrics for every execution.
-      - name: Multi-Provider Routing
-        description: Vendor-neutral access to OpenAI, Anthropic, Google, Mistral, and open models.
-      - name: SDKs for Python and TypeScript
-        description: First-class SDKs for invoking prompts, workflows, and datasets from application code.
-      - name: Self-Hosted Option
-        description: Deploy Vellum into the customer's own cloud for compliance-sensitive workloads.
-    useCases:
-      - name: Build Production LLM Apps
-        description: Iterate on prompts and workflows, then deploy versioned endpoints into apps.
-      - name: Evaluate LLM Quality
-        description: Use datasets and evals to measure regressions across models and prompt variants.
-      - name: Build Agents
-        description: Compose tools, retrieval, and conditional logic via the visual workflow builder.
-      - name: RAG Pipelines
-        description: Ingest documents, index them, and query through Vellum's managed retrieval layer.
-      - name: Observe and Debug
-        description: Trace production runs to debug failures and improve quality over time.
-    integrations:
-      - name: OpenAI
-      - name: Anthropic
-      - name: Google
-      - name: Mistral
-      - name: Cohere
-      - name: AWS Bedrock
-      - name: Azure OpenAI
-      - name: Pinecone
-      - name: Snowflake
-      - name: LangChain
-      - name: LlamaIndex
-    authentication:
-      - type: API Key
-        description: Workspace API keys passed via the `X_API_KEY` header authenticate REST and SDK calls.
+- aid: vellum:llm-platform
+  name: Vellum LLM Platform API
+  description: >-
+    The Vellum REST API exposes prompts, workflows, evaluations, datasets, document indexes, deployments,
+    and execution endpoints so developers can run versioned LLM pipelines from their own backends and
+    capture logs and metrics for production monitoring.
+  humanURL: https://docs.vellum.ai
+  baseURL: https://api.vellum.ai
+  tags:
+  - Prompts
+  - Workflows
+  - Evaluations
+  - Datasets
+  - Documents
+  - Deployments
+  - Executions
+  - Monitoring
+  properties:
+  - type: Documentation
+    url: https://docs.vellum.ai
+  - type: APIReference
+    url: https://docs.vellum.ai/api-reference
+  - type: GettingStarted
+    url: https://docs.vellum.ai/welcome/getting-started
+  - type: Signup
+    url: https://app.vellum.ai/signup
+  - type: SDKs
+    url: https://github.com/vellum-ai/vellum-client-python
+  - type: SDKs
+    url: https://github.com/vellum-ai/vellum-client-typescript
+  - type: GitHubOrganization
+    url: https://github.com/vellum-ai
+  - type: Pricing
+    url: https://www.vellum.ai/pricing
+  - type: Blog
+    url: https://www.vellum.ai/blog
+  features:
+  - name: Prompt Engineering Workbench
+    description: Versioned prompts, side-by-side model comparisons, and structured prompt variables.
+  - name: Workflows Builder
+    description: Visual builder for multi-step LLM pipelines including branching, tools, and RAG nodes.
+  - name: Evaluation Suites
+    description: Run dataset-driven evals with built-in and custom metrics for prompts and workflows.
+  - name: Dataset Management
+    description: Store labeled test cases and production examples to drive evaluations and fine-tuning.
+  - name: Document Indexes / RAG
+    description: Managed document ingestion, embeddings, and retrieval for grounded generation.
+  - name: Deployments and Versioning
+    description: Promote prompts and workflows through environments with rollback and traffic splits.
+  - name: Production Monitoring
+    description: Logs, traces, latency, cost, and quality metrics for every execution.
+  - name: Multi-Provider Routing
+    description: Vendor-neutral access to OpenAI, Anthropic, Google, Mistral, and open models.
+  - name: SDKs for Python and TypeScript
+    description: First-class SDKs for invoking prompts, workflows, and datasets from application code.
+  - name: Self-Hosted Option
+    description: Deploy Vellum into the customer's own cloud for compliance-sensitive workloads.
+  useCases:
+  - name: Build Production LLM Apps
+    description: Iterate on prompts and workflows, then deploy versioned endpoints into apps.
+  - name: Evaluate LLM Quality
+    description: Use datasets and evals to measure regressions across models and prompt variants.
+  - name: Build Agents
+    description: Compose tools, retrieval, and conditional logic via the visual workflow builder.
+  - name: RAG Pipelines
+    description: Ingest documents, index them, and query through Vellum's managed retrieval layer.
+  - name: Observe and Debug
+    description: Trace production runs to debug failures and improve quality over time.
+  integrations:
+  - name: OpenAI
+  - name: Anthropic
+  - name: Google
+  - name: Mistral
+  - name: Cohere
+  - name: AWS Bedrock
+  - name: Azure OpenAI
+  - name: Pinecone
+  - name: Snowflake
+  - name: LangChain
+  - name: LlamaIndex
+  authentication:
+  - type: API Key
+    description: Workspace API keys passed via the `X_API_KEY` header authenticate REST and SDK calls.
+- aid: vellum:vellum-default-api
+  name: Vellum AI Default API
+  description: The Default API from Vellum AI — 8 operation(s) for default.
+  humanURL: https://docs.vellum.ai
+  baseURL: https://api.vellum.ai
+  tags:
+  - Default
+  properties:
+  - type: OpenAPI
+    url: openapi/vellum-default-api-openapi.yml
+- aid: vellum:vellum-subpackage-deployments-api
+  name: Vellum AI subpackage_deployments API
+  description: >-
+    The subpackage_deployments API from Vellum AI — 7 operation(s) for subpackage_deployments.
+  humanURL: https://docs.vellum.ai
+  baseURL: https://api.vellum.ai
+  tags:
+  - subpackage_deployments
+  properties:
+  - type: OpenAPI
+    url: openapi/vellum-subpackage-deployments-api-openapi.yml
+- aid: vellum:vellum-subpackage-documentindexes-api
+  name: Vellum AI subpackage_documentIndexes API
+  description: >-
+    The subpackage_documentIndexes API from Vellum AI — 3 operation(s) for subpackage_documentindexes.
+  humanURL: https://docs.vellum.ai
+  baseURL: https://api.vellum.ai
+  tags:
+  - subpackage_documentIndexes
+  properties:
+  - type: OpenAPI
+    url: openapi/vellum-subpackage-documentindexes-api-openapi.yml
+- aid: vellum:vellum-subpackage-documents-api
+  name: Vellum AI subpackage_documents API
+  description: The subpackage_documents API from Vellum AI — 3 operation(s) for subpackage_documents.
+  humanURL: https://docs.vellum.ai
+  baseURL: https://api.vellum.ai
+  tags:
+  - subpackage_documents
+  properties:
+  - type: OpenAPI
+    url: openapi/vellum-subpackage-documents-api-openapi.yml
+- aid: vellum:vellum-subpackage-events-api
+  name: Vellum AI subpackage_events API
+  description: The subpackage_events API from Vellum AI — 1 operation(s) for subpackage_events.
+  humanURL: https://docs.vellum.ai
+  baseURL: https://api.vellum.ai
+  tags:
+  - subpackage_events
+  properties:
+  - type: OpenAPI
+    url: openapi/vellum-subpackage-events-api-openapi.yml
+- aid: vellum:vellum-subpackage-folderentities-api
+  name: Vellum AI subpackage_folderEntities API
+  description: >-
+    The subpackage_folderEntities API from Vellum AI — 2 operation(s) for subpackage_folderentities.
+  humanURL: https://docs.vellum.ai
+  baseURL: https://api.vellum.ai
+  tags:
+  - subpackage_folderEntities
+  properties:
+  - type: OpenAPI
+    url: openapi/vellum-subpackage-folderentities-api-openapi.yml
+- aid: vellum:vellum-subpackage-sandboxes-api
+  name: Vellum AI subpackage_sandboxes API
+  description: The subpackage_sandboxes API from Vellum AI — 3 operation(s) for subpackage_sandboxes.
+  humanURL: https://docs.vellum.ai
+  baseURL: https://api.vellum.ai
+  tags:
+  - subpackage_sandboxes
+  properties:
+  - type: OpenAPI
+    url: openapi/vellum-subpackage-sandboxes-api-openapi.yml
+- aid: vellum:vellum-subpackage-testsuiteruns-api
+  name: Vellum AI subpackage_testSuiteRuns API
+  description: >-
+    The subpackage_testSuiteRuns API from Vellum AI — 3 operation(s) for subpackage_testsuiteruns.
+  humanURL: https://docs.vellum.ai
+  baseURL: https://api.vellum.ai
+  tags:
+  - subpackage_testSuiteRuns
+  properties:
+  - type: OpenAPI
+    url: openapi/vellum-subpackage-testsuiteruns-api-openapi.yml
+- aid: vellum:vellum-subpackage-testsuites-api
+  name: Vellum AI subpackage_testSuites API
+  description: The subpackage_testSuites API from Vellum AI — 3 operation(s) for subpackage_testsuites.
+  humanURL: https://docs.vellum.ai
+  baseURL: https://api.vellum.ai
+  tags:
+  - subpackage_testSuites
+  properties:
+  - type: OpenAPI
+    url: openapi/vellum-subpackage-testsuites-api-openapi.yml
+- aid: vellum:vellum-subpackage-uploadedfiles-api
+  name: Vellum AI subpackage_uploadedFiles API
+  description: >-
+    The subpackage_uploadedFiles API from Vellum AI — 1 operation(s) for subpackage_uploadedfiles.
+  humanURL: https://docs.vellum.ai
+  baseURL: https://api.vellum.ai
+  tags:
+  - subpackage_uploadedFiles
+  properties:
+  - type: OpenAPI
+    url: openapi/vellum-subpackage-uploadedfiles-api-openapi.yml
+- aid: vellum:vellum-subpackage-workflowdeployments-api
+  name: Vellum AI subpackage_workflowDeployments API
+  description: >-
+    The subpackage_workflowDeployments API from Vellum AI — 10 operation(s) for subpackage_workflowdeployments.
+  humanURL: https://docs.vellum.ai
+  baseURL: https://api.vellum.ai
+  tags:
+  - subpackage_workflowDeployments
+  properties:
+  - type: OpenAPI
+    url: openapi/vellum-subpackage-workflowdeployments-api-openapi.yml
+- aid: vellum:vellum-subpackage-workflowexecutions-api
+  name: Vellum AI subpackage_workflowExecutions API
+  description: >-
+    The subpackage_workflowExecutions API from Vellum AI — 1 operation(s) for subpackage_workflowexecutions.
+  humanURL: https://docs.vellum.ai
+  baseURL: https://api.vellum.ai
+  tags:
+  - subpackage_workflowExecutions
+  properties:
+  - type: OpenAPI
+    url: openapi/vellum-subpackage-workflowexecutions-api-openapi.yml
+- aid: vellum:vellum-subpackage-workflows-api
+  name: Vellum AI subpackage_workflows API
+  description: The subpackage_workflows API from Vellum AI — 1 operation(s) for subpackage_workflows.
+  humanURL: https://docs.vellum.ai
+  baseURL: https://api.vellum.ai
+  tags:
+  - subpackage_workflows
+  properties:
+  - type: OpenAPI
+    url: openapi/vellum-subpackage-workflows-api-openapi.yml
+- aid: vellum:vellum-subpackage-workflowsandboxes-api
+  name: Vellum AI subpackage_workflowSandboxes API
+  description: >-
+    The subpackage_workflowSandboxes API from Vellum AI — 1 operation(s) for subpackage_workflowsandboxes.
+  humanURL: https://docs.vellum.ai
+  baseURL: https://api.vellum.ai
+  tags:
+  - subpackage_workflowSandboxes
+  properties:
+  - type: OpenAPI
+    url: openapi/vellum-subpackage-workflowsandboxes-api-openapi.yml
+- aid: vellum:vellum-subpackage-workspacesecrets-api
+  name: Vellum AI subpackage_workspaceSecrets API
+  description: >-
+    The subpackage_workspaceSecrets API from Vellum AI — 1 operation(s) for subpackage_workspacesecrets.
+  humanURL: https://docs.vellum.ai
+  baseURL: https://api.vellum.ai
+  tags:
+  - subpackage_workspaceSecrets
+  properties:
+  - type: OpenAPI
+    url: openapi/vellum-subpackage-workspacesecrets-api-openapi.yml
 common:
   - type: AgenticAccess
     url: agentic-access/vellum-agentic-access.yml
