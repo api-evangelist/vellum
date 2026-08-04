@@ -1,0 +1,42 @@
+{
+  "provider": "vellum",
+  "sources": [
+    "vellum-default-api-openapi.yml",
+    "vellum-subpackage-deployments-api-openapi.yml",
+    "vellum-subpackage-documentindexes-api-openapi.yml",
+    "vellum-subpackage-documents-api-openapi.yml",
+    "vellum-subpackage-events-api-openapi.yml",
+    "vellum-subpackage-folderentities-api-openapi.yml",
+    "vellum-subpackage-sandboxes-api-openapi.yml",
+    "vellum-subpackage-testsuiteruns-api-openapi.yml",
+    "vellum-subpackage-testsuites-api-openapi.yml",
+    "vellum-subpackage-uploadedfiles-api-openapi.yml",
+    "vellum-subpackage-workflowdeployments-api-openapi.yml",
+    "vellum-subpackage-workflowexecutions-api-openapi.yml",
+    "vellum-subpackage-workflows-api-openapi.yml",
+    "vellum-subpackage-workflowsandboxes-api-openapi.yml",
+    "vellum-subpackage-workspacesecrets-api-openapi.yml"
+  ],
+  "outputs": [
+    "vellum-default-api-openapi.yml",
+    "vellum-subpackage-deployments-api-openapi.yml",
+    "vellum-subpackage-documentindexes-api-openapi.yml",
+    "vellum-subpackage-documents-api-openapi.yml",
+    "vellum-subpackage-events-api-openapi.yml",
+    "vellum-subpackage-folderentities-api-openapi.yml",
+    "vellum-subpackage-sandboxes-api-openapi.yml",
+    "vellum-subpackage-testsuiteruns-api-openapi.yml",
+    "vellum-subpackage-testsuites-api-openapi.yml",
+    "vellum-subpackage-uploadedfiles-api-openapi.yml",
+    "vellum-subpackage-workflowdeployments-api-openapi.yml",
+    "vellum-subpackage-workflowexecutions-api-openapi.yml",
+    "vellum-subpackage-workflows-api-openapi.yml",
+    "vellum-subpackage-workflowsandboxes-api-openapi.yml",
+    "vellum-subpackage-workspacesecrets-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
