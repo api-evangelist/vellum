@@ -1,0 +1,53 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Client SDK subpackage_uploadedFiles API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "subpackage_uploadedFiles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://predict.vellum.ai/v1/uploaded-files/:id",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this uploaded file."
+              },
+              {
+                "name": "expiry_seconds",
+                "value": "",
+                "type": "query",
+                "description": "The number of seconds until the signed URL expires. Must be > 0 and <= 2592000 (30 days). Non-numeric or out-of-range values fall back to the default (604800 seconds or 7 days)."
+              }
+            ]
+          },
+          "docs": "Retrieve a previously uploaded file by its ID"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

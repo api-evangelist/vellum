@@ -1,0 +1,46 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Client SDK subpackage_workflows API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "subpackage_workflows",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workflow Execution Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://predict.vellum.ai/v1/workflows/executions/:execution_id/status",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "execution_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Checks if a workflow execution is currently executing (not fulfilled, not rejected, and has no end time).\nUses the ClickHouse Prime summary materialized view."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,316 @@
+{
+  "item": [
+    {
+      "id": "76982b7e-906a-46da-a554-2699d63d60e9",
+      "name": "subpackage_folderEntities",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d061b3f0-3b4a-4f47-b2bd-cfde5c928c0e",
+          "name": "Add Entity To Folder",
+          "request": {
+            "name": "Add Entity To Folder",
+            "description": {
+              "content": "Add an entity to a specific folder or root directory.\n\nAdding an entity to a folder will remove it from any other folders it might have been a member of.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "folders",
+                ":folder_id",
+                "add-entity"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "folder_id",
+                  "description": "(Required) The ID of the folder to which the entity should be added. This can be a UUID of a folder, or the name of a root\ndirectory. Supported root directories include:\n- PROMPT_SANDBOX\n- WORKFLOW_SANDBOX\n- DOCUMENT_INDEX\n- TEST_SUITE"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-API-KEY",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "key": "X-API-Version",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"entity_id\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "53b65ce1-2d73-44b0-bdc6-846897308eb7",
+              "name": "No response body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "folders",
+                    ":folder_id",
+                    "add-entity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "folder_id",
+                      "description": "(Required) The ID of the folder to which the entity should be added. This can be a UUID of a folder, or the name of a root\ndirectory. Supported root directories include:\n- PROMPT_SANDBOX\n- WORKFLOW_SANDBOX\n- DOCUMENT_INDEX\n- TEST_SUITE"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-API-KEY",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-API-Version",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entity_id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ba3330b8-c6a9-4c7a-8948-67056eb80ff7",
+          "name": "List",
+          "request": {
+            "name": "List",
+            "description": {
+              "content": "List all folder entities within a specified folder.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "folder-entities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "entity_status",
+                  "value": "<string>",
+                  "description": "Filter down to only those objects whose entities have a status matching the status specified.\n\n* `ACTIVE` - Active\n* `ARCHIVED` - Archived\n* `PENDING_DELETION` - Pending Deletion"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The initial index from which to return the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "ordering",
+                  "value": "<string>",
+                  "description": "Which field to use when ordering the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "parent_folder_id",
+                  "value": "<string>",
+                  "description": "(Required) Filter down to only those entities whose parent folder has the specified ID.\n\nTo filter by an entity's parent folder, provide the ID of the parent folder. To filter by the root directory, provide\na string representing the entity type of the root directory. Supported root directories include:\n- PROMPT_SANDBOX\n- WORKFLOW_SANDBOX\n- DOCUMENT_INDEX\n- TEST_SUITE"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-API-KEY",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "key": "X-API-Version",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0a17913d-0cb2-433a-b877-1989f8d2ed59",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "folder-entities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "entity_status",
+                      "value": "PENDING_DELETION"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parent_folder_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-API-KEY",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-API-Version",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 987,\n  \"next\": \"http://be.pgdFVRCUFWL4uBbzvi1INc\",\n  \"previous\": \"http://EPszgNne.vrkxFKdm0zV7-Th61WV3eqIlDoryL5rKud9O1kqSuQLXxxQOe+g\",\n  \"results\": [\n    {\n      \"id\": \"87360888-ee51-bb06-123f-38be2ac00bbd\",\n      \"type\": \"FOLDER\",\n      \"data\": {\n        \"id\": \"7660c4e1-1125-eab1-9467-0c04227099ca\",\n        \"label\": \"string\",\n        \"created\": \"2008-12-17T04:09:20.654Z\",\n        \"modified\": \"1985-12-19T04:10:57.565Z\",\n        \"has_contents\": false\n      }\n    },\n    {\n      \"id\": \"a7c57c32-b61d-9db1-9cb2-ed32879f69ad\",\n      \"type\": \"FOLDER\",\n      \"data\": {\n        \"id\": \"58d53f45-2a73-632f-a622-7d4c9ff15ef8\",\n        \"label\": \"string\",\n        \"created\": \"2014-01-29T19:43:02.752Z\",\n        \"modified\": \"2013-06-08T11:05:12.062Z\",\n        \"has_contents\": true\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://predict.vellum.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "fcb2807c-9b03-44bb-bb4d-4b2f0382b681",
+    "name": "Client SDK subpackage_folderEntities API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

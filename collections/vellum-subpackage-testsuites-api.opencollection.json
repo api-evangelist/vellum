@@ -1,0 +1,160 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Client SDK subpackage_testSuites API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "subpackage_testSuites",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Test Suite Test Cases",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://predict.vellum.ai/v1/test-suites/:id/test-cases",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Test Suites' ID or its unique name"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "List the Test Cases associated with a Test Suite"
+        },
+        {
+          "info": {
+            "name": "Upsert Test Suite Test Case",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://predict.vellum.ai/v1/test-suites/:id/test-cases",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Test Suites' ID or its unique name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Upserts a new test case for a test suite, keying off of the optionally provided test case id.\n\nIf an id is provided and has a match, the test case will be updated. If no id is provided or no match\nis found, a new test case will be appended to the end.\n\nNote that a full replacement of the test case is performed, so any fields not provided will be removed\nor overwritten with default values."
+        },
+        {
+          "info": {
+            "name": "Test Suite Test Cases Bulk",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://predict.vellum.ai/v1/test-suites/:id/test-cases-bulk",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Test Suites' ID or its unique name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Created, replace, and delete Test Cases within the specified Test Suite in bulk"
+        },
+        {
+          "info": {
+            "name": "Delete Test Suite Test Case",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://predict.vellum.ai/v1/test-suites/:id/test-cases/:test_case_id",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Test Suites' ID or its unique name"
+              },
+              {
+                "name": "test_case_id",
+                "value": "",
+                "type": "path",
+                "description": "An id identifying the test case that you'd like to delete"
+              }
+            ]
+          },
+          "docs": "Deletes an existing test case for a test suite, keying off of the test case id.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

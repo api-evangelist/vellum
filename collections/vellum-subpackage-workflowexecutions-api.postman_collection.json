@@ -1,0 +1,297 @@
+{
+  "item": [
+    {
+      "id": "068dc505-8023-42a0-a25c-b4f1741589cb",
+      "name": "subpackage_workflowExecutions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d7402689-a65d-44cc-bbab-acc40b3307f4",
+          "name": "Retrieve Workflow Execution Detail",
+          "request": {
+            "name": "Retrieve Workflow Execution Detail",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workflow-executions",
+                ":execution_id",
+                "detail"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "prev_span_id",
+                  "value": "<uuid>",
+                  "description": "Optional keyset cursor span_id to continue from (exclusive)"
+                },
+                {
+                  "disabled": false,
+                  "key": "span_limit",
+                  "value": "<integer>",
+                  "description": "Maximum number of spans to return (for lazy loading)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "execution_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-API-KEY",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "key": "X-API-Version",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "678696da-febd-4d66-93c7-1e44d32dcc14",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workflow-executions",
+                    ":execution_id",
+                    "detail"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "prev_span_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "span_limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "execution_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-API-KEY",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-API-Version",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"span_id\": \"da7aba52-3c82-35be-5ef9-4dddb071748c\",\n  \"parent_context\": {\n    \"workflow_definition\": {\n      \"name\": \"string\",\n      \"module\": [\n        \"string\",\n        \"string\"\n      ],\n      \"id\": \"b7090e9f-251c-ac1a-081b-3e2870694cb7\",\n      \"exclude_from_monitoring\": true\n    },\n    \"type\": \"WORKFLOW\",\n    \"span_id\": \"d2ca3302-bd2a-e45c-ce83-5c8750418af0\",\n    \"parent\": {\n      \"value\": \"<Circular reference to #/components/schemas/ParentContext detected>\"\n    },\n    \"links\": [\n      {\n        \"trace_id\": \"5313f356-09b0-6583-e6f7-252cf24f3197\",\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"span_context\": {\n          \"value\": \"<Circular reference to #/components/schemas/ParentContext detected>\"\n        }\n      },\n      {\n        \"trace_id\": \"cd7452e5-f5e9-b493-3654-b5356b518348\",\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"span_context\": {\n          \"value\": \"<Circular reference to #/components/schemas/ParentContext detected>\"\n        }\n      }\n    ]\n  },\n  \"start\": \"1981-07-05T23:08:47.480Z\",\n  \"end\": \"1953-07-20T10:09:57.181Z\",\n  \"inputs\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"STRING\",\n      \"value\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"STRING\",\n      \"value\": \"string\"\n    }\n  ],\n  \"outputs\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"STRING\",\n      \"value\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"STRING\",\n      \"value\": \"string\"\n    }\n  ],\n  \"error\": {\n    \"message\": \"string\",\n    \"code\": \"WORKFLOW_INITIALIZATION\",\n    \"raw_data\": {\n      \"key_0\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"key_1\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"key_2\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"stacktrace\": \"string\"\n  },\n  \"usage_results\": [\n    {\n      \"usage\": [\n        {\n          \"ml_model_name\": \"string\",\n          \"ml_model_usage\": {\n            \"output_token_count\": 1318,\n            \"input_token_count\": 5262,\n            \"input_char_count\": 606,\n            \"output_char_count\": 1172,\n            \"compute_nanos\": 4483,\n            \"cache_creation_input_tokens\": 6088,\n            \"cache_read_input_tokens\": 3656\n          }\n        },\n        {\n          \"ml_model_name\": \"string\",\n          \"ml_model_usage\": {\n            \"output_token_count\": 3365,\n            \"input_token_count\": 7420,\n            \"input_char_count\": 2866,\n            \"output_char_count\": 2579,\n            \"compute_nanos\": 8675,\n            \"cache_creation_input_tokens\": 3184,\n            \"cache_read_input_tokens\": 8644\n          }\n        }\n      ],\n      \"cost\": [\n        {\n          \"value\": 2053.436562649413,\n          \"unit\": \"USD\"\n        },\n        {\n          \"value\": 5253.189620979566,\n          \"unit\": \"USD\"\n        }\n      ],\n      \"error\": {\n        \"code\": \"UNKNOWN\",\n        \"message\": \"string\"\n      }\n    },\n    {\n      \"usage\": [\n        {\n          \"ml_model_name\": \"string\",\n          \"ml_model_usage\": {\n            \"output_token_count\": 2757,\n            \"input_token_count\": 8534,\n            \"input_char_count\": 3819,\n            \"output_char_count\": 9740,\n            \"compute_nanos\": 1537,\n            \"cache_creation_input_tokens\": 1865,\n            \"cache_read_input_tokens\": 2359\n          }\n        },\n        {\n          \"ml_model_name\": \"string\",\n          \"ml_model_usage\": {\n            \"output_token_count\": 4490,\n            \"input_token_count\": 3373,\n            \"input_char_count\": 9630,\n            \"output_char_count\": 3248,\n            \"compute_nanos\": 9770,\n            \"cache_creation_input_tokens\": 3110,\n            \"cache_read_input_tokens\": 480\n          }\n        }\n      ],\n      \"cost\": [\n        {\n          \"value\": 2864.002426185094,\n          \"unit\": \"USD\"\n        },\n        {\n          \"value\": 4579.933476785126,\n          \"unit\": \"USD\"\n        }\n      ],\n      \"error\": {\n        \"code\": \"INTERNAL_SERVER_ERROR\",\n        \"message\": \"string\"\n      }\n    }\n  ],\n  \"spans\": [\n    {\n      \"name\": \"workflow.execution\",\n      \"events\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"attributes\": {\n        \"label\": \"string\",\n        \"workflow_id\": \"11a6000d-8801-5c7b-fa68-7343e1b401eb\"\n      },\n      \"span_id\": \"2629a05d-133c-8812-4b5e-2d0a0c62c1e7\",\n      \"start_ts\": \"1976-09-29T04:27:45.065Z\",\n      \"end_ts\": \"2014-03-07T03:32:51.596Z\",\n      \"parent_span_id\": \"823a3a71-0d1a-f70d-dba2-f540fb83ba8e\",\n      \"usage_result\": {\n        \"usage\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"cost\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      }\n    },\n    {\n      \"name\": \"workflow.execution\",\n      \"events\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"attributes\": {\n        \"label\": \"string\",\n        \"workflow_id\": \"674654ad-83d9-df7c-3dbd-a0b27df65611\"\n      },\n      \"span_id\": \"d9f9b71f-e60e-dfb2-7e66-ae557bbb147a\",\n      \"start_ts\": \"2009-05-04T06:49:29.882Z\",\n      \"end_ts\": \"1987-01-24T08:39:40.643Z\",\n      \"parent_span_id\": \"d60c5bd5-90f7-b596-ca94-067032b84613\",\n      \"usage_result\": {\n        \"usage\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"cost\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      }\n    }\n  ],\n  \"state\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "188aae18-74a3-43fd-8767-5a38f7c50e93",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workflow-executions",
+                    ":execution_id",
+                    "detail"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "prev_span_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "span_limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "execution_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-API-KEY",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-API-Version",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a53adeca-78d4-47c5-b143-05c03a2d47b7",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workflow-executions",
+                    ":execution_id",
+                    "detail"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "prev_span_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "span_limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "execution_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-API-KEY",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-API-Version",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "code": 421,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"update_active_workspace_id\": \"e6eeaabc-3b5e-5334-c8f4-fe22c7f0e29e\",\n  \"update_active_environment_id\": \"e86d4746-19ea-6a7e-81ed-5f7205ff4338\",\n  \"is_staff\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://predict.vellum.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "89db773a-fd0c-4a58-a058-d187a3fb968b",
+    "name": "Client SDK subpackage_workflowExecutions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

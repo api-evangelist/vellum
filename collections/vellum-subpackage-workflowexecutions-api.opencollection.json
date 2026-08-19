@@ -1,0 +1,58 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Client SDK subpackage_workflowExecutions API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "subpackage_workflowExecutions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve Workflow Execution Detail",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://predict.vellum.ai/v1/workflow-executions/:execution_id/detail",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "execution_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "prev_span_id",
+                "value": "",
+                "type": "query",
+                "description": "Optional keyset cursor span_id to continue from (exclusive)"
+              },
+              {
+                "name": "span_limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of spans to return (for lazy loading)"
+              }
+            ]
+          },
+          "docs": "Retrieve Workflow Execution Detail"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

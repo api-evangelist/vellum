@@ -1,0 +1,573 @@
+{
+  "item": [
+    {
+      "id": "5380e167-6d26-44b0-b61e-5dde6c3de7d1",
+      "name": "subpackage_testSuites",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "303fe731-1821-4da0-ae5f-b6338bc45082",
+          "name": "List Test Suite Test Cases",
+          "request": {
+            "name": "List Test Suite Test Cases",
+            "description": {
+              "content": "List the Test Cases associated with a Test Suite",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "test-suites",
+                ":id",
+                "test-cases"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The initial index from which to return the results."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Either the Test Suites' ID or its unique name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-API-KEY",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "key": "X-API-Version",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "651cf1a1-afd6-45ad-8a30-49ca943356ae",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "test-suites",
+                    ":id",
+                    "test-cases"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Either the Test Suites' ID or its unique name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-API-KEY",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-API-Version",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 7573,\n  \"next\": \"http://dRWegBrMFXwadApVhB.ipqdd6JPG9QuWOK3CAtZnxX49lS8w\",\n  \"previous\": \"https://GUQLuXVGiBxvhgYrw.eqvzhKDz8wHv6PXFyQOz.WD7sXUYbvicBo2YqukyesYTYnN4nZp4BlHAbh\",\n  \"results\": [\n    {\n      \"input_values\": [\n        {\n          \"variable_id\": \"string\",\n          \"name\": \"string\",\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": \"string\"\n        },\n        {\n          \"variable_id\": \"string\",\n          \"name\": \"string\",\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": \"string\"\n        }\n      ],\n      \"evaluation_values\": [\n        {\n          \"variable_id\": \"string\",\n          \"name\": \"string\",\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": \"string\"\n        },\n        {\n          \"variable_id\": \"string\",\n          \"name\": \"string\",\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": \"string\"\n        }\n      ],\n      \"id\": \"string\",\n      \"external_id\": \"string\",\n      \"label\": \"string\"\n    },\n    {\n      \"input_values\": [\n        {\n          \"variable_id\": \"string\",\n          \"name\": \"string\",\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": \"string\"\n        },\n        {\n          \"variable_id\": \"string\",\n          \"name\": \"string\",\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": \"string\"\n        }\n      ],\n      \"evaluation_values\": [\n        {\n          \"variable_id\": \"string\",\n          \"name\": \"string\",\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": \"string\"\n        },\n        {\n          \"variable_id\": \"string\",\n          \"name\": \"string\",\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": \"string\"\n        }\n      ],\n      \"id\": \"string\",\n      \"external_id\": \"string\",\n      \"label\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "190371c2-82d4-4125-b6d0-f172c1cf0753",
+          "name": "Upsert Test Suite Test Case",
+          "request": {
+            "name": "Upsert Test Suite Test Case",
+            "description": {
+              "content": "Upserts a new test case for a test suite, keying off of the optionally provided test case id.\n\nIf an id is provided and has a match, the test case will be updated. If no id is provided or no match\nis found, a new test case will be appended to the end.\n\nNote that a full replacement of the test case is performed, so any fields not provided will be removed\nor overwritten with default values.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "test-suites",
+                ":id",
+                "test-cases"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Either the Test Suites' ID or its unique name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-API-KEY",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "key": "X-API-Version",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"input_values\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string,null>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string,null>\",\n      \"name\": \"<string>\"\n    }\n  ],\n  \"evaluation_values\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string,null>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string,null>\",\n      \"name\": \"<string>\"\n    }\n  ],\n  \"id\": \"<uuid>\",\n  \"external_id\": \"<string>\",\n  \"label\": \"<string,null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "326656d8-cb5c-48c8-a9d7-2dac15a1f38b",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "test-suites",
+                    ":id",
+                    "test-cases"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Either the Test Suites' ID or its unique name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-API-KEY",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-API-Version",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"input_values\": [\n    {\n      \"type\": \"STRING\",\n      \"value\": \"string\",\n      \"name\": \"string\"\n    },\n    {\n      \"type\": \"STRING\",\n      \"value\": \"string\",\n      \"name\": \"string\"\n    }\n  ],\n  \"evaluation_values\": [\n    {\n      \"type\": \"STRING\",\n      \"value\": \"string\",\n      \"name\": \"string\"\n    },\n    {\n      \"type\": \"STRING\",\n      \"value\": \"string\",\n      \"name\": \"string\"\n    }\n  ],\n  \"id\": \"<uuid>\",\n  \"external_id\": \"<string>\",\n  \"label\": \"<string,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"input_values\": [\n    {\n      \"variable_id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"STRING\",\n      \"value\": \"string\"\n    },\n    {\n      \"variable_id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"STRING\",\n      \"value\": \"string\"\n    }\n  ],\n  \"evaluation_values\": [\n    {\n      \"variable_id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"STRING\",\n      \"value\": \"string\"\n    },\n    {\n      \"variable_id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"STRING\",\n      \"value\": \"string\"\n    }\n  ],\n  \"id\": \"string\",\n  \"external_id\": \"string\",\n  \"label\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ec206b51-a365-48d9-9d8c-02127da0a3c5",
+          "name": "Test Suite Test Cases Bulk",
+          "request": {
+            "name": "Test Suite Test Cases Bulk",
+            "description": {
+              "content": "Created, replace, and delete Test Cases within the specified Test Suite in bulk",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "test-suites",
+                ":id",
+                "test-cases-bulk"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Either the Test Suites' ID or its unique name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-API-KEY",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "key": "X-API-Version",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/event-stream"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"id\": \"<uuid>\",\n    \"type\": \"<string>\",\n    \"data\": {\n      \"input_values\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"evaluation_values\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"label\": \"<string,null>\",\n      \"external_id\": \"<string,null>\"\n    }\n  },\n  {\n    \"id\": \"<uuid>\",\n    \"type\": \"<string>\",\n    \"data\": {\n      \"input_values\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"evaluation_values\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"label\": \"<string,null>\",\n      \"external_id\": \"<string,null>\"\n    }\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cc3e4f15-77dc-421e-afd4-3839f709c46b",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "test-suites",
+                    ":id",
+                    "test-cases-bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Either the Test Suites' ID or its unique name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-API-KEY",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-API-Version",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/event-stream"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"id\": \"fcef4005-4d5d-c1be-c00e-bbb25d1fa5e4\",\n    \"type\": \"CREATE\",\n    \"data\": {\n      \"input_values\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"evaluation_values\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"label\": \"string\",\n      \"external_id\": \"string\"\n    }\n  },\n  {\n    \"id\": \"94a32161-c621-0c17-93d0-9d835dddda65\",\n    \"type\": \"CREATE\",\n    \"data\": {\n      \"input_values\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"evaluation_values\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"label\": \"string\",\n      \"external_id\": \"string\"\n    }\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/event-stream"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fbb05955-ae82-41bd-9757-d24861c81f76",
+          "name": "Delete Test Suite Test Case",
+          "request": {
+            "name": "Delete Test Suite Test Case",
+            "description": {
+              "content": "Deletes an existing test case for a test suite, keying off of the test case id.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "test-suites",
+                ":id",
+                "test-cases",
+                ":test_case_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Either the Test Suites' ID or its unique name"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "test_case_id",
+                  "description": "(Required) An id identifying the test case that you'd like to delete"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-API-KEY",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "key": "X-API-Version",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cecd55a2-87f5-461d-946e-51bdfbd77d40",
+              "name": "No response body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "test-suites",
+                    ":id",
+                    "test-cases",
+                    ":test_case_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Either the Test Suites' ID or its unique name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "test_case_id",
+                      "description": "(Required) An id identifying the test case that you'd like to delete"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-API-KEY",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-API-Version",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://predict.vellum.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "bfa286f8-9de8-402a-ac49-7f0726bd805f",
+    "name": "Client SDK subpackage_testSuites API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

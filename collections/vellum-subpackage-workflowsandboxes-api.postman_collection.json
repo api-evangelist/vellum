@@ -1,0 +1,165 @@
+{
+  "item": [
+    {
+      "id": "94c0e340-7b4a-446a-a908-afa633e242d1",
+      "name": "subpackage_workflowSandboxes",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6edecc8d-da18-4a2e-acd7-18277535e62f",
+          "name": "Deploy Workflow",
+          "request": {
+            "name": "Deploy Workflow",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workflow-sandboxes",
+                ":id",
+                "deploy"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) A UUID string identifying this workflow sandbox."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-API-KEY",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "key": "X-API-Version",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"workflow_deployment_id\": \"<string,null-uuid>\",\n  \"workflow_deployment_name\": \"<string,null>\",\n  \"label\": \"<string,null>\",\n  \"release_tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"release_description\": \"\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5563a0b7-5c0b-44c9-9470-e9b9cfc8ef37",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workflow-sandboxes",
+                    ":id",
+                    "deploy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this workflow sandbox."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-API-KEY",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-API-Version",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"workflow_deployment_id\": \"<string,null-uuid>\",\n  \"workflow_deployment_name\": \"<string,null>\",\n  \"label\": \"<string,null>\",\n  \"release_tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"release_description\": \"\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"c433f942-a1d2-429d-5f09-7b45db036074\",\n  \"name\": \"string\",\n  \"label\": \"string\",\n  \"created\": \"2026-03-01T01:21:37.322Z\",\n  \"last_deployed_on\": \"2006-12-31T16:50:10.642Z\",\n  \"last_deployed_history_item_id\": \"67f4826b-4982-7c31-ce46-26f5b1275d43\",\n  \"input_variables\": [\n    {\n      \"id\": \"string\",\n      \"key\": \"string\",\n      \"type\": \"FUNCTION_CALL\",\n      \"required\": false,\n      \"default\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"value\": \"string\"\n      },\n      \"extensions\": {\n        \"color\": \"string\",\n        \"description\": \"string\",\n        \"title\": \"string\"\n      },\n      \"schema\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"key\": \"string\",\n      \"type\": \"SEARCH_RESULTS\",\n      \"required\": true,\n      \"default\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"value\": \"string\"\n      },\n      \"extensions\": {\n        \"color\": \"string\",\n        \"description\": \"string\",\n        \"title\": \"string\"\n      },\n      \"schema\": {\n        \"key_0\": {},\n        \"key_1\": {},\n        \"key_2\": {}\n      }\n    }\n  ],\n  \"output_variables\": [\n    {\n      \"id\": \"string\",\n      \"key\": \"string\",\n      \"type\": \"NULL\",\n      \"required\": false,\n      \"default\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"value\": \"string\"\n      },\n      \"extensions\": {\n        \"color\": \"string\",\n        \"description\": \"string\",\n        \"title\": \"string\"\n      },\n      \"schema\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"key\": \"string\",\n      \"type\": \"STRING\",\n      \"required\": false,\n      \"default\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"value\": \"string\"\n      },\n      \"extensions\": {\n        \"color\": \"string\",\n        \"description\": \"string\",\n        \"title\": \"string\"\n      },\n      \"schema\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      }\n    }\n  ],\n  \"status\": \"ARCHIVED\",\n  \"environment\": \"PRODUCTION\",\n  \"description\": \"string\",\n  \"display_data\": {\n    \"icon\": {\n      \"src\": \"string\",\n      \"color\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://predict.vellum.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ae307eed-18b9-42f7-91b3-cd2b47542dbe",
+    "name": "Client SDK subpackage_workflowSandboxes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

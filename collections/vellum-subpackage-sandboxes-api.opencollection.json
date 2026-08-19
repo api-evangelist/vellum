@@ -1,0 +1,125 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Client SDK subpackage_sandboxes API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "subpackage_sandboxes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Deploy Prompt",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://predict.vellum.ai/v1/sandboxes/:id/prompts/:prompt_variant_id/deploy",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this sandbox."
+              },
+              {
+                "name": "prompt_variant_id",
+                "value": "",
+                "type": "path",
+                "description": "An ID identifying the Prompt you'd like to deploy."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deploy Prompt"
+        },
+        {
+          "info": {
+            "name": "Upsert Sandbox Scenario",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://predict.vellum.ai/v1/sandboxes/:id/scenarios",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this sandbox."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Upserts a new scenario for a sandbox, keying off of the optionally provided scenario id.\n\nIf an id is provided and has a match, the scenario will be updated. If no id is provided or no match\nis found, a new scenario will be appended to the end.\n\nNote that a full replacement of the scenario is performed, so any fields not provided will be removed\nor overwritten with default values."
+        },
+        {
+          "info": {
+            "name": "Delete Sandbox Scenario",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://predict.vellum.ai/v1/sandboxes/:id/scenarios/:scenario_id",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this sandbox."
+              },
+              {
+                "name": "scenario_id",
+                "value": "",
+                "type": "path",
+                "description": "An id identifying the scenario that you'd like to delete"
+              }
+            ]
+          },
+          "docs": "Deletes an existing scenario from a sandbox, keying off of the provided scenario id."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

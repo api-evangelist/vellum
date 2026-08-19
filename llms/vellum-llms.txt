@@ -1,0 +1,229 @@
+# Vellum | Documentation
+
+## Instructions for AI Agents
+
+- For clean Markdown of any page, append `.md` to the page URL
+- For section-specific indexes, append `/llms.txt` to any section URL
+- For AI client integration (Claude Code, Cursor, etc.), connect to the MCP server at https://docs.vellum.ai/_mcp/server
+
+## Docs
+
+- [Welcome to Vellum](https://docs.vellum.ai/home/getting-started/overview.md): Discover Vellum for AI Product Development. Get resources and support for prompt engineering, semantic search, agent orchestration, and more.
+- [Resources](https://docs.vellum.ai/home/getting-started/resources.md)
+- [Vellum's Help Center](https://docs.vellum.ai/home/getting-started/support.md): Discover ways to contact the Vellum team and receive assistance with your LLM features.
+- [Welcome to Vellum](https://docs.vellum.ai/product/getting-started/overview.md): Discover Vellum for prompt engineering, semantic search, and more. Get resources and support for all major LLM providers.
+- [Using the Agent Builder](https://docs.vellum.ai/product/agent-builder/agent-builder-sme.md): A practical guide to help you get good results with Vellum's Agent Builder
+- [Prompt Engineering](https://docs.vellum.ai/product/prompts/prompt-engineering.md): Discover how Vellum's prompt engineering enhances LLMs with dynamic templates, jinja templating, and function calling for smarter prompts.
+- [Collaborate on Prompts with Vellum Prompt Sandbox](https://docs.vellum.ai/product/prompts/collaboration.md): Explore Vellum Prompt Sandbox for rapid iteration, collaboration, and sharing of model-generated prompts. Save, tag, and track progress easily.
+- [Integrate Custom Models in Your Vellum Workspace Easily](https://docs.vellum.ai/product/prompts/custom-models.md): Learn how to add both private and public custom models to your Vellum workspace for enhanced functionality and domain-specific advantages.
+- [Input Images and Documents in Prompts and Workflows](https://docs.vellum.ai/product/prompts/multimodality.md): Learn how to send images and documents to multimodal models with Vellum
+- [Prompt Caching](https://docs.vellum.ai/product/prompts/prompt-caching.md)
+- [Build multi-step AI apps with Vellum’s Worfklows](https://docs.vellum.ai/product/workflows/introduction.md): Discover how Vellum Workflows streamline LLM call chains with a low-code interface, easy testing, and versioned deployments.
+- [Streamline AI App Development with Vellum's Workflows](https://docs.vellum.ai/product/workflows/experimentation.md): Discover how Vellum's Workflows simplifies building AI apps by managing complex LLM call chains and business logic easily.
+- [Building a RAG Chatbot from Scratch](https://docs.vellum.ai/product/workflows/tutorials/building-a-rag-chatbot.md): Learn how to build a complete RAG chatbot in Vellum's Workflow Builder, starting with a basic chatbot and then adding document context to reduce hallucinations and provide more accurate responses.
+- [Nodes Overview](https://docs.vellum.ai/product/workflows/nodes/overview.md): Overview of all Vellum Workflow Node types.
+- [Agent Node](https://docs.vellum.ai/product/workflows/nodes/agent-node.md): Simplify tool calling in workflows with automatic schema handling and loop logic
+- [Prompt Node](https://docs.vellum.ai/product/workflows/nodes/prompt-node.md): Invoke LLMs with your prompts, optionally using variables from other nodes.
+- [Prompt Deployment Node](https://docs.vellum.ai/product/workflows/nodes/prompt-deployment-node.md): Execute deployed prompts in your workflows.
+- [Templating Node](https://docs.vellum.ai/product/workflows/nodes/templating-node.md): Apply Jinja templating to perform lightweight data transformations.
+- [Search Node](https://docs.vellum.ai/product/workflows/nodes/search-node.md): Search against a Document Index, great for RAG.
+- [API Node](https://docs.vellum.ai/product/workflows/nodes/api-node.md): Make an HTTP request to an API endpoint.
+- [Code Execution Node](https://docs.vellum.ai/product/workflows/nodes/code-execution-node.md): Run custom Python or Typescript code.
+- [Subworkflow Node](https://docs.vellum.ai/product/workflows/nodes/subworkflow-node.md): Makes Workflows reusable and more maintainable as they get more complex.
+- [Map Node](https://docs.vellum.ai/product/workflows/nodes/map-node.md): Iterate over an array, executing a sub-workflow for each item.
+- [Guardrail Node](https://docs.vellum.ai/product/workflows/nodes/guardrail-node.md): Run an inline evaluation using a pre-defined Metric.
+- [Conditional Node](https://docs.vellum.ai/product/workflows/nodes/conditional-node.md): Branch your workflow based on a condition, also useful for error handling.
+- [Merge Node](https://docs.vellum.ai/product/workflows/nodes/merge-node.md): Wait for one or multiple branches to complete before continuing.
+- [Final Output Node](https://docs.vellum.ai/product/workflows/nodes/final-output-node.md): Exposes values you can use in your application, you may have more than one!
+- [Error Node](https://docs.vellum.ai/product/workflows/nodes/error-node.md): Stop workflow execution and raise an error.
+- [Note Node](https://docs.vellum.ai/product/workflows/nodes/note-node.md): A simple node that displays text to help annotate your Workflow.
+- [Node Adornments](https://docs.vellum.ai/product/workflows/nodes/node-adornments.md): Learn how to use Node Adornments to add error handling and retry logic to individual nodes in your workflows.
+- [Easy Integration with Vellum's API for Workflows](https://docs.vellum.ai/product/workflows/api-integration.md): Learn how to integrate and monitor your Workflow with Vellum's API, making production deployment quick and easy.
+- [Common LLM Architectures](https://docs.vellum.ai/product/workflows/common-architectures/overview.md): Discover popular architectural patterns for building LLM applications with Vellum Workflows
+- [RAG System Architecture](https://docs.vellum.ai/product/workflows/common-architectures/rag-system.md): Build a Retrieval Augmented Generation system to enhance LLM responses with relevant data
+- [Escalation to a Human](https://docs.vellum.ai/product/workflows/common-architectures/human-escalation.md): Automatically route sensitive or complex messages to human operators
+- [Prompt Retry Logic](https://docs.vellum.ai/product/workflows/common-architectures/prompt-retry.md): Implement error handling with automatic retries for non-deterministic failures
+- [PDF Content Summarization](https://docs.vellum.ai/product/workflows/common-architectures/pdf-summarization.md): Extract and summarize the contents of PDF documents
+- [Fallback Models](https://docs.vellum.ai/product/workflows/common-architectures/fallback-models.md): Learn how to implement dynamic model selection with fallback logic to handle errors and optimize cost/performance
+- [Function Calling](https://docs.vellum.ai/product/workflows/function-calling-with-chat-models.md): Learn how to use function calling with Chat Models in Vellum Workflows
+- [Long Running Workflows](https://docs.vellum.ai/product/workflows/advanced/long-running-workflows.md): Best practices for handling workflows that take extended time to complete, including asynchronous execution patterns and timeout management.
+- [Batching Executions](https://docs.vellum.ai/product/workflows/advanced/batching-executions.md): Process large volumes of Workflow executions efficiently using async execution and automatic queuing.
+- [Static IPs](https://docs.vellum.ai/product/workflows/advanced/static-ips.md)
+- [Examples and Walkthroughs](https://docs.vellum.ai/product/workflows/examples/overview.md): See interactive Vellum architectures and watch video walkthroughs of them! Use these as a great starting point for your own applications.
+- [Prompt Chaining](https://docs.vellum.ai/product/workflows/examples/prompt-chain.md): Build a basic Prompt Chain that connects multiple prompts to create a more powerful workflow.
+- [RAG Chatbot](https://docs.vellum.ai/product/workflows/examples/basic-rag-chatbot.md): Build a powerful chatbot that leverages Retrieval Augmented Generation (RAG) to provide accurate, context-aware responses based on your documents and knowledge base.
+- [RAG Chatbot with Cohere Rerank](https://docs.vellum.ai/product/workflows/examples/rag-chatbot-with-cohere-rerank.md): Learn how to build a RAG chatbot that uses Cohere's Reranker to improve the quality of its responses
+- [Customer Support Bot](https://docs.vellum.ai/product/workflows/examples/customer-support-bot.md): Create an intelligent customer support system that handles routine inquiries automatically while seamlessly escalating complex cases to human agents, demonstrating effective human-AI collaboration.
+- [Convert PDF to CSV](https://docs.vellum.ai/product/workflows/examples/pdf-to-csv.md): Learn how to convert PDF documents into CSV format for easier data manipulation.
+- [Summarize Images of Websites](https://docs.vellum.ai/product/workflows/examples/summarize-images-of-websites.md): Learn how to process and analyze website screenshots using multi-modal LLMs to extract meaningful insights and generate concise summaries of visual web content.
+- [Parallelized Function Calls](https://docs.vellum.ai/product/workflows/examples/parallel-function-calls.md): Learn how to optimize workflow performance by executing multiple functions concurrently, enabling efficient processing of batch operations and parallel API calls.
+- [Lookup Conference Attendees with Perplexity](https://docs.vellum.ai/product/workflows/examples/conference-attendees-lookup.md): Learn how to look up conference attendees and sort them based on their involvement with AI/LLMs.
+- [Multi-Agent Content Creation](https://docs.vellum.ai/product/workflows/examples/multi-agent-chatbot.md): Learn how to orchestrate multiple AI agents working together to research, create, and optimize content through collaborative workflows and specialized roles.
+- [LLMs Debating Each Other](https://docs.vellum.ai/product/workflows/examples/chatbots-debate.md): Explore an innovative approach where multiple language models engage in structured debates, demonstrating complex reasoning, argument construction, and dynamic interaction between AI agents.
+- [Slack Support Bot, Cites Sources using Multiple Indexes](https://docs.vellum.ai/product/workflows/examples/slack-support-bot.md): Learn how to build a Slack support bot that cites sources using multiple indexes.
+- [Automating PR Reviews](https://docs.vellum.ai/product/workflows/examples/automating-pr-reviews.md): Learn how to build an automated code review system using Vellum Workflows to analyze pull requests, deliver insightful feedback, and uphold coding standards across your engineering team.
+- [Maximize LLM Development Quality with Vellum's Evaluations](https://docs.vellum.ai/product/evaluation/quantitative-evaluation.md): Discover how Vellum's Evaluations feature quantitatively evaluates LLM outputs, ensuring model quality across numerous scenarios.
+- [Evaluating RAG Pipelines](https://docs.vellum.ai/product/evaluation/evaluating-rag-pipelines.md): How to evaluate and maintain high quality RAG pipelines in Vellum
+- [Leveraging Online Evaluations for LLM Development with Vellum](https://docs.vellum.ai/product/evaluation/online-evaluations.md): Learn how Vellum's Online Evaluations feature continuously assesses LLM outputs, ensuring model quality across diverse deployment scenarios.
+- [Evaluate your LLM Workflows with Dozens of Premade Vellum Metrics](https://docs.vellum.ai/product/metrics/out-of-the-box-metrics.md): Learn how to add both private and public custom models to your Vellum workspace for enhanced functionality and domain-specific advantages.
+- [Create Custom Reusable Metrics for LLM Evaluation](https://docs.vellum.ai/product/metrics/custom-metrics.md): Learn how to create custom Metrics to evaluate your LLM Workflows with ease. Catch edge-cases, prevent regressions, and ship AI features faster with more confidence!
+- [Reusing Metrics with Different Configurations in Test Suites](https://docs.vellum.ai/product/metrics/reusing-metrics.md): Learn how to use the same Metric multiple times in a test suite with different configurations to evaluate different aspects of your LLM outputs.
+- [Deployment Lifecycle Management](https://docs.vellum.ai/product/deployments/deployment-lifecycle-management.md): Learn how to manage your deployment lifecycle across environments with release promotion, multi-environment deployment, and version control.
+- [Observability in Production](https://docs.vellum.ai/product/deployments/observability.md): Learn how Vellum's observability tools help track AI model performance, analyze costs, and improve accuracy with execution tracking and user feedback integration.
+- [Environments](https://docs.vellum.ai/product/deployments/environments.md): Learn how to use Vellum Environments to manage different deployment stages with proper isolation and organization.
+- [Release Tags](https://docs.vellum.ai/product/deployments/release-tags.md): Discover how to manage Vellum deployments with release tags for better version control in your development workflow.
+- [Deployment Release Reviews](https://docs.vellum.ai/product/deployments/release-reviews.md): Learn how to implement a formal review process for your Prompt and Workflow Deployments using Vellum's Release Reviews feature.
+- [Track Production Trends with Prompt Deployment Monitoring](https://docs.vellum.ai/product/monitoring/production-trends.md): Easily monitor request volume, latency, and quality trends in your Prompt Deployment with our intuitive charts and filters.
+- [Track Workflow Execution Costs](https://docs.vellum.ai/product/monitoring/execution-cost-tracking.md): Learn how to monitor and analyze the cost of your Workflow Executions in Vellum to optimize your LLM usage.
+- [Datadog Integration](https://docs.vellum.ai/product/monitoring/datadog.md): Monitor your Vellum deployments through Datadog integration.
+- [Webhook Integration](https://docs.vellum.ai/product/monitoring/webhooks.md): Monitor your Vellum deployments through Webhook integration.
+- [Execution URLs](https://docs.vellum.ai/product/monitoring/execution-urls.md): Learn how to directly access Prompt and Workflow Execution Details using Execution IDs for easier debugging and cross-referencing.
+- [Easy Guide to Uploading Documents on Vellum AI](https://docs.vellum.ai/product/documents/uploading-documents.md): Learn how to upload and manage documents on Vellum AI for efficient document indexing and searching. Supports multiple file types.
+- [Easily integrate with Velum’s Search API](https://docs.vellum.ai/product/documents/api-integration.md): Learn to integrate search results in your queries with our easy 3-step process, including API calls and formatting tips.
+- [Improve Retrieval Results with Metadata Filtering](https://docs.vellum.ai/product/documents/metadata-filtering.md): Learn how to refine searches using metadata filtering for precise document retrieval. Perfect for targeted searches.
+- [Data Privacy and Storage](https://docs.vellum.ai/product/security/data-privacy-and-storage.md): Learn about Vellum's data storage, encryption, and privacy practices, including how interactions are stored and how data is handled.
+- [HMAC Authentication](https://docs.vellum.ai/product/security/hmac-authentication.md): This guide will walk you through the process of setting up and using HMAC authentication in Vellum.
+- [Role-Based Access Control (RBAC)](https://docs.vellum.ai/product/security/rbac-permissions.md): Learn about the different user roles and their permissions in Vellum Workspaces.
+- [Static IPs](https://docs.vellum.ai/product/security/static-ips.md)
+- [Manage Organization Access](https://docs.vellum.ai/product/organizations/manage-access.md)
+- [Data Retention Policies](https://docs.vellum.ai/product/organizations/data-retention-policies.md)
+- [Welcome to Vellum](https://docs.vellum.ai/developers/getting-started/overview.md): Discover Vellum for prompt engineering, semantic search, and more. Get resources and support for all major LLM providers.
+- [Workflows SDK](https://docs.vellum.ai/developers/workflows-sdk/introduction.md): Vellum's Workflows SDK is a framework for defining and executing complex AI systems as graphs.
+- [Installation](https://docs.vellum.ai/developers/workflows-sdk/installation.md): Install the Vellum Workflows SDK and set up your development environment.
+- [Quickstart Overview](https://docs.vellum.ai/developers/workflows-sdk/quickstart/overview.md): Learn how to define and run a Workflow in Vellum using the Workflows SDK or pull a Workflow from the Vellum UI.
+- [Code-first Approach](https://docs.vellum.ai/developers/workflows-sdk/quickstart/code-first.md): Build Workflows in code and push them to the Vellum UI for collaboration and experimentation.
+- [UI-first Approach](https://docs.vellum.ai/developers/workflows-sdk/quickstart/ui-first.md): Pull Workflows from the Vellum UI to modify and run locally.
+- [Core Concepts](https://docs.vellum.ai/developers/workflows-sdk/core-concepts.md)
+- [Defining Control Flow](https://docs.vellum.ai/developers/workflows-sdk/defining-control-flow.md)
+- [Configuration](https://docs.vellum.ai/developers/workflows-sdk/configuration.md)
+- [Custom Docker Images](https://docs.vellum.ai/developers/workflows-sdk/custom-container-images.md)
+- [Displayable Nodes Overview](https://docs.vellum.ai/developers/workflows-sdk/api-reference/nodes.md): Overview of all Workflows SDK Displayable Node types that support bidirectional synchronization between UI and code.
+- [Agent Node](https://docs.vellum.ai/developers/workflows-sdk/api-reference/nodes/agent-node.md): Simplify tool calling with automatic schema handling and iterative loop logic.
+- [Inline Prompt Node](https://docs.vellum.ai/developers/workflows-sdk/api-reference/nodes/inline-prompt-node.md): Execute prompts directly within workflows without requiring prompt deployments.
+- [Inline Subworkflow Node](https://docs.vellum.ai/developers/workflows-sdk/api-reference/nodes/inline-subworkflow-node.md): Execute subworkflows defined inline within your workflow code.
+- [Prompt Deployment Node](https://docs.vellum.ai/developers/workflows-sdk/api-reference/nodes/prompt-deployment-node.md): Execute deployed prompts from your Prompt Deployment system.
+- [Search Node](https://docs.vellum.ai/developers/workflows-sdk/api-reference/nodes/search-node.md): Perform hybrid search against a Document Index for RAG applications.
+- [Subworkflow Deployment Node](https://docs.vellum.ai/developers/workflows-sdk/api-reference/nodes/subworkflow-deployment-node.md): Execute deployed workflows as subworkflows within parent workflows.
+- [API Node](https://docs.vellum.ai/developers/workflows-sdk/api-reference/nodes/api-node.md): Make HTTP requests to external API endpoints.
+- [Code Execution Node](https://docs.vellum.ai/developers/workflows-sdk/api-reference/nodes/code-execution-node.md): Run custom Python or TypeScript code within your workflows.
+- [Templating Node](https://docs.vellum.ai/developers/workflows-sdk/api-reference/nodes/templating-node.md): Apply Jinja2 templating for lightweight data transformations.
+- [Guardrail Node](https://docs.vellum.ai/developers/workflows-sdk/api-reference/nodes/guardrail-node.md): Run inline evaluations using pre-defined Metrics for quality checks.
+- [Map Node](https://docs.vellum.ai/developers/workflows-sdk/api-reference/nodes/map-node.md): Iterate over arrays, executing subworkflows for each item with parallel processing.
+- [Conditional Node](https://docs.vellum.ai/developers/workflows-sdk/api-reference/nodes/conditional-node.md): Branch workflow execution based on conditions and upstream node results.
+- [Merge Node](https://docs.vellum.ai/developers/workflows-sdk/api-reference/nodes/merge-node.md): Consolidate divergent execution paths using configurable merge strategies.
+- [Error Node](https://docs.vellum.ai/developers/workflows-sdk/api-reference/nodes/error-node.md): Terminate workflow execution and raise custom error messages.
+- [Final Output Node](https://docs.vellum.ai/developers/workflows-sdk/api-reference/nodes/final-output-node.md): Stream workflow responses to production endpoints with Expression inputs.
+- [Datasets Overview](https://docs.vellum.ai/developers/workflows-sdk/api-reference/datasets.md): Define test scenarios and sample data for local workflow development using DatasetRow, inputs, triggers, and mocks.
+- [Mocks](https://docs.vellum.ai/developers/workflows-sdk/api-reference/datasets/mocks.md): Override node outputs during local workflow execution for testing specific scenarios.
+- [Vellum CLI](https://docs.vellum.ai/developers/workflows-sdk/api-reference/cli.md): The command line interface for interacting with Vellum.
+- [Ping](https://docs.vellum.ai/developers/workflows-sdk/api-reference/cli/ping.md)
+- [Pull](https://docs.vellum.ai/developers/workflows-sdk/api-reference/cli/pull.md)
+- [Push](https://docs.vellum.ai/developers/workflows-sdk/api-reference/cli/push.md)
+- [Examples Gallery](https://docs.vellum.ai/developers/workflows-sdk/tutorials/examples.md): Explore real-world Workflow examples built with the Vellum Workflows SDK. Use these as starting points for your own applications.
+- [Prompt Chaining](https://docs.vellum.ai/developers/workflows-sdk/tutorials/prompt-chaining.md): A prompt chain Workflow that generates blog content based on industry and audience inputs.
+- [RAG Chatbot](https://docs.vellum.ai/developers/workflows-sdk/tutorials/rag-chatbot.md): A basic RAG chatbot that answers questions based on PDF document contents.
+- [Custom Nodes](https://docs.vellum.ai/developers/workflows-sdk/tutorials/custom-nodes.md): Learn how to create custom nodes for Vellum Workflows with the Workflows SDK.
+- [Document Data Extraction](https://docs.vellum.ai/developers/workflows-sdk/tutorials/document-data-extraction.md): Learn how to build a Data Extraction Workflow that extracts key information from documents stored in Vellum and outputs the data in JSON format.
+- [Workflow Execution Filtering and Monitoring](https://docs.vellum.ai/developers/workflows-sdk/tutorials/workflow-execution-filtering.md): Learn how to programmatically filter and retrieve Workflow execution data using the Vellum API, including advanced filtering techniques and monitoring patterns.
+- [Branching with Ports and Expressions](https://docs.vellum.ai/developers/workflows-sdk/tutorials/ports-and-expressions.md): Learn how to use Ports and conditional logic in Vellum workflows with comprehensive examples of all available operators and LazyReference usage.
+- [External Workflow Server](https://docs.vellum.ai/developers/workflows-sdk/tutorials/external-workflow-server.md): Running Vellum Workflows on your own company's infrastructure
+- [Client SDK & API Reference](https://docs.vellum.ai/developers/client-sdk/introduction.md): Dive into Vellum's API docs for endpoint details, parameters, and responses. Use our official Python, Node, or Go clients for stable interaction.
+- [Authentication](https://docs.vellum.ai/developers/client-sdk/authentication.md): Learn how to authenticate with the Vellum API using API tokens.
+- [API Versioning](https://docs.vellum.ai/developers/client-sdk/api-versioning.md): Learn how to use Vellum's X-API-VERSION header to control which version of the API you're using and manage breaking changes.
+- [Self-Hosted Vellum](https://docs.vellum.ai/self-hosting/getting-started/introduction.md): Deploy Vellum in your own infrastructure for enhanced security and control
+- [Version 0.3](https://docs.vellum.ai/self-hosting/changelog/v3.md)
+- [Version 0.2](https://docs.vellum.ai/self-hosting/changelog/v2.md)
+- [February 2026](https://docs.vellum.ai/changelog/2026/2026-02.md): Vellum platform updates for February 2026
+- [January 2026](https://docs.vellum.ai/changelog/2026/2026-01.md): Vellum platform updates for January 2026
+- [December 2025](https://docs.vellum.ai/changelog/2025/2025-12.md): Vellum platform updates for December 2025
+- [November 2025](https://docs.vellum.ai/changelog/2025/2025-11.md): Vellum platform updates for November 2025
+- [October 2025](https://docs.vellum.ai/changelog/2025/2025-10.md): Vellum platform updates for October 2025
+- [September 2025](https://docs.vellum.ai/changelog/2025/2025-09.md): Vellum platform updates for September 2025
+- [August 2025](https://docs.vellum.ai/changelog/2025/2025-08.md): Vellum platform updates for August 2025
+- [July 2025](https://docs.vellum.ai/changelog/2025/2025-07.md): Vellum platform updates for July 2025
+- [June 2025](https://docs.vellum.ai/changelog/2025/2025-06.md): Vellum platform updates for June 2025
+- [Changelog | May, 2025](https://docs.vellum.ai/changelog/2025/2025-05.md)
+- [Changelog | April, 2025](https://docs.vellum.ai/changelog/2025/2025-04.md)
+- [Changelog | March, 2025](https://docs.vellum.ai/changelog/2025/2025-03.md)
+- [Changelog | February, 2025](https://docs.vellum.ai/changelog/2025/2025-02.md)
+- [Changelog | January, 2025](https://docs.vellum.ai/changelog/2025/2025-01.md)
+- [Changelog | December, 2024](https://docs.vellum.ai/changelog/2024/2024-12.md)
+- [Changelog | November, 2024](https://docs.vellum.ai/changelog/2024/2024-11.md)
+- [Changelog | October, 2024](https://docs.vellum.ai/changelog/2024/2024-10.md)
+- [Changelog | September, 2024](https://docs.vellum.ai/changelog/2024/2024-09.md)
+- [Changelog | August, 2024](https://docs.vellum.ai/changelog/2024/2024-08.md)
+- [Changelog | July, 2024](https://docs.vellum.ai/changelog/2024/2024-07.md)
+- [Changelog | June, 2024](https://docs.vellum.ai/changelog/2024/2024-06.md)
+- [Changelog | May, 2024](https://docs.vellum.ai/changelog/2024/2024-05.md)
+- [Changelog | April, 2024](https://docs.vellum.ai/changelog/2024/2024-04.md)
+- [Changelog | March, 2024](https://docs.vellum.ai/changelog/2024/2024-03.md)
+- [Changelog | February, 2024](https://docs.vellum.ai/changelog/2024/2024-02.md): Discover the newest features and improvements in Vellum's product update for February.
+- [Changelog | January, 2024](https://docs.vellum.ai/changelog/2024/2024-01.md): In January, 2024 Vellum released prompt usage tracking, single editor mode, and more!
+
+## API Docs
+
+- Client SDK > Prompts [Execute Prompt](https://docs.vellum.ai/developers/client-sdk/prompts/execute-prompt.md)
+- Client SDK > Prompts [Execute Prompt as Stream](https://docs.vellum.ai/developers/client-sdk/prompts/execute-prompt-stream.md)
+- Client SDK > Prompts [Submit Prompt Execution Actuals](https://docs.vellum.ai/developers/client-sdk/prompts/submit-completion-actuals.md)
+- Client SDK > Prompts [Retrieve Provider Payload](https://docs.vellum.ai/developers/client-sdk/prompts/retrieve-provider-payload.md)
+- Client SDK > Prompts > Prompt Sandboxes [Deploy Prompt Sandbox](https://docs.vellum.ai/developers/client-sdk/prompts/sandboxes/deploy-prompt.md)
+- Client SDK > Prompts > Prompt Sandboxes [Upsert Prompt Sandbox Scenario](https://docs.vellum.ai/developers/client-sdk/prompts/sandboxes/upsert-scenario.md)
+- Client SDK > Prompts > Prompt Sandboxes [Delete Prompt Sandbox Scenario](https://docs.vellum.ai/developers/client-sdk/prompts/sandboxes/delete-scenario.md)
+- Client SDK > Prompts > Prompt Deployments [List Prompt Deployments](https://docs.vellum.ai/developers/client-sdk/prompts/deployments/list.md)
+- Client SDK > Prompts > Prompt Deployments [Retrieve Prompt Deployment](https://docs.vellum.ai/developers/client-sdk/prompts/deployments/retrieve.md)
+- Client SDK > Prompts > Prompt Deployments [Retrieve Prompt Deployment Release](https://docs.vellum.ai/developers/client-sdk/prompts/deployments/retrieve-release.md)
+- Client SDK > Prompts > Prompt Deployments [Retrieve Prompt Deployment Release Tag](https://docs.vellum.ai/developers/client-sdk/prompts/deployments/retrieve-release-tag.md)
+- Client SDK > Prompts > Prompt Deployments [List Prompt Deployment Release Tags](https://docs.vellum.ai/developers/client-sdk/prompts/deployments/list-release-tags.md)
+- Client SDK > Prompts > Prompt Deployments [Update Prompt Deployment Release Tag](https://docs.vellum.ai/developers/client-sdk/prompts/deployments/update-release-tag.md)
+- Client SDK > Prompts > Prompt Deployments [Retrieve Prompt Deployment History](https://docs.vellum.ai/developers/client-sdk/prompts/deployments/retrieve-history.md)
+- Client SDK > Workflows [Execute Workflow](https://docs.vellum.ai/developers/client-sdk/workflows/execute-workflow.md)
+- Client SDK > Workflows [Execute Workflow Async](https://docs.vellum.ai/developers/client-sdk/workflows/execute-workflow-async.md)
+- Client SDK > Workflows [Execute Workflow as Stream](https://docs.vellum.ai/developers/client-sdk/workflows/execute-workflow-stream.md)
+- Client SDK > Workflows [Check Workflow Execution Status](https://docs.vellum.ai/developers/client-sdk/workflows/check-execution-status.md)
+- Client SDK > Workflows [Submit Workflow Execution Actuals](https://docs.vellum.ai/developers/client-sdk/workflows/submit-workflow-execution-actuals.md)
+- Client SDK > Workflows > Workflow Sandboxes [Deploy Workflow](https://docs.vellum.ai/developers/client-sdk/workflows/sandboxes/deploy.md)
+- Client SDK > Workflows > Workflow Deployments [Execute Workflow Deployment as Stream](https://docs.vellum.ai/developers/client-sdk/workflows/deployments/execute-stream.md)
+- Client SDK > Workflows > Workflow Deployments [List Workflow Deployments](https://docs.vellum.ai/developers/client-sdk/workflows/deployments/list.md)
+- Client SDK > Workflows > Workflow Deployments [List Workflow Deployment Releases](https://docs.vellum.ai/developers/client-sdk/workflows/deployments/list-releases.md)
+- Client SDK > Workflows > Workflow Deployments [Retrieve Workflow Deployment](https://docs.vellum.ai/developers/client-sdk/workflows/deployments/retrieve.md)
+- Client SDK > Workflows > Workflow Deployments [Retrieve Workflow Deployment Release](https://docs.vellum.ai/developers/client-sdk/workflows/deployments/retrieve-release.md)
+- Client SDK > Workflows > Workflow Deployments [Retrieve Workflow Deployment Release Tag](https://docs.vellum.ai/developers/client-sdk/workflows/deployments/retrieve-release-tag.md)
+- Client SDK > Workflows > Workflow Deployments [List Workflow Deployment Release Tags](https://docs.vellum.ai/developers/client-sdk/workflows/deployments/list-release-tags.md)
+- Client SDK > Workflows > Workflow Deployments [Update Workflow Deployment Release Tag](https://docs.vellum.ai/developers/client-sdk/workflows/deployments/update-release-tag.md)
+- Client SDK > Workflows > Workflow Deployments [Retrieve Workflow Deployment History](https://docs.vellum.ai/developers/client-sdk/workflows/deployments/retrieve-history.md)
+- Client SDK > Workflows > Workflow Deployments [List Workflow Deployment Executions](https://docs.vellum.ai/developers/client-sdk/workflows/deployments/list-executions.md)
+- Client SDK > Workflows > Workflow Deployments [Retrieve Workflow Deployment Execution](https://docs.vellum.ai/developers/client-sdk/workflows/deployments/retrieve-execution-event.md)
+- Client SDK > Workflows > Workflow Executions [Retrieve Workflow Execution Detail](https://docs.vellum.ai/developers/client-sdk/workflows/executions/retrieve-workflow-execution-detail.md)
+- Client SDK > Workflows > Workflow Executions [Create Monitoring Event](https://docs.vellum.ai/developers/client-sdk/workflows/executions/create-monitoring-event.md)
+- Client SDK > Document Indexes [Search](https://docs.vellum.ai/developers/client-sdk/document-indexes/search.md)
+- Client SDK > Document Indexes [Add Document](https://docs.vellum.ai/developers/client-sdk/document-indexes/add-document.md)
+- Client SDK > Document Indexes [Create Document Index](https://docs.vellum.ai/developers/client-sdk/document-indexes/create.md)
+- Client SDK > Document Indexes [Retrieve Document Index](https://docs.vellum.ai/developers/client-sdk/document-indexes/retrieve.md)
+- Client SDK > Document Indexes [List Document Indexes](https://docs.vellum.ai/developers/client-sdk/document-indexes/list.md)
+- Client SDK > Document Indexes [Update Document Index](https://docs.vellum.ai/developers/client-sdk/document-indexes/update.md)
+- Client SDK > Document Indexes [Replace Document Index](https://docs.vellum.ai/developers/client-sdk/document-indexes/replace.md)
+- Client SDK > Document Indexes [Destroy](https://docs.vellum.ai/developers/client-sdk/document-indexes/destroy.md)
+- Client SDK > Document Indexes [Remove Document](https://docs.vellum.ai/developers/client-sdk/document-indexes/remove-document.md)
+- Client SDK > Documents [Upload Document](https://docs.vellum.ai/developers/client-sdk/documents/upload-document.md)
+- Client SDK > Documents [Retrieve Document](https://docs.vellum.ai/developers/client-sdk/documents/retrieve.md)
+- Client SDK > Documents [List Documents](https://docs.vellum.ai/developers/client-sdk/documents/list.md)
+- Client SDK > Documents [Update Document](https://docs.vellum.ai/developers/client-sdk/documents/update.md)
+- Client SDK > Documents [Destroy](https://docs.vellum.ai/developers/client-sdk/documents/destroy.md)
+- Client SDK > Files [Retrieve Uploaded File](https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve.md)
+- Client SDK > Test Suites > Test Cases [List Test Cases](https://docs.vellum.ai/developers/client-sdk/test-suites/test-cases/list.md)
+- Client SDK > Test Suites > Test Cases [Upsert Test Cases](https://docs.vellum.ai/developers/client-sdk/test-suites/test-cases/upsert.md)
+- Client SDK > Test Suites > Test Cases [Bulk Update Test Cases](https://docs.vellum.ai/developers/client-sdk/test-suites/test-cases/bulk-update.md)
+- Client SDK > Test Suites > Test Cases [Delete Test Case](https://docs.vellum.ai/developers/client-sdk/test-suites/test-cases/delete.md)
+- Client SDK > Test Suites > Test Suite Runs [Create Test Suite Run](https://docs.vellum.ai/developers/client-sdk/test-suites/runs/create.md)
+- Client SDK > Test Suites > Test Suite Runs [Retrieve Test Suite Run](https://docs.vellum.ai/developers/client-sdk/test-suites/runs/retrieve.md)
+- Client SDK > Test Suites > Test Suite Runs [List Test Suite Executions](https://docs.vellum.ai/developers/client-sdk/test-suites/runs/list-executions.md)
+- Client SDK > Folders [Add Entity to Folder](https://docs.vellum.ai/developers/client-sdk/folders/add-entity-to-folder.md)
+- Client SDK > Folders [List Folder Entities](https://docs.vellum.ai/developers/client-sdk/folders/list-folder-entities.md)
+- Client SDK > Secrets [Retrieve Workspace Secret](https://docs.vellum.ai/developers/client-sdk/secrets/retrieve-workspace-secret.md)
+- Client SDK > Secrets [Update Workspace Secret](https://docs.vellum.ai/developers/client-sdk/secrets/update-workspace-secret.md)
+
+## OpenAPI Specification
+
+The raw OpenAPI 3.1 specification for this API is available at:
+- [OpenAPI JSON](https://docs.vellum.ai/openapi.json)
+- [OpenAPI YAML](https://docs.vellum.ai/openapi.yaml)

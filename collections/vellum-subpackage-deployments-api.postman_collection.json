@@ -1,0 +1,1325 @@
+{
+  "item": [
+    {
+      "id": "61e5869f-0538-44a1-b473-ede371cbe2b1",
+      "name": "subpackage_deployments",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d0f2a745-e2f0-4cda-8d50-239921ed81d8",
+          "name": "Retrieve Provider Payload",
+          "request": {
+            "name": "Retrieve Provider Payload",
+            "description": {
+              "content": "Given a set of input variable values, compile the exact payload that Vellum would send to the configured model provider\nfor execution if the execute-prompt endpoint had been invoked. Note that this endpoint does not actually execute the\nprompt or make an API call to the model provider.\n\nThis endpoint is useful if you don't want to proxy LLM provider requests through Vellum and prefer to send them directly\nto the provider yourself. Note that no guarantees are made on the format of this API's response schema, other than\nthat it will be a valid payload for the configured model provider. It's not recommended that you try to parse or\nderive meaning from the response body and instead, should simply pass it directly to the model provider as is.\n\nWe encourage you to seek advise from Vellum Support before integrating with this API for production use.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "deployments",
+                "provider-payload"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-API-KEY",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "key": "X-API-Version",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"inputs\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"deployment_id\": \"<string,null-uuid>\",\n  \"deployment_name\": \"<string,null>\",\n  \"release_tag\": \"<string,null>\",\n  \"expand_meta\": {\n    \"model_name\": \"<boolean,null>\",\n    \"deployment_release_tag\": \"<boolean,null>\",\n    \"prompt_version_id\": \"<boolean,null>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "649e8733-8875-4574-97c6-1a50f2bca5a4",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "deployments",
+                    "provider-payload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-API-KEY",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-API-Version",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputs\": [\n    {\n      \"name\": \"string\",\n      \"type\": \"STRING\",\n      \"value\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"type\": \"STRING\",\n      \"value\": \"string\"\n    }\n  ],\n  \"deployment_id\": \"<string,null-uuid>\",\n  \"deployment_name\": \"<string,null>\",\n  \"release_tag\": \"<string,null>\",\n  \"expand_meta\": {\n    \"model_name\": false,\n    \"deployment_release_tag\": false,\n    \"prompt_version_id\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"payload\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  },\n  \"meta\": {\n    \"model_name\": \"string\",\n    \"deployment_release_tag\": \"string\",\n    \"prompt_version_id\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "079c93d7-62ea-4343-b4af-7836d44c24b9",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "deployments",
+                    "provider-payload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-API-KEY",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-API-Version",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputs\": [\n    {\n      \"name\": \"string\",\n      \"type\": \"STRING\",\n      \"value\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"type\": \"STRING\",\n      \"value\": \"string\"\n    }\n  ],\n  \"deployment_id\": \"<string,null-uuid>\",\n  \"deployment_name\": \"<string,null>\",\n  \"release_tag\": \"<string,null>\",\n  \"expand_meta\": {\n    \"model_name\": false,\n    \"deployment_release_tag\": false,\n    \"prompt_version_id\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\",\n  \"raw_data\": {\n    \"key_0\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ef9dc2fb-adc7-4a70-8c99-793468bdf965",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "deployments",
+                    "provider-payload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-API-KEY",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-API-Version",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputs\": [\n    {\n      \"name\": \"string\",\n      \"type\": \"STRING\",\n      \"value\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"type\": \"STRING\",\n      \"value\": \"string\"\n    }\n  ],\n  \"deployment_id\": \"<string,null-uuid>\",\n  \"deployment_name\": \"<string,null>\",\n  \"release_tag\": \"<string,null>\",\n  \"expand_meta\": {\n    \"model_name\": false,\n    \"deployment_release_tag\": false,\n    \"prompt_version_id\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\",\n  \"raw_data\": {\n    \"key_0\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f2c4fd4d-e14d-4de9-bbfb-dee2762d66aa",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "deployments",
+                    "provider-payload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-API-KEY",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-API-Version",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputs\": [\n    {\n      \"name\": \"string\",\n      \"type\": \"STRING\",\n      \"value\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"type\": \"STRING\",\n      \"value\": \"string\"\n    }\n  ],\n  \"deployment_id\": \"<string,null-uuid>\",\n  \"deployment_name\": \"<string,null>\",\n  \"release_tag\": \"<string,null>\",\n  \"expand_meta\": {\n    \"model_name\": false,\n    \"deployment_release_tag\": false,\n    \"prompt_version_id\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\",\n  \"raw_data\": {\n    \"key_0\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "30bd0f97-cf3d-45d3-89b1-0ec9c3454aec",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "deployments",
+                    "provider-payload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-API-KEY",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-API-Version",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputs\": [\n    {\n      \"name\": \"string\",\n      \"type\": \"STRING\",\n      \"value\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"type\": \"STRING\",\n      \"value\": \"string\"\n    }\n  ],\n  \"deployment_id\": \"<string,null-uuid>\",\n  \"deployment_name\": \"<string,null>\",\n  \"release_tag\": \"<string,null>\",\n  \"expand_meta\": {\n    \"model_name\": false,\n    \"deployment_release_tag\": false,\n    \"prompt_version_id\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\",\n  \"raw_data\": {\n    \"key_0\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b33a3d92-1d63-4c3b-b682-15f9016533cd",
+          "name": "List",
+          "request": {
+            "name": "List",
+            "description": {
+              "content": "Used to list all Prompt Deployments.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "deployments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The initial index from which to return the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "ordering",
+                  "value": "<string>",
+                  "description": "Which field to use when ordering the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "status"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-API-KEY",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "key": "X-API-Version",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "34388487-888f-4c0f-9d80-ec3dbdf831a1",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "deployments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "ACTIVE"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-API-KEY",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-API-Version",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 2692,\n  \"next\": \"http://hHUXsnchACOktiGyzz.umcnazIJgCCFjxyzHstS6R0LgYorQMykewW+Q6GNeU1VFAr+jo\",\n  \"previous\": \"http://TkGiDevxpILiyBOVxbkMXYjz.bwtfvV3JjObFMlg\",\n  \"results\": [\n    {\n      \"id\": \"d4d5e654-320c-446a-0fb9-27f79164de70\",\n      \"created\": \"2026-01-20T06:20:35.073Z\",\n      \"label\": \"string\",\n      \"name\": \"string\",\n      \"last_deployed_on\": \"1956-11-11T19:03:09.394Z\",\n      \"input_variables\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"status\": \"ARCHIVED\",\n      \"environment\": \"STAGING\",\n      \"description\": \"string\"\n    },\n    {\n      \"id\": \"b701582f-0bb2-c625-6ae8-d244f0af31e9\",\n      \"created\": \"1989-09-26T10:22:41.683Z\",\n      \"label\": \"string\",\n      \"name\": \"string\",\n      \"last_deployed_on\": \"1969-12-31T12:00:53.350Z\",\n      \"input_variables\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"status\": \"ARCHIVED\",\n      \"environment\": \"PRODUCTION\",\n      \"description\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "929ff28d-282f-4afa-8b17-df3395f0ccde",
+          "name": "Retrieve",
+          "request": {
+            "name": "Retrieve",
+            "description": {
+              "content": "Used to retrieve a Prompt Deployment given its ID or name.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "deployments",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Either the Prompt Deployment's ID or its unique name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-API-KEY",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "key": "X-API-Version",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3413b22c-1ff4-46d4-9e39-478e253b0296",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "deployments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Either the Prompt Deployment's ID or its unique name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-API-KEY",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-API-Version",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"9e446bc8-6191-91ae-ae23-f0f06195ae5d\",\n  \"created\": \"2000-07-28T04:08:49.113Z\",\n  \"label\": \"string\",\n  \"name\": \"string\",\n  \"last_deployed_on\": \"1978-09-06T01:24:32.477Z\",\n  \"input_variables\": [\n    {\n      \"id\": \"string\",\n      \"key\": \"string\",\n      \"type\": \"AUDIO\",\n      \"required\": true,\n      \"default\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"value\": \"string\"\n      },\n      \"extensions\": {\n        \"color\": \"string\",\n        \"description\": \"string\",\n        \"title\": \"string\"\n      },\n      \"schema\": {\n        \"key_0\": {}\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"key\": \"string\",\n      \"type\": \"JSON\",\n      \"required\": false,\n      \"default\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"value\": \"string\"\n      },\n      \"extensions\": {\n        \"color\": \"string\",\n        \"description\": \"string\",\n        \"title\": \"string\"\n      },\n      \"schema\": {\n        \"key_0\": {},\n        \"key_1\": {},\n        \"key_2\": {}\n      }\n    }\n  ],\n  \"active_model_version_ids\": [\n    \"d37f6104-9310-6954-3b0b-284e1cb70658\",\n    \"d8ff73af-9a18-0253-086b-a09a0059ef8b\"\n  ],\n  \"last_deployed_history_item_id\": \"432ca3e2-0b32-c05c-0b36-eee8ad2a6137\",\n  \"status\": \"ACTIVE\",\n  \"environment\": \"PRODUCTION\",\n  \"description\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a3872d46-c7d7-48b6-848d-adbedf32d173",
+          "name": "Retrieve Prompt Deployment Release",
+          "request": {
+            "name": "Retrieve Prompt Deployment Release",
+            "description": {
+              "content": "Retrieve a specific Prompt Deployment Release by either its UUID or the name of a Release Tag that points to it.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "deployments",
+                ":id",
+                "releases",
+                ":release_id_or_release_tag"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Either the Prompt Deployment's ID or its unique name"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "release_id_or_release_tag",
+                  "description": "(Required) Either the UUID of Prompt Deployment Release you'd like to retrieve, or the name of a Release Tag that's pointing to the Prompt Deployment Release you'd like to retrieve."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-API-KEY",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "key": "X-API-Version",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4023a02a-8f0c-480d-a863-393f0cd60e32",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "deployments",
+                    ":id",
+                    "releases",
+                    ":release_id_or_release_tag"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Either the Prompt Deployment's ID or its unique name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "release_id_or_release_tag",
+                      "description": "(Required) Either the UUID of Prompt Deployment Release you'd like to retrieve, or the name of a Release Tag that's pointing to the Prompt Deployment Release you'd like to retrieve."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-API-KEY",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-API-Version",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"e0575217-cec3-3425-4bb1-674aca22ff0d\",\n  \"created\": \"1949-11-27T02:47:39.993Z\",\n  \"environment\": {\n    \"id\": \"c8aad586-89e5-0d9f-bb8b-58688e4c89e0\",\n    \"name\": \"string\",\n    \"label\": \"string\"\n  },\n  \"created_by\": {\n    \"id\": \"9cd45b1e-86bd-01ce-5833-6991fb2741f7\",\n    \"email\": \"qlvxpWcgCc@gpSjXxPRxoNQSkfijndWD.ku\",\n    \"full_name\": \"string\"\n  },\n  \"prompt_version\": {\n    \"id\": \"2acc94c1-be58-ad76-5620-6a7a0b208ed6\",\n    \"ml_model_to_workspace_id\": \"516f6ea2-d1a8-f6c9-f6f1-29bfd8e268c0\",\n    \"build_config\": {\n      \"source\": \"SANDBOX\",\n      \"sandbox_id\": \"3c902c38-96f2-7b6f-4720-820e3104f602\",\n      \"sandbox_snapshot_id\": \"c9edf391-5292-cef7-d1e0-5147ed94add5\",\n      \"prompt_id\": \"string\"\n    }\n  },\n  \"deployment\": {\n    \"id\": \"ead9ecd4-3519-8748-d646-789f7dea8aae\",\n    \"name\": \"string\"\n  },\n  \"release_tags\": [\n    {\n      \"name\": \"string\",\n      \"source\": \"USER\"\n    },\n    {\n      \"name\": \"string\",\n      \"source\": \"USER\"\n    }\n  ],\n  \"reviews\": [\n    {\n      \"id\": \"80d1c28d-9336-93e7-1178-87b89822cd56\",\n      \"created\": \"1974-08-04T15:18:09.934Z\",\n      \"reviewer\": {\n        \"id\": \"b4b3c2df-8ac3-a79a-7079-9f550647aa49\",\n        \"full_name\": \"string\"\n      },\n      \"state\": \"CHANGES_REQUESTED\"\n    },\n    {\n      \"id\": \"2bcdbb0f-1d87-3bd3-349c-1958ffec6d8a\",\n      \"created\": \"1954-03-14T00:42:37.682Z\",\n      \"reviewer\": {\n        \"id\": \"ceb6360c-d562-fab4-0cd7-bc480c397606\",\n        \"full_name\": \"string\"\n      },\n      \"state\": \"COMMENTED\"\n    }\n  ],\n  \"description\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a0b59d6a-b423-4106-904d-9f68bf71cc49",
+          "name": "Retrieve Deployment Release Tag",
+          "request": {
+            "name": "Retrieve Deployment Release Tag",
+            "description": {
+              "content": "Retrieve a Deployment Release Tag by tag name, associated with a specified Deployment.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "deployments",
+                ":id",
+                "release-tags",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Either the Prompt Deployment's ID or its unique name"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the Release Tag associated with this Deployment that you'd like to retrieve."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-API-KEY",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "key": "X-API-Version",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6614c7e3-a40a-4aa7-b1ea-422b646573cb",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "deployments",
+                    ":id",
+                    "release-tags",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Either the Prompt Deployment's ID or its unique name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the Release Tag associated with this Deployment that you'd like to retrieve."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-API-KEY",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-API-Version",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"source\": \"SYSTEM\",\n  \"history_item\": {\n    \"id\": \"d7d4f1e9-d8f2-9cf2-d32e-11a96fe286a8\",\n    \"timestamp\": \"1989-01-06T02:35:46.429Z\"\n  },\n  \"release\": {\n    \"id\": \"f6cfd7e0-76ae-2910-e5f1-068ce059b505\",\n    \"timestamp\": \"2007-12-11T23:23:53.684Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5f484183-9d05-4429-b376-933bbee57bc2",
+          "name": "Update Deployment Release Tag",
+          "request": {
+            "name": "Update Deployment Release Tag",
+            "description": {
+              "content": "Updates an existing Release Tag associated with the specified Prompt Deployment.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "deployments",
+                ":id",
+                "release-tags",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Either the Prompt Deployment's ID or its unique name"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the Release Tag associated with this Deployment that you'd like to update."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-API-KEY",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "key": "X-API-Version",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"history_item_id\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3789814e-4001-407a-b3f5-96ce6290d462",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "deployments",
+                    ":id",
+                    "release-tags",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Either the Prompt Deployment's ID or its unique name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the Release Tag associated with this Deployment that you'd like to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-API-KEY",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-API-Version",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"history_item_id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"source\": \"SYSTEM\",\n  \"history_item\": {\n    \"id\": \"d7d4f1e9-d8f2-9cf2-d32e-11a96fe286a8\",\n    \"timestamp\": \"1989-01-06T02:35:46.429Z\"\n  },\n  \"release\": {\n    \"id\": \"f6cfd7e0-76ae-2910-e5f1-068ce059b505\",\n    \"timestamp\": \"2007-12-11T23:23:53.684Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0227d00e-a8af-49a4-94ca-eba014a74269",
+          "name": "List Deployment Release Tags",
+          "request": {
+            "name": "List Deployment Release Tags",
+            "description": {
+              "content": "List Release Tags associated with the specified Prompt Deployment",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "deployments",
+                ":id",
+                "release-tags"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The initial index from which to return the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "ordering",
+                  "value": "<string>",
+                  "description": "Which field to use when ordering the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "source",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Either the Prompt Deployment's ID or its unique name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-API-KEY",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "key": "X-API-Version",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d5c43976-4218-48bd-b1e6-ee2993566f3d",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "deployments",
+                    ":id",
+                    "release-tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "SYSTEM"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Either the Prompt Deployment's ID or its unique name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-API-KEY",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-API-Version",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 4295,\n  \"next\": \"https://WUeRrETTXRaCJN.dxposMBjV76GU8AUv,3khg\",\n  \"previous\": \"http://kMstzXpmBuKaafJiRCuHU.ozdYZGMpcU09\",\n  \"results\": [\n    {\n      \"name\": \"string\",\n      \"source\": \"USER\",\n      \"history_item\": {\n        \"id\": \"6a0cef23-1201-3c4b-99f4-c6cf01cdc4eb\",\n        \"timestamp\": \"1978-02-07T07:57:12.014Z\"\n      },\n      \"release\": {\n        \"id\": \"3c7c07b4-1927-3cda-c62c-30066826a8d0\",\n        \"timestamp\": \"1962-05-21T15:25:32.251Z\"\n      }\n    },\n    {\n      \"name\": \"string\",\n      \"source\": \"SYSTEM\",\n      \"history_item\": {\n        \"id\": \"61475cab-2928-ecd8-8b1b-ba8e406a1083\",\n        \"timestamp\": \"1960-10-29T12:40:38.789Z\"\n      },\n      \"release\": {\n        \"id\": \"f98afd3b-46b7-86bf-8c2c-74e6732b3e4b\",\n        \"timestamp\": \"1953-11-17T13:19:21.586Z\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "643bf963-bdf0-4092-9a3f-195df000229a",
+          "name": "Deployment History Item Retrieve",
+          "request": {
+            "name": "Deployment History Item Retrieve",
+            "description": {
+              "content": "DEPRECATED: This endpoint is deprecated and will be removed in a future release. Please use the\n`retrieve_prompt_deployment_release` xendpoint instead.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "deployments",
+                ":id",
+                "history",
+                ":history_id_or_release_tag"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "history_id_or_release_tag",
+                  "description": "(Required) Either the UUID of Deployment History Item you'd like to retrieve, or the name of a Release Tag that's pointing to the Deployment History Item you'd like to retrieve."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Either the Prompt Deployment's ID or its unique name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-API-KEY",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "key": "X-API-Version",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "14cae999-9da6-4182-b08c-f50a385761cd",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "deployments",
+                    ":id",
+                    "history",
+                    ":history_id_or_release_tag"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "history_id_or_release_tag",
+                      "description": "(Required) Either the UUID of Deployment History Item you'd like to retrieve, or the name of a Release Tag that's pointing to the Deployment History Item you'd like to retrieve."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Either the Prompt Deployment's ID or its unique name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-API-KEY",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-API-Version",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"c0ae8070-a959-f815-3e60-917e33429721\",\n  \"deployment_id\": \"cb446e3a-81ee-bfb0-5671-3d3ca63a87a9\",\n  \"timestamp\": \"1972-02-29T02:20:27.612Z\",\n  \"label\": \"string\",\n  \"name\": \"string\",\n  \"input_variables\": [\n    {\n      \"id\": \"string\",\n      \"key\": \"string\",\n      \"type\": \"VIDEO\",\n      \"required\": false,\n      \"default\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"value\": \"string\"\n      },\n      \"extensions\": {\n        \"color\": \"string\",\n        \"description\": \"string\",\n        \"title\": \"string\"\n      },\n      \"schema\": {\n        \"key_0\": {},\n        \"key_1\": {},\n        \"key_2\": {},\n        \"key_3\": {}\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"key\": \"string\",\n      \"type\": \"THINKING\",\n      \"required\": true,\n      \"default\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"value\": \"string\"\n      },\n      \"extensions\": {\n        \"color\": \"string\",\n        \"description\": \"string\",\n        \"title\": \"string\"\n      },\n      \"schema\": {\n        \"key_0\": {},\n        \"key_1\": {},\n        \"key_2\": {},\n        \"key_3\": {}\n      }\n    }\n  ],\n  \"description\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://predict.vellum.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e94d7d85-f2d5-4f1e-865d-d22542fd4738",
+    "name": "Client SDK subpackage_deployments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

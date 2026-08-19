@@ -1,0 +1,104 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Client SDK subpackage_folderEntities API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "subpackage_folderEntities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Add Entity To Folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://predict.vellum.ai/v1/folders/:folder_id/add-entity",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "folder_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the folder to which the entity should be added. This can be a UUID of a folder, or the name of a root\ndirectory. Supported root directories include:\n- PROMPT_SANDBOX\n- WORKFLOW_SANDBOX\n- DOCUMENT_INDEX\n- TEST_SUITE"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add an entity to a specific folder or root directory.\n\nAdding an entity to a folder will remove it from any other folders it might have been a member of."
+        },
+        {
+          "info": {
+            "name": "List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://predict.vellum.ai/v1/folder-entities",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "entity_status",
+                "value": "",
+                "type": "query",
+                "description": "Filter down to only those objects whose entities have a status matching the status specified.\n\n* `ACTIVE` - Active\n* `ARCHIVED` - Archived\n* `PENDING_DELETION` - Pending Deletion"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "parent_folder_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter down to only those entities whose parent folder has the specified ID.\n\nTo filter by an entity's parent folder, provide the ID of the parent folder. To filter by the root directory, provide\na string representing the entity type of the root directory. Supported root directories include:\n- PROMPT_SANDBOX\n- WORKFLOW_SANDBOX\n- DOCUMENT_INDEX\n- TEST_SUITE"
+              }
+            ]
+          },
+          "docs": "List all folder entities within a specified folder."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

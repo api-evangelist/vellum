@@ -1,0 +1,315 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Client SDK subpackage_deployments API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "subpackage_deployments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve Provider Payload",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://predict.vellum.ai/v1/deployments/provider-payload",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Given a set of input variable values, compile the exact payload that Vellum would send to the configured model provider\nfor execution if the execute-prompt endpoint had been invoked. Note that this endpoint does not actually execute the\nprompt or make an API call to the model provider.\n\nThis endpoint is useful if you don't want to proxy LLM provider requests through Vellum and prefer to send them directly\nto the provider yourself. Note that no guarantees are made on the format of this API's resp"
+        },
+        {
+          "info": {
+            "name": "List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://predict.vellum.ai/v1/deployments",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "status"
+              }
+            ]
+          },
+          "docs": "Used to list all Prompt Deployments."
+        },
+        {
+          "info": {
+            "name": "Retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://predict.vellum.ai/v1/deployments/:id",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Prompt Deployment's ID or its unique name"
+              }
+            ]
+          },
+          "docs": "Used to retrieve a Prompt Deployment given its ID or name."
+        },
+        {
+          "info": {
+            "name": "Retrieve Prompt Deployment Release",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://predict.vellum.ai/v1/deployments/:id/releases/:release_id_or_release_tag",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Prompt Deployment's ID or its unique name"
+              },
+              {
+                "name": "release_id_or_release_tag",
+                "value": "",
+                "type": "path",
+                "description": "Either the UUID of Prompt Deployment Release you'd like to retrieve, or the name of a Release Tag that's pointing to the Prompt Deployment Release you'd like to retrieve."
+              }
+            ]
+          },
+          "docs": "Retrieve a specific Prompt Deployment Release by either its UUID or the name of a Release Tag that points to it."
+        },
+        {
+          "info": {
+            "name": "Retrieve Deployment Release Tag",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://predict.vellum.ai/v1/deployments/:id/release-tags/:name",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Prompt Deployment's ID or its unique name"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Release Tag associated with this Deployment that you'd like to retrieve."
+              }
+            ]
+          },
+          "docs": "Retrieve a Deployment Release Tag by tag name, associated with a specified Deployment."
+        },
+        {
+          "info": {
+            "name": "Update Deployment Release Tag",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://predict.vellum.ai/v1/deployments/:id/release-tags/:name",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Prompt Deployment's ID or its unique name"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Release Tag associated with this Deployment that you'd like to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing Release Tag associated with the specified Prompt Deployment."
+        },
+        {
+          "info": {
+            "name": "List Deployment Release Tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://predict.vellum.ai/v1/deployments/:id/release-tags",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Prompt Deployment's ID or its unique name"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "source",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Release Tags associated with the specified Prompt Deployment"
+        },
+        {
+          "info": {
+            "name": "Deployment History Item Retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://predict.vellum.ai/v1/deployments/:id/history/:history_id_or_release_tag",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "history_id_or_release_tag",
+                "value": "",
+                "type": "path",
+                "description": "Either the UUID of Deployment History Item you'd like to retrieve, or the name of a Release Tag that's pointing to the Deployment History Item you'd like to retrieve."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Prompt Deployment's ID or its unique name"
+              }
+            ]
+          },
+          "docs": "DEPRECATED: This endpoint is deprecated and will be removed in a future release. Please use the\n`retrieve_prompt_deployment_release` xendpoint instead."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,1146 @@
+{
+  "item": [
+    {
+      "id": "1563b1a1-86f5-4a63-9778-050110aa518d",
+      "name": "subpackage_documents",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "706b77fb-6f05-48be-b253-b349f4d48253",
+          "name": "Upload",
+          "request": {
+            "name": "Upload",
+            "description": {
+              "content": "Upload a document to be indexed and used for search.\n\n**Note:** Uses a base url of `https://documents.vellum.ai`.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "upload-document"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-API-KEY",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "key": "X-API-Version",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "label",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) A human-friendly name for this document. Typically the filename."
+                },
+                {
+                  "key": "add_to_index_names",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "type": "text",
+                  "description": "Optionally include the names of all indexes that you'd like this document to be included in"
+                },
+                {
+                  "key": "external_id",
+                  "value": "<string,null>",
+                  "type": "text",
+                  "description": "Optionally include an external ID for this document. This is useful if you want to re-upload the same document later when its contents change and would like it to be re-indexed."
+                },
+                {
+                  "key": "contents",
+                  "type": "file",
+                  "description": "The file contents of the document. Either contents or url must be provided."
+                },
+                {
+                  "key": "url",
+                  "value": "<string,null-uri>",
+                  "type": "text",
+                  "description": "A URL from which the document can be downloaded. Either contents or url must be provided."
+                },
+                {
+                  "key": "keywords",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "type": "text",
+                  "description": "Optionally include a list of keywords that'll be associated with this document. Used when performing keyword searches."
+                },
+                {
+                  "key": "metadata",
+                  "value": "<string,null-byte>",
+                  "type": "text",
+                  "description": "A stringified JSON object containing any metadata associated with the document that you'd like to filter upon later."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "558812e8-cf1c-4efc-b529-1bceee3cfbb6",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "upload-document"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-API-KEY",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-API-Version",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) A human-friendly name for this document. Typically the filename.",
+                        "type": "text/plain"
+                      },
+                      "key": "label",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Optionally include the names of all indexes that you'd like this document to be included in",
+                        "type": "text/plain"
+                      },
+                      "key": "add_to_index_names",
+                      "value": "[\"<string>\",\"<string>\"]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Optionally include an external ID for this document. This is useful if you want to re-upload the same document later when its contents change and would like it to be re-indexed.",
+                        "type": "text/plain"
+                      },
+                      "key": "external_id",
+                      "value": "<string,null>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The file contents of the document. Either contents or url must be provided.",
+                        "type": "text/plain"
+                      },
+                      "key": "contents",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "A URL from which the document can be downloaded. Either contents or url must be provided.",
+                        "type": "text/plain"
+                      },
+                      "key": "url",
+                      "value": "<string,null-uri>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Optionally include a list of keywords that'll be associated with this document. Used when performing keyword searches.",
+                        "type": "text/plain"
+                      },
+                      "key": "keywords",
+                      "value": "[\"<string>\",\"<string>\"]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "A stringified JSON object containing any metadata associated with the document that you'd like to filter upon later.",
+                        "type": "text/plain"
+                      },
+                      "key": "metadata",
+                      "value": "<string,null-byte>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"document_id\": \"d20769e7-934e-a4b7-ca75-1907b67b151c\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "34eaf123-fb5c-4184-b350-9556ed2557f1",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "upload-document"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-API-KEY",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-API-Version",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) A human-friendly name for this document. Typically the filename.",
+                        "type": "text/plain"
+                      },
+                      "key": "label",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Optionally include the names of all indexes that you'd like this document to be included in",
+                        "type": "text/plain"
+                      },
+                      "key": "add_to_index_names",
+                      "value": "[\"<string>\",\"<string>\"]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Optionally include an external ID for this document. This is useful if you want to re-upload the same document later when its contents change and would like it to be re-indexed.",
+                        "type": "text/plain"
+                      },
+                      "key": "external_id",
+                      "value": "<string,null>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The file contents of the document. Either contents or url must be provided.",
+                        "type": "text/plain"
+                      },
+                      "key": "contents",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "A URL from which the document can be downloaded. Either contents or url must be provided.",
+                        "type": "text/plain"
+                      },
+                      "key": "url",
+                      "value": "<string,null-uri>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Optionally include a list of keywords that'll be associated with this document. Used when performing keyword searches.",
+                        "type": "text/plain"
+                      },
+                      "key": "keywords",
+                      "value": "[\"<string>\",\"<string>\"]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "A stringified JSON object containing any metadata associated with the document that you'd like to filter upon later.",
+                        "type": "text/plain"
+                      },
+                      "key": "metadata",
+                      "value": "<string,null-byte>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5cd39ca1-154a-4812-9c11-dace96ea2aef",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "upload-document"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-API-KEY",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-API-Version",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) A human-friendly name for this document. Typically the filename.",
+                        "type": "text/plain"
+                      },
+                      "key": "label",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Optionally include the names of all indexes that you'd like this document to be included in",
+                        "type": "text/plain"
+                      },
+                      "key": "add_to_index_names",
+                      "value": "[\"<string>\",\"<string>\"]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Optionally include an external ID for this document. This is useful if you want to re-upload the same document later when its contents change and would like it to be re-indexed.",
+                        "type": "text/plain"
+                      },
+                      "key": "external_id",
+                      "value": "<string,null>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The file contents of the document. Either contents or url must be provided.",
+                        "type": "text/plain"
+                      },
+                      "key": "contents",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "A URL from which the document can be downloaded. Either contents or url must be provided.",
+                        "type": "text/plain"
+                      },
+                      "key": "url",
+                      "value": "<string,null-uri>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Optionally include a list of keywords that'll be associated with this document. Used when performing keyword searches.",
+                        "type": "text/plain"
+                      },
+                      "key": "keywords",
+                      "value": "[\"<string>\",\"<string>\"]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "A stringified JSON object containing any metadata associated with the document that you'd like to filter upon later.",
+                        "type": "text/plain"
+                      },
+                      "key": "metadata",
+                      "value": "<string,null-byte>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "abe78f28-7284-473e-8bd5-74b4649caf56",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "upload-document"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-API-KEY",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-API-Version",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) A human-friendly name for this document. Typically the filename.",
+                        "type": "text/plain"
+                      },
+                      "key": "label",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Optionally include the names of all indexes that you'd like this document to be included in",
+                        "type": "text/plain"
+                      },
+                      "key": "add_to_index_names",
+                      "value": "[\"<string>\",\"<string>\"]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Optionally include an external ID for this document. This is useful if you want to re-upload the same document later when its contents change and would like it to be re-indexed.",
+                        "type": "text/plain"
+                      },
+                      "key": "external_id",
+                      "value": "<string,null>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The file contents of the document. Either contents or url must be provided.",
+                        "type": "text/plain"
+                      },
+                      "key": "contents",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "A URL from which the document can be downloaded. Either contents or url must be provided.",
+                        "type": "text/plain"
+                      },
+                      "key": "url",
+                      "value": "<string,null-uri>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Optionally include a list of keywords that'll be associated with this document. Used when performing keyword searches.",
+                        "type": "text/plain"
+                      },
+                      "key": "keywords",
+                      "value": "[\"<string>\",\"<string>\"]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "A stringified JSON object containing any metadata associated with the document that you'd like to filter upon later.",
+                        "type": "text/plain"
+                      },
+                      "key": "metadata",
+                      "value": "<string,null-byte>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9595d586-ea0b-4e3f-8410-e2b904914823",
+          "name": "Retrieve",
+          "request": {
+            "name": "Retrieve",
+            "description": {
+              "content": "Retrieve a Document, keying off of either its Vellum-generated ID or its external ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "documents",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-API-KEY",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "key": "X-API-Version",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9a0487a4-069c-4e52-ae69-c88b28255bcf",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "documents",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-API-KEY",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-API-Version",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"81328d36-9673-e522-b4c6-4e8cfa565145\",\n  \"last_uploaded_at\": \"1968-01-19T17:28:06.749Z\",\n  \"label\": \"string\",\n  \"processing_state\": \"QUEUED\",\n  \"original_file_url\": \"string\",\n  \"document_to_document_indexes\": [\n    {\n      \"id\": \"f5571914-8802-bc33-346f-d713e7b14f47\",\n      \"environment_document_index_id\": \"fe2a7890-96b9-2fdd-a9fa-12183b6f61fd\",\n      \"document_index_id\": \"7ebd2bd2-2bd5-8fb9-c719-b62431bc7c7b\",\n      \"extracted_text_file_url\": \"string\",\n      \"processing_state\": \"string\",\n      \"indexing_state\": \"INDEXING\"\n    },\n    {\n      \"id\": \"9ec66224-7789-990a-05ba-db2e2df2d117\",\n      \"environment_document_index_id\": \"bd368317-74da-3345-a678-49e7890a80a3\",\n      \"document_index_id\": \"28bd3b64-f240-1e48-8e49-5aeea9a526b5\",\n      \"extracted_text_file_url\": \"string\",\n      \"processing_state\": \"string\",\n      \"indexing_state\": \"QUEUED\"\n    }\n  ],\n  \"external_id\": \"string\",\n  \"status\": \"ACTIVE\",\n  \"keywords\": [\n    \"string\",\n    \"string\"\n  ],\n  \"metadata\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3ab05e49-0a26-47fb-b387-688d94f51944",
+          "name": "Partial Update",
+          "request": {
+            "name": "Partial Update",
+            "description": {
+              "content": "Update a Document, keying off of either its Vellum-generated ID or its external ID. Particularly useful for updating its metadata.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "documents",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-API-KEY",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "key": "X-API-Version",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "label",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "A human-readable label for the document. Defaults to the originally uploaded file's file name."
+                },
+                {
+                  "key": "status",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "The current status of the document\n\n* `ACTIVE` - Active"
+                },
+                {
+                  "key": "keywords",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "type": "text",
+                  "description": "A list of keywords that'll be associated with the document. Used as part of keyword search."
+                },
+                {
+                  "key": "metadata",
+                  "value": "{\"key_0\":{},\"key_1\":{}}",
+                  "type": "text",
+                  "description": "A JSON object containing any metadata associated with the document that you'd like to filter upon later."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7a363bf4-b3c2-49cb-898c-6c3d35ba7879",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "documents",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-API-KEY",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-API-Version",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "A human-readable label for the document. Defaults to the originally uploaded file's file name.",
+                        "type": "text/plain"
+                      },
+                      "key": "label",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The current status of the document\n\n* `ACTIVE` - Active",
+                        "type": "text/plain"
+                      },
+                      "key": "status",
+                      "value": "ACTIVE",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "A list of keywords that'll be associated with the document. Used as part of keyword search.",
+                        "type": "text/plain"
+                      },
+                      "key": "keywords",
+                      "value": "[\"<string>\",\"<string>\"]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "A JSON object containing any metadata associated with the document that you'd like to filter upon later.",
+                        "type": "text/plain"
+                      },
+                      "key": "metadata",
+                      "value": "{\"key_0\":{}}",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"81328d36-9673-e522-b4c6-4e8cfa565145\",\n  \"last_uploaded_at\": \"1968-01-19T17:28:06.749Z\",\n  \"label\": \"string\",\n  \"processing_state\": \"QUEUED\",\n  \"original_file_url\": \"string\",\n  \"document_to_document_indexes\": [\n    {\n      \"id\": \"f5571914-8802-bc33-346f-d713e7b14f47\",\n      \"environment_document_index_id\": \"fe2a7890-96b9-2fdd-a9fa-12183b6f61fd\",\n      \"document_index_id\": \"7ebd2bd2-2bd5-8fb9-c719-b62431bc7c7b\",\n      \"extracted_text_file_url\": \"string\",\n      \"processing_state\": \"string\",\n      \"indexing_state\": \"INDEXING\"\n    },\n    {\n      \"id\": \"9ec66224-7789-990a-05ba-db2e2df2d117\",\n      \"environment_document_index_id\": \"bd368317-74da-3345-a678-49e7890a80a3\",\n      \"document_index_id\": \"28bd3b64-f240-1e48-8e49-5aeea9a526b5\",\n      \"extracted_text_file_url\": \"string\",\n      \"processing_state\": \"string\",\n      \"indexing_state\": \"QUEUED\"\n    }\n  ],\n  \"external_id\": \"string\",\n  \"status\": \"ACTIVE\",\n  \"keywords\": [\n    \"string\",\n    \"string\"\n  ],\n  \"metadata\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "60d03ac7-bf69-4254-9696-545b33b165a8",
+          "name": "Destroy",
+          "request": {
+            "name": "Destroy",
+            "description": {
+              "content": "Delete a Document, keying off of either its Vellum-generated ID or its external ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "documents",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-API-KEY",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "key": "X-API-Version",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "61e41bc7-f0ec-4909-8170-c32b6dd292b2",
+              "name": "No response body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "documents",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-API-KEY",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-API-Version",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a2e26801-052a-4625-89b9-bb1adc9cec17",
+          "name": "List",
+          "request": {
+            "name": "List",
+            "description": {
+              "content": "Used to list documents. Optionally filter on supported fields.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "documents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "document_index_id",
+                  "value": "<uuid>",
+                  "description": "Filter down to only those documents that are included in the specified index. You may provide either the Vellum-generated ID or the unique name of the index specified upon initial creation."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The initial index from which to return the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "ordering",
+                  "value": "<string>",
+                  "description": "Which field to use when ordering the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "A search term."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-API-KEY",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "key": "X-API-Version",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "38c21cb7-af50-4597-a7c8-7e72d9f50114",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "document_index_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-API-KEY",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-API-Version",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 7529,\n  \"next\": \"http://BkhKqYXBffrNnbSBBMFEjyQTH.ocognbLe9JxoqNj1d7l82Xhvr.KnRN\",\n  \"previous\": \"https://WYQXxOYHdHaq.brzeDun2Jxa7YYeKgPoyAEwbFYJg,PTdD,ZwZr25oi6BPZvaPEjzSIGEKxx+j75Ql\",\n  \"results\": [\n    {\n      \"id\": \"2bd48734-121e-425a-0832-85d93d83cd76\",\n      \"last_uploaded_at\": \"2018-08-18T23:24:07.756Z\",\n      \"label\": \"string\",\n      \"processing_state\": \"PROCESSED\",\n      \"document_to_document_indexes\": [\n        {\n          \"id\": \"12d633c4-d3c1-8fac-4e92-7c73884dd166\",\n          \"environment_document_index_id\": \"c5eeb4bb-7aae-ba7f-0007-56f86b17abec\",\n          \"document_index_id\": \"a91aadad-ad3a-6666-d4cd-dba40a6f0d11\",\n          \"processing_state\": \"string\",\n          \"indexing_state\": \"INDEXING\"\n        },\n        {\n          \"id\": \"1e5b2b6b-ba6a-9f6e-8517-939bbc7e3e72\",\n          \"environment_document_index_id\": \"166a8e28-7996-3d55-c49a-94f8e147e598\",\n          \"document_index_id\": \"bfcaac75-e925-00bf-6e00-8d7d7508f5ba\",\n          \"processing_state\": \"string\",\n          \"indexing_state\": \"INDEXED\"\n        }\n      ],\n      \"external_id\": \"string\",\n      \"processing_failure_reason\": \"INVALID_CREDENTIALS\",\n      \"status\": \"ACTIVE\",\n      \"keywords\": [\n        \"string\",\n        \"string\"\n      ],\n      \"metadata\": {\n        \"key_0\": {}\n      }\n    },\n    {\n      \"id\": \"97d10fb9-ad11-ba82-6c5e-ef9f316f5887\",\n      \"last_uploaded_at\": \"2024-10-24T09:47:06.614Z\",\n      \"label\": \"string\",\n      \"processing_state\": \"FAILED\",\n      \"document_to_document_indexes\": [\n        {\n          \"id\": \"8ae3e54e-0a09-b043-e0a4-7021c1602c76\",\n          \"environment_document_index_id\": \"b81a0ec1-756a-337f-4564-e39d272a32a0\",\n          \"document_index_id\": \"ab06a0c5-70d9-1ebb-7f28-67ceeb620358\",\n          \"processing_state\": \"string\",\n          \"indexing_state\": \"QUEUED\"\n        },\n        {\n          \"id\": \"c7d7678d-5a2f-7412-a05e-4b5dcfe5cbb1\",\n          \"environment_document_index_id\": \"ad9b2dd9-64bb-fb7b-335e-b62843f2bb7a\",\n          \"document_index_id\": \"57826d88-4f01-d36e-c0d1-7761475780c7\",\n          \"processing_state\": \"string\",\n          \"indexing_state\": \"FAILED\"\n        }\n      ],\n      \"external_id\": \"string\",\n      \"processing_failure_reason\": \"INVALID_CREDENTIALS\",\n      \"status\": \"ACTIVE\",\n      \"keywords\": [\n        \"string\",\n        \"string\"\n      ],\n      \"metadata\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://predict.vellum.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a182aa07-deb6-466e-bc3a-cd5a9f4d2563",
+    "name": "Client SDK subpackage_documents API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

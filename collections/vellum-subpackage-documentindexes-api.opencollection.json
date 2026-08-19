@@ -1,0 +1,296 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Client SDK subpackage_documentIndexes API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "subpackage_documentIndexes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Add Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://predict.vellum.ai/v1/document-indexes/:id/documents/:document_id",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "document_id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Vellum-generated ID or the originally supplied external_id that uniquely identifies the Document you'd like to add."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Vellum-generated ID or the originally specified name that uniquely identifies the Document Index to which you'd like to add the Document."
+              }
+            ]
+          },
+          "docs": "Adds a previously uploaded Document to the specified Document Index."
+        },
+        {
+          "info": {
+            "name": "Remove Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://predict.vellum.ai/v1/document-indexes/:id/documents/:document_id",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "document_id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Vellum-generated ID or the originally supplied external_id that uniquely identifies the Document you'd like to remove."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Vellum-generated ID or the originally specified name that uniquely identifies the Document Index from which you'd like to remove a Document."
+              }
+            ]
+          },
+          "docs": "Removes a Document from a Document Index without deleting the Document itself."
+        },
+        {
+          "info": {
+            "name": "List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://predict.vellum.ai/v1/document-indexes",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search for document indices by name or label"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter down to only document indices that have a status matching the status specified\n\n* `ACTIVE` - Active\n* `ARCHIVED` - Archived\n* `PENDING_DELETION` - Pending Deletion"
+              }
+            ]
+          },
+          "docs": "Used to retrieve a list of Document Indexes."
+        },
+        {
+          "info": {
+            "name": "Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://predict.vellum.ai/v1/document-indexes",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new document index."
+        },
+        {
+          "info": {
+            "name": "Retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://predict.vellum.ai/v1/document-indexes/:id",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Document Index's ID or its unique name"
+              },
+              {
+                "name": "mask_indexing_config",
+                "value": "",
+                "type": "query",
+                "description": "Whether to mask the indexing configuration in the response"
+              }
+            ]
+          },
+          "docs": "Used to retrieve a Document Index given its ID or name."
+        },
+        {
+          "info": {
+            "name": "Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://predict.vellum.ai/v1/document-indexes/:id",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Document Index's ID or its unique name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Used to fully update a Document Index given its ID or name."
+        },
+        {
+          "info": {
+            "name": "Partial Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://predict.vellum.ai/v1/document-indexes/:id",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Document Index's ID or its unique name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Used to partial update a Document Index given its ID or name."
+        },
+        {
+          "info": {
+            "name": "Destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://predict.vellum.ai/v1/document-indexes/:id",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Document Index's ID or its unique name"
+              }
+            ]
+          },
+          "docs": "Used to delete a Document Index given its ID or name."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

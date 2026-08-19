@@ -1,0 +1,451 @@
+{
+  "item": [
+    {
+      "id": "18218eb1-95bb-49ec-8021-7e320c6a0eca",
+      "name": "subpackage_sandboxes",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1ad44e36-7c61-4045-93b2-d5b7a6b66100",
+          "name": "Deploy Prompt",
+          "request": {
+            "name": "Deploy Prompt",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "sandboxes",
+                ":id",
+                "prompts",
+                ":prompt_variant_id",
+                "deploy"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) A UUID string identifying this sandbox."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "prompt_variant_id",
+                  "description": "(Required) An ID identifying the Prompt you'd like to deploy."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-API-KEY",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "key": "X-API-Version",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"prompt_deployment_id\": \"<string,null-uuid>\",\n  \"prompt_deployment_name\": \"<string,null>\",\n  \"label\": \"<string,null>\",\n  \"release_tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"release_description\": \"\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "93805ff6-995e-4d20-8ad3-cf341ac99718",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "sandboxes",
+                    ":id",
+                    "prompts",
+                    ":prompt_variant_id",
+                    "deploy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this sandbox."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "prompt_variant_id",
+                      "description": "(Required) An ID identifying the Prompt you'd like to deploy."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-API-KEY",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-API-Version",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"prompt_deployment_id\": \"<string,null-uuid>\",\n  \"prompt_deployment_name\": \"<string,null>\",\n  \"label\": \"<string,null>\",\n  \"release_tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"release_description\": \"\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"1da1b3e3-a819-8155-0f04-6f83dfa0c615\",\n  \"created\": \"1950-07-30T22:16:59.717Z\",\n  \"label\": \"string\",\n  \"name\": \"string\",\n  \"last_deployed_on\": \"1954-12-26T16:54:36.993Z\",\n  \"input_variables\": [\n    {\n      \"id\": \"string\",\n      \"key\": \"string\",\n      \"type\": \"VIDEO\",\n      \"required\": false,\n      \"default\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"value\": \"string\"\n      },\n      \"extensions\": {\n        \"color\": \"string\",\n        \"description\": \"string\",\n        \"title\": \"string\"\n      },\n      \"schema\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"key\": \"string\",\n      \"type\": \"SEARCH_RESULTS\",\n      \"required\": true,\n      \"default\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"value\": \"string\"\n      },\n      \"extensions\": {\n        \"color\": \"string\",\n        \"description\": \"string\",\n        \"title\": \"string\"\n      },\n      \"schema\": {\n        \"key_0\": {}\n      }\n    }\n  ],\n  \"active_model_version_ids\": [\n    \"4b728b24-d7b8-88c7-1d3f-0f4adf096d91\",\n    \"bc2d6bac-f2b2-1332-5659-9060310a9251\"\n  ],\n  \"last_deployed_history_item_id\": \"9eb6551f-dac8-679a-9edd-b085592c6786\",\n  \"status\": \"PENDING_DELETION\",\n  \"environment\": \"DEVELOPMENT\",\n  \"description\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1fee7295-1d81-44b2-b02d-da81af1db106",
+          "name": "Upsert Sandbox Scenario",
+          "request": {
+            "name": "Upsert Sandbox Scenario",
+            "description": {
+              "content": "Upserts a new scenario for a sandbox, keying off of the optionally provided scenario id.\n\nIf an id is provided and has a match, the scenario will be updated. If no id is provided or no match\nis found, a new scenario will be appended to the end.\n\nNote that a full replacement of the scenario is performed, so any fields not provided will be removed\nor overwritten with default values.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "sandboxes",
+                ":id",
+                "scenarios"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) A UUID string identifying this sandbox."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-API-KEY",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "key": "X-API-Version",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"inputs\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string,null>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string,null>\",\n      \"name\": \"<string>\"\n    }\n  ],\n  \"label\": \"Untitled Scenario\",\n  \"scenario_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e0514663-0c40-48ec-91bf-be8367376f9e",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "sandboxes",
+                    ":id",
+                    "scenarios"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this sandbox."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-API-KEY",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-API-Version",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputs\": [\n    {\n      \"type\": \"STRING\",\n      \"value\": \"string\",\n      \"name\": \"string\"\n    },\n    {\n      \"type\": \"STRING\",\n      \"value\": \"string\",\n      \"name\": \"string\"\n    }\n  ],\n  \"label\": \"Untitled Scenario\",\n  \"scenario_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"inputs\": [\n    {\n      \"type\": \"STRING\",\n      \"value\": \"string\",\n      \"input_variable_id\": \"string\"\n    },\n    {\n      \"type\": \"STRING\",\n      \"value\": \"string\",\n      \"input_variable_id\": \"string\"\n    }\n  ],\n  \"id\": \"string\",\n  \"label\": \"Untitled Scenario\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "83aa9424-85cd-4a7b-a6d5-0f114b31d996",
+          "name": "Delete Sandbox Scenario",
+          "request": {
+            "name": "Delete Sandbox Scenario",
+            "description": {
+              "content": "Deletes an existing scenario from a sandbox, keying off of the provided scenario id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "sandboxes",
+                ":id",
+                "scenarios",
+                ":scenario_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) A UUID string identifying this sandbox."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "scenario_id",
+                  "description": "(Required) An id identifying the scenario that you'd like to delete"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-API-KEY",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "key": "X-API-Version",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "538a6507-0477-4293-958f-de0b838d3451",
+              "name": "No response body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "sandboxes",
+                    ":id",
+                    "scenarios",
+                    ":scenario_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this sandbox."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scenario_id",
+                      "description": "(Required) An id identifying the scenario that you'd like to delete"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-API-KEY",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-API-Version",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://predict.vellum.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "3beccb63-420b-4035-b1af-5eb5e7711ef3",
+    "name": "Client SDK subpackage_sandboxes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

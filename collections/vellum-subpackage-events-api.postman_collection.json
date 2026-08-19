@@ -1,0 +1,374 @@
+{
+  "item": [
+    {
+      "id": "755a0fa5-4b57-46a6-a742-fcecc1015bd5",
+      "name": "subpackage_events",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bb48a178-ec35-461c-835c-2743b59a04b4",
+          "name": "Create",
+          "request": {
+            "name": "Create",
+            "description": {
+              "content": "Accept an event or list of events and publish them to ClickHouse for analytics processing.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "monitoring",
+                "v1",
+                "events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-API-KEY",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "key": "X-API-Version",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"name\": \"<string>\",\n    \"body\": {\n      \"node_definition\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"inputs\": {\n        \"key_0\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"id\": \"<uuid>\",\n    \"timestamp\": \"<dateTime>\",\n    \"trace_id\": \"<uuid>\",\n    \"span_id\": \"<uuid>\",\n    \"parent\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"links\": [\n      {\n        \"trace_id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"span_context\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      {\n        \"trace_id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"span_context\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    ],\n    \"api_version\": \"<string>\"\n  },\n  {\n    \"name\": \"<string>\",\n    \"body\": {\n      \"node_definition\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"inputs\": {\n        \"key_0\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"id\": \"<uuid>\",\n    \"timestamp\": \"<dateTime>\",\n    \"trace_id\": \"<uuid>\",\n    \"span_id\": \"<uuid>\",\n    \"parent\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"links\": [\n      {\n        \"trace_id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"span_context\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      {\n        \"trace_id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"span_context\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    ],\n    \"api_version\": \"<string>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "14603650-428c-4f21-bf97-e7c505df4efa",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "monitoring",
+                    "v1",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-API-KEY",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-API-Version",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"name\": \"node.execution.initiated\",\n    \"body\": {\n      \"node_definition\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"inputs\": {\n        \"key_0\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"id\": \"3b2bd004-6577-7585-8e07-78361f90cd45\",\n    \"timestamp\": \"1970-09-24T18:45:06.928Z\",\n    \"trace_id\": \"f4ebb55a-7711-b966-f98e-7c93279027e6\",\n    \"span_id\": \"a6b0dd54-32b5-1c3a-4c5d-7e761620352d\",\n    \"parent\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"links\": [\n      {\n        \"trace_id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"span_context\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      {\n        \"trace_id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"span_context\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    ],\n    \"api_version\": \"2025-07-30\"\n  },\n  {\n    \"name\": \"node.execution.initiated\",\n    \"body\": {\n      \"node_definition\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"inputs\": {\n        \"key_0\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"id\": \"35bccd29-af37-2b58-cc67-6261204fc611\",\n    \"timestamp\": \"2011-03-20T07:24:28.916Z\",\n    \"trace_id\": \"9ff52cc4-08d0-fb66-359f-678fae92f785\",\n    \"span_id\": \"5ed783f7-0ca1-f062-55a6-72466ea54216\",\n    \"parent\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"links\": [\n      {\n        \"trace_id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"span_context\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      {\n        \"trace_id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"span_context\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    ],\n    \"api_version\": \"2025-07-30\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 9465,\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "58f1aab4-f8f2-4f9c-a0a0-9a4ebc5f57f6",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "monitoring",
+                    "v1",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-API-KEY",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-API-Version",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"name\": \"node.execution.initiated\",\n    \"body\": {\n      \"node_definition\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"inputs\": {\n        \"key_0\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"id\": \"3b2bd004-6577-7585-8e07-78361f90cd45\",\n    \"timestamp\": \"1970-09-24T18:45:06.928Z\",\n    \"trace_id\": \"f4ebb55a-7711-b966-f98e-7c93279027e6\",\n    \"span_id\": \"a6b0dd54-32b5-1c3a-4c5d-7e761620352d\",\n    \"parent\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"links\": [\n      {\n        \"trace_id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"span_context\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      {\n        \"trace_id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"span_context\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    ],\n    \"api_version\": \"2025-07-30\"\n  },\n  {\n    \"name\": \"node.execution.initiated\",\n    \"body\": {\n      \"node_definition\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"inputs\": {\n        \"key_0\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"id\": \"35bccd29-af37-2b58-cc67-6261204fc611\",\n    \"timestamp\": \"2011-03-20T07:24:28.916Z\",\n    \"trace_id\": \"9ff52cc4-08d0-fb66-359f-678fae92f785\",\n    \"span_id\": \"5ed783f7-0ca1-f062-55a6-72466ea54216\",\n    \"parent\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"links\": [\n      {\n        \"trace_id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"span_context\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      {\n        \"trace_id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"span_context\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    ],\n    \"api_version\": \"2025-07-30\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2a639116-80c4-4503-9974-c0d46d724c29",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "monitoring",
+                    "v1",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-API-KEY",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-API-Version",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"name\": \"node.execution.initiated\",\n    \"body\": {\n      \"node_definition\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"inputs\": {\n        \"key_0\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"id\": \"3b2bd004-6577-7585-8e07-78361f90cd45\",\n    \"timestamp\": \"1970-09-24T18:45:06.928Z\",\n    \"trace_id\": \"f4ebb55a-7711-b966-f98e-7c93279027e6\",\n    \"span_id\": \"a6b0dd54-32b5-1c3a-4c5d-7e761620352d\",\n    \"parent\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"links\": [\n      {\n        \"trace_id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"span_context\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      {\n        \"trace_id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"span_context\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    ],\n    \"api_version\": \"2025-07-30\"\n  },\n  {\n    \"name\": \"node.execution.initiated\",\n    \"body\": {\n      \"node_definition\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"inputs\": {\n        \"key_0\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"id\": \"35bccd29-af37-2b58-cc67-6261204fc611\",\n    \"timestamp\": \"2011-03-20T07:24:28.916Z\",\n    \"trace_id\": \"9ff52cc4-08d0-fb66-359f-678fae92f785\",\n    \"span_id\": \"5ed783f7-0ca1-f062-55a6-72466ea54216\",\n    \"parent\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"links\": [\n      {\n        \"trace_id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"span_context\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      {\n        \"trace_id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"span_context\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    ],\n    \"api_version\": \"2025-07-30\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "085e070e-9121-43fe-821f-e514925abfa9",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "monitoring",
+                    "v1",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-API-KEY",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-API-Version",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"name\": \"node.execution.initiated\",\n    \"body\": {\n      \"node_definition\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"inputs\": {\n        \"key_0\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"id\": \"3b2bd004-6577-7585-8e07-78361f90cd45\",\n    \"timestamp\": \"1970-09-24T18:45:06.928Z\",\n    \"trace_id\": \"f4ebb55a-7711-b966-f98e-7c93279027e6\",\n    \"span_id\": \"a6b0dd54-32b5-1c3a-4c5d-7e761620352d\",\n    \"parent\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"links\": [\n      {\n        \"trace_id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"span_context\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      {\n        \"trace_id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"span_context\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    ],\n    \"api_version\": \"2025-07-30\"\n  },\n  {\n    \"name\": \"node.execution.initiated\",\n    \"body\": {\n      \"node_definition\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"inputs\": {\n        \"key_0\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"id\": \"35bccd29-af37-2b58-cc67-6261204fc611\",\n    \"timestamp\": \"2011-03-20T07:24:28.916Z\",\n    \"trace_id\": \"9ff52cc4-08d0-fb66-359f-678fae92f785\",\n    \"span_id\": \"5ed783f7-0ca1-f062-55a6-72466ea54216\",\n    \"parent\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"links\": [\n      {\n        \"trace_id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"span_context\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      {\n        \"trace_id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"span_context\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    ],\n    \"api_version\": \"2025-07-30\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c9128cb2-6275-456f-948d-25d66ce54987",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "monitoring",
+                    "v1",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-API-KEY",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-API-Version",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"name\": \"node.execution.initiated\",\n    \"body\": {\n      \"node_definition\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"inputs\": {\n        \"key_0\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"id\": \"3b2bd004-6577-7585-8e07-78361f90cd45\",\n    \"timestamp\": \"1970-09-24T18:45:06.928Z\",\n    \"trace_id\": \"f4ebb55a-7711-b966-f98e-7c93279027e6\",\n    \"span_id\": \"a6b0dd54-32b5-1c3a-4c5d-7e761620352d\",\n    \"parent\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"links\": [\n      {\n        \"trace_id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"span_context\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      {\n        \"trace_id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"span_context\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    ],\n    \"api_version\": \"2025-07-30\"\n  },\n  {\n    \"name\": \"node.execution.initiated\",\n    \"body\": {\n      \"node_definition\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"inputs\": {\n        \"key_0\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"id\": \"35bccd29-af37-2b58-cc67-6261204fc611\",\n    \"timestamp\": \"2011-03-20T07:24:28.916Z\",\n    \"trace_id\": \"9ff52cc4-08d0-fb66-359f-678fae92f785\",\n    \"span_id\": \"5ed783f7-0ca1-f062-55a6-72466ea54216\",\n    \"parent\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"links\": [\n      {\n        \"trace_id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"span_context\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      {\n        \"trace_id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"span_context\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    ],\n    \"api_version\": \"2025-07-30\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://predict.vellum.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "735b0f87-0b00-40f2-8c57-dbdd534eefb3",
+    "name": "Client SDK subpackage_events API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

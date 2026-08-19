@@ -1,0 +1,471 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Client SDK subpackage_workflowDeployments API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "subpackage_workflowDeployments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Execute Stream",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://predict.vellum.ai/v1/workflow-deployments/:id/execute-stream",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Workflow Deployment's ID or its unique name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Executes a deployed Workflow and streams back its results."
+        },
+        {
+          "info": {
+            "name": "List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://predict.vellum.ai/v1/workflow-deployments",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "has_story_config",
+                "value": "",
+                "type": "query",
+                "description": "has_story_config"
+              },
+              {
+                "name": "is_public",
+                "value": "",
+                "type": "query",
+                "description": "is_public"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the ordering of the returned Workflow Deployments. Valid values are:\n- `created` - Orders by creation time in ascending order.\n- `-created` - Orders by creation time in descending order. (default)\n- `name` - Orders by name in ascending order.\n- `-name` - Orders by name in descending order.\n\nCompound orderings are supported by separating fields with commas, e.g., `-created,name`.\n"
+              },
+              {
+                "name": "owned_by",
+                "value": "",
+                "type": "query",
+                "description": "owned_by"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "status"
+              }
+            ]
+          },
+          "docs": "Used to list all Workflow Deployments."
+        },
+        {
+          "info": {
+            "name": "List Workflow Deployment Releases",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://predict.vellum.ai/v1/workflow-deployments/:id/releases",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Workflow Deployment's ID or its unique name"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              }
+            ]
+          },
+          "docs": "List the Releases of the specified Workflow Deployment for the current Environment."
+        },
+        {
+          "info": {
+            "name": "Retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://predict.vellum.ai/v1/workflow-deployments/:id",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Workflow Deployment's ID or its unique name"
+              }
+            ]
+          },
+          "docs": "Used to retrieve a workflow deployment given its ID or name."
+        },
+        {
+          "info": {
+            "name": "Retrieve Workflow Deployment Release",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://predict.vellum.ai/v1/workflow-deployments/:id/releases/:release_id_or_release_tag",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Workflow Deployment's ID or its unique name"
+              },
+              {
+                "name": "release_id_or_release_tag",
+                "value": "",
+                "type": "path",
+                "description": "Either the UUID of Workflow Deployment Release you'd like to retrieve, or the name of a Release Tag that's pointing to the Workflow Deployment Release you'd like to retrieve."
+              }
+            ]
+          },
+          "docs": "Retrieve a specific Workflow Deployment Release by either its UUID or the name of a Release Tag that points to it."
+        },
+        {
+          "info": {
+            "name": "Retrieve Workflow Release Tag",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://predict.vellum.ai/v1/workflow-deployments/:id/release-tags/:name",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Workflow Deployment's ID or its unique name"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Release Tag associated with this Workflow Deployment that you'd like to retrieve."
+              }
+            ]
+          },
+          "docs": "Retrieve a Workflow Release Tag by tag name, associated with a specified Workflow Deployment."
+        },
+        {
+          "info": {
+            "name": "Update Workflow Release Tag",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://predict.vellum.ai/v1/workflow-deployments/:id/release-tags/:name",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Workflow Deployment's ID or its unique name"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Release Tag associated with this Workflow Deployment that you'd like to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing Release Tag associated with the specified Workflow Deployment."
+        },
+        {
+          "info": {
+            "name": "List Workflow Release Tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://predict.vellum.ai/v1/workflow-deployments/:id/release-tags",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Workflow Deployment's ID or its unique name"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "source",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Release Tags associated with the specified Workflow Deployment"
+        },
+        {
+          "info": {
+            "name": "Workflow Deployment History Item Retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://predict.vellum.ai/v1/workflow-deployments/:id/history/:history_id_or_release_tag",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "history_id_or_release_tag",
+                "value": "",
+                "type": "path",
+                "description": "Either the UUID of Workflow Deployment History Item you'd like to retrieve, or the name of a Release Tag that's pointing to the Workflow Deployment History Item you'd like to retrieve."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Workflow Deployment's ID or its unique name"
+              }
+            ]
+          },
+          "docs": "DEPRECATED: This endpoint is deprecated and will be removed in a future release. Please use the\n`retrieve_workflow_deployment_release` endpoint instead."
+        },
+        {
+          "info": {
+            "name": "List Workflow Deployment Event Executions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://predict.vellum.ai/v1/workflow-deployments/:id/execution-events",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of executions to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the executions."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Workflow Deployment Event Executions"
+        },
+        {
+          "info": {
+            "name": "Workflow Deployment Event Execution",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://predict.vellum.ai/v1/workflow-deployments/:id/execution-events/:execution_id",
+            "headers": [
+              {
+                "name": "X-API-KEY",
+                "value": ""
+              },
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "execution_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Workflow Deployment Event Execution"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
