@@ -36,6 +36,19 @@ tags:
   - Prompt Engineering
   - Workflows
   - Evaluations
+  - LLMOps
+  - RAG
+  - Observability
+  - Datasets
+  - Deployment
+  - Multi-Provider
+  - Agent Builder
+  - Self-Hosted
+tags_raw:
+  - LLM Platform
+  - Prompt Engineering
+  - Workflows
+  - Evaluations
   - LLM Ops
   - RAG
   - Observability
@@ -58,6 +71,15 @@ apis:
   humanURL: https://docs.vellum.ai
   baseURL: https://api.vellum.ai
   tags:
+  - Prompts
+  - Workflows
+  - Evaluations
+  - Datasets
+  - Documents
+  - Deployment
+  - Execution
+  - Monitoring
+  tags_raw:
   - Prompts
   - Workflows
   - Evaluations
@@ -137,7 +159,8 @@ apis:
   description: The Default API from Vellum AI — 8 operation(s) for default.
   humanURL: https://docs.vellum.ai
   baseURL: https://api.vellum.ai
-  tags:
+  tags: []
+  tags_raw:
   - Default
   properties:
   - type: OpenAPI
@@ -148,7 +171,8 @@ apis:
     The subpackage_deployments API from Vellum AI — 7 operation(s) for subpackage_deployments.
   humanURL: https://docs.vellum.ai
   baseURL: https://api.vellum.ai
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_deployments
   properties:
   - type: OpenAPI
@@ -169,7 +193,8 @@ apis:
   description: The subpackage_documents API from Vellum AI — 3 operation(s) for subpackage_documents.
   humanURL: https://docs.vellum.ai
   baseURL: https://api.vellum.ai
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_documents
   properties:
   - type: OpenAPI
@@ -179,7 +204,8 @@ apis:
   description: The subpackage_events API from Vellum AI — 1 operation(s) for subpackage_events.
   humanURL: https://docs.vellum.ai
   baseURL: https://api.vellum.ai
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_events
   properties:
   - type: OpenAPI
@@ -200,7 +226,8 @@ apis:
   description: The subpackage_sandboxes API from Vellum AI — 3 operation(s) for subpackage_sandboxes.
   humanURL: https://docs.vellum.ai
   baseURL: https://api.vellum.ai
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_sandboxes
   properties:
   - type: OpenAPI
@@ -264,7 +291,8 @@ apis:
   description: The subpackage_workflows API from Vellum AI — 1 operation(s) for subpackage_workflows.
   humanURL: https://docs.vellum.ai
   baseURL: https://api.vellum.ai
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_workflows
   properties:
   - type: OpenAPI
