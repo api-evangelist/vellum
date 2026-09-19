@@ -48,7 +48,7 @@ tags:
   - LLM Platform
   - Prompt Engineering
   - Workflows
-  - Evaluations
+  - Evaluation
   - LLMOps
   - RAG
   - Observability
@@ -86,7 +86,7 @@ apis:
   tags:
   - Prompts
   - Workflows
-  - Evaluations
+  - Evaluation
   - Datasets
   - Documents
   - Deployment
