@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Client SDK subpackage_folderEntities API
+  title: Client SDK Subpackage Folder Entities API
   version: 1.0.0
 servers:
 - url: https://predict.vellum.ai
@@ -135,11 +135,356 @@ paths:
                 $ref: '#/components/schemas/PaginatedFolderEntityList'
 components:
   schemas:
-    text-embedding-3-smallEnum:
+    GoogleVertexAIVectorizerGeminiEmbedding001:
+      type: object
+      properties:
+        model_name:
+          $ref: '#/components/schemas/gemini-embedding-001Enum'
+        config:
+          $ref: '#/components/schemas/GoogleVertexAIVectorizerConfig'
+      required:
+      - model_name
+      - config
+      title: GoogleVertexAIVectorizerGeminiEmbedding001
+    baai-bge-small-en-v1.5Enum:
       type: string
       enum:
-      - text-embedding-3-small
-      title: text-embedding-3-smallEnum
+      - BAAI/bge-small-en-v1.5
+      title: baai-bge-small-en-v1.5Enum
+    FolderEntityTestSuiteData:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        label:
+          type: string
+        created:
+          type: string
+          format: date-time
+        modified:
+          type: string
+          format: date-time
+        status:
+          $ref: '#/components/schemas/EntityStatus'
+      required:
+      - id
+      - label
+      - created
+      - modified
+      - status
+      title: FolderEntityTestSuiteData
+    FolderEntityDocumentIndexData:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        label:
+          type: string
+        created:
+          type: string
+          format: date-time
+        modified:
+          type: string
+          format: date-time
+        status:
+          $ref: '#/components/schemas/EntityStatus'
+        indexing_config:
+          $ref: '#/components/schemas/DocumentIndexIndexingConfig'
+      required:
+      - id
+      - label
+      - created
+      - modified
+      - status
+      - indexing_config
+      title: FolderEntityDocumentIndexData
+    text-embedding-3-largeEnum:
+      type: string
+      enum:
+      - text-embedding-3-large
+      title: text-embedding-3-largeEnum
+    WorkflowSandboxEnum:
+      type: string
+      enum:
+      - WORKFLOW_SANDBOX
+      title: WorkflowSandboxEnum
+    sentence-transformers-multi-qa-mpnet-base-dot-v1Enum:
+      type: string
+      enum:
+      - sentence-transformers/multi-qa-mpnet-base-dot-v1
+      title: sentence-transformers-multi-qa-mpnet-base-dot-v1Enum
+    GoogleVertexAIVectorizerTextEmbedding004:
+      type: object
+      properties:
+        model_name:
+          $ref: '#/components/schemas/text-embedding-004Enum'
+        config:
+          $ref: '#/components/schemas/GoogleVertexAIVectorizerConfig'
+      required:
+      - model_name
+      - config
+      title: GoogleVertexAIVectorizerTextEmbedding004
+    OpenAIVectorizerTextEmbeddingAda002:
+      type: object
+      properties:
+        config:
+          $ref: '#/components/schemas/OpenAIVectorizerConfig'
+        model_name:
+          $ref: '#/components/schemas/text-embedding-ada-002Enum'
+      required:
+      - config
+      - model_name
+      description: OpenAI vectorizer for text-embedding-ada-002.
+      title: OpenAIVectorizerTextEmbeddingAda002
+    OpenAIVectorizerTextEmbedding3Large:
+      type: object
+      properties:
+        config:
+          $ref: '#/components/schemas/OpenAIVectorizerConfig'
+        model_name:
+          $ref: '#/components/schemas/text-embedding-3-largeEnum'
+      required:
+      - config
+      - model_name
+      description: OpenAI vectorizer for text-embedding-3-large.
+      title: OpenAIVectorizerTextEmbedding3Large
+    token-overlapping-window-chunkerEnum:
+      type: string
+      enum:
+      - token-overlapping-window-chunker
+      title: token-overlapping-window-chunkerEnum
+    FolderEntityPromptSandbox:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          $ref: '#/components/schemas/PromptSandboxEnum'
+        data:
+          $ref: '#/components/schemas/FolderEntityPromptSandboxData'
+      required:
+      - id
+      - type
+      - data
+      description: A slim representation of a Prompt Sandbox, as it exists within a Folder.
+      title: FolderEntityPromptSandbox
+    SentenceChunkerConfig:
+      type: object
+      properties:
+        character_limit:
+          type: integer
+          default: 1000
+        min_overlap_ratio:
+          type: number
+          format: double
+          default: 0.5
+      description: Configuration for sentence chunking
+      title: SentenceChunkerConfig
+    BasicVectorizerIntfloatMultilingualE5Large:
+      type: object
+      properties:
+        config:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+        model_name:
+          $ref: '#/components/schemas/intfloat-multilingual-e5-largeEnum'
+      required:
+      - model_name
+      description: Basic vectorizer for intfloat/multilingual-e5-large.
+      title: BasicVectorizerIntfloatMultilingualE5Large
+    PrivateVectorizer:
+      type: object
+      properties:
+        model_name:
+          $ref: '#/components/schemas/private-vectorizerEnum'
+      required:
+      - model_name
+      description: Serializer for private vectorizer.
+      title: PrivateVectorizer
+    text-embedding-ada-002Enum:
+      type: string
+      enum:
+      - text-embedding-ada-002
+      title: text-embedding-ada-002Enum
+    delimiter-chunkerEnum:
+      type: string
+      enum:
+      - delimiter-chunker
+      title: delimiter-chunkerEnum
+    FolderEntityDocumentIndex:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          $ref: '#/components/schemas/DocumentIndexEnum'
+        data:
+          $ref: '#/components/schemas/FolderEntityDocumentIndexData'
+      required:
+      - id
+      - type
+      - data
+      description: A slim representation of a Document Index, as it exists within a Folder.
+      title: FolderEntityDocumentIndex
+    gemini-embedding-001Enum:
+      type: string
+      enum:
+      - gemini-embedding-001
+      title: gemini-embedding-001Enum
+    FolderEntityTestSuite:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          $ref: '#/components/schemas/TestSuiteEnum'
+        data:
+          $ref: '#/components/schemas/FolderEntityTestSuiteData'
+      required:
+      - id
+      - type
+      - data
+      description: A slim representation of a Test Suite, as it exists within a Folder.
+      title: FolderEntityTestSuite
+    text-embedding-004Enum:
+      type: string
+      enum:
+      - text-embedding-004
+      title: text-embedding-004Enum
+    SentenceChunking:
+      type: object
+      properties:
+        chunker_name:
+          $ref: '#/components/schemas/sentence-chunkerEnum'
+        chunker_config:
+          $ref: '#/components/schemas/SentenceChunkerConfig'
+      required:
+      - chunker_name
+      description: Sentence chunking
+      title: SentenceChunking
+    ReductoChunking:
+      type: object
+      properties:
+        chunker_name:
+          $ref: '#/components/schemas/reducto-chunkerEnum'
+        chunker_config:
+          $ref: '#/components/schemas/ReductoChunkerConfig'
+      required:
+      - chunker_name
+      description: Reducto chunking
+      title: ReductoChunking
+    FolderEntityWorkflowSandbox:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          $ref: '#/components/schemas/WorkflowSandboxEnum'
+        data:
+          $ref: '#/components/schemas/FolderEntityWorkflowSandboxData'
+      required:
+      - id
+      - type
+      - data
+      description: A slim representation of a Workflow Sandbox, as it exists within a Folder.
+      title: FolderEntityWorkflowSandbox
+    InstructorVectorizerConfig:
+      type: object
+      properties:
+        instruction_domain:
+          type: string
+        instruction_query_text_type:
+          type: string
+        instruction_document_text_type:
+          type: string
+      required:
+      - instruction_domain
+      - instruction_query_text_type
+      - instruction_document_text_type
+      description: Configuration for using an Instructor vectorizer.
+      title: InstructorVectorizerConfig
+    sentence-chunkerEnum:
+      type: string
+      enum:
+      - sentence-chunker
+      title: sentence-chunkerEnum
+    DelimiterChunkerConfig:
+      type: object
+      properties:
+        delimiter:
+          type: string
+          default: \n\n
+        is_regex:
+          type: boolean
+          default: false
+      title: DelimiterChunkerConfig
+    TokenOverlappingWindowChunkerConfig:
+      type: object
+      properties:
+        token_limit:
+          type: integer
+          default: 250
+        overlap_ratio:
+          type: number
+          format: double
+          default: 0.5
+      description: Configuration for token overlapping window chunking
+      title: TokenOverlappingWindowChunkerConfig
+    FolderEntityFolder:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          $ref: '#/components/schemas/FolderEnum'
+        data:
+          $ref: '#/components/schemas/FolderEntityFolderData'
+      required:
+      - id
+      - type
+      - data
+      description: A slim representation of a Folder, as it exists within another Folder.
+      title: FolderEntityFolder
+    TokenOverlappingWindowChunking:
+      type: object
+      properties:
+        chunker_name:
+          $ref: '#/components/schemas/token-overlapping-window-chunkerEnum'
+        chunker_config:
+          $ref: '#/components/schemas/TokenOverlappingWindowChunkerConfig'
+      required:
+      - chunker_name
+      description: Token overlapping window chunking
+      title: TokenOverlappingWindowChunking
+    OpenAIVectorizerConfig:
+      type: object
+      properties:
+        add_openai_api_key:
+          $ref: '#/components/schemas/AddOpenaiApiKeyEnum'
+      description: Configuration for using an OpenAI vectorizer.
+      title: OpenAIVectorizerConfig
+    DocumentIndexIndexingConfig:
+      type: object
+      properties:
+        vectorizer:
+          $ref: '#/components/schemas/IndexingConfigVectorizer'
+        chunking:
+          oneOf:
+          - $ref: '#/components/schemas/DocumentIndexChunking'
+          - type: 'null'
+      required:
+      - vectorizer
+      title: DocumentIndexIndexingConfig
     DocumentIndexChunking:
       oneOf:
       - $ref: '#/components/schemas/ReductoChunking'
@@ -147,58 +492,6 @@ components:
       - $ref: '#/components/schemas/TokenOverlappingWindowChunking'
       - $ref: '#/components/schemas/DelimiterChunking'
       title: DocumentIndexChunking
-    text-embedding-3-largeEnum:
-      type: string
-      enum:
-      - text-embedding-3-large
-      title: text-embedding-3-largeEnum
-    AddEntityToFolderRequest:
-      type: object
-      properties:
-        entity_id:
-          type: string
-          format: uuid
-          description: The ID of the entity you would like to move.
-      required:
-      - entity_id
-      title: AddEntityToFolderRequest
-    EntityStatus:
-      type: string
-      enum:
-      - ACTIVE
-      - ARCHIVED
-      - PENDING_DELETION
-      description: '* `ACTIVE` - Active
-
-        * `ARCHIVED` - Archived
-
-        * `PENDING_DELETION` - Pending Deletion'
-      title: EntityStatus
-    BasicVectorizerSentenceTransformersMultiQaMpnetBaseDotV1:
-      type: object
-      properties:
-        model_name:
-          $ref: '#/components/schemas/sentence-transformers-multi-qa-mpnet-base-dot-v1Enum'
-        config:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            description: Any type
-      required:
-      - model_name
-      description: Basic vectorizer for sentence-transformers/multi-qa-mpnet-base-dot-v1.
-      title: BasicVectorizerSentenceTransformersMultiQaMpnetBaseDotV1
-    DelimiterChunking:
-      type: object
-      properties:
-        chunker_name:
-          $ref: '#/components/schemas/delimiter-chunkerEnum'
-        chunker_config:
-          $ref: '#/components/schemas/DelimiterChunkerConfig'
-      required:
-      - chunker_name
-      title: DelimiterChunking
     HkunlpInstructorXlVectorizer:
       type: object
       properties:
@@ -211,34 +504,6 @@ components:
       - config
       description: Vectorizer for hkunlp/instructor-xl.
       title: HkunlpInstructorXlVectorizer
-    DatasetEnum:
-      type: string
-      enum:
-      - DATASET
-      title: DatasetEnum
-    OpenAIVectorizerConfig:
-      type: object
-      properties:
-        add_openai_api_key:
-          $ref: '#/components/schemas/AddOpenaiApiKeyEnum'
-      description: Configuration for using an OpenAI vectorizer.
-      title: OpenAIVectorizerConfig
-    FolderEnum:
-      type: string
-      enum:
-      - FOLDER
-      title: FolderEnum
-    GoogleVertexAIVectorizerTextMultilingualEmbedding002:
-      type: object
-      properties:
-        model_name:
-          $ref: '#/components/schemas/text-multilingual-embedding-002Enum'
-        config:
-          $ref: '#/components/schemas/GoogleVertexAIVectorizerConfig'
-      required:
-      - model_name
-      - config
-      title: GoogleVertexAIVectorizerTextMultilingualEmbedding002
     IndexingConfigVectorizer:
       oneOf:
       - $ref: '#/components/schemas/OpenAIVectorizerTextEmbedding3Small'
@@ -254,25 +519,6 @@ components:
       - $ref: '#/components/schemas/FastEmbedVectorizerBAAIBgeSmallEnV15'
       - $ref: '#/components/schemas/PrivateVectorizer'
       title: IndexingConfigVectorizer
-    FastEmbedVectorizerBAAIBgeSmallEnV15:
-      type: object
-      properties:
-        model_name:
-          $ref: '#/components/schemas/baai-bge-small-en-v1.5Enum'
-      required:
-      - model_name
-      description: FastEmbed vectorizer for BAAI/bge-small-en-v1.5.
-      title: FastEmbedVectorizerBAAIBgeSmallEnV15
-    sentence-transformers-multi-qa-mpnet-base-cos-v1Enum:
-      type: string
-      enum:
-      - sentence-transformers/multi-qa-mpnet-base-cos-v1
-      title: sentence-transformers-multi-qa-mpnet-base-cos-v1Enum
-    reducto-chunkerEnum:
-      type: string
-      enum:
-      - reducto-chunker
-      title: reducto-chunkerEnum
     BasicVectorizerSentenceTransformersMultiQaMpnetBaseCosV1:
       type: object
       properties:
@@ -288,7 +534,81 @@ components:
       - model_name
       description: Basic vectorizer for sentence-transformers/multi-qa-mpnet-base-cos-v1.
       title: BasicVectorizerSentenceTransformersMultiQaMpnetBaseCosV1
-    FolderEntityFolderData:
+    FolderEntityDataset:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          $ref: '#/components/schemas/DatasetEnum'
+        data:
+          $ref: '#/components/schemas/FolderEntityDatasetData'
+      required:
+      - id
+      - type
+      - data
+      description: A slim representation of a Dataset, as it exists within a Folder.
+      title: FolderEntityDataset
+    reducto-chunkerEnum:
+      type: string
+      enum:
+      - reducto-chunker
+      title: reducto-chunkerEnum
+    text-embedding-3-smallEnum:
+      type: string
+      enum:
+      - text-embedding-3-small
+      title: text-embedding-3-smallEnum
+    WorkflowSandboxDisplayData:
+      type: object
+      properties:
+        icon:
+          oneOf:
+          - $ref: '#/components/schemas/WorkflowDisplayIcon'
+          - type: 'null'
+          description: The icon associated with this Workflow Sandbox.
+      description: Information used to display this Workflow Sandbox.
+      title: WorkflowSandboxDisplayData
+    WorkflowDisplayIcon:
+      type: object
+      properties:
+        src:
+          type:
+          - string
+          - 'null'
+        color:
+          type:
+          - string
+          - 'null'
+      description: Icon to be used alongside a Workflow
+      title: WorkflowDisplayIcon
+    AddEntityToFolderRequest:
+      type: object
+      properties:
+        entity_id:
+          type: string
+          format: uuid
+          description: The ID of the entity you would like to move.
+      required:
+      - entity_id
+      title: AddEntityToFolderRequest
+    folder-entities_add_entity_to_folder_Response_200:
+      type: object
+      properties: {}
+      description: Empty response body
+      title: folder-entities_add_entity_to_folder_Response_200
+    PromptSandboxEnum:
+      type: string
+      enum:
+      - PROMPT_SANDBOX
+      title: PromptSandboxEnum
+    DocumentIndexEnum:
+      type: string
+      enum:
+      - DOCUMENT_INDEX
+      title: DocumentIndexEnum
+    FolderEntityDatasetData:
       type: object
       properties:
         id:
@@ -296,31 +616,52 @@ components:
           format: uuid
         label:
           type: string
+        name:
+          type: string
+        description:
+          type:
+          - string
+          - 'null'
         created:
           type: string
           format: date-time
         modified:
           type: string
           format: date-time
-        has_contents:
-          type: boolean
       required:
       - id
       - label
+      - name
       - created
       - modified
-      - has_contents
-      title: FolderEntityFolderData
-    private-vectorizerEnum:
+      title: FolderEntityDatasetData
+    OpenAIVectorizerTextEmbedding3Small:
+      type: object
+      properties:
+        config:
+          $ref: '#/components/schemas/OpenAIVectorizerConfig'
+        model_name:
+          $ref: '#/components/schemas/text-embedding-3-smallEnum'
+      required:
+      - config
+      - model_name
+      description: OpenAI vectorizer for text-embedding-3-small.
+      title: OpenAIVectorizerTextEmbedding3Small
+    DelimiterChunking:
+      type: object
+      properties:
+        chunker_name:
+          $ref: '#/components/schemas/delimiter-chunkerEnum'
+        chunker_config:
+          $ref: '#/components/schemas/DelimiterChunkerConfig'
+      required:
+      - chunker_name
+      title: DelimiterChunking
+    TestSuiteEnum:
       type: string
       enum:
-      - private-vectorizer
-      title: private-vectorizerEnum
-    gemini-embedding-001Enum:
-      type: string
-      enum:
-      - gemini-embedding-001
-      title: gemini-embedding-001Enum
+      - TEST_SUITE
+      title: TestSuiteEnum
     FolderEntityWorkflowSandboxData:
       type: object
       properties:
@@ -358,137 +699,31 @@ components:
       - status
       - display_data
       title: FolderEntityWorkflowSandboxData
-    InstructorVectorizerConfig:
-      type: object
-      properties:
-        instruction_domain:
-          type: string
-        instruction_query_text_type:
-          type: string
-        instruction_document_text_type:
-          type: string
-      required:
-      - instruction_domain
-      - instruction_query_text_type
-      - instruction_document_text_type
-      description: Configuration for using an Instructor vectorizer.
-      title: InstructorVectorizerConfig
-    TokenOverlappingWindowChunking:
-      type: object
-      properties:
-        chunker_name:
-          $ref: '#/components/schemas/token-overlapping-window-chunkerEnum'
-        chunker_config:
-          $ref: '#/components/schemas/TokenOverlappingWindowChunkerConfig'
-      required:
-      - chunker_name
-      description: Token overlapping window chunking
-      title: TokenOverlappingWindowChunking
-    DelimiterChunkerConfig:
-      type: object
-      properties:
-        delimiter:
-          type: string
-          default: \n\n
-        is_regex:
-          type: boolean
-          default: false
-      title: DelimiterChunkerConfig
-    delimiter-chunkerEnum:
+    text-multilingual-embedding-002Enum:
       type: string
       enum:
-      - delimiter-chunker
-      title: delimiter-chunkerEnum
-    GoogleVertexAIVectorizerConfig:
-      type: object
-      properties:
-        project_id:
-          type: string
-        region:
-          type: string
-      required:
-      - project_id
-      - region
-      title: GoogleVertexAIVectorizerConfig
-    SentenceChunkerConfig:
-      type: object
-      properties:
-        character_limit:
-          type: integer
-          default: 1000
-        min_overlap_ratio:
-          type: number
-          format: double
-          default: 0.5
-      description: Configuration for sentence chunking
-      title: SentenceChunkerConfig
-    PromptSandboxEnum:
+      - text-multilingual-embedding-002
+      title: text-multilingual-embedding-002Enum
+    sentence-transformers-multi-qa-mpnet-base-cos-v1Enum:
       type: string
       enum:
-      - PROMPT_SANDBOX
-      title: PromptSandboxEnum
-    FolderEntity:
-      oneOf:
-      - $ref: '#/components/schemas/FolderEntityFolder'
-      - $ref: '#/components/schemas/FolderEntityPromptSandbox'
-      - $ref: '#/components/schemas/FolderEntityWorkflowSandbox'
-      - $ref: '#/components/schemas/FolderEntityDocumentIndex'
-      - $ref: '#/components/schemas/FolderEntityTestSuite'
-      - $ref: '#/components/schemas/FolderEntityDataset'
-      title: FolderEntity
-    FolderEntityPromptSandbox:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        type:
-          $ref: '#/components/schemas/PromptSandboxEnum'
-        data:
-          $ref: '#/components/schemas/FolderEntityPromptSandboxData'
-      required:
-      - id
-      - type
-      - data
-      description: A slim representation of a Prompt Sandbox, as it exists within a Folder.
-      title: FolderEntityPromptSandbox
-    DocumentIndexIndexingConfig:
-      type: object
-      properties:
-        vectorizer:
-          $ref: '#/components/schemas/IndexingConfigVectorizer'
-        chunking:
-          oneOf:
-          - $ref: '#/components/schemas/DocumentIndexChunking'
-          - type: 'null'
-      required:
-      - vectorizer
-      title: DocumentIndexIndexingConfig
-    GoogleVertexAIVectorizerGeminiEmbedding001:
+      - sentence-transformers/multi-qa-mpnet-base-cos-v1
+      title: sentence-transformers-multi-qa-mpnet-base-cos-v1Enum
+    BasicVectorizerSentenceTransformersMultiQaMpnetBaseDotV1:
       type: object
       properties:
         model_name:
-          $ref: '#/components/schemas/gemini-embedding-001Enum'
+          $ref: '#/components/schemas/sentence-transformers-multi-qa-mpnet-base-dot-v1Enum'
         config:
-          $ref: '#/components/schemas/GoogleVertexAIVectorizerConfig'
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
       required:
       - model_name
-      - config
-      title: GoogleVertexAIVectorizerGeminiEmbedding001
-    AddOpenaiApiKeyEnum:
-      type: boolean
-      description: '* `True` - True'
-      title: AddOpenaiApiKeyEnum
-    hkunlp-instructor-xlEnum:
-      type: string
-      enum:
-      - hkunlp/instructor-xl
-      title: hkunlp-instructor-xlEnum
-    DocumentIndexEnum:
-      type: string
-      enum:
-      - DOCUMENT_INDEX
-      title: DocumentIndexEnum
+      description: Basic vectorizer for sentence-transformers/multi-qa-mpnet-base-dot-v1.
+      title: BasicVectorizerSentenceTransformersMultiQaMpnetBaseDotV1
     PaginatedFolderEntityList:
       type: object
       properties:
@@ -509,121 +744,29 @@ components:
           items:
             $ref: '#/components/schemas/FolderEntity'
       title: PaginatedFolderEntityList
-    FolderEntityDataset:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        type:
-          $ref: '#/components/schemas/DatasetEnum'
-        data:
-          $ref: '#/components/schemas/FolderEntityDatasetData'
-      required:
-      - id
-      - type
-      - data
-      description: A slim representation of a Dataset, as it exists within a Folder.
-      title: FolderEntityDataset
-    FolderEntityDatasetData:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        label:
-          type: string
-        name:
-          type: string
-        description:
-          type:
-          - string
-          - 'null'
-        created:
-          type: string
-          format: date-time
-        modified:
-          type: string
-          format: date-time
-      required:
-      - id
-      - label
-      - name
-      - created
-      - modified
-      title: FolderEntityDatasetData
-    text-embedding-004Enum:
+    AddOpenaiApiKeyEnum:
+      type: boolean
+      description: '* `True` - True'
+      title: AddOpenaiApiKeyEnum
+    private-vectorizerEnum:
       type: string
       enum:
-      - text-embedding-004
-      title: text-embedding-004Enum
-    sentence-chunkerEnum:
+      - private-vectorizer
+      title: private-vectorizerEnum
+    DatasetEnum:
       type: string
       enum:
-      - sentence-chunker
-      title: sentence-chunkerEnum
-    FolderEntityWorkflowSandbox:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        type:
-          $ref: '#/components/schemas/WorkflowSandboxEnum'
-        data:
-          $ref: '#/components/schemas/FolderEntityWorkflowSandboxData'
-      required:
-      - id
-      - type
-      - data
-      description: A slim representation of a Workflow Sandbox, as it exists within a Folder.
-      title: FolderEntityWorkflowSandbox
-    sentence-transformers-multi-qa-mpnet-base-dot-v1Enum:
-      type: string
-      enum:
-      - sentence-transformers/multi-qa-mpnet-base-dot-v1
-      title: sentence-transformers-multi-qa-mpnet-base-dot-v1Enum
-    FolderEntityTestSuite:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        type:
-          $ref: '#/components/schemas/TestSuiteEnum'
-        data:
-          $ref: '#/components/schemas/FolderEntityTestSuiteData'
-      required:
-      - id
-      - type
-      - data
-      description: A slim representation of a Test Suite, as it exists within a Folder.
-      title: FolderEntityTestSuite
-    token-overlapping-window-chunkerEnum:
-      type: string
-      enum:
-      - token-overlapping-window-chunker
-      title: token-overlapping-window-chunkerEnum
-    WorkflowSandboxDisplayData:
-      type: object
-      properties:
-        icon:
-          oneOf:
-          - $ref: '#/components/schemas/WorkflowDisplayIcon'
-          - type: 'null'
-          description: The icon associated with this Workflow Sandbox.
-      description: Information used to display this Workflow Sandbox.
-      title: WorkflowSandboxDisplayData
-    baai-bge-small-en-v1.5Enum:
-      type: string
-      enum:
-      - BAAI/bge-small-en-v1.5
-      title: baai-bge-small-en-v1.5Enum
-    WorkflowSandboxEnum:
-      type: string
-      enum:
-      - WORKFLOW_SANDBOX
-      title: WorkflowSandboxEnum
+      - DATASET
+      title: DatasetEnum
+    FolderEntity:
+      oneOf:
+      - $ref: '#/components/schemas/FolderEntityFolder'
+      - $ref: '#/components/schemas/FolderEntityPromptSandbox'
+      - $ref: '#/components/schemas/FolderEntityWorkflowSandbox'
+      - $ref: '#/components/schemas/FolderEntityDocumentIndex'
+      - $ref: '#/components/schemas/FolderEntityTestSuite'
+      - $ref: '#/components/schemas/FolderEntityDataset'
+      title: FolderEntity
     ReductoChunkerConfig:
       type: object
       properties:
@@ -632,163 +775,6 @@ components:
           default: 1000
       description: Configuration for Reducto chunking
       title: ReductoChunkerConfig
-    TokenOverlappingWindowChunkerConfig:
-      type: object
-      properties:
-        token_limit:
-          type: integer
-          default: 250
-        overlap_ratio:
-          type: number
-          format: double
-          default: 0.5
-      description: Configuration for token overlapping window chunking
-      title: TokenOverlappingWindowChunkerConfig
-    SentenceChunking:
-      type: object
-      properties:
-        chunker_name:
-          $ref: '#/components/schemas/sentence-chunkerEnum'
-        chunker_config:
-          $ref: '#/components/schemas/SentenceChunkerConfig'
-      required:
-      - chunker_name
-      description: Sentence chunking
-      title: SentenceChunking
-    ReductoChunking:
-      type: object
-      properties:
-        chunker_name:
-          $ref: '#/components/schemas/reducto-chunkerEnum'
-        chunker_config:
-          $ref: '#/components/schemas/ReductoChunkerConfig'
-      required:
-      - chunker_name
-      description: Reducto chunking
-      title: ReductoChunking
-    TestSuiteEnum:
-      type: string
-      enum:
-      - TEST_SUITE
-      title: TestSuiteEnum
-    FolderEntityDocumentIndexData:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        label:
-          type: string
-        created:
-          type: string
-          format: date-time
-        modified:
-          type: string
-          format: date-time
-        status:
-          $ref: '#/components/schemas/EntityStatus'
-        indexing_config:
-          $ref: '#/components/schemas/DocumentIndexIndexingConfig'
-      required:
-      - id
-      - label
-      - created
-      - modified
-      - status
-      - indexing_config
-      title: FolderEntityDocumentIndexData
-    FolderEntityTestSuiteData:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        label:
-          type: string
-        created:
-          type: string
-          format: date-time
-        modified:
-          type: string
-          format: date-time
-        status:
-          $ref: '#/components/schemas/EntityStatus'
-      required:
-      - id
-      - label
-      - created
-      - modified
-      - status
-      title: FolderEntityTestSuiteData
-    BasicVectorizerIntfloatMultilingualE5Large:
-      type: object
-      properties:
-        config:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            description: Any type
-        model_name:
-          $ref: '#/components/schemas/intfloat-multilingual-e5-largeEnum'
-      required:
-      - model_name
-      description: Basic vectorizer for intfloat/multilingual-e5-large.
-      title: BasicVectorizerIntfloatMultilingualE5Large
-    text-multilingual-embedding-002Enum:
-      type: string
-      enum:
-      - text-multilingual-embedding-002
-      title: text-multilingual-embedding-002Enum
-    OpenAIVectorizerTextEmbedding3Large:
-      type: object
-      properties:
-        config:
-          $ref: '#/components/schemas/OpenAIVectorizerConfig'
-        model_name:
-          $ref: '#/components/schemas/text-embedding-3-largeEnum'
-      required:
-      - config
-      - model_name
-      description: OpenAI vectorizer for text-embedding-3-large.
-      title: OpenAIVectorizerTextEmbedding3Large
-    PrivateVectorizer:
-      type: object
-      properties:
-        model_name:
-          $ref: '#/components/schemas/private-vectorizerEnum'
-      required:
-      - model_name
-      description: Serializer for private vectorizer.
-      title: PrivateVectorizer
-    OpenAIVectorizerTextEmbedding3Small:
-      type: object
-      properties:
-        config:
-          $ref: '#/components/schemas/OpenAIVectorizerConfig'
-        model_name:
-          $ref: '#/components/schemas/text-embedding-3-smallEnum'
-      required:
-      - config
-      - model_name
-      description: OpenAI vectorizer for text-embedding-3-small.
-      title: OpenAIVectorizerTextEmbedding3Small
-    FolderEntityDocumentIndex:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        type:
-          $ref: '#/components/schemas/DocumentIndexEnum'
-        data:
-          $ref: '#/components/schemas/FolderEntityDocumentIndexData'
-      required:
-      - id
-      - type
-      - data
-      description: A slim representation of a Document Index, as it exists within a Folder.
-      title: FolderEntityDocumentIndex
     FolderEntityPromptSandboxData:
       type: object
       properties:
@@ -821,34 +807,37 @@ components:
       - modified
       - status
       title: FolderEntityPromptSandboxData
-    text-embedding-ada-002Enum:
+    EntityStatus:
       type: string
       enum:
-      - text-embedding-ada-002
-      title: text-embedding-ada-002Enum
-    GoogleVertexAIVectorizerTextEmbedding004:
+      - ACTIVE
+      - ARCHIVED
+      - PENDING_DELETION
+      description: '* `ACTIVE` - Active
+
+        * `ARCHIVED` - Archived
+
+        * `PENDING_DELETION` - Pending Deletion'
+      title: EntityStatus
+    FolderEnum:
+      type: string
+      enum:
+      - FOLDER
+      title: FolderEnum
+    hkunlp-instructor-xlEnum:
+      type: string
+      enum:
+      - hkunlp/instructor-xl
+      title: hkunlp-instructor-xlEnum
+    FastEmbedVectorizerBAAIBgeSmallEnV15:
       type: object
       properties:
         model_name:
-          $ref: '#/components/schemas/text-embedding-004Enum'
-        config:
-          $ref: '#/components/schemas/GoogleVertexAIVectorizerConfig'
+          $ref: '#/components/schemas/baai-bge-small-en-v1.5Enum'
       required:
       - model_name
-      - config
-      title: GoogleVertexAIVectorizerTextEmbedding004
-    OpenAIVectorizerTextEmbeddingAda002:
-      type: object
-      properties:
-        config:
-          $ref: '#/components/schemas/OpenAIVectorizerConfig'
-        model_name:
-          $ref: '#/components/schemas/text-embedding-ada-002Enum'
-      required:
-      - config
-      - model_name
-      description: OpenAI vectorizer for text-embedding-ada-002.
-      title: OpenAIVectorizerTextEmbeddingAda002
+      description: FastEmbed vectorizer for BAAI/bge-small-en-v1.5.
+      title: FastEmbedVectorizerBAAIBgeSmallEnV15
     V1FolderEntitiesGetParametersEntityStatus:
       type: string
       enum:
@@ -856,45 +845,56 @@ components:
       - ARCHIVED
       - PENDING_DELETION
       title: V1FolderEntitiesGetParametersEntityStatus
-    WorkflowDisplayIcon:
-      type: object
-      properties:
-        src:
-          type:
-          - string
-          - 'null'
-        color:
-          type:
-          - string
-          - 'null'
-      description: Icon to be used alongside a Workflow
-      title: WorkflowDisplayIcon
-    intfloat-multilingual-e5-largeEnum:
-      type: string
-      enum:
-      - intfloat/multilingual-e5-large
-      title: intfloat-multilingual-e5-largeEnum
-    FolderEntityFolder:
+    FolderEntityFolderData:
       type: object
       properties:
         id:
           type: string
           format: uuid
-        type:
-          $ref: '#/components/schemas/FolderEnum'
-        data:
-          $ref: '#/components/schemas/FolderEntityFolderData'
+        label:
+          type: string
+        created:
+          type: string
+          format: date-time
+        modified:
+          type: string
+          format: date-time
+        has_contents:
+          type: boolean
       required:
       - id
-      - type
-      - data
-      description: A slim representation of a Folder, as it exists within another Folder.
-      title: FolderEntityFolder
-    folder-entities_add_entity_to_folder_Response_200:
+      - label
+      - created
+      - modified
+      - has_contents
+      title: FolderEntityFolderData
+    GoogleVertexAIVectorizerTextMultilingualEmbedding002:
       type: object
-      properties: {}
-      description: Empty response body
-      title: folder-entities_add_entity_to_folder_Response_200
+      properties:
+        model_name:
+          $ref: '#/components/schemas/text-multilingual-embedding-002Enum'
+        config:
+          $ref: '#/components/schemas/GoogleVertexAIVectorizerConfig'
+      required:
+      - model_name
+      - config
+      title: GoogleVertexAIVectorizerTextMultilingualEmbedding002
+    intfloat-multilingual-e5-largeEnum:
+      type: string
+      enum:
+      - intfloat/multilingual-e5-large
+      title: intfloat-multilingual-e5-largeEnum
+    GoogleVertexAIVectorizerConfig:
+      type: object
+      properties:
+        project_id:
+          type: string
+        region:
+          type: string
+      required:
+      - project_id
+      - region
+      title: GoogleVertexAIVectorizerConfig
   securitySchemes:
     default:
       type: apiKey
