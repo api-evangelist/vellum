@@ -62,15 +62,36 @@ paths:
                 $ref: '#/components/schemas/CheckWorkflowExecutionStatusErrorResponse'
 components:
   schemas:
-    CheckWorkflowExecutionStatusErrorResponse:
+    WorkflowResultEventState:
+      type: string
+      enum:
+      - INITIATED
+      - STREAMING
+      - FULFILLED
+      - REJECTED
+      - PENDING
+      description: '* `INITIATED` - Initiated
+
+        * `STREAMING` - Streaming
+
+        * `FULFILLED` - Fulfilled
+
+        * `REJECTED` - Rejected
+
+        * `PENDING` - Pending'
+      title: WorkflowResultEventState
+    CheckWorkflowExecutionStatusError:
       type: object
       properties:
-        detail:
-          type: string
-      required:
-      - detail
-      description: Error response for workflow execution status check.
-      title: CheckWorkflowExecutionStatusErrorResponse
+        message:
+          type:
+          - string
+          - 'null'
+        code:
+          oneOf:
+          - $ref: '#/components/schemas/WorkflowExecutionEventErrorCode'
+          - type: 'null'
+      title: CheckWorkflowExecutionStatusError
     WorkflowExecutionEventErrorCode:
       type: string
       enum:
@@ -119,36 +140,15 @@ components:
 
         * `USER_DEFINED_ERROR` - USER_DEFINED_ERROR'
       title: WorkflowExecutionEventErrorCode
-    CheckWorkflowExecutionStatusError:
+    CheckWorkflowExecutionStatusErrorResponse:
       type: object
       properties:
-        message:
-          type:
-          - string
-          - 'null'
-        code:
-          oneOf:
-          - $ref: '#/components/schemas/WorkflowExecutionEventErrorCode'
-          - type: 'null'
-      title: CheckWorkflowExecutionStatusError
-    WorkflowResultEventState:
-      type: string
-      enum:
-      - INITIATED
-      - STREAMING
-      - FULFILLED
-      - REJECTED
-      - PENDING
-      description: '* `INITIATED` - Initiated
-
-        * `STREAMING` - Streaming
-
-        * `FULFILLED` - Fulfilled
-
-        * `REJECTED` - Rejected
-
-        * `PENDING` - Pending'
-      title: WorkflowResultEventState
+        detail:
+          type: string
+      required:
+      - detail
+      description: Error response for workflow execution status check.
+      title: CheckWorkflowExecutionStatusErrorResponse
     CheckWorkflowExecutionStatusResponse:
       type: object
       properties:

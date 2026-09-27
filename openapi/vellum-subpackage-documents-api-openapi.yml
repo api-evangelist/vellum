@@ -274,66 +274,11 @@ paths:
                 $ref: '#/components/schemas/PaginatedSlimDocumentList'
 components:
   schemas:
-    SlimDocumentDocumentToDocumentIndex:
+    documents_destroy_Response_204:
       type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Vellum-generated ID that uniquely identifies this link.
-        environment_document_index_id:
-          type: string
-          format: uuid
-          description: Vellum-generated ID that uniquely identifies the environment index this document is included in.
-        document_index_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: Vellum-generated ID that uniquely identifies the index this document is included in.
-        indexing_state:
-          $ref: '#/components/schemas/IndexingStateEnum'
-          description: 'An enum value representing where this document is along its indexing lifecycle for this index.
-
-
-            * `AWAITING_PROCESSING` - Awaiting Processing
-
-            * `QUEUED` - Queued
-
-            * `INDEXING` - Indexing
-
-            * `INDEXED` - Indexed
-
-            * `FAILED` - Failed'
-        processing_state:
-          type:
-          - string
-          - 'null'
-      required:
-      - id
-      - environment_document_index_id
-      - document_index_id
-      - processing_state
-      description: A slim representation of the link between a Document and a Document Index it's a member of.
-      title: SlimDocumentDocumentToDocumentIndex
-    DocumentProcessingState:
-      type: string
-      enum:
-      - QUEUED
-      - PROCESSING
-      - PROCESSED
-      - FAILED
-      - UNKNOWN
-      description: '* `QUEUED` - Queued
-
-        * `PROCESSING` - Processing
-
-        * `PROCESSED` - Processed
-
-        * `FAILED` - Failed
-
-        * `UNKNOWN` - Unknown'
-      title: DocumentProcessingState
+      properties: {}
+      description: Empty response body
+      title: documents_destroy_Response_204
     DocumentDocumentToDocumentIndex:
       type: object
       properties:
@@ -381,11 +326,22 @@ components:
       - processing_state
       description: A detailed representation of the link between a Document and a Document Index it's a member of.
       title: DocumentDocumentToDocumentIndex
-    documents_destroy_Response_204:
+    UploadDocumentResponse:
       type: object
-      properties: {}
-      description: Empty response body
-      title: documents_destroy_Response_204
+      properties:
+        document_id:
+          type: string
+          format: uuid
+          description: The ID of the newly created document.
+      required:
+      - document_id
+      title: UploadDocumentResponse
+    DocumentStatus:
+      type: string
+      enum:
+      - ACTIVE
+      description: '* `ACTIVE` - Active'
+      title: DocumentStatus
     PaginatedSlimDocumentList:
       type: object
       properties:
@@ -406,65 +362,60 @@ components:
           items:
             $ref: '#/components/schemas/SlimDocument'
       title: PaginatedSlimDocumentList
-    DocumentRead:
+    SlimDocumentDocumentToDocumentIndex:
       type: object
       properties:
         id:
           type: string
           format: uuid
-        external_id:
+          description: Vellum-generated ID that uniquely identifies this link.
+        environment_document_index_id:
+          type: string
+          format: uuid
+          description: Vellum-generated ID that uniquely identifies the environment index this document is included in.
+        document_index_id:
           type:
           - string
           - 'null'
-          description: The unique id of this document as it exists in the user's system.
-        last_uploaded_at:
-          type: string
-          format: date-time
-        label:
-          type: string
-          description: A human-readable label for the document. Defaults to the originally uploaded file's file name.
+          format: uuid
+          description: Vellum-generated ID that uniquely identifies the index this document is included in.
+        indexing_state:
+          $ref: '#/components/schemas/IndexingStateEnum'
+          description: 'An enum value representing where this document is along its indexing lifecycle for this index.
+
+
+            * `AWAITING_PROCESSING` - Awaiting Processing
+
+            * `QUEUED` - Queued
+
+            * `INDEXING` - Indexing
+
+            * `INDEXED` - Indexed
+
+            * `FAILED` - Failed'
         processing_state:
-          $ref: '#/components/schemas/DocumentProcessingState'
-        status:
-          $ref: '#/components/schemas/DocumentStatus'
-          description: 'The current status of the document
-
-
-            * `ACTIVE` - Active'
-        keywords:
-          type: array
-          items:
-            type: string
-          description: A list of keywords that'll be associated with the document. Used as part of keyword search.
-        original_file_url:
           type:
           - string
           - 'null'
-        document_to_document_indexes:
-          type: array
-          items:
-            $ref: '#/components/schemas/DocumentDocumentToDocumentIndex'
-        metadata:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            description: Any type
-          description: A previously supplied JSON object containing metadata that can be filtered on when searching.
       required:
       - id
-      - last_uploaded_at
-      - label
+      - environment_document_index_id
+      - document_index_id
       - processing_state
-      - original_file_url
-      - document_to_document_indexes
-      title: DocumentRead
-    DocumentStatus:
+      description: A slim representation of the link between a Document and a Document Index it's a member of.
+      title: SlimDocumentDocumentToDocumentIndex
+    ProcessingFailureReasonEnum:
       type: string
       enum:
-      - ACTIVE
-      description: '* `ACTIVE` - Active'
-      title: DocumentStatus
+      - EXCEEDED_CHARACTER_LIMIT
+      - INVALID_FILE
+      - INVALID_CREDENTIALS
+      description: '* `EXCEEDED_CHARACTER_LIMIT` - Exceeded Character Limit
+
+        * `INVALID_FILE` - Invalid File
+
+        * `INVALID_CREDENTIALS` - Invalid Credentials'
+      title: ProcessingFailureReasonEnum
     UploadDocumentErrorResponse:
       type: object
       properties:
@@ -473,16 +424,24 @@ components:
       required:
       - detail
       title: UploadDocumentErrorResponse
-    UploadDocumentResponse:
-      type: object
-      properties:
-        document_id:
-          type: string
-          format: uuid
-          description: The ID of the newly created document.
-      required:
-      - document_id
-      title: UploadDocumentResponse
+    IndexingStateEnum:
+      type: string
+      enum:
+      - AWAITING_PROCESSING
+      - QUEUED
+      - INDEXING
+      - INDEXED
+      - FAILED
+      description: '* `AWAITING_PROCESSING` - Awaiting Processing
+
+        * `QUEUED` - Queued
+
+        * `INDEXING` - Indexing
+
+        * `INDEXED` - Indexed
+
+        * `FAILED` - Failed'
+      title: IndexingStateEnum
     SlimDocument:
       type: object
       properties:
@@ -545,36 +504,77 @@ components:
       - processing_state
       - document_to_document_indexes
       title: SlimDocument
-    ProcessingFailureReasonEnum:
+    DocumentRead:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: The unique id of this document as it exists in the user's system.
+        last_uploaded_at:
+          type: string
+          format: date-time
+        label:
+          type: string
+          description: A human-readable label for the document. Defaults to the originally uploaded file's file name.
+        processing_state:
+          $ref: '#/components/schemas/DocumentProcessingState'
+        status:
+          $ref: '#/components/schemas/DocumentStatus'
+          description: 'The current status of the document
+
+
+            * `ACTIVE` - Active'
+        keywords:
+          type: array
+          items:
+            type: string
+          description: A list of keywords that'll be associated with the document. Used as part of keyword search.
+        original_file_url:
+          type:
+          - string
+          - 'null'
+        document_to_document_indexes:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentDocumentToDocumentIndex'
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+          description: A previously supplied JSON object containing metadata that can be filtered on when searching.
+      required:
+      - id
+      - last_uploaded_at
+      - label
+      - processing_state
+      - original_file_url
+      - document_to_document_indexes
+      title: DocumentRead
+    DocumentProcessingState:
       type: string
       enum:
-      - EXCEEDED_CHARACTER_LIMIT
-      - INVALID_FILE
-      - INVALID_CREDENTIALS
-      description: '* `EXCEEDED_CHARACTER_LIMIT` - Exceeded Character Limit
-
-        * `INVALID_FILE` - Invalid File
-
-        * `INVALID_CREDENTIALS` - Invalid Credentials'
-      title: ProcessingFailureReasonEnum
-    IndexingStateEnum:
-      type: string
-      enum:
-      - AWAITING_PROCESSING
       - QUEUED
-      - INDEXING
-      - INDEXED
+      - PROCESSING
+      - PROCESSED
       - FAILED
-      description: '* `AWAITING_PROCESSING` - Awaiting Processing
+      - UNKNOWN
+      description: '* `QUEUED` - Queued
 
-        * `QUEUED` - Queued
+        * `PROCESSING` - Processing
 
-        * `INDEXING` - Indexing
+        * `PROCESSED` - Processed
 
-        * `INDEXED` - Indexed
+        * `FAILED` - Failed
 
-        * `FAILED` - Failed'
-      title: IndexingStateEnum
+        * `UNKNOWN` - Unknown'
+      title: DocumentProcessingState
   securitySchemes:
     default:
       type: apiKey

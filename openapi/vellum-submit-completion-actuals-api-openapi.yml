@@ -1,0 +1,139 @@
+openapi: 3.2.0
+info:
+  title: Client SDK Submit Completion Actuals API
+  version: 1.0.0
+servers:
+- url: https://predict.vellum.ai
+- url: https://api.vellum.ai
+- url: https://documents.vellum.ai
+tags:
+- name: Submit Completion Actuals
+paths:
+  /v1/submit-completion-actuals:
+    post:
+      operationId: submit-completion-actuals
+      summary: Submit Completion Actuals
+      description: Used to submit feedback regarding the quality of previously generated completions.
+      tags:
+      - Submit Completion Actuals
+      parameters:
+      - name: X-API-KEY
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-API-Version
+        in: header
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: No response body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/submit-completion-actuals_Response_200'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubmitCompletionActualsErrorResponse'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubmitCompletionActualsErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubmitCompletionActualsErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubmitCompletionActualsRequest'
+components:
+  schemas:
+    SubmitCompletionActualsRequest:
+      type: object
+      properties:
+        deployment_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of the deployment. Must provide either this or deployment_name.
+        deployment_name:
+          type:
+          - string
+          - 'null'
+          description: The name of the deployment. Must provide either this or deployment_id.
+        actuals:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubmitCompletionActualRequest'
+          description: Feedback regarding the quality of previously generated completions
+      required:
+      - actuals
+      title: SubmitCompletionActualsRequest
+    SubmitCompletionActualRequest:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          description: The Vellum-generated ID of a previously generated completion. Must provide either this or external_id.
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: The external ID that was originally provided when generating the completion that you'd now like to submit actuals for. Must provide either this or id.
+        text:
+          type:
+          - string
+          - 'null'
+          description: Text representing what the completion _should_ have been.
+        quality:
+          type:
+          - number
+          - 'null'
+          format: double
+          description: A number between 0 and 1 representing the quality of the completion. 0 is the worst, 1 is the best.
+        timestamp:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Optionally provide the timestamp representing when this feedback was collected. Used for reporting purposes.
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+          description: Optionally provide additional metadata about the feedback submission.
+      title: SubmitCompletionActualRequest
+    submit-completion-actuals_Response_200:
+      type: object
+      properties: {}
+      description: Empty response body
+      title: submit-completion-actuals_Response_200
+    SubmitCompletionActualsErrorResponse:
+      type: object
+      properties:
+        detail:
+          type: string
+      required:
+      - detail
+      title: SubmitCompletionActualsErrorResponse
+  securitySchemes:
+    default:
+      type: apiKey
+      in: header
+      name: X-API-KEY

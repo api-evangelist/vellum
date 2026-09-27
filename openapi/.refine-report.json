@@ -4,7 +4,14 @@
     "_original/vellum-openapi.json"
   ],
   "outputs": [
-    "vellum-default-api-openapi.yml",
+    "vellum-execute-prompt-api-openapi.yml",
+    "vellum-execute-prompt-stream-api-openapi.yml",
+    "vellum-execute-workflow-api-openapi.yml",
+    "vellum-execute-workflow-async-api-openapi.yml",
+    "vellum-execute-workflow-stream-api-openapi.yml",
+    "vellum-search-api-openapi.yml",
+    "vellum-submit-completion-actuals-api-openapi.yml",
+    "vellum-submit-workflow-execution-actuals-api-openapi.yml",
     "vellum-subpackage-deployments-api-openapi.yml",
     "vellum-subpackage-documentindexes-api-openapi.yml",
     "vellum-subpackage-documents-api-openapi.yml",
@@ -20,13 +27,30 @@
     "vellum-subpackage-workflows-api-openapi.yml",
     "vellum-subpackage-workspacesecrets-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
   "notes": [
     "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
     "vellum-openapi.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "vellum-openapi.json: declared missing tag: ",
+    "vellum-openapi.json: tagged paths POST /v1/execute-prompt -> Execute Prompt",
+    "vellum-openapi.json: tagged paths POST /v1/execute-prompt-stream -> Execute Prompt Stream",
+    "vellum-openapi.json: tagged paths POST /v1/submit-completion-actuals -> Submit Completion Actuals",
+    "vellum-openapi.json: tagged paths POST /v1/execute-workflow -> Execute Workflow",
+    "vellum-openapi.json: tagged paths POST /v1/execute-workflow-async -> Execute Workflow Async",
+    "vellum-openapi.json: tagged paths POST /v1/execute-workflow-stream -> Execute Workflow Stream",
+    "vellum-openapi.json: tagged paths POST /v1/submit-workflow-execution-actuals -> Submit Workflow Execution Actuals",
+    "vellum-openapi.json: tagged paths POST /v1/search -> Search",
+    "vellum-openapi.json: declared missing tag: Execute Prompt",
+    "vellum-openapi.json: declared missing tag: Execute Prompt Stream",
+    "vellum-openapi.json: declared missing tag: Execute Workflow",
+    "vellum-openapi.json: declared missing tag: Execute Workflow Async",
+    "vellum-openapi.json: declared missing tag: Execute Workflow Stream",
+    "vellum-openapi.json: declared missing tag: Search",
+    "vellum-openapi.json: declared missing tag: Submit Completion Actuals",
+    "vellum-openapi.json: declared missing tag: Submit Workflow Execution Actuals",
     "vellum-openapi.json: declared missing tag: subpackage_deployments",
     "vellum-openapi.json: declared missing tag: subpackage_documentIndexes",
     "vellum-openapi.json: declared missing tag: subpackage_documents",
@@ -41,7 +65,8 @@
     "vellum-openapi.json: declared missing tag: subpackage_workflowSandboxes",
     "vellum-openapi.json: declared missing tag: subpackage_workflows",
     "vellum-openapi.json: declared missing tag: subpackage_workspaceSecrets",
-    "apis.yml register: already-registered"
+    "superseded outputs removed: vellum-default-api-openapi.yml",
+    "apis.yml register: written (+8 apis, 23 total)"
   ],
   "skipped": [
     "vellum-default-api-openapi.yml: previously refined output, superseded by openapi/_original/",

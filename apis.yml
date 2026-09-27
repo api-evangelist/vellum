@@ -167,19 +167,8 @@ apis:
   authentication:
   - type: API Key
     description: Workspace API keys passed via the `X_API_KEY` header authenticate REST and SDK calls.
-- aid: vellum:vellum-default-api
-  name: Vellum AI Default API
-  description: The Default API from Vellum AI — 8 operation(s) for default.
-  humanURL: https://docs.vellum.ai
-  baseURL: https://api.vellum.ai
-  tags: []
-  tags_raw:
-  - Default
-  properties:
-  - type: OpenAPI
-    url: openapi/vellum-default-api-openapi.yml
 - aid: vellum:vellum-subpackage-deployments-api
-  name: Vellum AI subpackage_deployments API
+  name: Vellum AI Subpackage Deployments API
   description: >-
     The subpackage_deployments API from Vellum AI — 7 operation(s) for subpackage_deployments.
   humanURL: https://docs.vellum.ai
@@ -191,7 +180,7 @@ apis:
   - type: OpenAPI
     url: openapi/vellum-subpackage-deployments-api-openapi.yml
 - aid: vellum:vellum-subpackage-documentindexes-api
-  name: Vellum AI subpackage_documentIndexes API
+  name: Vellum AI Subpackage Document Indexes API
   description: >-
     The subpackage_documentIndexes API from Vellum AI — 3 operation(s) for subpackage_documentindexes.
   humanURL: https://docs.vellum.ai
@@ -202,7 +191,7 @@ apis:
   - type: OpenAPI
     url: openapi/vellum-subpackage-documentindexes-api-openapi.yml
 - aid: vellum:vellum-subpackage-documents-api
-  name: Vellum AI subpackage_documents API
+  name: Vellum AI Subpackage Documents API
   description: The subpackage_documents API from Vellum AI — 3 operation(s) for subpackage_documents.
   humanURL: https://docs.vellum.ai
   baseURL: https://api.vellum.ai
@@ -213,7 +202,7 @@ apis:
   - type: OpenAPI
     url: openapi/vellum-subpackage-documents-api-openapi.yml
 - aid: vellum:vellum-subpackage-events-api
-  name: Vellum AI subpackage_events API
+  name: Vellum AI Subpackage Events API
   description: The subpackage_events API from Vellum AI — 1 operation(s) for subpackage_events.
   humanURL: https://docs.vellum.ai
   baseURL: https://api.vellum.ai
@@ -224,7 +213,7 @@ apis:
   - type: OpenAPI
     url: openapi/vellum-subpackage-events-api-openapi.yml
 - aid: vellum:vellum-subpackage-folderentities-api
-  name: Vellum AI subpackage_folderEntities API
+  name: Vellum AI Subpackage Folder Entities API
   description: >-
     The subpackage_folderEntities API from Vellum AI — 2 operation(s) for subpackage_folderentities.
   humanURL: https://docs.vellum.ai
@@ -235,7 +224,7 @@ apis:
   - type: OpenAPI
     url: openapi/vellum-subpackage-folderentities-api-openapi.yml
 - aid: vellum:vellum-subpackage-sandboxes-api
-  name: Vellum AI subpackage_sandboxes API
+  name: Vellum AI Subpackage Sandboxes API
   description: The subpackage_sandboxes API from Vellum AI — 3 operation(s) for subpackage_sandboxes.
   humanURL: https://docs.vellum.ai
   baseURL: https://api.vellum.ai
@@ -246,7 +235,7 @@ apis:
   - type: OpenAPI
     url: openapi/vellum-subpackage-sandboxes-api-openapi.yml
 - aid: vellum:vellum-subpackage-testsuiteruns-api
-  name: Vellum AI subpackage_testSuiteRuns API
+  name: Vellum AI Subpackage Test Suite Runs API
   description: >-
     The subpackage_testSuiteRuns API from Vellum AI — 3 operation(s) for subpackage_testsuiteruns.
   humanURL: https://docs.vellum.ai
@@ -257,7 +246,7 @@ apis:
   - type: OpenAPI
     url: openapi/vellum-subpackage-testsuiteruns-api-openapi.yml
 - aid: vellum:vellum-subpackage-testsuites-api
-  name: Vellum AI subpackage_testSuites API
+  name: Vellum AI Subpackage Test Suites API
   description: The subpackage_testSuites API from Vellum AI — 3 operation(s) for subpackage_testsuites.
   humanURL: https://docs.vellum.ai
   baseURL: https://api.vellum.ai
@@ -267,7 +256,7 @@ apis:
   - type: OpenAPI
     url: openapi/vellum-subpackage-testsuites-api-openapi.yml
 - aid: vellum:vellum-subpackage-uploadedfiles-api
-  name: Vellum AI subpackage_uploadedFiles API
+  name: Vellum AI Subpackage Uploaded Files API
   description: >-
     The subpackage_uploadedFiles API from Vellum AI — 1 operation(s) for subpackage_uploadedfiles.
   humanURL: https://docs.vellum.ai
@@ -278,7 +267,7 @@ apis:
   - type: OpenAPI
     url: openapi/vellum-subpackage-uploadedfiles-api-openapi.yml
 - aid: vellum:vellum-subpackage-workflowdeployments-api
-  name: Vellum AI subpackage_workflowDeployments API
+  name: Vellum AI Subpackage Workflow Deployments API
   description: >-
     The subpackage_workflowDeployments API from Vellum AI — 10 operation(s) for subpackage_workflowdeployments.
   humanURL: https://docs.vellum.ai
@@ -289,7 +278,7 @@ apis:
   - type: OpenAPI
     url: openapi/vellum-subpackage-workflowdeployments-api-openapi.yml
 - aid: vellum:vellum-subpackage-workflowexecutions-api
-  name: Vellum AI subpackage_workflowExecutions API
+  name: Vellum AI Subpackage Workflow Executions API
   description: >-
     The subpackage_workflowExecutions API from Vellum AI — 1 operation(s) for subpackage_workflowexecutions.
   humanURL: https://docs.vellum.ai
@@ -300,7 +289,7 @@ apis:
   - type: OpenAPI
     url: openapi/vellum-subpackage-workflowexecutions-api-openapi.yml
 - aid: vellum:vellum-subpackage-workflows-api
-  name: Vellum AI subpackage_workflows API
+  name: Vellum AI Subpackage Workflows API
   description: The subpackage_workflows API from Vellum AI — 1 operation(s) for subpackage_workflows.
   humanURL: https://docs.vellum.ai
   baseURL: https://api.vellum.ai
@@ -311,7 +300,7 @@ apis:
   - type: OpenAPI
     url: openapi/vellum-subpackage-workflows-api-openapi.yml
 - aid: vellum:vellum-subpackage-workflowsandboxes-api
-  name: Vellum AI subpackage_workflowSandboxes API
+  name: Vellum AI Subpackage Workflow Sandboxes API
   description: >-
     The subpackage_workflowSandboxes API from Vellum AI — 1 operation(s) for subpackage_workflowsandboxes.
   humanURL: https://docs.vellum.ai
@@ -322,7 +311,7 @@ apis:
   - type: OpenAPI
     url: openapi/vellum-subpackage-workflowsandboxes-api-openapi.yml
 - aid: vellum:vellum-subpackage-workspacesecrets-api
-  name: Vellum AI subpackage_workspaceSecrets API
+  name: Vellum AI Subpackage Workspace Secrets API
   description: >-
     The subpackage_workspaceSecrets API from Vellum AI — 1 operation(s) for subpackage_workspacesecrets.
   humanURL: https://docs.vellum.ai
@@ -332,6 +321,91 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/vellum-subpackage-workspacesecrets-api-openapi.yml
+- aid: vellum:vellum-execute-prompt-api
+  name: Vellum AI Execute Prompt API
+  description: The Execute Prompt API from Vellum AI — 1 operation(s) for execute prompt.
+  humanURL: https://docs.vellum.ai
+  baseURL: https://api.vellum.ai
+  tags:
+  - Execute Prompt
+  properties:
+  - type: OpenAPI
+    url: openapi/vellum-execute-prompt-api-openapi.yml
+- aid: vellum:vellum-execute-prompt-stream-api
+  name: Vellum AI Execute Prompt Stream API
+  description: The Execute Prompt Stream API from Vellum AI — 1 operation(s) for execute prompt stream.
+  humanURL: https://docs.vellum.ai
+  baseURL: https://api.vellum.ai
+  tags:
+  - Execute Prompt Stream
+  properties:
+  - type: OpenAPI
+    url: openapi/vellum-execute-prompt-stream-api-openapi.yml
+- aid: vellum:vellum-execute-workflow-api
+  name: Vellum AI Execute Workflow API
+  description: The Execute Workflow API from Vellum AI — 1 operation(s) for execute workflow.
+  humanURL: https://docs.vellum.ai
+  baseURL: https://api.vellum.ai
+  tags:
+  - Execute Workflow
+  properties:
+  - type: OpenAPI
+    url: openapi/vellum-execute-workflow-api-openapi.yml
+- aid: vellum:vellum-execute-workflow-async-api
+  name: Vellum AI Execute Workflow Async API
+  description: >-
+    The Execute Workflow Async API from Vellum AI — 1 operation(s) for execute workflow async.
+  humanURL: https://docs.vellum.ai
+  baseURL: https://api.vellum.ai
+  tags:
+  - Execute Workflow Async
+  properties:
+  - type: OpenAPI
+    url: openapi/vellum-execute-workflow-async-api-openapi.yml
+- aid: vellum:vellum-execute-workflow-stream-api
+  name: Vellum AI Execute Workflow Stream API
+  description: >-
+    The Execute Workflow Stream API from Vellum AI — 1 operation(s) for execute workflow stream.
+  humanURL: https://docs.vellum.ai
+  baseURL: https://api.vellum.ai
+  tags:
+  - Execute Workflow Stream
+  properties:
+  - type: OpenAPI
+    url: openapi/vellum-execute-workflow-stream-api-openapi.yml
+- aid: vellum:vellum-search-api
+  name: Vellum AI Search API
+  description: The Search API from Vellum AI — 1 operation(s) for search.
+  humanURL: https://docs.vellum.ai
+  baseURL: https://api.vellum.ai
+  tags:
+  - Search
+  properties:
+  - type: OpenAPI
+    url: openapi/vellum-search-api-openapi.yml
+- aid: vellum:vellum-submit-completion-actuals-api
+  name: Vellum AI Submit Completion Actuals API
+  description: >-
+    The Submit Completion Actuals API from Vellum AI — 1 operation(s) for submit completion actuals.
+  humanURL: https://docs.vellum.ai
+  baseURL: https://api.vellum.ai
+  tags:
+  - Submit Completion Actuals
+  properties:
+  - type: OpenAPI
+    url: openapi/vellum-submit-completion-actuals-api-openapi.yml
+- aid: vellum:vellum-submit-workflow-execution-actuals-api
+  name: Vellum AI Submit Workflow Execution Actuals API
+  description: >-
+    The Submit Workflow Execution Actuals API from Vellum AI — 1 operation(s) for submit workflow execution
+    actuals.
+  humanURL: https://docs.vellum.ai
+  baseURL: https://api.vellum.ai
+  tags:
+  - Submit Workflow Execution Actuals
+  properties:
+  - type: OpenAPI
+    url: openapi/vellum-submit-workflow-execution-actuals-api-openapi.yml
 common:
   - type: AgenticAccess
     url: agentic-access/vellum-agentic-access.yml

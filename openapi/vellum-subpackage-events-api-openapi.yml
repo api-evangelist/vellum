@@ -65,214 +65,7 @@ paths:
               $ref: '#/components/schemas/CreateWorkflowEventRequest'
 components:
   schemas:
-    WorkflowSandboxEnum:
-      type: string
-      enum:
-      - WORKFLOW_SANDBOX
-      title: WorkflowSandboxEnum
-    SpanLinkTypeEnum:
-      type: string
-      enum:
-      - TRIGGERED_BY
-      - PREVIOUS_SPAN
-      - ROOT_SPAN
-      description: '* `TRIGGERED_BY` - TRIGGERED_BY
-
-        * `PREVIOUS_SPAN` - PREVIOUS_SPAN
-
-        * `ROOT_SPAN` - ROOT_SPAN'
-      title: SpanLinkTypeEnum
-    workflow.execution.initiatedEnum:
-      type: string
-      enum:
-      - workflow.execution.initiated
-      title: workflow.execution.initiatedEnum
-    WorkflowExecutionResumedEvent:
-      type: object
-      properties:
-        parent:
-          oneOf:
-          - $ref: '#/components/schemas/ParentContext'
-          - type: 'null'
-        links:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/SpanLink'
-        name:
-          $ref: '#/components/schemas/workflow.execution.resumedEnum'
-        body:
-          $ref: '#/components/schemas/WorkflowExecutionResumedBody'
-        id:
-          type: string
-          format: uuid
-        timestamp:
-          type: string
-          format: date-time
-        api_version:
-          $ref: '#/components/schemas/ApiVersionEnum'
-        trace_id:
-          type: string
-          format: uuid
-        span_id:
-          type: string
-          format: uuid
-      required:
-      - name
-      - body
-      - id
-      - timestamp
-      - trace_id
-      - span_id
-      title: WorkflowExecutionResumedEvent
-    ErrorDetailResponse:
-      type: object
-      properties:
-        detail:
-          type: string
-          description: Message informing the user of the error.
-      required:
-      - detail
-      title: ErrorDetailResponse
-    workflow.execution.resumedEnum:
-      type: string
-      enum:
-      - workflow.execution.resumed
-      title: workflow.execution.resumedEnum
-    node.execution.initiatedEnum:
-      type: string
-      enum:
-      - node.execution.initiated
-      title: node.execution.initiatedEnum
-    VellumSdkErrorRawData:
-      oneOf:
-      - type: object
-        additionalProperties:
-          description: Any type
-      - type: string
-      title: VellumSdkErrorRawData
-    ExternalEnum:
-      type: string
-      enum:
-      - EXTERNAL
-      title: ExternalEnum
-    node.execution.fulfilledEnum:
-      type: string
-      enum:
-      - node.execution.fulfilled
-      title: node.execution.fulfilledEnum
-    WorkflowExecutionPausedEvent:
-      type: object
-      properties:
-        parent:
-          oneOf:
-          - $ref: '#/components/schemas/ParentContext'
-          - type: 'null'
-        links:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/SpanLink'
-        name:
-          $ref: '#/components/schemas/workflow.execution.pausedEnum'
-        body:
-          $ref: '#/components/schemas/WorkflowExecutionPausedBody'
-        id:
-          type: string
-          format: uuid
-        timestamp:
-          type: string
-          format: date-time
-        api_version:
-          $ref: '#/components/schemas/ApiVersionEnum'
-        trace_id:
-          type: string
-          format: uuid
-        span_id:
-          type: string
-          format: uuid
-      required:
-      - name
-      - body
-      - id
-      - timestamp
-      - trace_id
-      - span_id
-      title: WorkflowExecutionPausedEvent
-    NodeExecutionFulfilledBody:
-      type: object
-      properties:
-        node_definition:
-          $ref: '#/components/schemas/VellumCodeResourceDefinition'
-        invoked_ports:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/InvokedPort'
-        outputs:
-          type: object
-          additionalProperties:
-            description: Any type
-        mocked:
-          type:
-          - boolean
-          - 'null'
-        redacted:
-          type:
-          - boolean
-          - 'null'
-      required:
-      - node_definition
-      - outputs
-      title: NodeExecutionFulfilledBody
-    NodeExecutionPausedEvent:
-      type: object
-      properties:
-        parent:
-          oneOf:
-          - $ref: '#/components/schemas/ParentContext'
-          - type: 'null'
-        links:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/SpanLink'
-        name:
-          $ref: '#/components/schemas/node.execution.pausedEnum'
-        body:
-          $ref: '#/components/schemas/NodeExecutionPausedBody'
-        id:
-          type: string
-          format: uuid
-        timestamp:
-          type: string
-          format: date-time
-        api_version:
-          $ref: '#/components/schemas/ApiVersionEnum'
-        trace_id:
-          type: string
-          format: uuid
-        span_id:
-          type: string
-          format: uuid
-      required:
-      - name
-      - body
-      - id
-      - timestamp
-      - trace_id
-      - span_id
-      title: NodeExecutionPausedEvent
-    workflow.execution.streamingEnum:
-      type: string
-      enum:
-      - workflow.execution.streaming
-      title: workflow.execution.streamingEnum
-    APIRequestParentContext:
+    IntegrationTriggerContext:
       type: object
       properties:
         parent:
@@ -286,60 +79,49 @@ components:
           items:
             $ref: '#/components/schemas/SpanLink'
         type:
-          $ref: '#/components/schemas/ApiRequestEnum'
+          $ref: '#/components/schemas/IntegrationEnum'
+        trigger_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
         span_id:
           type: string
           format: uuid
-        api_actor_id:
-          type:
-          - string
-          - 'null'
-        api_actor_type:
-          oneOf:
-          - $ref: '#/components/schemas/ApiActorTypeEnum'
-          - type: 'null'
-        api_actor_label:
-          type:
-          - string
-          - 'null'
       required:
       - type
       - span_id
-      title: APIRequestParentContext
-    NodeExecutionRejectedBody:
+      title: IntegrationTriggerContext
+    WorkflowParentContext:
       type: object
       properties:
-        node_definition:
-          $ref: '#/components/schemas/VellumCodeResourceDefinition'
-        error:
-          $ref: '#/components/schemas/VellumSdkError'
-        stacktrace:
+        parent:
+          oneOf:
+          - $ref: '#/components/schemas/ParentContext'
+          - type: 'null'
+        links:
           type:
-          - string
+          - array
           - 'null'
+          items:
+            $ref: '#/components/schemas/SpanLink'
+        workflow_definition:
+          $ref: '#/components/schemas/VellumCodeResourceDefinition'
+        type:
+          $ref: '#/components/schemas/WorkflowEnum'
+        span_id:
+          type: string
+          format: uuid
       required:
-      - node_definition
-      - error
-      title: NodeExecutionRejectedBody
-    PromptReleaseTagEnum:
+      - workflow_definition
+      - type
+      - span_id
+      title: WorkflowParentContext
+    node.execution.fulfilledEnum:
       type: string
       enum:
-      - PROMPT_RELEASE_TAG
-      title: PromptReleaseTagEnum
-    ApiVersionEnum:
-      type: string
-      enum:
-      - '2024-10-25'
-      - '2025-07-30'
-      description: '* `2024-10-25` - V2024_10_25
-
-        * `2025-07-30` - V2025_07_30'
-      title: ApiVersionEnum
-    WorkflowNodeEnum:
-      type: string
-      enum:
-      - WORKFLOW_NODE
-      title: WorkflowNodeEnum
+      - node.execution.fulfilled
+      title: node.execution.fulfilledEnum
     NodeExecutionLogEvent:
       type: object
       properties:
@@ -379,27 +161,153 @@ components:
       - trace_id
       - span_id
       title: NodeExecutionLogEvent
-    CodeResourceDefinition:
+    WorkflowExecutionPausedEvent:
+      type: object
+      properties:
+        parent:
+          oneOf:
+          - $ref: '#/components/schemas/ParentContext'
+          - type: 'null'
+        links:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SpanLink'
+        name:
+          $ref: '#/components/schemas/workflow.execution.pausedEnum'
+        body:
+          $ref: '#/components/schemas/WorkflowExecutionPausedBody'
+        id:
+          type: string
+          format: uuid
+        timestamp:
+          type: string
+          format: date-time
+        api_version:
+          $ref: '#/components/schemas/ApiVersionEnum'
+        trace_id:
+          type: string
+          format: uuid
+        span_id:
+          type: string
+          format: uuid
+      required:
+      - name
+      - body
+      - id
+      - timestamp
+      - trace_id
+      - span_id
+      title: WorkflowExecutionPausedEvent
+    InvokedPort:
       type: object
       properties:
         name:
           type: string
-          description: The name of the resource, typically a class name.
-        module:
-          type: array
-          items:
-            type: string
-          description: The module that this resource is defined in.
       required:
       - name
-      - module
-      description: The definition of a resource defined in code.
-      title: CodeResourceDefinition
-    workflow.execution.pausedEnum:
+      title: InvokedPort
+    CreateWorkflowEventRequest0:
+      type: array
+      items:
+        $ref: '#/components/schemas/WorkflowEvent'
+      title: CreateWorkflowEventRequest0
+    WorkflowExecutionInitiatedBody:
+      type: object
+      properties:
+        workflow_definition:
+          $ref: '#/components/schemas/VellumCodeResourceDefinition'
+        inputs:
+          type: object
+          additionalProperties:
+            description: Any type
+        trigger:
+          oneOf:
+          - $ref: '#/components/schemas/VellumCodeResourceDefinition'
+          - type: 'null'
+      required:
+      - workflow_definition
+      - inputs
+      title: WorkflowExecutionInitiatedBody
+    WorkflowExecutionStreamingBody:
+      type: object
+      properties:
+        workflow_definition:
+          $ref: '#/components/schemas/VellumCodeResourceDefinition'
+        output:
+          $ref: '#/components/schemas/BaseOutput'
+      required:
+      - workflow_definition
+      - output
+      title: WorkflowExecutionStreamingBody
+    WorkflowEnum:
       type: string
       enum:
-      - workflow.execution.paused
-      title: workflow.execution.pausedEnum
+      - WORKFLOW
+      title: WorkflowEnum
+    WorkflowExecutionInitiatedEvent:
+      type: object
+      properties:
+        parent:
+          oneOf:
+          - $ref: '#/components/schemas/ParentContext'
+          - type: 'null'
+        links:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SpanLink'
+        name:
+          $ref: '#/components/schemas/workflow.execution.initiatedEnum'
+        body:
+          $ref: '#/components/schemas/WorkflowExecutionInitiatedBody'
+        id:
+          type: string
+          format: uuid
+        timestamp:
+          type: string
+          format: date-time
+        api_version:
+          $ref: '#/components/schemas/ApiVersionEnum'
+        trace_id:
+          type: string
+          format: uuid
+        span_id:
+          type: string
+          format: uuid
+      required:
+      - name
+      - body
+      - id
+      - timestamp
+      - trace_id
+      - span_id
+      title: WorkflowExecutionInitiatedEvent
+    WorkflowExecutionPausedBody:
+      type: object
+      properties:
+        workflow_definition:
+          $ref: '#/components/schemas/VellumCodeResourceDefinition'
+        external_inputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExternalInputDescriptor'
+      required:
+      - workflow_definition
+      - external_inputs
+      title: WorkflowExecutionPausedBody
+    ExternalEnum:
+      type: string
+      enum:
+      - EXTERNAL
+      title: ExternalEnum
+    workflow.execution.initiatedEnum:
+      type: string
+      enum:
+      - workflow.execution.initiated
+      title: workflow.execution.initiatedEnum
     WorkflowSandboxParentContext:
       type: object
       properties:
@@ -434,20 +342,7 @@ components:
       - sandbox_history_item_id
       - scenario_id
       title: WorkflowSandboxParentContext
-    WorkflowExecutionPausedBody:
-      type: object
-      properties:
-        workflow_definition:
-          $ref: '#/components/schemas/VellumCodeResourceDefinition'
-        external_inputs:
-          type: array
-          items:
-            $ref: '#/components/schemas/ExternalInputDescriptor'
-      required:
-      - workflow_definition
-      - external_inputs
-      title: WorkflowExecutionPausedBody
-    WorkflowExecutionStreamingEvent:
+    NodeExecutionStreamingEvent:
       type: object
       properties:
         parent:
@@ -461,9 +356,9 @@ components:
           items:
             $ref: '#/components/schemas/SpanLink'
         name:
-          $ref: '#/components/schemas/workflow.execution.streamingEnum'
+          $ref: '#/components/schemas/node.execution.streamingEnum'
         body:
-          $ref: '#/components/schemas/WorkflowExecutionStreamingBody'
+          $ref: '#/components/schemas/NodeExecutionStreamingBody'
         id:
           type: string
           format: uuid
@@ -485,34 +380,102 @@ components:
       - timestamp
       - trace_id
       - span_id
-      title: WorkflowExecutionStreamingEvent
-    node.execution.streamingEnum:
-      type: string
-      enum:
-      - node.execution.streaming
-      title: node.execution.streamingEnum
-    WorkflowExecutionSnapshottedBody:
+      title: NodeExecutionStreamingEvent
+    ErrorDetailResponse:
+      type: object
+      properties:
+        detail:
+          type: string
+          description: Message informing the user of the error.
+      required:
+      - detail
+      title: ErrorDetailResponse
+    WorkflowExecutionRejectedBody:
       type: object
       properties:
         workflow_definition:
           $ref: '#/components/schemas/VellumCodeResourceDefinition'
-        edited_by:
+        error:
+          $ref: '#/components/schemas/VellumSdkError'
+        stacktrace:
+          type:
+          - string
+          - 'null'
+      required:
+      - workflow_definition
+      - error
+      title: WorkflowExecutionRejectedBody
+    WorkflowExecutionFulfilledEvent:
+      type: object
+      properties:
+        parent:
           oneOf:
-          - $ref: '#/components/schemas/VellumCodeResourceDefinition'
+          - $ref: '#/components/schemas/ParentContext'
           - type: 'null'
-        state:
+        links:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SpanLink'
+        name:
+          $ref: '#/components/schemas/workflow.execution.fulfilledEnum'
+        body:
+          $ref: '#/components/schemas/WorkflowExecutionFulfilledBody'
+        id:
+          type: string
+          format: uuid
+        timestamp:
+          type: string
+          format: date-time
+        api_version:
+          $ref: '#/components/schemas/ApiVersionEnum'
+        trace_id:
+          type: string
+          format: uuid
+        span_id:
+          type: string
+          format: uuid
+      required:
+      - name
+      - body
+      - id
+      - timestamp
+      - trace_id
+      - span_id
+      title: WorkflowExecutionFulfilledEvent
+    WorkflowReleaseTagEnum:
+      type: string
+      enum:
+      - WORKFLOW_RELEASE_TAG
+      title: WorkflowReleaseTagEnum
+    NodeExecutionFulfilledBody:
+      type: object
+      properties:
+        node_definition:
+          $ref: '#/components/schemas/VellumCodeResourceDefinition'
+        invoked_ports:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/InvokedPort'
+        outputs:
           type: object
           additionalProperties:
             description: Any type
+        mocked:
+          type:
+          - boolean
+          - 'null'
+        redacted:
+          type:
+          - boolean
+          - 'null'
       required:
-      - workflow_definition
-      - state
-      title: WorkflowExecutionSnapshottedBody
-    node.execution.rejectedEnum:
-      type: string
-      enum:
-      - node.execution.rejected
-      title: node.execution.rejectedEnum
+      - node_definition
+      - outputs
+      title: NodeExecutionFulfilledBody
     VellumSdkErrorCodeEnum:
       type: string
       enum:
@@ -567,6 +530,121 @@ components:
 
         * `NODE_EXECUTION` - NODE_EXECUTION'
       title: VellumSdkErrorCodeEnum
+    node.execution.logEnum:
+      type: string
+      enum:
+      - node.execution.log
+      title: node.execution.logEnum
+    VellumCodeResourceDefinition:
+      type: object
+      properties:
+        name:
+          type: string
+        module:
+          type: array
+          items:
+            type: string
+          description: The module that this resource is defined in.
+        exclude_from_monitoring:
+          type:
+          - boolean
+          - 'null'
+          description: Whether this node should be excluded from monitoring views.
+        id:
+          type: string
+          format: uuid
+      required:
+      - name
+      - module
+      - id
+      title: VellumCodeResourceDefinition
+    NodeParentContext:
+      type: object
+      properties:
+        parent:
+          oneOf:
+          - $ref: '#/components/schemas/ParentContext'
+          - type: 'null'
+        links:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SpanLink'
+        node_definition:
+          $ref: '#/components/schemas/VellumCodeResourceDefinition'
+        type:
+          $ref: '#/components/schemas/WorkflowNodeEnum'
+        span_id:
+          type: string
+          format: uuid
+      required:
+      - node_definition
+      - type
+      - span_id
+      title: NodeParentContext
+    NodeExecutionInitiatedBody:
+      type: object
+      properties:
+        node_definition:
+          $ref: '#/components/schemas/VellumCodeResourceDefinition'
+        inputs:
+          type: object
+          additionalProperties:
+            description: Any type
+      required:
+      - node_definition
+      - inputs
+      title: NodeExecutionInitiatedBody
+    ApiRequestEnum:
+      type: string
+      enum:
+      - API_REQUEST
+      title: ApiRequestEnum
+    ScheduledTriggerContext:
+      type: object
+      properties:
+        parent:
+          oneOf:
+          - $ref: '#/components/schemas/ParentContext'
+          - type: 'null'
+        links:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SpanLink'
+        type:
+          $ref: '#/components/schemas/ScheduledEnum'
+        trigger_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        span_id:
+          type: string
+          format: uuid
+      required:
+      - type
+      - span_id
+      title: ScheduledTriggerContext
+    VellumSdkErrorRawData:
+      oneOf:
+      - type: object
+        additionalProperties:
+          description: Any type
+      - type: string
+      title: VellumSdkErrorRawData
+    WorkflowNodeEnum:
+      type: string
+      enum:
+      - WORKFLOW_NODE
+      title: WorkflowNodeEnum
+    workflow.execution.pausedEnum:
+      type: string
+      enum:
+      - workflow.execution.paused
+      title: workflow.execution.pausedEnum
     WorkflowExecutionSnapshottedEvent:
       type: object
       properties:
@@ -606,11 +684,97 @@ components:
       - trace_id
       - span_id
       title: WorkflowExecutionSnapshottedEvent
-    CreateWorkflowEventRequest0:
-      type: array
-      items:
-        $ref: '#/components/schemas/WorkflowEvent'
-      title: CreateWorkflowEventRequest0
+    workflow.execution.snapshottedEnum:
+      type: string
+      enum:
+      - workflow.execution.snapshotted
+      title: workflow.execution.snapshottedEnum
+    EventCreateResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          default: true
+          description: Indicates whether the event was published successfully.
+        count:
+          type: integer
+          description: Number of events processed
+      required:
+      - count
+      description: Response serializer for successful event creation.
+      title: EventCreateResponse
+    NodeExecutionLogBody:
+      type: object
+      properties:
+        node_definition:
+          $ref: '#/components/schemas/VellumCodeResourceDefinition'
+        message:
+          type: string
+        attributes:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+        severity:
+          $ref: '#/components/schemas/SeverityEnum'
+      required:
+      - node_definition
+      - message
+      - severity
+      title: NodeExecutionLogBody
+    WorkflowExecutionResumedEvent:
+      type: object
+      properties:
+        parent:
+          oneOf:
+          - $ref: '#/components/schemas/ParentContext'
+          - type: 'null'
+        links:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SpanLink'
+        name:
+          $ref: '#/components/schemas/workflow.execution.resumedEnum'
+        body:
+          $ref: '#/components/schemas/WorkflowExecutionResumedBody'
+        id:
+          type: string
+          format: uuid
+        timestamp:
+          type: string
+          format: date-time
+        api_version:
+          $ref: '#/components/schemas/ApiVersionEnum'
+        trace_id:
+          type: string
+          format: uuid
+        span_id:
+          type: string
+          format: uuid
+      required:
+      - name
+      - body
+      - id
+      - timestamp
+      - trace_id
+      - span_id
+      title: WorkflowExecutionResumedEvent
+    NodeExecutionPausedBody:
+      type: object
+      properties:
+        node_definition:
+          $ref: '#/components/schemas/VellumCodeResourceDefinition'
+      required:
+      - node_definition
+      title: NodeExecutionPausedBody
+    node.execution.resumedEnum:
+      type: string
+      enum:
+      - node.execution.resumed
+      title: node.execution.resumedEnum
     WorkflowDeploymentParentContext:
       type: object
       properties:
@@ -665,282 +829,16 @@ components:
       - release_tag_name
       - workflow_version_id
       title: WorkflowDeploymentParentContext
-    SeverityEnum:
-      type: string
-      enum:
-      - DEBUG
-      - INFO
-      - WARNING
-      - ERROR
-      description: '* `DEBUG` - DEBUG
-
-        * `INFO` - INFO
-
-        * `WARNING` - WARNING
-
-        * `ERROR` - ERROR'
-      title: SeverityEnum
-    node.execution.logEnum:
-      type: string
-      enum:
-      - node.execution.log
-      title: node.execution.logEnum
-    NodeExecutionLogBody:
-      type: object
-      properties:
-        node_definition:
-          $ref: '#/components/schemas/VellumCodeResourceDefinition'
-        message:
-          type: string
-        attributes:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            description: Any type
-        severity:
-          $ref: '#/components/schemas/SeverityEnum'
-      required:
-      - node_definition
-      - message
-      - severity
-      title: NodeExecutionLogBody
-    ParentContext:
-      oneOf:
-      - $ref: '#/components/schemas/WorkflowParentContext'
-      - $ref: '#/components/schemas/NodeParentContext'
-      - $ref: '#/components/schemas/WorkflowDeploymentParentContext'
-      - $ref: '#/components/schemas/WorkflowSandboxParentContext'
-      - $ref: '#/components/schemas/PromptDeploymentParentContext'
-      - $ref: '#/components/schemas/APIRequestParentContext'
-      - $ref: '#/components/schemas/ExternalParentContext'
-      - $ref: '#/components/schemas/ScheduledTriggerContext'
-      - $ref: '#/components/schemas/IntegrationTriggerContext'
-      title: ParentContext
     workflow.execution.rejectedEnum:
       type: string
       enum:
       - workflow.execution.rejected
       title: workflow.execution.rejectedEnum
-    IntegrationEnum:
+    node.execution.rejectedEnum:
       type: string
       enum:
-      - INTEGRATION
-      title: IntegrationEnum
-    VellumCodeResourceDefinition:
-      type: object
-      properties:
-        name:
-          type: string
-        module:
-          type: array
-          items:
-            type: string
-          description: The module that this resource is defined in.
-        exclude_from_monitoring:
-          type:
-          - boolean
-          - 'null'
-          description: Whether this node should be excluded from monitoring views.
-        id:
-          type: string
-          format: uuid
-      required:
-      - name
-      - module
-      - id
-      title: VellumCodeResourceDefinition
-    NodeExecutionStreamingBody:
-      type: object
-      properties:
-        node_definition:
-          $ref: '#/components/schemas/VellumCodeResourceDefinition'
-        output:
-          $ref: '#/components/schemas/BaseOutput'
-      required:
-      - node_definition
-      - output
-      title: NodeExecutionStreamingBody
-    WorkflowEvent:
-      oneOf:
-      - $ref: '#/components/schemas/NodeExecutionInitiatedEvent'
-      - $ref: '#/components/schemas/NodeExecutionStreamingEvent'
-      - $ref: '#/components/schemas/NodeExecutionFulfilledEvent'
-      - $ref: '#/components/schemas/NodeExecutionRejectedEvent'
-      - $ref: '#/components/schemas/NodeExecutionPausedEvent'
-      - $ref: '#/components/schemas/NodeExecutionResumedEvent'
-      - $ref: '#/components/schemas/NodeExecutionLogEvent'
-      - $ref: '#/components/schemas/WorkflowExecutionInitiatedEvent'
-      - $ref: '#/components/schemas/WorkflowExecutionStreamingEvent'
-      - $ref: '#/components/schemas/WorkflowExecutionRejectedEvent'
-      - $ref: '#/components/schemas/WorkflowExecutionFulfilledEvent'
-      - $ref: '#/components/schemas/WorkflowExecutionPausedEvent'
-      - $ref: '#/components/schemas/WorkflowExecutionResumedEvent'
-      - $ref: '#/components/schemas/WorkflowExecutionSnapshottedEvent'
-      title: WorkflowEvent
-    ScheduledEnum:
-      type: string
-      enum:
-      - SCHEDULED
-      title: ScheduledEnum
-    ApiRequestEnum:
-      type: string
-      enum:
-      - API_REQUEST
-      title: ApiRequestEnum
-    EventCreateResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-          default: true
-          description: Indicates whether the event was published successfully.
-        count:
-          type: integer
-          description: Number of events processed
-      required:
-      - count
-      description: Response serializer for successful event creation.
-      title: EventCreateResponse
-    WorkflowExecutionStreamingBody:
-      type: object
-      properties:
-        workflow_definition:
-          $ref: '#/components/schemas/VellumCodeResourceDefinition'
-        output:
-          $ref: '#/components/schemas/BaseOutput'
-      required:
-      - workflow_definition
-      - output
-      title: WorkflowExecutionStreamingBody
-    node.execution.resumedEnum:
-      type: string
-      enum:
-      - node.execution.resumed
-      title: node.execution.resumedEnum
-    CreateWorkflowEventRequest:
-      oneOf:
-      - $ref: '#/components/schemas/CreateWorkflowEventRequest0'
-      - $ref: '#/components/schemas/WorkflowEvent'
-      title: CreateWorkflowEventRequest
-    WorkflowExecutionRejectedEvent:
-      type: object
-      properties:
-        parent:
-          oneOf:
-          - $ref: '#/components/schemas/ParentContext'
-          - type: 'null'
-        links:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/SpanLink'
-        name:
-          $ref: '#/components/schemas/workflow.execution.rejectedEnum'
-        body:
-          $ref: '#/components/schemas/WorkflowExecutionRejectedBody'
-        id:
-          type: string
-          format: uuid
-        timestamp:
-          type: string
-          format: date-time
-        api_version:
-          $ref: '#/components/schemas/ApiVersionEnum'
-        trace_id:
-          type: string
-          format: uuid
-        span_id:
-          type: string
-          format: uuid
-      required:
-      - name
-      - body
-      - id
-      - timestamp
-      - trace_id
-      - span_id
-      title: WorkflowExecutionRejectedEvent
-    WorkflowParentContext:
-      type: object
-      properties:
-        parent:
-          oneOf:
-          - $ref: '#/components/schemas/ParentContext'
-          - type: 'null'
-        links:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/SpanLink'
-        workflow_definition:
-          $ref: '#/components/schemas/VellumCodeResourceDefinition'
-        type:
-          $ref: '#/components/schemas/WorkflowEnum'
-        span_id:
-          type: string
-          format: uuid
-      required:
-      - workflow_definition
-      - type
-      - span_id
-      title: WorkflowParentContext
-    node.execution.pausedEnum:
-      type: string
-      enum:
-      - node.execution.paused
-      title: node.execution.pausedEnum
-    WorkflowEnum:
-      type: string
-      enum:
-      - WORKFLOW
-      title: WorkflowEnum
-    workflow.execution.snapshottedEnum:
-      type: string
-      enum:
-      - workflow.execution.snapshotted
-      title: workflow.execution.snapshottedEnum
-    NodeExecutionRejectedEvent:
-      type: object
-      properties:
-        parent:
-          oneOf:
-          - $ref: '#/components/schemas/ParentContext'
-          - type: 'null'
-        links:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/SpanLink'
-        name:
-          $ref: '#/components/schemas/node.execution.rejectedEnum'
-        body:
-          $ref: '#/components/schemas/NodeExecutionRejectedBody'
-        id:
-          type: string
-          format: uuid
-        timestamp:
-          type: string
-          format: date-time
-        api_version:
-          $ref: '#/components/schemas/ApiVersionEnum'
-        trace_id:
-          type: string
-          format: uuid
-        span_id:
-          type: string
-          format: uuid
-      required:
-      - name
-      - body
-      - id
-      - timestamp
-      - trace_id
-      - span_id
-      title: NodeExecutionRejectedEvent
+      - node.execution.rejected
+      title: node.execution.rejectedEnum
     ExternalParentContext:
       type: object
       properties:
@@ -963,92 +861,6 @@ components:
       - type
       - span_id
       title: ExternalParentContext
-    NodeExecutionPausedBody:
-      type: object
-      properties:
-        node_definition:
-          $ref: '#/components/schemas/VellumCodeResourceDefinition'
-      required:
-      - node_definition
-      title: NodeExecutionPausedBody
-    NodeParentContext:
-      type: object
-      properties:
-        parent:
-          oneOf:
-          - $ref: '#/components/schemas/ParentContext'
-          - type: 'null'
-        links:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/SpanLink'
-        node_definition:
-          $ref: '#/components/schemas/VellumCodeResourceDefinition'
-        type:
-          $ref: '#/components/schemas/WorkflowNodeEnum'
-        span_id:
-          type: string
-          format: uuid
-      required:
-      - node_definition
-      - type
-      - span_id
-      title: NodeParentContext
-    ExternalInputDescriptor:
-      type: object
-      properties:
-        types:
-          type: array
-          items:
-            $ref: '#/components/schemas/CodeResourceDefinition'
-        inputs_class:
-          oneOf:
-          - $ref: '#/components/schemas/CodeResourceDefinition'
-          - type: 'null'
-        instance:
-          oneOf:
-          - description: Any type
-          - type: 'null'
-        name:
-          type: string
-      required:
-      - types
-      - name
-      title: ExternalInputDescriptor
-    workflow.execution.fulfilledEnum:
-      type: string
-      enum:
-      - workflow.execution.fulfilled
-      title: workflow.execution.fulfilledEnum
-    IntegrationTriggerContext:
-      type: object
-      properties:
-        parent:
-          oneOf:
-          - $ref: '#/components/schemas/ParentContext'
-          - type: 'null'
-        links:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/SpanLink'
-        type:
-          $ref: '#/components/schemas/IntegrationEnum'
-        trigger_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-        span_id:
-          type: string
-          format: uuid
-      required:
-      - type
-      - span_id
-      title: IntegrationTriggerContext
     PromptDeploymentParentContext:
       type: object
       properties:
@@ -1103,262 +915,22 @@ components:
       - release_tag_name
       - prompt_version_id
       title: PromptDeploymentParentContext
-    NodeExecutionStreamingEvent:
+    BaseOutput:
       type: object
       properties:
-        parent:
+        value:
           oneOf:
-          - $ref: '#/components/schemas/ParentContext'
+          - description: Any type
           - type: 'null'
-        links:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/SpanLink'
+        delta:
+          oneOf:
+          - description: Any type
+          - type: 'null'
         name:
-          $ref: '#/components/schemas/node.execution.streamingEnum'
-        body:
-          $ref: '#/components/schemas/NodeExecutionStreamingBody'
-        id:
           type: string
-          format: uuid
-        timestamp:
-          type: string
-          format: date-time
-        api_version:
-          $ref: '#/components/schemas/ApiVersionEnum'
-        trace_id:
-          type: string
-          format: uuid
-        span_id:
-          type: string
-          format: uuid
       required:
       - name
-      - body
-      - id
-      - timestamp
-      - trace_id
-      - span_id
-      title: NodeExecutionStreamingEvent
-    ScheduledTriggerContext:
-      type: object
-      properties:
-        parent:
-          oneOf:
-          - $ref: '#/components/schemas/ParentContext'
-          - type: 'null'
-        links:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/SpanLink'
-        type:
-          $ref: '#/components/schemas/ScheduledEnum'
-        trigger_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-        span_id:
-          type: string
-          format: uuid
-      required:
-      - type
-      - span_id
-      title: ScheduledTriggerContext
-    SpanLink:
-      type: object
-      properties:
-        trace_id:
-          type: string
-          format: uuid
-        type:
-          $ref: '#/components/schemas/SpanLinkTypeEnum'
-        span_context:
-          $ref: '#/components/schemas/ParentContext'
-      required:
-      - trace_id
-      - type
-      - span_context
-      title: SpanLink
-    WorkflowExecutionInitiatedBody:
-      type: object
-      properties:
-        workflow_definition:
-          $ref: '#/components/schemas/VellumCodeResourceDefinition'
-        inputs:
-          type: object
-          additionalProperties:
-            description: Any type
-        trigger:
-          oneOf:
-          - $ref: '#/components/schemas/VellumCodeResourceDefinition'
-          - type: 'null'
-      required:
-      - workflow_definition
-      - inputs
-      title: WorkflowExecutionInitiatedBody
-    WorkflowExecutionFulfilledEvent:
-      type: object
-      properties:
-        parent:
-          oneOf:
-          - $ref: '#/components/schemas/ParentContext'
-          - type: 'null'
-        links:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/SpanLink'
-        name:
-          $ref: '#/components/schemas/workflow.execution.fulfilledEnum'
-        body:
-          $ref: '#/components/schemas/WorkflowExecutionFulfilledBody'
-        id:
-          type: string
-          format: uuid
-        timestamp:
-          type: string
-          format: date-time
-        api_version:
-          $ref: '#/components/schemas/ApiVersionEnum'
-        trace_id:
-          type: string
-          format: uuid
-        span_id:
-          type: string
-          format: uuid
-      required:
-      - name
-      - body
-      - id
-      - timestamp
-      - trace_id
-      - span_id
-      title: WorkflowExecutionFulfilledEvent
-    WorkflowExecutionResumedBody:
-      type: object
-      properties:
-        workflow_definition:
-          $ref: '#/components/schemas/VellumCodeResourceDefinition'
-      required:
-      - workflow_definition
-      title: WorkflowExecutionResumedBody
-    NodeExecutionResumedEvent:
-      type: object
-      properties:
-        parent:
-          oneOf:
-          - $ref: '#/components/schemas/ParentContext'
-          - type: 'null'
-        links:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/SpanLink'
-        name:
-          $ref: '#/components/schemas/node.execution.resumedEnum'
-        body:
-          $ref: '#/components/schemas/NodeExecutionResumedBody'
-        id:
-          type: string
-          format: uuid
-        timestamp:
-          type: string
-          format: date-time
-        api_version:
-          $ref: '#/components/schemas/ApiVersionEnum'
-        trace_id:
-          type: string
-          format: uuid
-        span_id:
-          type: string
-          format: uuid
-      required:
-      - name
-      - body
-      - id
-      - timestamp
-      - trace_id
-      - span_id
-      title: NodeExecutionResumedEvent
-    VellumSdkError:
-      type: object
-      properties:
-        message:
-          type: string
-        raw_data:
-          oneOf:
-          - $ref: '#/components/schemas/VellumSdkErrorRawData'
-          - type: 'null'
-        code:
-          $ref: '#/components/schemas/VellumSdkErrorCodeEnum'
-      required:
-      - message
-      - code
-      title: VellumSdkError
-    WorkflowReleaseTagEnum:
-      type: string
-      enum:
-      - WORKFLOW_RELEASE_TAG
-      title: WorkflowReleaseTagEnum
-    NodeExecutionInitiatedBody:
-      type: object
-      properties:
-        node_definition:
-          $ref: '#/components/schemas/VellumCodeResourceDefinition'
-        inputs:
-          type: object
-          additionalProperties:
-            description: Any type
-      required:
-      - node_definition
-      - inputs
-      title: NodeExecutionInitiatedBody
-    NodeExecutionInitiatedEvent:
-      type: object
-      properties:
-        parent:
-          oneOf:
-          - $ref: '#/components/schemas/ParentContext'
-          - type: 'null'
-        links:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/SpanLink'
-        name:
-          $ref: '#/components/schemas/node.execution.initiatedEnum'
-        body:
-          $ref: '#/components/schemas/NodeExecutionInitiatedBody'
-        id:
-          type: string
-          format: uuid
-        timestamp:
-          type: string
-          format: date-time
-        api_version:
-          $ref: '#/components/schemas/ApiVersionEnum'
-        trace_id:
-          type: string
-          format: uuid
-        span_id:
-          type: string
-          format: uuid
-      required:
-      - name
-      - body
-      - id
-      - timestamp
-      - trace_id
-      - span_id
-      title: NodeExecutionInitiatedEvent
+      title: BaseOutput
     WorkflowExecutionFulfilledBody:
       type: object
       properties:
@@ -1388,6 +960,215 @@ components:
       - workflow_definition
       - outputs
       title: WorkflowExecutionFulfilledBody
+    NodeExecutionRejectedEvent:
+      type: object
+      properties:
+        parent:
+          oneOf:
+          - $ref: '#/components/schemas/ParentContext'
+          - type: 'null'
+        links:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SpanLink'
+        name:
+          $ref: '#/components/schemas/node.execution.rejectedEnum'
+        body:
+          $ref: '#/components/schemas/NodeExecutionRejectedBody'
+        id:
+          type: string
+          format: uuid
+        timestamp:
+          type: string
+          format: date-time
+        api_version:
+          $ref: '#/components/schemas/ApiVersionEnum'
+        trace_id:
+          type: string
+          format: uuid
+        span_id:
+          type: string
+          format: uuid
+      required:
+      - name
+      - body
+      - id
+      - timestamp
+      - trace_id
+      - span_id
+      title: NodeExecutionRejectedEvent
+    workflow.execution.streamingEnum:
+      type: string
+      enum:
+      - workflow.execution.streaming
+      title: workflow.execution.streamingEnum
+    SeverityEnum:
+      type: string
+      enum:
+      - DEBUG
+      - INFO
+      - WARNING
+      - ERROR
+      description: '* `DEBUG` - DEBUG
+
+        * `INFO` - INFO
+
+        * `WARNING` - WARNING
+
+        * `ERROR` - ERROR'
+      title: SeverityEnum
+    APIRequestParentContext:
+      type: object
+      properties:
+        parent:
+          oneOf:
+          - $ref: '#/components/schemas/ParentContext'
+          - type: 'null'
+        links:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SpanLink'
+        type:
+          $ref: '#/components/schemas/ApiRequestEnum'
+        span_id:
+          type: string
+          format: uuid
+        api_actor_id:
+          type:
+          - string
+          - 'null'
+        api_actor_type:
+          oneOf:
+          - $ref: '#/components/schemas/ApiActorTypeEnum'
+          - type: 'null'
+        api_actor_label:
+          type:
+          - string
+          - 'null'
+      required:
+      - type
+      - span_id
+      title: APIRequestParentContext
+    node.execution.pausedEnum:
+      type: string
+      enum:
+      - node.execution.paused
+      title: node.execution.pausedEnum
+    WorkflowExecutionResumedBody:
+      type: object
+      properties:
+        workflow_definition:
+          $ref: '#/components/schemas/VellumCodeResourceDefinition'
+      required:
+      - workflow_definition
+      title: WorkflowExecutionResumedBody
+    CodeResourceDefinition:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the resource, typically a class name.
+        module:
+          type: array
+          items:
+            type: string
+          description: The module that this resource is defined in.
+      required:
+      - name
+      - module
+      description: The definition of a resource defined in code.
+      title: CodeResourceDefinition
+    node.execution.streamingEnum:
+      type: string
+      enum:
+      - node.execution.streaming
+      title: node.execution.streamingEnum
+    ParentContext:
+      oneOf:
+      - $ref: '#/components/schemas/WorkflowParentContext'
+      - $ref: '#/components/schemas/NodeParentContext'
+      - $ref: '#/components/schemas/WorkflowDeploymentParentContext'
+      - $ref: '#/components/schemas/WorkflowSandboxParentContext'
+      - $ref: '#/components/schemas/PromptDeploymentParentContext'
+      - $ref: '#/components/schemas/APIRequestParentContext'
+      - $ref: '#/components/schemas/ExternalParentContext'
+      - $ref: '#/components/schemas/ScheduledTriggerContext'
+      - $ref: '#/components/schemas/IntegrationTriggerContext'
+      title: ParentContext
+    IntegrationEnum:
+      type: string
+      enum:
+      - INTEGRATION
+      title: IntegrationEnum
+    WorkflowExecutionRejectedEvent:
+      type: object
+      properties:
+        parent:
+          oneOf:
+          - $ref: '#/components/schemas/ParentContext'
+          - type: 'null'
+        links:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SpanLink'
+        name:
+          $ref: '#/components/schemas/workflow.execution.rejectedEnum'
+        body:
+          $ref: '#/components/schemas/WorkflowExecutionRejectedBody'
+        id:
+          type: string
+          format: uuid
+        timestamp:
+          type: string
+          format: date-time
+        api_version:
+          $ref: '#/components/schemas/ApiVersionEnum'
+        trace_id:
+          type: string
+          format: uuid
+        span_id:
+          type: string
+          format: uuid
+      required:
+      - name
+      - body
+      - id
+      - timestamp
+      - trace_id
+      - span_id
+      title: WorkflowExecutionRejectedEvent
+    PromptReleaseTagEnum:
+      type: string
+      enum:
+      - PROMPT_RELEASE_TAG
+      title: PromptReleaseTagEnum
+    SpanLinkTypeEnum:
+      type: string
+      enum:
+      - TRIGGERED_BY
+      - PREVIOUS_SPAN
+      - ROOT_SPAN
+      description: '* `TRIGGERED_BY` - TRIGGERED_BY
+
+        * `PREVIOUS_SPAN` - PREVIOUS_SPAN
+
+        * `ROOT_SPAN` - ROOT_SPAN'
+      title: SpanLinkTypeEnum
+    ApiVersionEnum:
+      type: string
+      enum:
+      - '2024-10-25'
+      - '2025-07-30'
+      description: '* `2024-10-25` - V2024_10_25
+
+        * `2025-07-30` - V2025_07_30'
+      title: ApiVersionEnum
     NodeExecutionFulfilledEvent:
       type: object
       properties:
@@ -1427,7 +1208,56 @@ components:
       - trace_id
       - span_id
       title: NodeExecutionFulfilledEvent
-    WorkflowExecutionInitiatedEvent:
+    ExternalInputDescriptor:
+      type: object
+      properties:
+        types:
+          type: array
+          items:
+            $ref: '#/components/schemas/CodeResourceDefinition'
+        inputs_class:
+          oneOf:
+          - $ref: '#/components/schemas/CodeResourceDefinition'
+          - type: 'null'
+        instance:
+          oneOf:
+          - description: Any type
+          - type: 'null'
+        name:
+          type: string
+      required:
+      - types
+      - name
+      title: ExternalInputDescriptor
+    NodeExecutionResumedBody:
+      type: object
+      properties:
+        node_definition:
+          $ref: '#/components/schemas/VellumCodeResourceDefinition'
+      required:
+      - node_definition
+      title: NodeExecutionResumedBody
+    workflow.execution.resumedEnum:
+      type: string
+      enum:
+      - workflow.execution.resumed
+      title: workflow.execution.resumedEnum
+    SpanLink:
+      type: object
+      properties:
+        trace_id:
+          type: string
+          format: uuid
+        type:
+          $ref: '#/components/schemas/SpanLinkTypeEnum'
+        span_context:
+          $ref: '#/components/schemas/ParentContext'
+      required:
+      - trace_id
+      - type
+      - span_context
+      title: SpanLink
+    WorkflowExecutionStreamingEvent:
       type: object
       properties:
         parent:
@@ -1441,9 +1271,9 @@ components:
           items:
             $ref: '#/components/schemas/SpanLink'
         name:
-          $ref: '#/components/schemas/workflow.execution.initiatedEnum'
+          $ref: '#/components/schemas/workflow.execution.streamingEnum'
         body:
-          $ref: '#/components/schemas/WorkflowExecutionInitiatedBody'
+          $ref: '#/components/schemas/WorkflowExecutionStreamingBody'
         id:
           type: string
           format: uuid
@@ -1465,7 +1295,224 @@ components:
       - timestamp
       - trace_id
       - span_id
-      title: WorkflowExecutionInitiatedEvent
+      title: WorkflowExecutionStreamingEvent
+    CreateWorkflowEventRequest:
+      oneOf:
+      - $ref: '#/components/schemas/CreateWorkflowEventRequest0'
+      - $ref: '#/components/schemas/WorkflowEvent'
+      title: CreateWorkflowEventRequest
+    NodeExecutionResumedEvent:
+      type: object
+      properties:
+        parent:
+          oneOf:
+          - $ref: '#/components/schemas/ParentContext'
+          - type: 'null'
+        links:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SpanLink'
+        name:
+          $ref: '#/components/schemas/node.execution.resumedEnum'
+        body:
+          $ref: '#/components/schemas/NodeExecutionResumedBody'
+        id:
+          type: string
+          format: uuid
+        timestamp:
+          type: string
+          format: date-time
+        api_version:
+          $ref: '#/components/schemas/ApiVersionEnum'
+        trace_id:
+          type: string
+          format: uuid
+        span_id:
+          type: string
+          format: uuid
+      required:
+      - name
+      - body
+      - id
+      - timestamp
+      - trace_id
+      - span_id
+      title: NodeExecutionResumedEvent
+    NodeExecutionInitiatedEvent:
+      type: object
+      properties:
+        parent:
+          oneOf:
+          - $ref: '#/components/schemas/ParentContext'
+          - type: 'null'
+        links:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SpanLink'
+        name:
+          $ref: '#/components/schemas/node.execution.initiatedEnum'
+        body:
+          $ref: '#/components/schemas/NodeExecutionInitiatedBody'
+        id:
+          type: string
+          format: uuid
+        timestamp:
+          type: string
+          format: date-time
+        api_version:
+          $ref: '#/components/schemas/ApiVersionEnum'
+        trace_id:
+          type: string
+          format: uuid
+        span_id:
+          type: string
+          format: uuid
+      required:
+      - name
+      - body
+      - id
+      - timestamp
+      - trace_id
+      - span_id
+      title: NodeExecutionInitiatedEvent
+    NodeExecutionRejectedBody:
+      type: object
+      properties:
+        node_definition:
+          $ref: '#/components/schemas/VellumCodeResourceDefinition'
+        error:
+          $ref: '#/components/schemas/VellumSdkError'
+        stacktrace:
+          type:
+          - string
+          - 'null'
+      required:
+      - node_definition
+      - error
+      title: NodeExecutionRejectedBody
+    VellumSdkError:
+      type: object
+      properties:
+        message:
+          type: string
+        raw_data:
+          oneOf:
+          - $ref: '#/components/schemas/VellumSdkErrorRawData'
+          - type: 'null'
+        code:
+          $ref: '#/components/schemas/VellumSdkErrorCodeEnum'
+      required:
+      - message
+      - code
+      title: VellumSdkError
+    NodeExecutionPausedEvent:
+      type: object
+      properties:
+        parent:
+          oneOf:
+          - $ref: '#/components/schemas/ParentContext'
+          - type: 'null'
+        links:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SpanLink'
+        name:
+          $ref: '#/components/schemas/node.execution.pausedEnum'
+        body:
+          $ref: '#/components/schemas/NodeExecutionPausedBody'
+        id:
+          type: string
+          format: uuid
+        timestamp:
+          type: string
+          format: date-time
+        api_version:
+          $ref: '#/components/schemas/ApiVersionEnum'
+        trace_id:
+          type: string
+          format: uuid
+        span_id:
+          type: string
+          format: uuid
+      required:
+      - name
+      - body
+      - id
+      - timestamp
+      - trace_id
+      - span_id
+      title: NodeExecutionPausedEvent
+    WorkflowEvent:
+      oneOf:
+      - $ref: '#/components/schemas/NodeExecutionInitiatedEvent'
+      - $ref: '#/components/schemas/NodeExecutionStreamingEvent'
+      - $ref: '#/components/schemas/NodeExecutionFulfilledEvent'
+      - $ref: '#/components/schemas/NodeExecutionRejectedEvent'
+      - $ref: '#/components/schemas/NodeExecutionPausedEvent'
+      - $ref: '#/components/schemas/NodeExecutionResumedEvent'
+      - $ref: '#/components/schemas/NodeExecutionLogEvent'
+      - $ref: '#/components/schemas/WorkflowExecutionInitiatedEvent'
+      - $ref: '#/components/schemas/WorkflowExecutionStreamingEvent'
+      - $ref: '#/components/schemas/WorkflowExecutionRejectedEvent'
+      - $ref: '#/components/schemas/WorkflowExecutionFulfilledEvent'
+      - $ref: '#/components/schemas/WorkflowExecutionPausedEvent'
+      - $ref: '#/components/schemas/WorkflowExecutionResumedEvent'
+      - $ref: '#/components/schemas/WorkflowExecutionSnapshottedEvent'
+      title: WorkflowEvent
+    WorkflowExecutionSnapshottedBody:
+      type: object
+      properties:
+        workflow_definition:
+          $ref: '#/components/schemas/VellumCodeResourceDefinition'
+        edited_by:
+          oneOf:
+          - $ref: '#/components/schemas/VellumCodeResourceDefinition'
+          - type: 'null'
+        state:
+          type: object
+          additionalProperties:
+            description: Any type
+      required:
+      - workflow_definition
+      - state
+      title: WorkflowExecutionSnapshottedBody
+    NodeExecutionStreamingBody:
+      type: object
+      properties:
+        node_definition:
+          $ref: '#/components/schemas/VellumCodeResourceDefinition'
+        output:
+          $ref: '#/components/schemas/BaseOutput'
+      required:
+      - node_definition
+      - output
+      title: NodeExecutionStreamingBody
+    workflow.execution.fulfilledEnum:
+      type: string
+      enum:
+      - workflow.execution.fulfilled
+      title: workflow.execution.fulfilledEnum
+    WorkflowSandboxEnum:
+      type: string
+      enum:
+      - WORKFLOW_SANDBOX
+      title: WorkflowSandboxEnum
+    node.execution.initiatedEnum:
+      type: string
+      enum:
+      - node.execution.initiated
+      title: node.execution.initiatedEnum
+    ScheduledEnum:
+      type: string
+      enum:
+      - SCHEDULED
+      title: ScheduledEnum
     ApiActorTypeEnum:
       type: string
       enum:
@@ -1484,53 +1531,6 @@ components:
 
         * `SERVICE_TOKEN` - SERVICE_TOKEN'
       title: ApiActorTypeEnum
-    InvokedPort:
-      type: object
-      properties:
-        name:
-          type: string
-      required:
-      - name
-      title: InvokedPort
-    WorkflowExecutionRejectedBody:
-      type: object
-      properties:
-        workflow_definition:
-          $ref: '#/components/schemas/VellumCodeResourceDefinition'
-        error:
-          $ref: '#/components/schemas/VellumSdkError'
-        stacktrace:
-          type:
-          - string
-          - 'null'
-      required:
-      - workflow_definition
-      - error
-      title: WorkflowExecutionRejectedBody
-    BaseOutput:
-      type: object
-      properties:
-        value:
-          oneOf:
-          - description: Any type
-          - type: 'null'
-        delta:
-          oneOf:
-          - description: Any type
-          - type: 'null'
-        name:
-          type: string
-      required:
-      - name
-      title: BaseOutput
-    NodeExecutionResumedBody:
-      type: object
-      properties:
-        node_definition:
-          $ref: '#/components/schemas/VellumCodeResourceDefinition'
-      required:
-      - node_definition
-      title: NodeExecutionResumedBody
   securitySchemes:
     default:
       type: apiKey
