@@ -119,11 +119,6 @@ components:
             description: Any type
           description: Optionally provide additional metadata about the feedback submission.
       title: SubmitCompletionActualRequest
-    submit-completion-actuals_Response_200:
-      type: object
-      properties: {}
-      description: Empty response body
-      title: submit-completion-actuals_Response_200
     SubmitCompletionActualsErrorResponse:
       type: object
       properties:
@@ -132,6 +127,11 @@ components:
       required:
       - detail
       title: SubmitCompletionActualsErrorResponse
+    submit-completion-actuals_Response_200:
+      type: object
+      properties: {}
+      description: Empty response body
+      title: submit-completion-actuals_Response_200
   securitySchemes:
     default:
       type: apiKey

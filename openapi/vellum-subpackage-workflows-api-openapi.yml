@@ -62,24 +62,6 @@ paths:
                 $ref: '#/components/schemas/CheckWorkflowExecutionStatusErrorResponse'
 components:
   schemas:
-    WorkflowResultEventState:
-      type: string
-      enum:
-      - INITIATED
-      - STREAMING
-      - FULFILLED
-      - REJECTED
-      - PENDING
-      description: '* `INITIATED` - Initiated
-
-        * `STREAMING` - Streaming
-
-        * `FULFILLED` - Fulfilled
-
-        * `REJECTED` - Rejected
-
-        * `PENDING` - Pending'
-      title: WorkflowResultEventState
     CheckWorkflowExecutionStatusError:
       type: object
       properties:
@@ -175,6 +157,24 @@ components:
       - execution_id
       description: Response serializer for workflow execution status check.
       title: CheckWorkflowExecutionStatusResponse
+    WorkflowResultEventState:
+      type: string
+      enum:
+      - INITIATED
+      - STREAMING
+      - FULFILLED
+      - REJECTED
+      - PENDING
+      description: '* `INITIATED` - Initiated
+
+        * `STREAMING` - Streaming
+
+        * `FULFILLED` - Fulfilled
+
+        * `REJECTED` - Rejected
+
+        * `PENDING` - Pending'
+      title: WorkflowResultEventState
   securitySchemes:
     default:
       type: apiKey

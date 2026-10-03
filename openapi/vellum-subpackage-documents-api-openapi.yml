@@ -274,148 +274,6 @@ paths:
                 $ref: '#/components/schemas/PaginatedSlimDocumentList'
 components:
   schemas:
-    documents_destroy_Response_204:
-      type: object
-      properties: {}
-      description: Empty response body
-      title: documents_destroy_Response_204
-    DocumentDocumentToDocumentIndex:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Vellum-generated ID that uniquely identifies this link.
-        environment_document_index_id:
-          type: string
-          format: uuid
-          description: Vellum-generated ID that uniquely identifies the environment index this document is included in.
-        document_index_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: Vellum-generated ID that uniquely identifies the index this document is included in.
-        indexing_state:
-          $ref: '#/components/schemas/IndexingStateEnum'
-          description: 'An enum value representing where this document is along its indexing lifecycle for this index.
-
-
-            * `AWAITING_PROCESSING` - Awaiting Processing
-
-            * `QUEUED` - Queued
-
-            * `INDEXING` - Indexing
-
-            * `INDEXED` - Indexed
-
-            * `FAILED` - Failed'
-        extracted_text_file_url:
-          type:
-          - string
-          - 'null'
-        processing_state:
-          type:
-          - string
-          - 'null'
-      required:
-      - id
-      - environment_document_index_id
-      - document_index_id
-      - extracted_text_file_url
-      - processing_state
-      description: A detailed representation of the link between a Document and a Document Index it's a member of.
-      title: DocumentDocumentToDocumentIndex
-    UploadDocumentResponse:
-      type: object
-      properties:
-        document_id:
-          type: string
-          format: uuid
-          description: The ID of the newly created document.
-      required:
-      - document_id
-      title: UploadDocumentResponse
-    DocumentStatus:
-      type: string
-      enum:
-      - ACTIVE
-      description: '* `ACTIVE` - Active'
-      title: DocumentStatus
-    PaginatedSlimDocumentList:
-      type: object
-      properties:
-        count:
-          type: integer
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/SlimDocument'
-      title: PaginatedSlimDocumentList
-    SlimDocumentDocumentToDocumentIndex:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Vellum-generated ID that uniquely identifies this link.
-        environment_document_index_id:
-          type: string
-          format: uuid
-          description: Vellum-generated ID that uniquely identifies the environment index this document is included in.
-        document_index_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: Vellum-generated ID that uniquely identifies the index this document is included in.
-        indexing_state:
-          $ref: '#/components/schemas/IndexingStateEnum'
-          description: 'An enum value representing where this document is along its indexing lifecycle for this index.
-
-
-            * `AWAITING_PROCESSING` - Awaiting Processing
-
-            * `QUEUED` - Queued
-
-            * `INDEXING` - Indexing
-
-            * `INDEXED` - Indexed
-
-            * `FAILED` - Failed'
-        processing_state:
-          type:
-          - string
-          - 'null'
-      required:
-      - id
-      - environment_document_index_id
-      - document_index_id
-      - processing_state
-      description: A slim representation of the link between a Document and a Document Index it's a member of.
-      title: SlimDocumentDocumentToDocumentIndex
-    ProcessingFailureReasonEnum:
-      type: string
-      enum:
-      - EXCEEDED_CHARACTER_LIMIT
-      - INVALID_FILE
-      - INVALID_CREDENTIALS
-      description: '* `EXCEEDED_CHARACTER_LIMIT` - Exceeded Character Limit
-
-        * `INVALID_FILE` - Invalid File
-
-        * `INVALID_CREDENTIALS` - Invalid Credentials'
-      title: ProcessingFailureReasonEnum
     UploadDocumentErrorResponse:
       type: object
       properties:
@@ -504,6 +362,124 @@ components:
       - processing_state
       - document_to_document_indexes
       title: SlimDocument
+    ProcessingFailureReasonEnum:
+      type: string
+      enum:
+      - EXCEEDED_CHARACTER_LIMIT
+      - INVALID_FILE
+      - INVALID_CREDENTIALS
+      description: '* `EXCEEDED_CHARACTER_LIMIT` - Exceeded Character Limit
+
+        * `INVALID_FILE` - Invalid File
+
+        * `INVALID_CREDENTIALS` - Invalid Credentials'
+      title: ProcessingFailureReasonEnum
+    PaginatedSlimDocumentList:
+      type: object
+      properties:
+        count:
+          type: integer
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/SlimDocument'
+      title: PaginatedSlimDocumentList
+    UploadDocumentResponse:
+      type: object
+      properties:
+        document_id:
+          type: string
+          format: uuid
+          description: The ID of the newly created document.
+      required:
+      - document_id
+      title: UploadDocumentResponse
+    DocumentStatus:
+      type: string
+      enum:
+      - ACTIVE
+      description: '* `ACTIVE` - Active'
+      title: DocumentStatus
+    documents_destroy_Response_204:
+      type: object
+      properties: {}
+      description: Empty response body
+      title: documents_destroy_Response_204
+    DocumentDocumentToDocumentIndex:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Vellum-generated ID that uniquely identifies this link.
+        environment_document_index_id:
+          type: string
+          format: uuid
+          description: Vellum-generated ID that uniquely identifies the environment index this document is included in.
+        document_index_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: Vellum-generated ID that uniquely identifies the index this document is included in.
+        indexing_state:
+          $ref: '#/components/schemas/IndexingStateEnum'
+          description: 'An enum value representing where this document is along its indexing lifecycle for this index.
+
+
+            * `AWAITING_PROCESSING` - Awaiting Processing
+
+            * `QUEUED` - Queued
+
+            * `INDEXING` - Indexing
+
+            * `INDEXED` - Indexed
+
+            * `FAILED` - Failed'
+        extracted_text_file_url:
+          type:
+          - string
+          - 'null'
+        processing_state:
+          type:
+          - string
+          - 'null'
+      required:
+      - id
+      - environment_document_index_id
+      - document_index_id
+      - extracted_text_file_url
+      - processing_state
+      description: A detailed representation of the link between a Document and a Document Index it's a member of.
+      title: DocumentDocumentToDocumentIndex
+    DocumentProcessingState:
+      type: string
+      enum:
+      - QUEUED
+      - PROCESSING
+      - PROCESSED
+      - FAILED
+      - UNKNOWN
+      description: '* `QUEUED` - Queued
+
+        * `PROCESSING` - Processing
+
+        * `PROCESSED` - Processed
+
+        * `FAILED` - Failed
+
+        * `UNKNOWN` - Unknown'
+      title: DocumentProcessingState
     DocumentRead:
       type: object
       properties:
@@ -557,24 +533,48 @@ components:
       - original_file_url
       - document_to_document_indexes
       title: DocumentRead
-    DocumentProcessingState:
-      type: string
-      enum:
-      - QUEUED
-      - PROCESSING
-      - PROCESSED
-      - FAILED
-      - UNKNOWN
-      description: '* `QUEUED` - Queued
+    SlimDocumentDocumentToDocumentIndex:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Vellum-generated ID that uniquely identifies this link.
+        environment_document_index_id:
+          type: string
+          format: uuid
+          description: Vellum-generated ID that uniquely identifies the environment index this document is included in.
+        document_index_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: Vellum-generated ID that uniquely identifies the index this document is included in.
+        indexing_state:
+          $ref: '#/components/schemas/IndexingStateEnum'
+          description: 'An enum value representing where this document is along its indexing lifecycle for this index.
 
-        * `PROCESSING` - Processing
 
-        * `PROCESSED` - Processed
+            * `AWAITING_PROCESSING` - Awaiting Processing
 
-        * `FAILED` - Failed
+            * `QUEUED` - Queued
 
-        * `UNKNOWN` - Unknown'
-      title: DocumentProcessingState
+            * `INDEXING` - Indexing
+
+            * `INDEXED` - Indexed
+
+            * `FAILED` - Failed'
+        processing_state:
+          type:
+          - string
+          - 'null'
+      required:
+      - id
+      - environment_document_index_id
+      - document_index_id
+      - processing_state
+      description: A slim representation of the link between a Document and a Document Index it's a member of.
+      title: SlimDocumentDocumentToDocumentIndex
   securitySchemes:
     default:
       type: apiKey

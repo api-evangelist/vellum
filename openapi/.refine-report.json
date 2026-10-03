@@ -27,9 +27,7 @@
     "vellum-subpackage-workflows-api-openapi.yml",
     "vellum-subpackage-workspacesecrets-api-openapi.yml"
   ],
-  "archived": [
-    "deleted 1 superseded output(s) from the previous generation"
-  ],
+  "archived": [],
   "errors": [],
   "warnings": [],
   "notes": [
@@ -65,11 +63,17 @@
     "vellum-openapi.json: declared missing tag: subpackage_workflowSandboxes",
     "vellum-openapi.json: declared missing tag: subpackage_workflows",
     "vellum-openapi.json: declared missing tag: subpackage_workspaceSecrets",
-    "superseded outputs removed: vellum-default-api-openapi.yml",
-    "apis.yml register: written (+8 apis, 23 total)"
+    "apis.yml register: already-registered"
   ],
   "skipped": [
-    "vellum-default-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "vellum-execute-prompt-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "vellum-execute-prompt-stream-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "vellum-execute-workflow-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "vellum-execute-workflow-async-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "vellum-execute-workflow-stream-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "vellum-search-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "vellum-submit-completion-actuals-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "vellum-submit-workflow-execution-actuals-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "vellum-subpackage-deployments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "vellum-subpackage-documentindexes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "vellum-subpackage-documents-api-openapi.yml: previously refined output, superseded by openapi/_original/",
