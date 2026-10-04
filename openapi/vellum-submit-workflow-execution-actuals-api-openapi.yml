@@ -44,6 +44,80 @@ paths:
               $ref: '#/components/schemas/SubmitWorkflowExecutionActualsRequest'
 components:
   schemas:
+    DocumentChatMessageContentRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/DocumentEnum'
+        value:
+          $ref: '#/components/schemas/VellumDocumentRequest'
+      required:
+      - type
+      - value
+      description: A document value that is used in a chat message.
+      title: DocumentChatMessageContentRequest
+    ArrayChatMessageContentRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ArrayEnum'
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/ArrayChatMessageContentItemRequest'
+      required:
+      - type
+      - value
+      description: A list of chat message content items.
+      title: ArrayChatMessageContentRequest
+    SubmitWorkflowExecutionActualRequest:
+      oneOf:
+      - $ref: '#/components/schemas/WorkflowExecutionActualStringRequest'
+      - $ref: '#/components/schemas/WorkflowExecutionActualJsonRequest'
+      - $ref: '#/components/schemas/WorkflowExecutionActualChatHistoryRequest'
+      title: SubmitWorkflowExecutionActualRequest
+    StringChatMessageContentRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/StringEnum'
+        value:
+          type: string
+      required:
+      - type
+      - value
+      description: A string value that is used in a chat message.
+      title: StringChatMessageContentRequest
+    VellumAudioRequest:
+      type: object
+      properties:
+        src:
+          type: string
+          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - src
+      title: VellumAudioRequest
+    ChatMessageRole:
+      type: string
+      enum:
+      - SYSTEM
+      - ASSISTANT
+      - USER
+      - FUNCTION
+      description: '* `SYSTEM` - System
+
+        * `ASSISTANT` - Assistant
+
+        * `USER` - User
+
+        * `FUNCTION` - Function'
+      title: ChatMessageRole
     AudioChatMessageContentRequest:
       type: object
       properties:
@@ -56,21 +130,30 @@ components:
       - value
       description: An audio value that is used in a chat message.
       title: AudioChatMessageContentRequest
-    AudioEnum:
+    ChatHistoryEnum:
       type: string
       enum:
-      - AUDIO
-      title: AudioEnum
-    VideoEnum:
+      - CHAT_HISTORY
+      title: ChatHistoryEnum
+    ArrayEnum:
       type: string
       enum:
-      - VIDEO
-      title: VideoEnum
-    JsonEnum:
+      - ARRAY
+      title: ArrayEnum
+    ArrayChatMessageContentItemRequest:
+      oneOf:
+      - $ref: '#/components/schemas/StringChatMessageContentRequest'
+      - $ref: '#/components/schemas/FunctionCallChatMessageContentRequest'
+      - $ref: '#/components/schemas/AudioChatMessageContentRequest'
+      - $ref: '#/components/schemas/VideoChatMessageContentRequest'
+      - $ref: '#/components/schemas/ImageChatMessageContentRequest'
+      - $ref: '#/components/schemas/DocumentChatMessageContentRequest'
+      title: ArrayChatMessageContentItemRequest
+    FunctionCallEnum:
       type: string
       enum:
-      - JSON
-      title: JsonEnum
+      - FUNCTION_CALL
+      title: FunctionCallEnum
     SubmitWorkflowExecutionActualsRequest:
       type: object
       properties:
@@ -93,50 +176,6 @@ components:
       required:
       - actuals
       title: SubmitWorkflowExecutionActualsRequest
-    WorkflowExecutionActualStringRequest:
-      type: object
-      properties:
-        output_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: The Vellum-generated ID of a workflow output. Must provide either this or output_key. output_key is typically preferred.
-        output_key:
-          type:
-          - string
-          - 'null'
-          description: The user-defined name of a workflow output. Must provide either this or output_id. Should correspond to the `Name` specified in a Final Output Node. Generally preferred over output_id.
-        quality:
-          type:
-          - number
-          - 'null'
-          format: double
-          description: Optionally provide a decimal number between 0.0 and 1.0 (inclusive) representing the quality of the output. 0 is the worst, 1 is the best.
-        metadata:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            description: Any type
-          description: Optionally provide additional metadata about the feedback submission.
-        timestamp:
-          type:
-          - number
-          - 'null'
-          format: double
-          description: Optionally provide the timestamp representing when this feedback was collected. Used for reporting purposes.
-        output_type:
-          $ref: '#/components/schemas/StringEnum'
-          description: The variable type of the output that this actual is being submitted for.
-        desired_output_value:
-          type:
-          - string
-          - 'null'
-          description: Optionally provide the value that the output ideally should have been.
-      required:
-      - output_type
-      title: WorkflowExecutionActualStringRequest
     WorkflowExecutionActualChatHistoryRequest:
       type: object
       properties:
@@ -183,6 +222,85 @@ components:
       required:
       - output_type
       title: WorkflowExecutionActualChatHistoryRequest
+    VellumVideoRequest:
+      type: object
+      properties:
+        src:
+          type: string
+          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - src
+      title: VellumVideoRequest
+    WorkflowExecutionActualStringRequest:
+      type: object
+      properties:
+        output_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The Vellum-generated ID of a workflow output. Must provide either this or output_key. output_key is typically preferred.
+        output_key:
+          type:
+          - string
+          - 'null'
+          description: The user-defined name of a workflow output. Must provide either this or output_id. Should correspond to the `Name` specified in a Final Output Node. Generally preferred over output_id.
+        quality:
+          type:
+          - number
+          - 'null'
+          format: double
+          description: Optionally provide a decimal number between 0.0 and 1.0 (inclusive) representing the quality of the output. 0 is the worst, 1 is the best.
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+          description: Optionally provide additional metadata about the feedback submission.
+        timestamp:
+          type:
+          - number
+          - 'null'
+          format: double
+          description: Optionally provide the timestamp representing when this feedback was collected. Used for reporting purposes.
+        output_type:
+          $ref: '#/components/schemas/StringEnum'
+          description: The variable type of the output that this actual is being submitted for.
+        desired_output_value:
+          type:
+          - string
+          - 'null'
+          description: Optionally provide the value that the output ideally should have been.
+      required:
+      - output_type
+      title: WorkflowExecutionActualStringRequest
+    VideoEnum:
+      type: string
+      enum:
+      - VIDEO
+      title: VideoEnum
+    VellumDocumentRequest:
+      type: object
+      properties:
+        src:
+          type: string
+          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - src
+      title: VellumDocumentRequest
     FunctionCallChatMessageContentValueRequest:
       type: object
       properties:
@@ -201,51 +319,12 @@ components:
       - arguments
       description: The final resolved function call value.
       title: FunctionCallChatMessageContentValueRequest
-    VellumVideoRequest:
-      type: object
-      properties:
-        src:
-          type: string
-          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
-        metadata:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            description: Any type
-      required:
-      - src
-      title: VellumVideoRequest
-    FunctionCallChatMessageContentRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/FunctionCallEnum'
-        value:
-          $ref: '#/components/schemas/FunctionCallChatMessageContentValueRequest'
-      required:
-      - type
-      - value
-      description: A function call value that is used in a chat message.
-      title: FunctionCallChatMessageContentRequest
-    VideoChatMessageContentRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/VideoEnum'
-        value:
-          $ref: '#/components/schemas/VellumVideoRequest'
-      required:
-      - type
-      - value
-      description: A video value that is used in a chat message.
-      title: VideoChatMessageContentRequest
-    ArrayEnum:
+    ImageEnum:
       type: string
       enum:
-      - ARRAY
-      title: ArrayEnum
-    VellumAudioRequest:
+      - IMAGE
+      title: ImageEnum
+    VellumImageRequest:
       type: object
       properties:
         src:
@@ -259,37 +338,49 @@ components:
             description: Any type
       required:
       - src
-      title: VellumAudioRequest
-    DocumentChatMessageContentRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/DocumentEnum'
-        value:
-          $ref: '#/components/schemas/VellumDocumentRequest'
-      required:
-      - type
-      - value
-      description: A document value that is used in a chat message.
-      title: DocumentChatMessageContentRequest
-    SubmitWorkflowExecutionActualRequest:
+      title: VellumImageRequest
+    JsonEnum:
+      type: string
+      enum:
+      - JSON
+      title: JsonEnum
+    ChatMessageContentRequest:
       oneOf:
-      - $ref: '#/components/schemas/WorkflowExecutionActualStringRequest'
-      - $ref: '#/components/schemas/WorkflowExecutionActualJsonRequest'
-      - $ref: '#/components/schemas/WorkflowExecutionActualChatHistoryRequest'
-      title: SubmitWorkflowExecutionActualRequest
-    StringChatMessageContentRequest:
+      - $ref: '#/components/schemas/StringChatMessageContentRequest'
+      - $ref: '#/components/schemas/FunctionCallChatMessageContentRequest'
+      - $ref: '#/components/schemas/ArrayChatMessageContentRequest'
+      - $ref: '#/components/schemas/AudioChatMessageContentRequest'
+      - $ref: '#/components/schemas/VideoChatMessageContentRequest'
+      - $ref: '#/components/schemas/ImageChatMessageContentRequest'
+      - $ref: '#/components/schemas/DocumentChatMessageContentRequest'
+      title: ChatMessageContentRequest
+    ChatMessageRequest:
       type: object
       properties:
-        type:
-          $ref: '#/components/schemas/StringEnum'
-        value:
-          type: string
+        text:
+          type:
+          - string
+          - 'null'
+        role:
+          $ref: '#/components/schemas/ChatMessageRole'
+        content:
+          oneOf:
+          - $ref: '#/components/schemas/ChatMessageContentRequest'
+          - type: 'null'
+        source:
+          type:
+          - string
+          - 'null'
+          description: An optional identifier representing who or what generated this message.
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
       required:
-      - type
-      - value
-      description: A string value that is used in a chat message.
-      title: StringChatMessageContentRequest
+      - role
+      title: ChatMessageRequest
     WorkflowExecutionActualJsonRequest:
       type: object
       properties:
@@ -336,116 +427,11 @@ components:
       required:
       - output_type
       title: WorkflowExecutionActualJsonRequest
-    ChatMessageRole:
+    AudioEnum:
       type: string
       enum:
-      - SYSTEM
-      - ASSISTANT
-      - USER
-      - FUNCTION
-      description: '* `SYSTEM` - System
-
-        * `ASSISTANT` - Assistant
-
-        * `USER` - User
-
-        * `FUNCTION` - Function'
-      title: ChatMessageRole
-    DocumentEnum:
-      type: string
-      enum:
-      - DOCUMENT
-      title: DocumentEnum
-    ArrayChatMessageContentItemRequest:
-      oneOf:
-      - $ref: '#/components/schemas/StringChatMessageContentRequest'
-      - $ref: '#/components/schemas/FunctionCallChatMessageContentRequest'
-      - $ref: '#/components/schemas/AudioChatMessageContentRequest'
-      - $ref: '#/components/schemas/VideoChatMessageContentRequest'
-      - $ref: '#/components/schemas/ImageChatMessageContentRequest'
-      - $ref: '#/components/schemas/DocumentChatMessageContentRequest'
-      title: ArrayChatMessageContentItemRequest
-    VellumDocumentRequest:
-      type: object
-      properties:
-        src:
-          type: string
-          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
-        metadata:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            description: Any type
-      required:
-      - src
-      title: VellumDocumentRequest
-    ChatMessageRequest:
-      type: object
-      properties:
-        text:
-          type:
-          - string
-          - 'null'
-        role:
-          $ref: '#/components/schemas/ChatMessageRole'
-        content:
-          oneOf:
-          - $ref: '#/components/schemas/ChatMessageContentRequest'
-          - type: 'null'
-        source:
-          type:
-          - string
-          - 'null'
-          description: An optional identifier representing who or what generated this message.
-        metadata:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            description: Any type
-      required:
-      - role
-      title: ChatMessageRequest
-    StringEnum:
-      type: string
-      enum:
-      - STRING
-      title: StringEnum
-    ArrayChatMessageContentRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/ArrayEnum'
-        value:
-          type: array
-          items:
-            $ref: '#/components/schemas/ArrayChatMessageContentItemRequest'
-      required:
-      - type
-      - value
-      description: A list of chat message content items.
-      title: ArrayChatMessageContentRequest
-    ImageEnum:
-      type: string
-      enum:
-      - IMAGE
-      title: ImageEnum
-    ChatMessageContentRequest:
-      oneOf:
-      - $ref: '#/components/schemas/StringChatMessageContentRequest'
-      - $ref: '#/components/schemas/FunctionCallChatMessageContentRequest'
-      - $ref: '#/components/schemas/ArrayChatMessageContentRequest'
-      - $ref: '#/components/schemas/AudioChatMessageContentRequest'
-      - $ref: '#/components/schemas/VideoChatMessageContentRequest'
-      - $ref: '#/components/schemas/ImageChatMessageContentRequest'
-      - $ref: '#/components/schemas/DocumentChatMessageContentRequest'
-      title: ChatMessageContentRequest
-    ChatHistoryEnum:
-      type: string
-      enum:
-      - CHAT_HISTORY
-      title: ChatHistoryEnum
+      - AUDIO
+      title: AudioEnum
     ImageChatMessageContentRequest:
       type: object
       properties:
@@ -458,31 +444,45 @@ components:
       - value
       description: An image value that is used in a chat message.
       title: ImageChatMessageContentRequest
+    StringEnum:
+      type: string
+      enum:
+      - STRING
+      title: StringEnum
+    DocumentEnum:
+      type: string
+      enum:
+      - DOCUMENT
+      title: DocumentEnum
     submit-workflow-execution-actuals_Response_200:
       type: object
       properties: {}
       description: Empty response body
       title: submit-workflow-execution-actuals_Response_200
-    FunctionCallEnum:
-      type: string
-      enum:
-      - FUNCTION_CALL
-      title: FunctionCallEnum
-    VellumImageRequest:
+    FunctionCallChatMessageContentRequest:
       type: object
       properties:
-        src:
-          type: string
-          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
-        metadata:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            description: Any type
+        type:
+          $ref: '#/components/schemas/FunctionCallEnum'
+        value:
+          $ref: '#/components/schemas/FunctionCallChatMessageContentValueRequest'
       required:
-      - src
-      title: VellumImageRequest
+      - type
+      - value
+      description: A function call value that is used in a chat message.
+      title: FunctionCallChatMessageContentRequest
+    VideoChatMessageContentRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/VideoEnum'
+        value:
+          $ref: '#/components/schemas/VellumVideoRequest'
+      required:
+      - type
+      - value
+      description: A video value that is used in a chat message.
+      title: VideoChatMessageContentRequest
   securitySchemes:
     default:
       type: apiKey

@@ -59,28 +59,19 @@ paths:
               $ref: '#/components/schemas/SubmitCompletionActualsRequest'
 components:
   schemas:
-    SubmitCompletionActualsRequest:
+    SubmitCompletionActualsErrorResponse:
       type: object
       properties:
-        deployment_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: The ID of the deployment. Must provide either this or deployment_name.
-        deployment_name:
-          type:
-          - string
-          - 'null'
-          description: The name of the deployment. Must provide either this or deployment_id.
-        actuals:
-          type: array
-          items:
-            $ref: '#/components/schemas/SubmitCompletionActualRequest'
-          description: Feedback regarding the quality of previously generated completions
+        detail:
+          type: string
       required:
-      - actuals
-      title: SubmitCompletionActualsRequest
+      - detail
+      title: SubmitCompletionActualsErrorResponse
+    submit-completion-actuals_Response_200:
+      type: object
+      properties: {}
+      description: Empty response body
+      title: submit-completion-actuals_Response_200
     SubmitCompletionActualRequest:
       type: object
       properties:
@@ -119,19 +110,28 @@ components:
             description: Any type
           description: Optionally provide additional metadata about the feedback submission.
       title: SubmitCompletionActualRequest
-    SubmitCompletionActualsErrorResponse:
+    SubmitCompletionActualsRequest:
       type: object
       properties:
-        detail:
-          type: string
+        deployment_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of the deployment. Must provide either this or deployment_name.
+        deployment_name:
+          type:
+          - string
+          - 'null'
+          description: The name of the deployment. Must provide either this or deployment_id.
+        actuals:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubmitCompletionActualRequest'
+          description: Feedback regarding the quality of previously generated completions
       required:
-      - detail
-      title: SubmitCompletionActualsErrorResponse
-    submit-completion-actuals_Response_200:
-      type: object
-      properties: {}
-      description: Empty response body
-      title: submit-completion-actuals_Response_200
+      - actuals
+      title: SubmitCompletionActualsRequest
   securitySchemes:
     default:
       type: apiKey

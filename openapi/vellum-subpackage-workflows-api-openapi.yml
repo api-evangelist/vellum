@@ -62,18 +62,15 @@ paths:
                 $ref: '#/components/schemas/CheckWorkflowExecutionStatusErrorResponse'
 components:
   schemas:
-    CheckWorkflowExecutionStatusError:
+    CheckWorkflowExecutionStatusErrorResponse:
       type: object
       properties:
-        message:
-          type:
-          - string
-          - 'null'
-        code:
-          oneOf:
-          - $ref: '#/components/schemas/WorkflowExecutionEventErrorCode'
-          - type: 'null'
-      title: CheckWorkflowExecutionStatusError
+        detail:
+          type: string
+      required:
+      - detail
+      description: Error response for workflow execution status check.
+      title: CheckWorkflowExecutionStatusErrorResponse
     WorkflowExecutionEventErrorCode:
       type: string
       enum:
@@ -122,15 +119,6 @@ components:
 
         * `USER_DEFINED_ERROR` - USER_DEFINED_ERROR'
       title: WorkflowExecutionEventErrorCode
-    CheckWorkflowExecutionStatusErrorResponse:
-      type: object
-      properties:
-        detail:
-          type: string
-      required:
-      - detail
-      description: Error response for workflow execution status check.
-      title: CheckWorkflowExecutionStatusErrorResponse
     CheckWorkflowExecutionStatusResponse:
       type: object
       properties:
@@ -157,6 +145,18 @@ components:
       - execution_id
       description: Response serializer for workflow execution status check.
       title: CheckWorkflowExecutionStatusResponse
+    CheckWorkflowExecutionStatusError:
+      type: object
+      properties:
+        message:
+          type:
+          - string
+          - 'null'
+        code:
+          oneOf:
+          - $ref: '#/components/schemas/WorkflowExecutionEventErrorCode'
+          - type: 'null'
+      title: CheckWorkflowExecutionStatusError
     WorkflowResultEventState:
       type: string
       enum:

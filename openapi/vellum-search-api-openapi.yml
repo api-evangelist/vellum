@@ -59,47 +59,26 @@ paths:
               $ref: '#/components/schemas/SearchRequestBodyRequest'
 components:
   schemas:
-    AudioChatMessageContentRequest:
+    DocumentChatMessageContentRequest:
       type: object
       properties:
         type:
-          $ref: '#/components/schemas/AudioEnum'
+          $ref: '#/components/schemas/DocumentEnum'
         value:
-          $ref: '#/components/schemas/VellumAudioRequest'
+          $ref: '#/components/schemas/VellumDocumentRequest'
       required:
       - type
       - value
-      description: An audio value that is used in a chat message.
-      title: AudioChatMessageContentRequest
-    AudioEnum:
-      type: string
-      enum:
-      - AUDIO
-      title: AudioEnum
-    StringVellumValueRequest:
+      description: A document value that is used in a chat message.
+      title: DocumentChatMessageContentRequest
+    SearchResultMetaRequest:
       type: object
       properties:
-        type:
-          $ref: '#/components/schemas/StringEnum'
-        value:
-          type:
-          - string
-          - 'null'
-      required:
-      - type
-      - value
-      description: A value representing a string.
-      title: StringVellumValueRequest
-    VideoEnum:
-      type: string
-      enum:
-      - VIDEO
-      title: VideoEnum
-    JsonEnum:
-      type: string
-      enum:
-      - JSON
-      title: JsonEnum
+        source:
+          oneOf:
+          - $ref: '#/components/schemas/SearchResultMetaSourceRequest'
+          - type: 'null'
+      title: SearchResultMetaRequest
     VideoVellumValueRequest:
       type: object
       properties:
@@ -114,562 +93,6 @@ components:
       - value
       description: A base Vellum primitive value representing a video.
       title: VideoVellumValueRequest
-    SearchResultMeta:
-      type: object
-      properties:
-        source:
-          oneOf:
-          - $ref: '#/components/schemas/SearchResultMetaSource'
-          - type: 'null'
-      title: SearchResultMeta
-    SearchResultDocument:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: The ID of the document.
-        label:
-          type: string
-          description: The human-readable name for the document.
-        external_id:
-          type:
-          - string
-          - 'null'
-          description: The unique ID of the document as represented in an external system and specified when it was originally uploaded.
-        metadata:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            description: Any type
-          description: A previously supplied JSON object containing metadata that can be filtered on when searching.
-      required:
-      - label
-      title: SearchResultDocument
-    SearchResultsEnum:
-      type: string
-      enum:
-      - SEARCH_RESULTS
-      title: SearchResultsEnum
-    NumberVellumValueRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/NumberEnum'
-        value:
-          type:
-          - number
-          - 'null'
-          format: double
-      required:
-      - type
-      - value
-      description: A value representing a number.
-      title: NumberVellumValueRequest
-    VellumValueLogicalExpressionRequest:
-      oneOf:
-      - $ref: '#/components/schemas/VellumValueLogicalConditionRequest'
-      - $ref: '#/components/schemas/VellumValueLogicalConditionGroupRequest'
-      title: VellumValueLogicalExpressionRequest
-    SearchWeightsRequest:
-      type: object
-      properties:
-        semantic_similarity:
-          type: number
-          format: double
-          default: 0.8
-          description: The relative weight to give to semantic similarity
-        keywords:
-          type: number
-          format: double
-          default: 0.2
-          description: The relative weight to give to keywords
-      title: SearchWeightsRequest
-    SearchRequestOptionsRequest:
-      type: object
-      properties:
-        limit:
-          type:
-          - integer
-          - 'null'
-          default: 10
-          description: The maximum number of results to return.
-        weights:
-          oneOf:
-          - $ref: '#/components/schemas/SearchWeightsRequest'
-          - type: 'null'
-          description: The weights to use for the search. Must add up to 1.0.
-        result_merging:
-          oneOf:
-          - $ref: '#/components/schemas/SearchResultMergingRequest'
-          - type: 'null'
-          description: The configuration for merging results.
-        filters:
-          oneOf:
-          - $ref: '#/components/schemas/SearchFiltersRequest'
-          - type: 'null'
-          description: The filters to apply to the search.
-      title: SearchRequestOptionsRequest
-    ThinkingEnum:
-      type: string
-      enum:
-      - THINKING
-      title: ThinkingEnum
-    SearchResultDocumentRequest:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: The ID of the document.
-        label:
-          type: string
-          description: The human-readable name for the document.
-        external_id:
-          type:
-          - string
-          - 'null'
-          description: The unique ID of the document as represented in an external system and specified when it was originally uploaded.
-        metadata:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            description: Any type
-          description: A previously supplied JSON object containing metadata that can be filtered on when searching.
-      required:
-      - label
-      title: SearchResultDocumentRequest
-    ArrayVellumValueRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/ArrayEnum'
-        value:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/VellumValueRequest'
-      required:
-      - type
-      - value
-      description: A value representing an array of Vellum variable values.
-      title: ArrayVellumValueRequest
-    MetadataFilterConfigRequest:
-      type: object
-      properties:
-        combinator:
-          oneOf:
-          - $ref: '#/components/schemas/MetadataFilterRuleCombinator'
-          - type: 'null'
-        negated:
-          type:
-          - boolean
-          - 'null'
-        rules:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/MetadataFilterRuleRequest'
-        field:
-          type:
-          - string
-          - 'null'
-        operator:
-          oneOf:
-          - $ref: '#/components/schemas/LogicalOperator'
-          - type: 'null'
-        value:
-          type:
-          - string
-          - 'null'
-      description: A deprecated pattern for filtering on metadata. Please use MetadataFilters instead.
-      title: MetadataFilterConfigRequest
-    VellumErrorCodeEnum:
-      type: string
-      enum:
-      - INVALID_REQUEST
-      - INVALID_INPUTS
-      - PROVIDER_ERROR
-      - PROVIDER_CREDENTIALS_UNAVAILABLE
-      - INTEGRATION_CREDENTIALS_UNAVAILABLE
-      - REQUEST_TIMEOUT
-      - INTERNAL_SERVER_ERROR
-      - USER_DEFINED_ERROR
-      - WORKFLOW_CANCELLED
-      - NODE_CANCELLED
-      - PROVIDER_QUOTA_EXCEEDED
-      - CHAT_QUOTA_EXCEEDED
-      description: '* `INVALID_REQUEST` - INVALID_REQUEST
-
-        * `INVALID_INPUTS` - INVALID_INPUTS
-
-        * `PROVIDER_ERROR` - PROVIDER_ERROR
-
-        * `PROVIDER_CREDENTIALS_UNAVAILABLE` - PROVIDER_CREDENTIALS_UNAVAILABLE
-
-        * `INTEGRATION_CREDENTIALS_UNAVAILABLE` - INTEGRATION_CREDENTIALS_UNAVAILABLE
-
-        * `REQUEST_TIMEOUT` - REQUEST_TIMEOUT
-
-        * `INTERNAL_SERVER_ERROR` - INTERNAL_SERVER_ERROR
-
-        * `USER_DEFINED_ERROR` - USER_DEFINED_ERROR
-
-        * `WORKFLOW_CANCELLED` - WORKFLOW_CANCELLED
-
-        * `NODE_CANCELLED` - NODE_CANCELLED
-
-        * `PROVIDER_QUOTA_EXCEEDED` - PROVIDER_QUOTA_EXCEEDED
-
-        * `CHAT_QUOTA_EXCEEDED` - CHAT_QUOTA_EXCEEDED'
-      title: VellumErrorCodeEnum
-    MetadataFiltersRequest:
-      oneOf:
-      - $ref: '#/components/schemas/MetadataFilterConfigRequest'
-      - $ref: '#/components/schemas/VellumValueLogicalExpressionRequest'
-      title: MetadataFiltersRequest
-    FunctionCallChatMessageContentValueRequest:
-      type: object
-      properties:
-        name:
-          type: string
-        arguments:
-          type: object
-          additionalProperties:
-            description: Any type
-        id:
-          type:
-          - string
-          - 'null'
-      required:
-      - name
-      - arguments
-      description: The final resolved function call value.
-      title: FunctionCallChatMessageContentValueRequest
-    VellumVideoRequest:
-      type: object
-      properties:
-        src:
-          type: string
-          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
-        metadata:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            description: Any type
-      required:
-      - src
-      title: VellumVideoRequest
-    FunctionCallChatMessageContentRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/FunctionCallEnum'
-        value:
-          $ref: '#/components/schemas/FunctionCallChatMessageContentValueRequest'
-      required:
-      - type
-      - value
-      description: A function call value that is used in a chat message.
-      title: FunctionCallChatMessageContentRequest
-    FunctionCallRequest:
-      type: object
-      properties:
-        arguments:
-          type: object
-          additionalProperties:
-            description: Any type
-        id:
-          type:
-          - string
-          - 'null'
-        name:
-          type: string
-      required:
-      - arguments
-      - name
-      description: The final resolved function call value.
-      title: FunctionCallRequest
-    AudioVellumValueRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/AudioEnum'
-        value:
-          oneOf:
-          - $ref: '#/components/schemas/VellumAudioRequest'
-          - type: 'null'
-      required:
-      - type
-      - value
-      description: A base Vellum primitive value representing audio.
-      title: AudioVellumValueRequest
-    SearchErrorResponse:
-      type: object
-      properties:
-        detail:
-          type: string
-          description: Details about why the request failed.
-      required:
-      - detail
-      title: SearchErrorResponse
-    VideoChatMessageContentRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/VideoEnum'
-        value:
-          $ref: '#/components/schemas/VellumVideoRequest'
-      required:
-      - type
-      - value
-      description: A video value that is used in a chat message.
-      title: VideoChatMessageContentRequest
-    JsonVellumValueRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/JsonEnum'
-        value:
-          oneOf:
-          - description: Any type
-          - type: 'null'
-      required:
-      - type
-      - value
-      description: A value representing a JSON object.
-      title: JsonVellumValueRequest
-    LogicalConditionEnum:
-      type: string
-      enum:
-      - LOGICAL_CONDITION
-      title: LogicalConditionEnum
-    ArrayEnum:
-      type: string
-      enum:
-      - ARRAY
-      title: ArrayEnum
-    VellumAudioRequest:
-      type: object
-      properties:
-        src:
-          type: string
-          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
-        metadata:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            description: Any type
-      required:
-      - src
-      title: VellumAudioRequest
-    SearchRequestBodyRequest:
-      type: object
-      properties:
-        index_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: The ID of the index to search against. Must provide either this, index_name or document_index.
-        index_name:
-          type:
-          - string
-          - 'null'
-          description: The name of the index to search against. Must provide either this, index_id or document_index.
-        query:
-          type: string
-          description: The query to search for.
-        options:
-          oneOf:
-          - $ref: '#/components/schemas/SearchRequestOptionsRequest'
-          - type: 'null'
-          description: Configuration options for the search.
-        document_index:
-          type:
-          - string
-          - 'null'
-          description: Either the index name or index ID to search against. Must provide either this, index_id or index_name.
-      required:
-      - query
-      title: SearchRequestBodyRequest
-    DocumentChatMessageContentRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/DocumentEnum'
-        value:
-          $ref: '#/components/schemas/VellumDocumentRequest'
-      required:
-      - type
-      - value
-      description: A document value that is used in a chat message.
-      title: DocumentChatMessageContentRequest
-    StringChatMessageContentRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/StringEnum'
-        value:
-          type: string
-      required:
-      - type
-      - value
-      description: A string value that is used in a chat message.
-      title: StringChatMessageContentRequest
-    ChatMessageRole:
-      type: string
-      enum:
-      - SYSTEM
-      - ASSISTANT
-      - USER
-      - FUNCTION
-      description: '* `SYSTEM` - System
-
-        * `ASSISTANT` - Assistant
-
-        * `USER` - User
-
-        * `FUNCTION` - Function'
-      title: ChatMessageRole
-    SearchResultMetaSourceRequest:
-      oneOf:
-      - $ref: '#/components/schemas/PdfSearchResultMetaSourceRequest'
-      title: SearchResultMetaSourceRequest
-    DocumentEnum:
-      type: string
-      enum:
-      - DOCUMENT
-      title: DocumentEnum
-    SearchResultMetaRequest:
-      type: object
-      properties:
-        source:
-          oneOf:
-          - $ref: '#/components/schemas/SearchResultMetaSourceRequest'
-          - type: 'null'
-      title: SearchResultMetaRequest
-    ArrayChatMessageContentItemRequest:
-      oneOf:
-      - $ref: '#/components/schemas/StringChatMessageContentRequest'
-      - $ref: '#/components/schemas/FunctionCallChatMessageContentRequest'
-      - $ref: '#/components/schemas/AudioChatMessageContentRequest'
-      - $ref: '#/components/schemas/VideoChatMessageContentRequest'
-      - $ref: '#/components/schemas/ImageChatMessageContentRequest'
-      - $ref: '#/components/schemas/DocumentChatMessageContentRequest'
-      title: ArrayChatMessageContentItemRequest
-    VellumDocumentRequest:
-      type: object
-      properties:
-        src:
-          type: string
-          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
-        metadata:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            description: Any type
-      required:
-      - src
-      title: VellumDocumentRequest
-    PdfEnum:
-      type: string
-      enum:
-      - PDF
-      title: PdfEnum
-    SearchFiltersRequest:
-      type: object
-      properties:
-        external_ids:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-          description: The document external IDs to filter by
-        metadata:
-          oneOf:
-          - $ref: '#/components/schemas/MetadataFiltersRequest'
-          - type: 'null'
-          description: The metadata filters to apply to the search
-      title: SearchFiltersRequest
-    StringEnum:
-      type: string
-      enum:
-      - STRING
-      title: StringEnum
-    ChatMessageRequest:
-      type: object
-      properties:
-        text:
-          type:
-          - string
-          - 'null'
-        role:
-          $ref: '#/components/schemas/ChatMessageRole'
-        content:
-          oneOf:
-          - $ref: '#/components/schemas/ChatMessageContentRequest'
-          - type: 'null'
-        source:
-          type:
-          - string
-          - 'null'
-          description: An optional identifier representing who or what generated this message.
-        metadata:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            description: Any type
-      required:
-      - role
-      title: ChatMessageRequest
-    MetadataFilterRuleRequest:
-      type: object
-      properties:
-        combinator:
-          oneOf:
-          - $ref: '#/components/schemas/MetadataFilterRuleCombinator'
-          - type: 'null'
-        negated:
-          type:
-          - boolean
-          - 'null'
-        rules:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/MetadataFilterRuleRequest'
-        field:
-          type:
-          - string
-          - 'null'
-        operator:
-          oneOf:
-          - $ref: '#/components/schemas/LogicalOperator'
-          - type: 'null'
-        value:
-          type:
-          - string
-          - 'null'
-      title: MetadataFilterRuleRequest
-    SearchResultMetaSource:
-      oneOf:
-      - $ref: '#/components/schemas/PdfSearchResultMetaSource'
-      title: SearchResultMetaSource
     ArrayChatMessageContentRequest:
       type: object
       properties:
@@ -684,158 +107,18 @@ components:
       - value
       description: A list of chat message content items.
       title: ArrayChatMessageContentRequest
-    ImageEnum:
-      type: string
-      enum:
-      - IMAGE
-      title: ImageEnum
-    VellumValueLogicalConditionRequest:
+    StringChatMessageContentRequest:
       type: object
       properties:
         type:
-          $ref: '#/components/schemas/LogicalConditionEnum'
-        lhs_variable:
-          $ref: '#/components/schemas/VellumValueRequest'
-        operator:
-          $ref: '#/components/schemas/LogicalOperator'
-        rhs_variable:
-          $ref: '#/components/schemas/VellumValueRequest'
-      required:
-      - type
-      - lhs_variable
-      - operator
-      - rhs_variable
-      description: A basic condition comparing two Vellum values.
-      title: VellumValueLogicalConditionRequest
-    VellumValueRequest:
-      oneOf:
-      - $ref: '#/components/schemas/StringVellumValueRequest'
-      - $ref: '#/components/schemas/NumberVellumValueRequest'
-      - $ref: '#/components/schemas/JsonVellumValueRequest'
-      - $ref: '#/components/schemas/AudioVellumValueRequest'
-      - $ref: '#/components/schemas/VideoVellumValueRequest'
-      - $ref: '#/components/schemas/ImageVellumValueRequest'
-      - $ref: '#/components/schemas/DocumentVellumValueRequest'
-      - $ref: '#/components/schemas/FunctionCallVellumValueRequest'
-      - $ref: '#/components/schemas/ErrorVellumValueRequest'
-      - $ref: '#/components/schemas/ArrayVellumValueRequest'
-      - $ref: '#/components/schemas/ChatHistoryVellumValueRequest'
-      - $ref: '#/components/schemas/SearchResultsVellumValueRequest'
-      - $ref: '#/components/schemas/ThinkingVellumValueRequest'
-      title: VellumValueRequest
-    DocumentVellumValueRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/DocumentEnum'
+          $ref: '#/components/schemas/StringEnum'
         value:
-          oneOf:
-          - $ref: '#/components/schemas/VellumDocumentRequest'
-          - type: 'null'
-      required:
-      - type
-      - value
-      description: A base Vellum primitive value representing a document.
-      title: DocumentVellumValueRequest
-    SearchResultsVellumValueRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/SearchResultsEnum'
-        value:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/SearchResultRequest'
-      required:
-      - type
-      - value
-      description: A value representing Search Results.
-      title: SearchResultsVellumValueRequest
-    ThinkingVellumValueRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/ThinkingEnum'
-        value:
-          oneOf:
-          - $ref: '#/components/schemas/StringVellumValueRequest'
-          - type: 'null'
-      required:
-      - type
-      - value
-      description: A value representing Thinking mode output.
-      title: ThinkingVellumValueRequest
-    SearchResponse:
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/SearchResult'
-          description: The results of the search. Each result represents a chunk that matches the search query.
-      required:
-      - results
-      title: SearchResponse
-    PdfSearchResultMetaSourceRequest:
-      type: object
-      properties:
-        document_type:
-          $ref: '#/components/schemas/PdfEnum'
-        start_page_num:
-          type:
-          - integer
-          - 'null'
-          description: The 1-indexed page number where the chunk starts in the document. Only available for supported chunking strategies and document types.
-        end_page_num:
-          type:
-          - integer
-          - 'null'
-          description: The 1-indexed page number where the chunk ends in the document. Only available for supported chunking strategies and document types.
-      required:
-      - document_type
-      - start_page_num
-      - end_page_num
-      description: The source of a search result from a PDF document.
-      title: PdfSearchResultMetaSourceRequest
-    VellumErrorRequest:
-      type: object
-      properties:
-        code:
-          $ref: '#/components/schemas/VellumErrorCodeEnum'
-        message:
           type: string
-        raw_data:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            description: Any type
       required:
-      - code
-      - message
-      title: VellumErrorRequest
-    ChatMessageContentRequest:
-      oneOf:
-      - $ref: '#/components/schemas/StringChatMessageContentRequest'
-      - $ref: '#/components/schemas/FunctionCallChatMessageContentRequest'
-      - $ref: '#/components/schemas/ArrayChatMessageContentRequest'
-      - $ref: '#/components/schemas/AudioChatMessageContentRequest'
-      - $ref: '#/components/schemas/VideoChatMessageContentRequest'
-      - $ref: '#/components/schemas/ImageChatMessageContentRequest'
-      - $ref: '#/components/schemas/DocumentChatMessageContentRequest'
-      title: ChatMessageContentRequest
-    ChatHistoryEnum:
-      type: string
-      enum:
-      - CHAT_HISTORY
-      title: ChatHistoryEnum
-    ErrorEnum:
-      type: string
-      enum:
-      - ERROR
-      title: ErrorEnum
+      - type
+      - value
+      description: A string value that is used in a chat message.
+      title: StringChatMessageContentRequest
     LogicalOperator:
       type: string
       enum:
@@ -929,172 +212,50 @@ components:
 
         * `length` - LENGTH'
       title: LogicalOperator
-    MetadataFilterRuleCombinator:
-      type: string
-      enum:
-      - and
-      - or
-      description: '* `and` - AND
-
-        * `or` - OR'
-      title: MetadataFilterRuleCombinator
-    SearchResultMergingRequest:
+    SearchWeightsRequest:
       type: object
       properties:
-        enabled:
-          type: boolean
-          default: true
-          description: Whether to enable merging results
-      title: SearchResultMergingRequest
-    ConditionCombinator:
-      type: string
-      enum:
-      - OR
-      - AND
-      description: '* `OR` - OR
-
-        * `AND` - AND'
-      title: ConditionCombinator
-    LogicalConditionGroupEnum:
-      type: string
-      enum:
-      - LOGICAL_CONDITION_GROUP
-      title: LogicalConditionGroupEnum
-    VellumValueLogicalConditionGroupRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/LogicalConditionGroupEnum'
-        conditions:
-          type: array
-          items:
-            $ref: '#/components/schemas/VellumValueLogicalExpressionRequest'
-        combinator:
-          $ref: '#/components/schemas/ConditionCombinator'
-        negated:
-          type: boolean
-      required:
-      - type
-      - conditions
-      - combinator
-      - negated
-      description: A higher-order condition that combines one or more basic conditions or other higher-order conditions.
-      title: VellumValueLogicalConditionGroupRequest
-    ImageVellumValueRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/ImageEnum'
-        value:
-          oneOf:
-          - $ref: '#/components/schemas/VellumImageRequest'
-          - type: 'null'
-      required:
-      - type
-      - value
-      description: A base Vellum primitive value representing an image.
-      title: ImageVellumValueRequest
-    ImageChatMessageContentRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/ImageEnum'
-        value:
-          $ref: '#/components/schemas/VellumImageRequest'
-      required:
-      - type
-      - value
-      description: An image value that is used in a chat message.
-      title: ImageChatMessageContentRequest
-    NumberEnum:
-      type: string
-      enum:
-      - NUMBER
-      title: NumberEnum
-    SearchResult:
-      type: object
-      properties:
-        text:
-          type: string
-          description: The text of the chunk that matched the search query.
-        score:
+        semantic_similarity:
           type: number
           format: double
-          description: A score representing how well the chunk matches the search query.
+          default: 0.8
+          description: The relative weight to give to semantic similarity
         keywords:
-          type: array
-          items:
-            type: string
-        document:
-          $ref: '#/components/schemas/SearchResultDocument'
-          description: The document that contains the chunk that matched the search query.
-        meta:
-          oneOf:
-          - $ref: '#/components/schemas/SearchResultMeta'
-          - type: 'null'
-          description: Additional information about the search result.
+          type: number
+          format: double
+          default: 0.2
+          description: The relative weight to give to keywords
+      title: SearchWeightsRequest
+    VellumAudioRequest:
+      type: object
+      properties:
+        src:
+          type: string
+          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
       required:
-      - text
-      - score
-      - keywords
-      - document
-      title: SearchResult
-    FunctionCallEnum:
+      - src
+      title: VellumAudioRequest
+    ChatMessageRole:
       type: string
       enum:
-      - FUNCTION_CALL
-      title: FunctionCallEnum
-    PdfSearchResultMetaSource:
-      type: object
-      properties:
-        document_type:
-          $ref: '#/components/schemas/PdfEnum'
-        start_page_num:
-          type:
-          - integer
-          - 'null'
-          description: The 1-indexed page number where the chunk starts in the document. Only available for supported chunking strategies and document types.
-        end_page_num:
-          type:
-          - integer
-          - 'null'
-          description: The 1-indexed page number where the chunk ends in the document. Only available for supported chunking strategies and document types.
-      required:
-      - document_type
-      - start_page_num
-      - end_page_num
-      description: The source of a search result from a PDF document.
-      title: PdfSearchResultMetaSource
-    ErrorVellumValueRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/ErrorEnum'
-        value:
-          oneOf:
-          - $ref: '#/components/schemas/VellumErrorRequest'
-          - type: 'null'
-      required:
-      - type
-      - value
-      description: A value representing an Error.
-      title: ErrorVellumValueRequest
-    ChatHistoryVellumValueRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/ChatHistoryEnum'
-        value:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/ChatMessageRequest'
-      required:
-      - type
-      - value
-      description: A value representing Chat History.
-      title: ChatHistoryVellumValueRequest
+      - SYSTEM
+      - ASSISTANT
+      - USER
+      - FUNCTION
+      description: '* `SYSTEM` - System
+
+        * `ASSISTANT` - Assistant
+
+        * `USER` - User
+
+        * `FUNCTION` - Function'
+      title: ChatMessageRole
     SearchResultRequest:
       type: object
       properties:
@@ -1123,6 +284,479 @@ components:
       - keywords
       - document
       title: SearchResultRequest
+    VellumErrorRequest:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/VellumErrorCodeEnum'
+        message:
+          type: string
+        raw_data:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - code
+      - message
+      title: VellumErrorRequest
+    PdfEnum:
+      type: string
+      enum:
+      - PDF
+      title: PdfEnum
+    AudioChatMessageContentRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/AudioEnum'
+        value:
+          $ref: '#/components/schemas/VellumAudioRequest'
+      required:
+      - type
+      - value
+      description: An audio value that is used in a chat message.
+      title: AudioChatMessageContentRequest
+    ChatHistoryEnum:
+      type: string
+      enum:
+      - CHAT_HISTORY
+      title: ChatHistoryEnum
+    VellumValueLogicalConditionGroupRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/LogicalConditionGroupEnum'
+        conditions:
+          type: array
+          items:
+            $ref: '#/components/schemas/VellumValueLogicalExpressionRequest'
+        combinator:
+          $ref: '#/components/schemas/ConditionCombinator'
+        negated:
+          type: boolean
+      required:
+      - type
+      - conditions
+      - combinator
+      - negated
+      description: A higher-order condition that combines one or more basic conditions or other higher-order conditions.
+      title: VellumValueLogicalConditionGroupRequest
+    SearchResultMeta:
+      type: object
+      properties:
+        source:
+          oneOf:
+          - $ref: '#/components/schemas/SearchResultMetaSource'
+          - type: 'null'
+      title: SearchResultMeta
+    SearchRequestOptionsRequest:
+      type: object
+      properties:
+        limit:
+          type:
+          - integer
+          - 'null'
+          default: 10
+          description: The maximum number of results to return.
+        weights:
+          oneOf:
+          - $ref: '#/components/schemas/SearchWeightsRequest'
+          - type: 'null'
+          description: The weights to use for the search. Must add up to 1.0.
+        result_merging:
+          oneOf:
+          - $ref: '#/components/schemas/SearchResultMergingRequest'
+          - type: 'null'
+          description: The configuration for merging results.
+        filters:
+          oneOf:
+          - $ref: '#/components/schemas/SearchFiltersRequest'
+          - type: 'null'
+          description: The filters to apply to the search.
+      title: SearchRequestOptionsRequest
+    ConditionCombinator:
+      type: string
+      enum:
+      - OR
+      - AND
+      description: '* `OR` - OR
+
+        * `AND` - AND'
+      title: ConditionCombinator
+    SearchResultsVellumValueRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/SearchResultsEnum'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SearchResultRequest'
+      required:
+      - type
+      - value
+      description: A value representing Search Results.
+      title: SearchResultsVellumValueRequest
+    SearchErrorResponse:
+      type: object
+      properties:
+        detail:
+          type: string
+          description: Details about why the request failed.
+      required:
+      - detail
+      title: SearchErrorResponse
+    SearchRequestBodyRequest:
+      type: object
+      properties:
+        index_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of the index to search against. Must provide either this, index_name or document_index.
+        index_name:
+          type:
+          - string
+          - 'null'
+          description: The name of the index to search against. Must provide either this, index_id or document_index.
+        query:
+          type: string
+          description: The query to search for.
+        options:
+          oneOf:
+          - $ref: '#/components/schemas/SearchRequestOptionsRequest'
+          - type: 'null'
+          description: Configuration options for the search.
+        document_index:
+          type:
+          - string
+          - 'null'
+          description: Either the index name or index ID to search against. Must provide either this, index_id or index_name.
+      required:
+      - query
+      title: SearchRequestBodyRequest
+    ArrayEnum:
+      type: string
+      enum:
+      - ARRAY
+      title: ArrayEnum
+    ArrayChatMessageContentItemRequest:
+      oneOf:
+      - $ref: '#/components/schemas/StringChatMessageContentRequest'
+      - $ref: '#/components/schemas/FunctionCallChatMessageContentRequest'
+      - $ref: '#/components/schemas/AudioChatMessageContentRequest'
+      - $ref: '#/components/schemas/VideoChatMessageContentRequest'
+      - $ref: '#/components/schemas/ImageChatMessageContentRequest'
+      - $ref: '#/components/schemas/DocumentChatMessageContentRequest'
+      title: ArrayChatMessageContentItemRequest
+    FunctionCallVellumValueRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/FunctionCallEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/FunctionCallRequest'
+          - type: 'null'
+      required:
+      - type
+      - value
+      description: A value representing a Function Call.
+      title: FunctionCallVellumValueRequest
+    LogicalConditionEnum:
+      type: string
+      enum:
+      - LOGICAL_CONDITION
+      title: LogicalConditionEnum
+    FunctionCallEnum:
+      type: string
+      enum:
+      - FUNCTION_CALL
+      title: FunctionCallEnum
+    SearchResultMetaSource:
+      oneOf:
+      - $ref: '#/components/schemas/PdfSearchResultMetaSource'
+      title: SearchResultMetaSource
+    DocumentVellumValueRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/DocumentEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumDocumentRequest'
+          - type: 'null'
+      required:
+      - type
+      - value
+      description: A base Vellum primitive value representing a document.
+      title: DocumentVellumValueRequest
+    VellumVideoRequest:
+      type: object
+      properties:
+        src:
+          type: string
+          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - src
+      title: VellumVideoRequest
+    MetadataFilterRuleRequest:
+      type: object
+      properties:
+        combinator:
+          oneOf:
+          - $ref: '#/components/schemas/MetadataFilterRuleCombinator'
+          - type: 'null'
+        negated:
+          type:
+          - boolean
+          - 'null'
+        rules:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/MetadataFilterRuleRequest'
+        field:
+          type:
+          - string
+          - 'null'
+        operator:
+          oneOf:
+          - $ref: '#/components/schemas/LogicalOperator'
+          - type: 'null'
+        value:
+          type:
+          - string
+          - 'null'
+      title: MetadataFilterRuleRequest
+    ChatHistoryVellumValueRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ChatHistoryEnum'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ChatMessageRequest'
+      required:
+      - type
+      - value
+      description: A value representing Chat History.
+      title: ChatHistoryVellumValueRequest
+    VellumValueLogicalConditionRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/LogicalConditionEnum'
+        lhs_variable:
+          $ref: '#/components/schemas/VellumValueRequest'
+        operator:
+          $ref: '#/components/schemas/LogicalOperator'
+        rhs_variable:
+          $ref: '#/components/schemas/VellumValueRequest'
+      required:
+      - type
+      - lhs_variable
+      - operator
+      - rhs_variable
+      description: A basic condition comparing two Vellum values.
+      title: VellumValueLogicalConditionRequest
+    VellumValueLogicalExpressionRequest:
+      oneOf:
+      - $ref: '#/components/schemas/VellumValueLogicalConditionRequest'
+      - $ref: '#/components/schemas/VellumValueLogicalConditionGroupRequest'
+      title: VellumValueLogicalExpressionRequest
+    LogicalConditionGroupEnum:
+      type: string
+      enum:
+      - LOGICAL_CONDITION_GROUP
+      title: LogicalConditionGroupEnum
+    MetadataFiltersRequest:
+      oneOf:
+      - $ref: '#/components/schemas/MetadataFilterConfigRequest'
+      - $ref: '#/components/schemas/VellumValueLogicalExpressionRequest'
+      title: MetadataFiltersRequest
+    SearchResult:
+      type: object
+      properties:
+        text:
+          type: string
+          description: The text of the chunk that matched the search query.
+        score:
+          type: number
+          format: double
+          description: A score representing how well the chunk matches the search query.
+        keywords:
+          type: array
+          items:
+            type: string
+        document:
+          $ref: '#/components/schemas/SearchResultDocument'
+          description: The document that contains the chunk that matched the search query.
+        meta:
+          oneOf:
+          - $ref: '#/components/schemas/SearchResultMeta'
+          - type: 'null'
+          description: Additional information about the search result.
+      required:
+      - text
+      - score
+      - keywords
+      - document
+      title: SearchResult
+    PdfSearchResultMetaSource:
+      type: object
+      properties:
+        document_type:
+          $ref: '#/components/schemas/PdfEnum'
+        start_page_num:
+          type:
+          - integer
+          - 'null'
+          description: The 1-indexed page number where the chunk starts in the document. Only available for supported chunking strategies and document types.
+        end_page_num:
+          type:
+          - integer
+          - 'null'
+          description: The 1-indexed page number where the chunk ends in the document. Only available for supported chunking strategies and document types.
+      required:
+      - document_type
+      - start_page_num
+      - end_page_num
+      description: The source of a search result from a PDF document.
+      title: PdfSearchResultMetaSource
+    VideoEnum:
+      type: string
+      enum:
+      - VIDEO
+      title: VideoEnum
+    NumberEnum:
+      type: string
+      enum:
+      - NUMBER
+      title: NumberEnum
+    VellumValueRequest:
+      oneOf:
+      - $ref: '#/components/schemas/StringVellumValueRequest'
+      - $ref: '#/components/schemas/NumberVellumValueRequest'
+      - $ref: '#/components/schemas/JsonVellumValueRequest'
+      - $ref: '#/components/schemas/AudioVellumValueRequest'
+      - $ref: '#/components/schemas/VideoVellumValueRequest'
+      - $ref: '#/components/schemas/ImageVellumValueRequest'
+      - $ref: '#/components/schemas/DocumentVellumValueRequest'
+      - $ref: '#/components/schemas/FunctionCallVellumValueRequest'
+      - $ref: '#/components/schemas/ErrorVellumValueRequest'
+      - $ref: '#/components/schemas/ArrayVellumValueRequest'
+      - $ref: '#/components/schemas/ChatHistoryVellumValueRequest'
+      - $ref: '#/components/schemas/SearchResultsVellumValueRequest'
+      - $ref: '#/components/schemas/ThinkingVellumValueRequest'
+      title: VellumValueRequest
+    SearchResultsEnum:
+      type: string
+      enum:
+      - SEARCH_RESULTS
+      title: SearchResultsEnum
+    ThinkingEnum:
+      type: string
+      enum:
+      - THINKING
+      title: ThinkingEnum
+    MetadataFilterRuleCombinator:
+      type: string
+      enum:
+      - and
+      - or
+      description: '* `and` - AND
+
+        * `or` - OR'
+      title: MetadataFilterRuleCombinator
+    VellumDocumentRequest:
+      type: object
+      properties:
+        src:
+          type: string
+          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - src
+      title: VellumDocumentRequest
+    PdfSearchResultMetaSourceRequest:
+      type: object
+      properties:
+        document_type:
+          $ref: '#/components/schemas/PdfEnum'
+        start_page_num:
+          type:
+          - integer
+          - 'null'
+          description: The 1-indexed page number where the chunk starts in the document. Only available for supported chunking strategies and document types.
+        end_page_num:
+          type:
+          - integer
+          - 'null'
+          description: The 1-indexed page number where the chunk ends in the document. Only available for supported chunking strategies and document types.
+      required:
+      - document_type
+      - start_page_num
+      - end_page_num
+      description: The source of a search result from a PDF document.
+      title: PdfSearchResultMetaSourceRequest
+    FunctionCallChatMessageContentValueRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        arguments:
+          type: object
+          additionalProperties:
+            description: Any type
+        id:
+          type:
+          - string
+          - 'null'
+      required:
+      - name
+      - arguments
+      description: The final resolved function call value.
+      title: FunctionCallChatMessageContentValueRequest
+    StringVellumValueRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/StringEnum'
+        value:
+          type:
+          - string
+          - 'null'
+      required:
+      - type
+      - value
+      description: A value representing a string.
+      title: StringVellumValueRequest
+    ImageEnum:
+      type: string
+      enum:
+      - IMAGE
+      title: ImageEnum
     VellumImageRequest:
       type: object
       properties:
@@ -1138,20 +772,386 @@ components:
       required:
       - src
       title: VellumImageRequest
-    FunctionCallVellumValueRequest:
+    SearchResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/SearchResult'
+          description: The results of the search. Each result represents a chunk that matches the search query.
+      required:
+      - results
+      title: SearchResponse
+    JsonEnum:
+      type: string
+      enum:
+      - JSON
+      title: JsonEnum
+    SearchFiltersRequest:
+      type: object
+      properties:
+        external_ids:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: The document external IDs to filter by
+        metadata:
+          oneOf:
+          - $ref: '#/components/schemas/MetadataFiltersRequest'
+          - type: 'null'
+          description: The metadata filters to apply to the search
+      title: SearchFiltersRequest
+    ChatMessageContentRequest:
+      oneOf:
+      - $ref: '#/components/schemas/StringChatMessageContentRequest'
+      - $ref: '#/components/schemas/FunctionCallChatMessageContentRequest'
+      - $ref: '#/components/schemas/ArrayChatMessageContentRequest'
+      - $ref: '#/components/schemas/AudioChatMessageContentRequest'
+      - $ref: '#/components/schemas/VideoChatMessageContentRequest'
+      - $ref: '#/components/schemas/ImageChatMessageContentRequest'
+      - $ref: '#/components/schemas/DocumentChatMessageContentRequest'
+      title: ChatMessageContentRequest
+    ImageVellumValueRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ImageEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumImageRequest'
+          - type: 'null'
+      required:
+      - type
+      - value
+      description: A base Vellum primitive value representing an image.
+      title: ImageVellumValueRequest
+    AudioVellumValueRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/AudioEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumAudioRequest'
+          - type: 'null'
+      required:
+      - type
+      - value
+      description: A base Vellum primitive value representing audio.
+      title: AudioVellumValueRequest
+    MetadataFilterConfigRequest:
+      type: object
+      properties:
+        combinator:
+          oneOf:
+          - $ref: '#/components/schemas/MetadataFilterRuleCombinator'
+          - type: 'null'
+        negated:
+          type:
+          - boolean
+          - 'null'
+        rules:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/MetadataFilterRuleRequest'
+        field:
+          type:
+          - string
+          - 'null'
+        operator:
+          oneOf:
+          - $ref: '#/components/schemas/LogicalOperator'
+          - type: 'null'
+        value:
+          type:
+          - string
+          - 'null'
+      description: A deprecated pattern for filtering on metadata. Please use MetadataFilters instead.
+      title: MetadataFilterConfigRequest
+    ThinkingVellumValueRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ThinkingEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/StringVellumValueRequest'
+          - type: 'null'
+      required:
+      - type
+      - value
+      description: A value representing Thinking mode output.
+      title: ThinkingVellumValueRequest
+    ChatMessageRequest:
+      type: object
+      properties:
+        text:
+          type:
+          - string
+          - 'null'
+        role:
+          $ref: '#/components/schemas/ChatMessageRole'
+        content:
+          oneOf:
+          - $ref: '#/components/schemas/ChatMessageContentRequest'
+          - type: 'null'
+        source:
+          type:
+          - string
+          - 'null'
+          description: An optional identifier representing who or what generated this message.
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - role
+      title: ChatMessageRequest
+    FunctionCallRequest:
+      type: object
+      properties:
+        arguments:
+          type: object
+          additionalProperties:
+            description: Any type
+        id:
+          type:
+          - string
+          - 'null'
+        name:
+          type: string
+      required:
+      - arguments
+      - name
+      description: The final resolved function call value.
+      title: FunctionCallRequest
+    SearchResultMetaSourceRequest:
+      oneOf:
+      - $ref: '#/components/schemas/PdfSearchResultMetaSourceRequest'
+      title: SearchResultMetaSourceRequest
+    ErrorVellumValueRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ErrorEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumErrorRequest'
+          - type: 'null'
+      required:
+      - type
+      - value
+      description: A value representing an Error.
+      title: ErrorVellumValueRequest
+    ArrayVellumValueRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ArrayEnum'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/VellumValueRequest'
+      required:
+      - type
+      - value
+      description: A value representing an array of Vellum variable values.
+      title: ArrayVellumValueRequest
+    AudioEnum:
+      type: string
+      enum:
+      - AUDIO
+      title: AudioEnum
+    ImageChatMessageContentRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ImageEnum'
+        value:
+          $ref: '#/components/schemas/VellumImageRequest'
+      required:
+      - type
+      - value
+      description: An image value that is used in a chat message.
+      title: ImageChatMessageContentRequest
+    SearchResultDocumentRequest:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of the document.
+        label:
+          type: string
+          description: The human-readable name for the document.
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: The unique ID of the document as represented in an external system and specified when it was originally uploaded.
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+          description: A previously supplied JSON object containing metadata that can be filtered on when searching.
+      required:
+      - label
+      title: SearchResultDocumentRequest
+    StringEnum:
+      type: string
+      enum:
+      - STRING
+      title: StringEnum
+    NumberVellumValueRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/NumberEnum'
+        value:
+          type:
+          - number
+          - 'null'
+          format: double
+      required:
+      - type
+      - value
+      description: A value representing a number.
+      title: NumberVellumValueRequest
+    ErrorEnum:
+      type: string
+      enum:
+      - ERROR
+      title: ErrorEnum
+    SearchResultMergingRequest:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          default: true
+          description: Whether to enable merging results
+      title: SearchResultMergingRequest
+    JsonVellumValueRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/JsonEnum'
+        value:
+          oneOf:
+          - description: Any type
+          - type: 'null'
+      required:
+      - type
+      - value
+      description: A value representing a JSON object.
+      title: JsonVellumValueRequest
+    SearchResultDocument:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of the document.
+        label:
+          type: string
+          description: The human-readable name for the document.
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: The unique ID of the document as represented in an external system and specified when it was originally uploaded.
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+          description: A previously supplied JSON object containing metadata that can be filtered on when searching.
+      required:
+      - label
+      title: SearchResultDocument
+    DocumentEnum:
+      type: string
+      enum:
+      - DOCUMENT
+      title: DocumentEnum
+    VellumErrorCodeEnum:
+      type: string
+      enum:
+      - INVALID_REQUEST
+      - INVALID_INPUTS
+      - PROVIDER_ERROR
+      - PROVIDER_CREDENTIALS_UNAVAILABLE
+      - INTEGRATION_CREDENTIALS_UNAVAILABLE
+      - REQUEST_TIMEOUT
+      - INTERNAL_SERVER_ERROR
+      - USER_DEFINED_ERROR
+      - WORKFLOW_CANCELLED
+      - NODE_CANCELLED
+      - PROVIDER_QUOTA_EXCEEDED
+      - CHAT_QUOTA_EXCEEDED
+      description: '* `INVALID_REQUEST` - INVALID_REQUEST
+
+        * `INVALID_INPUTS` - INVALID_INPUTS
+
+        * `PROVIDER_ERROR` - PROVIDER_ERROR
+
+        * `PROVIDER_CREDENTIALS_UNAVAILABLE` - PROVIDER_CREDENTIALS_UNAVAILABLE
+
+        * `INTEGRATION_CREDENTIALS_UNAVAILABLE` - INTEGRATION_CREDENTIALS_UNAVAILABLE
+
+        * `REQUEST_TIMEOUT` - REQUEST_TIMEOUT
+
+        * `INTERNAL_SERVER_ERROR` - INTERNAL_SERVER_ERROR
+
+        * `USER_DEFINED_ERROR` - USER_DEFINED_ERROR
+
+        * `WORKFLOW_CANCELLED` - WORKFLOW_CANCELLED
+
+        * `NODE_CANCELLED` - NODE_CANCELLED
+
+        * `PROVIDER_QUOTA_EXCEEDED` - PROVIDER_QUOTA_EXCEEDED
+
+        * `CHAT_QUOTA_EXCEEDED` - CHAT_QUOTA_EXCEEDED'
+      title: VellumErrorCodeEnum
+    FunctionCallChatMessageContentRequest:
       type: object
       properties:
         type:
           $ref: '#/components/schemas/FunctionCallEnum'
         value:
-          oneOf:
-          - $ref: '#/components/schemas/FunctionCallRequest'
-          - type: 'null'
+          $ref: '#/components/schemas/FunctionCallChatMessageContentValueRequest'
       required:
       - type
       - value
-      description: A value representing a Function Call.
-      title: FunctionCallVellumValueRequest
+      description: A function call value that is used in a chat message.
+      title: FunctionCallChatMessageContentRequest
+    VideoChatMessageContentRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/VideoEnum'
+        value:
+          $ref: '#/components/schemas/VellumVideoRequest'
+      required:
+      - type
+      - value
+      description: A video value that is used in a chat message.
+      title: VideoChatMessageContentRequest
   securitySchemes:
     default:
       type: apiKey
