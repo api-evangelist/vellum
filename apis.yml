@@ -407,6 +407,9 @@ apis:
   - type: OpenAPI
     url: openapi/vellum-submit-workflow-execution-actuals-api-openapi.yml
 common:
+  - type: CapabilityMap
+    url: capabilities/vellum-capability-edges.yml
+    name: Vellum AI Business Capability Map
   - type: AgenticAccess
     url: agentic-access/vellum-agentic-access.yml
   - type: DomainSecurity

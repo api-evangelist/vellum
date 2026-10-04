@@ -1,0 +1,55 @@
+slug: vellum
+provider: Vellum AI
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 4
+edges:
+- tag: subpackage_testSuites
+  spec_file: vellum-subpackage-testsuites-api-openapi.yml
+  capability_id: BC-4200.50
+  capability_id_l1: BC-4200
+  capability_name: Software Quality Engineering
+  confidence: 0.85
+  evidence: POST /v1/test-suites/{id}/test-cases  upsert-test-suite-test-case  Upsert Test Suite Test
+    Case
+  reason: Explicit CRUD and bulk management of test cases within test suites — automated test suite stewardship,
+    i.e. Software Quality Engineering.
+- tag: subpackage_testSuiteRuns
+  spec_file: vellum-subpackage-testsuiteruns-api-openapi.yml
+  capability_id: BC-4200.50
+  capability_id_l1: BC-4200
+  capability_name: Software Quality Engineering
+  confidence: 0.8
+  evidence: POST /v1/test-suite-runs  create  Create; GET /v1/test-suite-runs/{id}/executions  list-executions  List
+    Executions; schema TestSuiteRunRead, ExternalTestCaseExecution
+  reason: Creating and inspecting test-suite runs and their executions is test execution over an automated
+    test suite, which is Software Quality Engineering.
+- tag: Execute Prompt
+  spec_file: vellum-execute-prompt-api-openapi.yml
+  capability_id: BC-610.60
+  capability_id_l1: BC-610
+  capability_name: Artificial Intelligence Management
+  confidence: 0.75
+  evidence: POST /v1/execute-prompt execute-prompt Execute Prompt; schemas MLModelUsage, RawPromptExecutionOverridesRequest
+  reason: Runtime invocation of an LLM prompt with model-usage accounting is AI/ML model operation, mapping
+    to Artificial Intelligence Management; it is inference execution rather than full model lifecycle,
+    so not higher.
+- tag: subpackage_workflowDeployments
+  spec_file: vellum-subpackage-workflowdeployments-api-openapi.yml
+  capability_id: BC-4210
+  capability_id_l1: BC-4210
+  capability_name: Software Release & Deployment Management
+  confidence: 0.7
+  evidence: GET /v1/workflow-deployments/{id}/releases  list-workflow-deployment-releases; PATCH /v1/workflow-deployments/{id}/release-tags/{name}  update-workflow-release-tag
+  reason: Surface manages deployments, releases, release tags and deployment history for workflow artefacts
+    — release and deployment management. Also carries execution-event endpoints, so L2 (release engineering
+    vs deployment orchestration) is left unasserted.
