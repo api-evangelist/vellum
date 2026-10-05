@@ -1,0 +1,12 @@
+{
+ "url": "https://docs.vellum.ai/openapi.json",
+ "requested_url": "https://docs.vellum.ai/openapi.json",
+ "status": 200,
+ "content_type": "application/json; charset=utf-8",
+ "bytes": 377517,
+ "sha256": "1796df1d865362831ba285c33127316f4cd830f7c78bdc9168b24c0943fabd57",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 0.967), but the bytes differ, so the archive is an earlier or reformatted copy."
+}
