@@ -63,18 +63,60 @@ paths:
               $ref: '#/components/schemas/ExecuteWorkflowAsyncRequest'
 components:
   schemas:
-    DocumentChatMessageContentRequest:
+    ExecuteWorkflowAsyncResponse:
+      type: object
+      properties:
+        execution_id:
+          type: string
+          description: The ID of the workflow execution.
+      required:
+      - execution_id
+      description: The response from an async Workflow Deployment execution.
+      title: ExecuteWorkflowAsyncResponse
+    ChatHistoryEnum:
+      type: string
+      enum:
+      - CHAT_HISTORY
+      title: ChatHistoryEnum
+    FunctionCallChatMessageContentRequest:
       type: object
       properties:
         type:
-          $ref: '#/components/schemas/DocumentEnum'
+          $ref: '#/components/schemas/FunctionCallEnum'
         value:
-          $ref: '#/components/schemas/VellumDocumentRequest'
+          $ref: '#/components/schemas/FunctionCallChatMessageContentValueRequest'
       required:
       - type
       - value
-      description: A document value that is used in a chat message.
-      title: DocumentChatMessageContentRequest
+      description: A function call value that is used in a chat message.
+      title: FunctionCallChatMessageContentRequest
+    WorkflowRequestChatHistoryInputRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The variable's name, as defined in the Workflow.
+        type:
+          $ref: '#/components/schemas/ChatHistoryEnum'
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChatMessageRequest'
+      required:
+      - name
+      - type
+      - value
+      description: The input for a chat history variable in a Workflow.
+      title: WorkflowRequestChatHistoryInputRequest
+    ExecuteWorkflowStreamErrorResponse:
+      type: object
+      properties:
+        detail:
+          type: string
+          description: Details about why the request failed.
+      required:
+      - detail
+      title: ExecuteWorkflowStreamErrorResponse
     ExecuteWorkflowAsyncRequest:
       type: object
       properties:
@@ -121,175 +163,70 @@ components:
       - inputs
       description: The request to execute a Workflow Deployment asynchronously.
       title: ExecuteWorkflowAsyncRequest
-    ArrayChatMessageContentRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/ArrayEnum'
-        value:
-          type: array
-          items:
-            $ref: '#/components/schemas/ArrayChatMessageContentItemRequest'
-      required:
-      - type
-      - value
-      description: A list of chat message content items.
-      title: ArrayChatMessageContentRequest
-    StringChatMessageContentRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/StringEnum'
-        value:
-          type: string
-      required:
-      - type
-      - value
-      description: A string value that is used in a chat message.
-      title: StringChatMessageContentRequest
-    VellumAudioRequest:
-      type: object
-      properties:
-        src:
-          type: string
-          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
-        metadata:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            description: Any type
-      required:
-      - src
-      title: VellumAudioRequest
-    WorkflowRequestImageInputRequest:
+    WorkflowRequestDocumentInputRequest:
       type: object
       properties:
         name:
           type: string
           description: The variable's name, as defined in the Workflow.
         type:
-          $ref: '#/components/schemas/ImageEnum'
+          $ref: '#/components/schemas/DocumentEnum'
         value:
-          $ref: '#/components/schemas/VellumImageRequest'
+          $ref: '#/components/schemas/VellumDocumentRequest'
       required:
       - name
       - type
       - value
-      description: The input for an image variable in a Workflow.
-      title: WorkflowRequestImageInputRequest
-    ChatMessageRole:
-      type: string
-      enum:
-      - SYSTEM
-      - ASSISTANT
-      - USER
-      - FUNCTION
-      description: '* `SYSTEM` - System
-
-        * `ASSISTANT` - Assistant
-
-        * `USER` - User
-
-        * `FUNCTION` - Function'
-      title: ChatMessageRole
-    AudioChatMessageContentRequest:
+      description: The input for a document variable in a Workflow.
+      title: WorkflowRequestDocumentInputRequest
+    VideoChatMessageContentRequest:
       type: object
       properties:
         type:
-          $ref: '#/components/schemas/AudioEnum'
+          $ref: '#/components/schemas/VideoEnum'
         value:
-          $ref: '#/components/schemas/VellumAudioRequest'
+          $ref: '#/components/schemas/VellumVideoRequest'
       required:
       - type
       - value
-      description: An audio value that is used in a chat message.
-      title: AudioChatMessageContentRequest
-    ChatHistoryEnum:
+      description: A video value that is used in a chat message.
+      title: VideoChatMessageContentRequest
+    NumberEnum:
       type: string
       enum:
-      - CHAT_HISTORY
-      title: ChatHistoryEnum
-    WorkflowRequestInputRequest:
-      oneOf:
-      - $ref: '#/components/schemas/WorkflowRequestStringInputRequest'
-      - $ref: '#/components/schemas/WorkflowRequestJSONInputRequest'
-      - $ref: '#/components/schemas/WorkflowRequestChatHistoryInputRequest'
-      - $ref: '#/components/schemas/WorkflowRequestNumberInputRequest'
-      - $ref: '#/components/schemas/WorkflowRequestAudioInputRequest'
-      - $ref: '#/components/schemas/WorkflowRequestVideoInputRequest'
-      - $ref: '#/components/schemas/WorkflowRequestImageInputRequest'
-      - $ref: '#/components/schemas/WorkflowRequestDocumentInputRequest'
-      title: WorkflowRequestInputRequest
-    WorkflowRequestAudioInputRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The variable's name, as defined in the Workflow.
-        type:
-          $ref: '#/components/schemas/AudioEnum'
-        value:
-          $ref: '#/components/schemas/VellumAudioRequest'
-      required:
-      - name
-      - type
-      - value
-      description: The input for an audio variable in a Workflow.
-      title: WorkflowRequestAudioInputRequest
-    ExecuteWorkflowStreamErrorResponse:
-      type: object
-      properties:
-        detail:
-          type: string
-          description: Details about why the request failed.
-      required:
-      - detail
-      title: ExecuteWorkflowStreamErrorResponse
-    ArrayEnum:
+      - NUMBER
+      title: NumberEnum
+    JsonEnum:
       type: string
       enum:
-      - ARRAY
-      title: ArrayEnum
-    ArrayChatMessageContentItemRequest:
-      oneOf:
-      - $ref: '#/components/schemas/StringChatMessageContentRequest'
-      - $ref: '#/components/schemas/FunctionCallChatMessageContentRequest'
-      - $ref: '#/components/schemas/AudioChatMessageContentRequest'
-      - $ref: '#/components/schemas/VideoChatMessageContentRequest'
-      - $ref: '#/components/schemas/ImageChatMessageContentRequest'
-      - $ref: '#/components/schemas/DocumentChatMessageContentRequest'
-      title: ArrayChatMessageContentItemRequest
-    ExecuteWorkflowAsyncResponse:
-      type: object
-      properties:
-        execution_id:
-          type: string
-          description: The ID of the workflow execution.
-      required:
-      - execution_id
-      description: The response from an async Workflow Deployment execution.
-      title: ExecuteWorkflowAsyncResponse
+      - JSON
+      title: JsonEnum
     FunctionCallEnum:
       type: string
       enum:
       - FUNCTION_CALL
       title: FunctionCallEnum
-    VellumVideoRequest:
+    VideoEnum:
+      type: string
+      enum:
+      - VIDEO
+      title: VideoEnum
+    WorkflowRequestStringInputRequest:
       type: object
       properties:
-        src:
+        name:
           type: string
-          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
-        metadata:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            description: Any type
+          description: The variable's name, as defined in the Workflow.
+        type:
+          $ref: '#/components/schemas/StringEnum'
+        value:
+          type: string
       required:
-      - src
-      title: VellumVideoRequest
+      - name
+      - type
+      - value
+      description: The input for a string variable in a Workflow.
+      title: WorkflowRequestStringInputRequest
     WorkflowRequestJSONInputRequest:
       type: object
       properties:
@@ -308,32 +245,23 @@ components:
       - value
       description: The input for a JSON variable in a Workflow.
       title: WorkflowRequestJSONInputRequest
-    VideoEnum:
-      type: string
-      enum:
-      - VIDEO
-      title: VideoEnum
-    NumberEnum:
-      type: string
-      enum:
-      - NUMBER
-      title: NumberEnum
-    WorkflowRequestVideoInputRequest:
+    WorkflowRequestNumberInputRequest:
       type: object
       properties:
         name:
           type: string
           description: The variable's name, as defined in the Workflow.
         type:
-          $ref: '#/components/schemas/VideoEnum'
+          $ref: '#/components/schemas/NumberEnum'
         value:
-          $ref: '#/components/schemas/VellumVideoRequest'
+          type: number
+          format: double
       required:
       - name
       - type
       - value
-      description: The input for a video variable in a Workflow.
-      title: WorkflowRequestVideoInputRequest
+      description: The input for a number variable in a Workflow.
+      title: WorkflowRequestNumberInputRequest
     VellumDocumentRequest:
       type: object
       properties:
@@ -349,6 +277,22 @@ components:
       required:
       - src
       title: VellumDocumentRequest
+    WorkflowRequestImageInputRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The variable's name, as defined in the Workflow.
+        type:
+          $ref: '#/components/schemas/ImageEnum'
+        value:
+          $ref: '#/components/schemas/VellumImageRequest'
+      required:
+      - name
+      - type
+      - value
+      description: The input for an image variable in a Workflow.
+      title: WorkflowRequestImageInputRequest
     FunctionCallChatMessageContentValueRequest:
       type: object
       properties:
@@ -367,11 +311,110 @@ components:
       - arguments
       description: The final resolved function call value.
       title: FunctionCallChatMessageContentValueRequest
-    ImageEnum:
+    ArrayChatMessageContentItemRequest:
+      oneOf:
+      - $ref: '#/components/schemas/StringChatMessageContentRequest'
+      - $ref: '#/components/schemas/FunctionCallChatMessageContentRequest'
+      - $ref: '#/components/schemas/AudioChatMessageContentRequest'
+      - $ref: '#/components/schemas/VideoChatMessageContentRequest'
+      - $ref: '#/components/schemas/ImageChatMessageContentRequest'
+      - $ref: '#/components/schemas/DocumentChatMessageContentRequest'
+      title: ArrayChatMessageContentItemRequest
+    AudioEnum:
       type: string
       enum:
-      - IMAGE
-      title: ImageEnum
+      - AUDIO
+      title: AudioEnum
+    ArrayEnum:
+      type: string
+      enum:
+      - ARRAY
+      title: ArrayEnum
+    ArrayChatMessageContentRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ArrayEnum'
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/ArrayChatMessageContentItemRequest'
+      required:
+      - type
+      - value
+      description: A list of chat message content items.
+      title: ArrayChatMessageContentRequest
+    AudioChatMessageContentRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/AudioEnum'
+        value:
+          $ref: '#/components/schemas/VellumAudioRequest'
+      required:
+      - type
+      - value
+      description: An audio value that is used in a chat message.
+      title: AudioChatMessageContentRequest
+    WorkflowRequestAudioInputRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The variable's name, as defined in the Workflow.
+        type:
+          $ref: '#/components/schemas/AudioEnum'
+        value:
+          $ref: '#/components/schemas/VellumAudioRequest'
+      required:
+      - name
+      - type
+      - value
+      description: The input for an audio variable in a Workflow.
+      title: WorkflowRequestAudioInputRequest
+    WorkflowRequestInputRequest:
+      oneOf:
+      - $ref: '#/components/schemas/WorkflowRequestStringInputRequest'
+      - $ref: '#/components/schemas/WorkflowRequestJSONInputRequest'
+      - $ref: '#/components/schemas/WorkflowRequestChatHistoryInputRequest'
+      - $ref: '#/components/schemas/WorkflowRequestNumberInputRequest'
+      - $ref: '#/components/schemas/WorkflowRequestAudioInputRequest'
+      - $ref: '#/components/schemas/WorkflowRequestVideoInputRequest'
+      - $ref: '#/components/schemas/WorkflowRequestImageInputRequest'
+      - $ref: '#/components/schemas/WorkflowRequestDocumentInputRequest'
+      title: WorkflowRequestInputRequest
+    VellumAudioRequest:
+      type: object
+      properties:
+        src:
+          type: string
+          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - src
+      title: VellumAudioRequest
+    StringEnum:
+      type: string
+      enum:
+      - STRING
+      title: StringEnum
+    ImageChatMessageContentRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ImageEnum'
+        value:
+          $ref: '#/components/schemas/VellumImageRequest'
+      required:
+      - type
+      - value
+      description: An image value that is used in a chat message.
+      title: ImageChatMessageContentRequest
     VellumImageRequest:
       type: object
       properties:
@@ -387,27 +430,71 @@ components:
       required:
       - src
       title: VellumImageRequest
-    WorkflowRequestStringInputRequest:
+    StringChatMessageContentRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/StringEnum'
+        value:
+          type: string
+      required:
+      - type
+      - value
+      description: A string value that is used in a chat message.
+      title: StringChatMessageContentRequest
+    WorkflowRequestVideoInputRequest:
       type: object
       properties:
         name:
           type: string
           description: The variable's name, as defined in the Workflow.
         type:
-          $ref: '#/components/schemas/StringEnum'
+          $ref: '#/components/schemas/VideoEnum'
         value:
-          type: string
+          $ref: '#/components/schemas/VellumVideoRequest'
       required:
       - name
       - type
       - value
-      description: The input for a string variable in a Workflow.
-      title: WorkflowRequestStringInputRequest
-    JsonEnum:
+      description: The input for a video variable in a Workflow.
+      title: WorkflowRequestVideoInputRequest
+    VellumVideoRequest:
+      type: object
+      properties:
+        src:
+          type: string
+          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - src
+      title: VellumVideoRequest
+    ImageEnum:
       type: string
       enum:
-      - JSON
-      title: JsonEnum
+      - IMAGE
+      title: ImageEnum
+    DocumentChatMessageContentRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/DocumentEnum'
+        value:
+          $ref: '#/components/schemas/VellumDocumentRequest'
+      required:
+      - type
+      - value
+      description: A document value that is used in a chat message.
+      title: DocumentChatMessageContentRequest
+    DocumentEnum:
+      type: string
+      enum:
+      - DOCUMENT
+      title: DocumentEnum
     ChatMessageContentRequest:
       oneOf:
       - $ref: '#/components/schemas/StringChatMessageContentRequest'
@@ -445,108 +532,21 @@ components:
       required:
       - role
       title: ChatMessageRequest
-    AudioEnum:
+    ChatMessageRole:
       type: string
       enum:
-      - AUDIO
-      title: AudioEnum
-    ImageChatMessageContentRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/ImageEnum'
-        value:
-          $ref: '#/components/schemas/VellumImageRequest'
-      required:
-      - type
-      - value
-      description: An image value that is used in a chat message.
-      title: ImageChatMessageContentRequest
-    StringEnum:
-      type: string
-      enum:
-      - STRING
-      title: StringEnum
-    WorkflowRequestNumberInputRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The variable's name, as defined in the Workflow.
-        type:
-          $ref: '#/components/schemas/NumberEnum'
-        value:
-          type: number
-          format: double
-      required:
-      - name
-      - type
-      - value
-      description: The input for a number variable in a Workflow.
-      title: WorkflowRequestNumberInputRequest
-    DocumentEnum:
-      type: string
-      enum:
-      - DOCUMENT
-      title: DocumentEnum
-    WorkflowRequestChatHistoryInputRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The variable's name, as defined in the Workflow.
-        type:
-          $ref: '#/components/schemas/ChatHistoryEnum'
-        value:
-          type: array
-          items:
-            $ref: '#/components/schemas/ChatMessageRequest'
-      required:
-      - name
-      - type
-      - value
-      description: The input for a chat history variable in a Workflow.
-      title: WorkflowRequestChatHistoryInputRequest
-    FunctionCallChatMessageContentRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/FunctionCallEnum'
-        value:
-          $ref: '#/components/schemas/FunctionCallChatMessageContentValueRequest'
-      required:
-      - type
-      - value
-      description: A function call value that is used in a chat message.
-      title: FunctionCallChatMessageContentRequest
-    WorkflowRequestDocumentInputRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The variable's name, as defined in the Workflow.
-        type:
-          $ref: '#/components/schemas/DocumentEnum'
-        value:
-          $ref: '#/components/schemas/VellumDocumentRequest'
-      required:
-      - name
-      - type
-      - value
-      description: The input for a document variable in a Workflow.
-      title: WorkflowRequestDocumentInputRequest
-    VideoChatMessageContentRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/VideoEnum'
-        value:
-          $ref: '#/components/schemas/VellumVideoRequest'
-      required:
-      - type
-      - value
-      description: A video value that is used in a chat message.
-      title: VideoChatMessageContentRequest
+      - SYSTEM
+      - ASSISTANT
+      - USER
+      - FUNCTION
+      description: '* `SYSTEM` - System
+
+        * `ASSISTANT` - Assistant
+
+        * `USER` - User
+
+        * `FUNCTION` - Function'
+      title: ChatMessageRole
   securitySchemes:
     default:
       type: apiKey

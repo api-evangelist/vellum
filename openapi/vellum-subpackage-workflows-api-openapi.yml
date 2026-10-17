@@ -62,15 +62,6 @@ paths:
                 $ref: '#/components/schemas/CheckWorkflowExecutionStatusErrorResponse'
 components:
   schemas:
-    CheckWorkflowExecutionStatusErrorResponse:
-      type: object
-      properties:
-        detail:
-          type: string
-      required:
-      - detail
-      description: Error response for workflow execution status check.
-      title: CheckWorkflowExecutionStatusErrorResponse
     WorkflowExecutionEventErrorCode:
       type: string
       enum:
@@ -119,32 +110,15 @@ components:
 
         * `USER_DEFINED_ERROR` - USER_DEFINED_ERROR'
       title: WorkflowExecutionEventErrorCode
-    CheckWorkflowExecutionStatusResponse:
+    CheckWorkflowExecutionStatusErrorResponse:
       type: object
       properties:
-        status:
-          $ref: '#/components/schemas/WorkflowResultEventState'
-        outputs:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            description: Any type
-        error:
-          oneOf:
-          - $ref: '#/components/schemas/CheckWorkflowExecutionStatusError'
-          - type: 'null'
-        execution_id:
+        detail:
           type: string
-        execution_detail_url:
-          type:
-          - string
-          - 'null'
       required:
-      - status
-      - execution_id
-      description: Response serializer for workflow execution status check.
-      title: CheckWorkflowExecutionStatusResponse
+      - detail
+      description: Error response for workflow execution status check.
+      title: CheckWorkflowExecutionStatusErrorResponse
     CheckWorkflowExecutionStatusError:
       type: object
       properties:
@@ -175,6 +149,32 @@ components:
 
         * `PENDING` - Pending'
       title: WorkflowResultEventState
+    CheckWorkflowExecutionStatusResponse:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/WorkflowResultEventState'
+        outputs:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+        error:
+          oneOf:
+          - $ref: '#/components/schemas/CheckWorkflowExecutionStatusError'
+          - type: 'null'
+        execution_id:
+          type: string
+        execution_detail_url:
+          type:
+          - string
+          - 'null'
+      required:
+      - status
+      - execution_id
+      description: Response serializer for workflow execution status check.
+      title: CheckWorkflowExecutionStatusResponse
   securitySchemes:
     default:
       type: apiKey

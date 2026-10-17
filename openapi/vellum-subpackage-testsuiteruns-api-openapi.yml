@@ -130,14 +130,285 @@ paths:
                 $ref: '#/components/schemas/PaginatedTestSuiteRunExecutionList'
 components:
   schemas:
-    SearchResultMetaRequest:
+    ImageVellumValueRequest:
       type: object
       properties:
-        source:
+        type:
+          $ref: '#/components/schemas/ImageEnum'
+        value:
           oneOf:
-          - $ref: '#/components/schemas/SearchResultMetaSourceRequest'
+          - $ref: '#/components/schemas/VellumImageRequest'
           - type: 'null'
-      title: SearchResultMetaRequest
+      required:
+      - type
+      - value
+      description: A base Vellum primitive value representing an image.
+      title: ImageVellumValueRequest
+    NamedTestCaseDocumentVariableValueRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/DocumentEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumDocumentRequest'
+          - type: 'null'
+        name:
+          type: string
+      required:
+      - type
+      - value
+      - name
+      title: NamedTestCaseDocumentVariableValueRequest
+    DocumentChatMessageContent:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/DocumentEnum'
+        value:
+          $ref: '#/components/schemas/VellumDocument'
+      required:
+      - type
+      - value
+      description: A document value that is used in a chat message.
+      title: DocumentChatMessageContent
+    NamedTestCaseFunctionCallVariableValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/FunctionCallEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/FunctionCall'
+          - type: 'null'
+        name:
+          type: string
+      required:
+      - type
+      - value
+      - name
+      description: Named Test Case value that is of type FUNCTION_CALL
+      title: NamedTestCaseFunctionCallVariableValue
+    ArrayChatMessageContent:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ArrayEnum'
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/ArrayChatMessageContentItem'
+      required:
+      - type
+      - value
+      description: A list of chat message content items.
+      title: ArrayChatMessageContent
+    ChatHistoryVellumValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ChatHistoryEnum'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ChatMessage'
+      required:
+      - type
+      - value
+      description: A value representing Chat History.
+      title: ChatHistoryVellumValue
+    TestSuiteRunDeploymentReleaseTagExecConfigTypeEnum:
+      type: string
+      enum:
+      - DEPLOYMENT_RELEASE_TAG
+      description: '* `DEPLOYMENT_RELEASE_TAG` - DEPLOYMENT_RELEASE_TAG'
+      title: TestSuiteRunDeploymentReleaseTagExecConfigTypeEnum
+    VideoChatMessageContentRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/VideoEnum'
+        value:
+          $ref: '#/components/schemas/VellumVideoRequest'
+      required:
+      - type
+      - value
+      description: A video value that is used in a chat message.
+      title: VideoChatMessageContentRequest
+    FunctionCallVellumValueRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/FunctionCallEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/FunctionCallRequest'
+          - type: 'null'
+      required:
+      - type
+      - value
+      description: A value representing a Function Call.
+      title: FunctionCallVellumValueRequest
+    PdfEnum:
+      type: string
+      enum:
+      - PDF
+      title: PdfEnum
+    AudioEnum:
+      type: string
+      enum:
+      - AUDIO
+      title: AudioEnum
+    TestSuiteRunWorkflowReleaseTagExecConfigRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/TestSuiteRunWorkflowReleaseTagExecConfigTypeEnum'
+        data:
+          $ref: '#/components/schemas/TestSuiteRunWorkflowReleaseTagExecConfigDataRequest'
+        test_case_ids:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Optionally specify a subset of test case ids to run. If not provided, all test cases within the test suite will be run by default.
+      required:
+      - data
+      description: Execution configuration for running a Test Suite against a Workflow Deployment
+      title: TestSuiteRunWorkflowReleaseTagExecConfigRequest
+    ImageChatMessageContent:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ImageEnum'
+        value:
+          $ref: '#/components/schemas/VellumImage'
+      required:
+      - type
+      - value
+      description: An image value that is used in a chat message.
+      title: ImageChatMessageContent
+    VideoVellumValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/VideoEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumVideo'
+          - type: 'null'
+      required:
+      - type
+      - value
+      description: A base Vellum primitive value representing a video.
+      title: VideoVellumValue
+    SearchResultsEnum:
+      type: string
+      enum:
+      - SEARCH_RESULTS
+      title: SearchResultsEnum
+    VellumImage:
+      type: object
+      properties:
+        src:
+          type: string
+          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - src
+      title: VellumImage
+    AudioChatMessageContentRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/AudioEnum'
+        value:
+          $ref: '#/components/schemas/VellumAudioRequest'
+      required:
+      - type
+      - value
+      description: An audio value that is used in a chat message.
+      title: AudioChatMessageContentRequest
+    TestSuiteRunWorkflowSandboxHistoryItemExecConfigRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/TestSuiteRunWorkflowSandboxHistoryItemExecConfigTypeEnum'
+        data:
+          $ref: '#/components/schemas/TestSuiteRunWorkflowSandboxHistoryItemExecConfigDataRequest'
+        test_case_ids:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Optionally specify a subset of test case ids to run. If not provided, all test cases within the test suite will be run by default.
+      required:
+      - data
+      description: Execution configuration for running a Test Suite against a Workflow Sandbox History Item
+      title: TestSuiteRunWorkflowSandboxHistoryItemExecConfigRequest
+    TestSuiteRunExecutionNumberOutput:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/NumberEnum'
+        value:
+          type:
+          - number
+          - 'null'
+          format: double
+        output_variable_id:
+          type: string
+          format: uuid
+      required:
+      - name
+      - type
+      - value
+      - output_variable_id
+      description: Execution output of an entity evaluated during a Test Suite Run that is of type NUMBER
+      title: TestSuiteRunExecutionNumberOutput
+    ErrorVellumValueRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ErrorEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumErrorRequest'
+          - type: 'null'
+      required:
+      - type
+      - value
+      description: A value representing an Error.
+      title: ErrorVellumValueRequest
+    TestSuiteRunWorkflowSandboxHistoryItemExecConfig:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/TestSuiteRunWorkflowSandboxHistoryItemExecConfigTypeEnum'
+        data:
+          $ref: '#/components/schemas/TestSuiteRunWorkflowSandboxHistoryItemExecConfigData'
+        test_case_ids:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Optionally specify a subset of test case ids to run. If not provided, all test cases within the test suite will be run by default.
+      required:
+      - data
+      description: Execution configuration for running a Test Suite against a Workflow Sandbox History Item
+      title: TestSuiteRunWorkflowSandboxHistoryItemExecConfig
     TestSuiteRunState:
       type: string
       enum:
@@ -156,101 +427,69 @@ components:
 
         * `CANCELLED` - Cancelled'
       title: TestSuiteRunState
-    VellumVideo:
+    TestSuiteRunExternalExecConfig:
       type: object
       properties:
-        src:
-          type: string
-          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
-        metadata:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            description: Any type
-      required:
-      - src
-      title: VellumVideo
-    NamedTestCaseStringVariableValue:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/StringEnum'
-        value:
-          type:
-          - string
-          - 'null'
-        name:
-          type: string
-      required:
-      - type
-      - value
-      - name
-      description: Named Test Case value that is of type STRING
-      title: NamedTestCaseStringVariableValue
-    ArrayChatMessageContentRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/ArrayEnum'
-        value:
-          type: array
-          items:
-            $ref: '#/components/schemas/ArrayChatMessageContentItemRequest'
-      required:
-      - type
-      - value
-      description: A list of chat message content items.
-      title: ArrayChatMessageContentRequest
-    NamedTestCaseSearchResultsVariableValueRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/SearchResultsEnum'
-        value:
+        data:
+          $ref: '#/components/schemas/TestSuiteRunExternalExecConfigData'
+        test_case_ids:
           type:
           - array
           - 'null'
           items:
-            $ref: '#/components/schemas/SearchResultRequest'
+            type: string
+          description: Optionally specify a subset of test case ids to run. If not provided, all test cases within the test suite will be run by default.
+        type:
+          $ref: '#/components/schemas/TestSuiteRunExternalExecConfigTypeEnum'
+      required:
+      - data
+      description: Execution configuration for running a Vellum Test Suite against an external callable
+      title: TestSuiteRunExternalExecConfig
+    StringChatMessageContentRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/StringEnum'
+        value:
+          type: string
+      required:
+      - type
+      - value
+      description: A string value that is used in a chat message.
+      title: StringChatMessageContentRequest
+    VellumValueRequest:
+      oneOf:
+      - $ref: '#/components/schemas/StringVellumValueRequest'
+      - $ref: '#/components/schemas/NumberVellumValueRequest'
+      - $ref: '#/components/schemas/JsonVellumValueRequest'
+      - $ref: '#/components/schemas/AudioVellumValueRequest'
+      - $ref: '#/components/schemas/VideoVellumValueRequest'
+      - $ref: '#/components/schemas/ImageVellumValueRequest'
+      - $ref: '#/components/schemas/DocumentVellumValueRequest'
+      - $ref: '#/components/schemas/FunctionCallVellumValueRequest'
+      - $ref: '#/components/schemas/ErrorVellumValueRequest'
+      - $ref: '#/components/schemas/ArrayVellumValueRequest'
+      - $ref: '#/components/schemas/ChatHistoryVellumValueRequest'
+      - $ref: '#/components/schemas/SearchResultsVellumValueRequest'
+      - $ref: '#/components/schemas/ThinkingVellumValueRequest'
+      title: VellumValueRequest
+    NamedTestCaseDocumentVariableValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/DocumentEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumDocument'
+          - type: 'null'
         name:
           type: string
       required:
       - type
       - value
       - name
-      description: Named Test Case value that is of type SEARCH_RESULTS
-      title: NamedTestCaseSearchResultsVariableValueRequest
-    StringVellumValue:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/StringEnum'
-        value:
-          type:
-          - string
-          - 'null'
-      required:
-      - type
-      - value
-      description: A value representing a string.
-      title: StringVellumValue
-    ChatMessageRole:
-      type: string
-      enum:
-      - SYSTEM
-      - ASSISTANT
-      - USER
-      - FUNCTION
-      description: '* `SYSTEM` - System
-
-        * `ASSISTANT` - Assistant
-
-        * `USER` - User
-
-        * `FUNCTION` - Function'
-      title: ChatMessageRole
-    VellumErrorRequest:
+      title: NamedTestCaseDocumentVariableValue
+    VellumError:
       type: object
       properties:
         code:
@@ -266,61 +505,25 @@ components:
       required:
       - code
       - message
-      title: VellumErrorRequest
-    PdfEnum:
-      type: string
-      enum:
-      - PDF
-      title: PdfEnum
-    ArrayVellumValue:
+      title: VellumError
+    FunctionCallRequest:
       type: object
       properties:
-        type:
-          $ref: '#/components/schemas/ArrayEnum'
-        value:
+        arguments:
+          type: object
+          additionalProperties:
+            description: Any type
+        id:
           type:
-          - array
+          - string
           - 'null'
-          items:
-            $ref: '#/components/schemas/VellumValue'
+        name:
+          type: string
       required:
-      - type
-      - value
-      description: A value representing an array of Vellum variable values.
-      title: ArrayVellumValue
-    TestSuiteRunMetricErrorOutputTypeEnum:
-      type: string
-      enum:
-      - ERROR
-      description: '* `ERROR` - ERROR'
-      title: TestSuiteRunMetricErrorOutputTypeEnum
-    TestSuiteRunPromptSandboxExecConfigRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/TestSuiteRunPromptSandboxExecConfigTypeEnum'
-        data:
-          $ref: '#/components/schemas/TestSuiteRunPromptSandboxExecConfigDataRequest'
-        test_case_ids:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-          description: Optionally specify a subset of test case ids to run. If not provided, all test cases within the test suite will be run by default.
-      required:
-      - data
-      description: Execution configuration for running a Test Suite against a Prompt Sandbox
-      title: TestSuiteRunPromptSandboxExecConfigRequest
-    ArrayChatMessageContentItemRequest:
-      oneOf:
-      - $ref: '#/components/schemas/StringChatMessageContentRequest'
-      - $ref: '#/components/schemas/FunctionCallChatMessageContentRequest'
-      - $ref: '#/components/schemas/AudioChatMessageContentRequest'
-      - $ref: '#/components/schemas/VideoChatMessageContentRequest'
-      - $ref: '#/components/schemas/ImageChatMessageContentRequest'
-      - $ref: '#/components/schemas/DocumentChatMessageContentRequest'
-      title: ArrayChatMessageContentItemRequest
+      - arguments
+      - name
+      description: The final resolved function call value.
+      title: FunctionCallRequest
     NamedTestCaseChatHistoryVariableValueRequest:
       type: object
       properties:
@@ -340,109 +543,59 @@ components:
       - name
       description: Named Test Case value that is of type CHAT_HISTORY
       title: NamedTestCaseChatHistoryVariableValueRequest
-    TestSuiteRunWorkflowSandboxExecConfigDataRequest:
-      type: object
-      properties:
-        workflow_sandbox_id:
-          type: string
-          format: uuid
-          description: The ID of the Workflow Sandbox to run the Test Suite against.
-      required:
-      - workflow_sandbox_id
-      title: TestSuiteRunWorkflowSandboxExecConfigDataRequest
-    SearchResultMetaSource:
+    NamedTestCaseVariableValueRequest:
       oneOf:
-      - $ref: '#/components/schemas/PdfSearchResultMetaSource'
-      title: SearchResultMetaSource
-    TestSuiteRunRead:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        created:
-          type: string
-          format: date-time
-        test_suite:
-          $ref: '#/components/schemas/TestSuiteRunTestSuite'
-        state:
-          $ref: '#/components/schemas/TestSuiteRunState'
-          description: 'The current state of this run
-
-
-            * `QUEUED` - Queued
-
-            * `RUNNING` - Running
-
-            * `COMPLETE` - Complete
-
-            * `FAILED` - Failed
-
-            * `CANCELLED` - Cancelled'
-        exec_config:
-          oneOf:
-          - $ref: '#/components/schemas/TestSuiteRunExecConfig'
-          - type: 'null'
-          description: Configuration that defines how the Test Suite should be run
-        progress:
-          $ref: '#/components/schemas/TestSuiteRunProgress'
-      required:
-      - id
-      - created
-      - test_suite
-      - state
-      title: TestSuiteRunRead
-    JsonVellumValue:
+      - $ref: '#/components/schemas/NamedTestCaseStringVariableValueRequest'
+      - $ref: '#/components/schemas/NamedTestCaseNumberVariableValueRequest'
+      - $ref: '#/components/schemas/NamedTestCaseJsonVariableValueRequest'
+      - $ref: '#/components/schemas/NamedTestCaseChatHistoryVariableValueRequest'
+      - $ref: '#/components/schemas/NamedTestCaseSearchResultsVariableValueRequest'
+      - $ref: '#/components/schemas/NamedTestCaseErrorVariableValueRequest'
+      - $ref: '#/components/schemas/NamedTestCaseFunctionCallVariableValueRequest'
+      - $ref: '#/components/schemas/NamedTestCaseArrayVariableValueRequest'
+      - $ref: '#/components/schemas/NamedTestCaseAudioVariableValueRequest'
+      - $ref: '#/components/schemas/NamedTestCaseVideoVariableValueRequest'
+      - $ref: '#/components/schemas/NamedTestCaseImageVariableValueRequest'
+      - $ref: '#/components/schemas/NamedTestCaseDocumentVariableValueRequest'
+      title: NamedTestCaseVariableValueRequest
+    ErrorVellumValue:
       type: object
       properties:
         type:
-          $ref: '#/components/schemas/JsonEnum'
+          $ref: '#/components/schemas/ErrorEnum'
         value:
           oneOf:
-          - description: Any type
+          - $ref: '#/components/schemas/VellumError'
           - type: 'null'
       required:
       - type
       - value
-      description: A value representing a JSON object.
-      title: JsonVellumValue
-    DocumentVellumValueRequest:
+      description: A value representing an Error.
+      title: ErrorVellumValue
+    TestSuiteRunMetricStringOutput:
       type: object
       properties:
-        type:
-          $ref: '#/components/schemas/DocumentEnum'
         value:
-          oneOf:
-          - $ref: '#/components/schemas/VellumDocumentRequest'
-          - type: 'null'
-      required:
-      - type
-      - value
-      description: A base Vellum primitive value representing a document.
-      title: DocumentVellumValueRequest
-    VellumVideoRequest:
-      type: object
-      properties:
-        src:
-          type: string
-          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
-        metadata:
           type:
-          - object
+          - string
           - 'null'
-          additionalProperties:
-            description: Any type
+        type:
+          $ref: '#/components/schemas/TestSuiteRunMetricStringOutputTypeEnum'
+        name:
+          type: string
       required:
-      - src
-      title: VellumVideoRequest
-    NamedTestCaseImageVariableValue:
+      - value
+      - name
+      description: Output for a test suite run metric that is of type STRING
+      title: TestSuiteRunMetricStringOutput
+    NamedTestCaseAudioVariableValue:
       type: object
       properties:
         type:
-          $ref: '#/components/schemas/ImageEnum'
+          $ref: '#/components/schemas/AudioEnum'
         value:
           oneOf:
-          - $ref: '#/components/schemas/VellumImage'
+          - $ref: '#/components/schemas/VellumAudio'
           - type: 'null'
         name:
           type: string
@@ -450,7 +603,47 @@ components:
       - type
       - value
       - name
-      title: NamedTestCaseImageVariableValue
+      description: Named Test Case value that is of type AUDIO
+      title: NamedTestCaseAudioVariableValue
+    TestSuiteRunExternalExecConfigDataRequest:
+      type: object
+      properties:
+        executions:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExternalTestCaseExecutionRequest'
+          description: The executions of some callable external to Vellum whose outputs you would like to evaluate.
+      required:
+      - executions
+      title: TestSuiteRunExternalExecConfigDataRequest
+    TestSuiteRunMetricArrayOutputTypeEnum:
+      type: string
+      enum:
+      - ARRAY
+      description: '* `ARRAY` - ARRAY'
+      title: TestSuiteRunMetricArrayOutputTypeEnum
+    ChatHistoryVellumValueRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ChatHistoryEnum'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ChatMessageRequest'
+      required:
+      - type
+      - value
+      description: A value representing Chat History.
+      title: ChatHistoryVellumValueRequest
+    TestSuiteRunExternalExecConfigTypeEnum:
+      type: string
+      enum:
+      - EXTERNAL
+      description: '* `EXTERNAL` - EXTERNAL'
+      title: TestSuiteRunExternalExecConfigTypeEnum
     SearchResult:
       type: object
       properties:
@@ -479,327 +672,88 @@ components:
       - keywords
       - document
       title: SearchResult
-    ChatHistoryVellumValueRequest:
+    TestSuiteRunWorkflowReleaseTagExecConfigData:
       type: object
       properties:
-        type:
-          $ref: '#/components/schemas/ChatHistoryEnum'
-        value:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/ChatMessageRequest'
+        workflow_deployment_id:
+          type: string
+          format: uuid
+          description: The ID of the Workflow Deployment to run the Test Suite against.
+        tag:
+          type: string
+          default: LATEST
+          description: A tag identifying which release of the Workflow Deployment to run the Test Suite against. Useful for testing past versions of the Workflow Deployment
       required:
-      - type
-      - value
-      description: A value representing Chat History.
-      title: ChatHistoryVellumValueRequest
-    ErrorVellumValue:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/ErrorEnum'
-        value:
-          oneOf:
-          - $ref: '#/components/schemas/VellumError'
-          - type: 'null'
-      required:
-      - type
-      - value
-      description: A value representing an Error.
-      title: ErrorVellumValue
-    TestSuiteRunExternalExecConfig:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/TestSuiteRunExternalExecConfigData'
-        test_case_ids:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-          description: Optionally specify a subset of test case ids to run. If not provided, all test cases within the test suite will be run by default.
-        type:
-          $ref: '#/components/schemas/TestSuiteRunExternalExecConfigTypeEnum'
-      required:
-      - data
-      description: Execution configuration for running a Vellum Test Suite against an external callable
-      title: TestSuiteRunExternalExecConfig
-    VideoEnum:
-      type: string
-      enum:
-      - VIDEO
-      title: VideoEnum
-    TestSuiteRunExecutionMetricDefinition:
+      - workflow_deployment_id
+      title: TestSuiteRunWorkflowReleaseTagExecConfigData
+    TestSuiteRunTestSuite:
       type: object
       properties:
         id:
           type: string
-        label:
-          type: string
-        name:
-          type: string
-      title: TestSuiteRunExecutionMetricDefinition
-    SearchResultsEnum:
-      type: string
-      enum:
-      - SEARCH_RESULTS
-      title: SearchResultsEnum
-    FunctionCallChatMessageContent:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/FunctionCallEnum'
-        value:
-          $ref: '#/components/schemas/FunctionCallChatMessageContentValue'
-      required:
-      - type
-      - value
-      description: A function call value that is used in a chat message.
-      title: FunctionCallChatMessageContent
-    TestSuiteRunExternalExecConfigDataRequest:
-      type: object
-      properties:
-        executions:
-          type: array
-          items:
-            $ref: '#/components/schemas/ExternalTestCaseExecutionRequest'
-          description: The executions of some callable external to Vellum whose outputs you would like to evaluate.
-      required:
-      - executions
-      title: TestSuiteRunExternalExecConfigDataRequest
-    TestSuiteRunExecutionOutput:
-      oneOf:
-      - $ref: '#/components/schemas/TestSuiteRunExecutionStringOutput'
-      - $ref: '#/components/schemas/TestSuiteRunExecutionNumberOutput'
-      - $ref: '#/components/schemas/TestSuiteRunExecutionJsonOutput'
-      - $ref: '#/components/schemas/TestSuiteRunExecutionChatHistoryOutput'
-      - $ref: '#/components/schemas/TestSuiteRunExecutionSearchResultsOutput'
-      - $ref: '#/components/schemas/TestSuiteRunExecutionErrorOutput'
-      - $ref: '#/components/schemas/TestSuiteRunExecutionFunctionCallOutput'
-      - $ref: '#/components/schemas/TestSuiteRunExecutionArrayOutput'
-      title: TestSuiteRunExecutionOutput
-    VellumDocumentRequest:
-      type: object
-      properties:
-        src:
-          type: string
-          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
-        metadata:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            description: Any type
-      required:
-      - src
-      title: VellumDocumentRequest
-    TestSuiteRunWorkflowSandboxHistoryItemExecConfigTypeEnum:
-      type: string
-      enum:
-      - WORKFLOW_SANDBOX_HISTORY_ITEM
-      description: '* `WORKFLOW_SANDBOX_HISTORY_ITEM` - WORKFLOW_SANDBOX_HISTORY_ITEM'
-      title: TestSuiteRunWorkflowSandboxHistoryItemExecConfigTypeEnum
-    TestSuiteRunPromptSandboxHistoryItemExecConfigData:
-      type: object
-      properties:
+          format: uuid
         history_item_id:
           type: string
           format: uuid
-          description: The ID of the Prompt Sandbox History Item that the Test Suite will run against.
-        prompt_variant_id:
+        label:
           type: string
-          format: uuid
-          description: The ID of the Prompt Variant within the Prompt Sandbox History Item that you'd like to run the Test Suite against.
       required:
+      - id
       - history_item_id
-      - prompt_variant_id
-      title: TestSuiteRunPromptSandboxHistoryItemExecConfigData
-    VellumImageRequest:
-      type: object
-      properties:
-        src:
-          type: string
-          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
-        metadata:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            description: Any type
-      required:
-      - src
-      title: VellumImageRequest
-    ChatMessageContentRequest:
-      oneOf:
-      - $ref: '#/components/schemas/StringChatMessageContentRequest'
-      - $ref: '#/components/schemas/FunctionCallChatMessageContentRequest'
-      - $ref: '#/components/schemas/ArrayChatMessageContentRequest'
-      - $ref: '#/components/schemas/AudioChatMessageContentRequest'
-      - $ref: '#/components/schemas/VideoChatMessageContentRequest'
-      - $ref: '#/components/schemas/ImageChatMessageContentRequest'
-      - $ref: '#/components/schemas/DocumentChatMessageContentRequest'
-      title: ChatMessageContentRequest
-    TestSuiteRunExecutionArrayOutput:
-      type: object
-      properties:
-        name:
-          type: string
-        type:
-          $ref: '#/components/schemas/ArrayEnum'
-        value:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/VellumValue'
-        output_variable_id:
-          type: string
-          format: uuid
-      required:
-      - name
-      - type
-      - value
-      - output_variable_id
-      description: Execution output of an entity evaluated during a Test Suite Run that is of type ARRAY
-      title: TestSuiteRunExecutionArrayOutput
-    TestSuiteRunPromptSandboxExecConfigDataRequest:
-      type: object
-      properties:
-        prompt_sandbox_id:
-          type: string
-          format: uuid
-          description: The ID of the Prompt Sandbox to run the Test Suite against.
-        prompt_variant_id:
-          type: string
-          format: uuid
-          description: The ID of the Prompt Variant within the Prompt Sandbox that you'd like to run the Test Suite against.
-      required:
-      - prompt_sandbox_id
-      - prompt_variant_id
-      title: TestSuiteRunPromptSandboxExecConfigDataRequest
-    NamedTestCaseNumberVariableValue:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/NumberEnum'
-        value:
-          type:
-          - number
-          - 'null'
-          format: double
-        name:
-          type: string
-      required:
-      - type
-      - value
-      - name
-      description: Named Test Case value that is of type NUMBER
-      title: NamedTestCaseNumberVariableValue
-    ChatMessageRequest:
-      type: object
-      properties:
-        text:
-          type:
-          - string
-          - 'null'
-        role:
-          $ref: '#/components/schemas/ChatMessageRole'
-        content:
-          oneOf:
-          - $ref: '#/components/schemas/ChatMessageContentRequest'
-          - type: 'null'
-        source:
-          type:
-          - string
-          - 'null'
-          description: An optional identifier representing who or what generated this message.
-        metadata:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            description: Any type
-      required:
-      - role
-      title: ChatMessageRequest
-    NumberVellumValue:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/NumberEnum'
-        value:
-          type:
-          - number
-          - 'null'
-          format: double
-      required:
-      - type
-      - value
-      description: A value representing a number.
-      title: NumberVellumValue
-    NamedTestCaseDocumentVariableValueRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/DocumentEnum'
-        value:
-          oneOf:
-          - $ref: '#/components/schemas/VellumDocumentRequest'
-          - type: 'null'
-        name:
-          type: string
-      required:
-      - type
-      - value
-      - name
-      title: NamedTestCaseDocumentVariableValueRequest
-    PaginatedTestSuiteRunExecutionList:
-      type: object
-      properties:
-        count:
-          type: integer
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/TestSuiteRunExecution'
-      required:
-      - count
-      - next
-      - previous
-      - results
-      title: PaginatedTestSuiteRunExecutionList
-    ImageChatMessageContentRequest:
+      - label
+      title: TestSuiteRunTestSuite
+    NamedTestCaseImageVariableValue:
       type: object
       properties:
         type:
           $ref: '#/components/schemas/ImageEnum'
         value:
-          $ref: '#/components/schemas/VellumImageRequest'
+          oneOf:
+          - $ref: '#/components/schemas/VellumImage'
+          - type: 'null'
+        name:
+          type: string
       required:
       - type
       - value
-      description: An image value that is used in a chat message.
-      title: ImageChatMessageContentRequest
-    TestSuiteRunWorkflowSandboxHistoryItemExecConfigRequest:
+      - name
+      title: NamedTestCaseImageVariableValue
+    NamedTestCaseVariableValue:
+      oneOf:
+      - $ref: '#/components/schemas/NamedTestCaseStringVariableValue'
+      - $ref: '#/components/schemas/NamedTestCaseNumberVariableValue'
+      - $ref: '#/components/schemas/NamedTestCaseJsonVariableValue'
+      - $ref: '#/components/schemas/NamedTestCaseChatHistoryVariableValue'
+      - $ref: '#/components/schemas/NamedTestCaseSearchResultsVariableValue'
+      - $ref: '#/components/schemas/NamedTestCaseErrorVariableValue'
+      - $ref: '#/components/schemas/NamedTestCaseFunctionCallVariableValue'
+      - $ref: '#/components/schemas/NamedTestCaseArrayVariableValue'
+      - $ref: '#/components/schemas/NamedTestCaseAudioVariableValue'
+      - $ref: '#/components/schemas/NamedTestCaseVideoVariableValue'
+      - $ref: '#/components/schemas/NamedTestCaseImageVariableValue'
+      - $ref: '#/components/schemas/NamedTestCaseDocumentVariableValue'
+      title: NamedTestCaseVariableValue
+    ThinkingVellumValue:
       type: object
       properties:
         type:
-          $ref: '#/components/schemas/TestSuiteRunWorkflowSandboxHistoryItemExecConfigTypeEnum'
+          $ref: '#/components/schemas/ThinkingEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/StringVellumValue'
+          - type: 'null'
+      required:
+      - type
+      - value
+      description: A value representing Thinking mode output.
+      title: ThinkingVellumValue
+    TestSuiteRunWorkflowSandboxExecConfigRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/TestSuiteRunWorkflowSandboxExecConfigTypeEnum'
         data:
-          $ref: '#/components/schemas/TestSuiteRunWorkflowSandboxHistoryItemExecConfigDataRequest'
+          $ref: '#/components/schemas/TestSuiteRunWorkflowSandboxExecConfigDataRequest'
         test_case_ids:
           type:
           - array
@@ -809,8 +763,66 @@ components:
           description: Optionally specify a subset of test case ids to run. If not provided, all test cases within the test suite will be run by default.
       required:
       - data
-      description: Execution configuration for running a Test Suite against a Workflow Sandbox History Item
-      title: TestSuiteRunWorkflowSandboxHistoryItemExecConfigRequest
+      description: Execution configuration for running a Test Suite against a Workflow Sandbox
+      title: TestSuiteRunWorkflowSandboxExecConfigRequest
+    StringVellumValueRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/StringEnum'
+        value:
+          type:
+          - string
+          - 'null'
+      required:
+      - type
+      - value
+      description: A value representing a string.
+      title: StringVellumValueRequest
+    NumberEnum:
+      type: string
+      enum:
+      - NUMBER
+      title: NumberEnum
+    FunctionCallEnum:
+      type: string
+      enum:
+      - FUNCTION_CALL
+      title: FunctionCallEnum
+    TestSuiteRunPromptSandboxHistoryItemExecConfig:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/TestSuiteRunPromptSandboxHistoryItemExecConfigTypeEnum'
+        data:
+          $ref: '#/components/schemas/TestSuiteRunPromptSandboxHistoryItemExecConfigData'
+        test_case_ids:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Optionally specify a subset of test case ids to run. If not provided, all test cases within the test suite will be run by default.
+      required:
+      - data
+      description: Execution configuration for running a Test Suite against a Prompt Sandbox History Item
+      title: TestSuiteRunPromptSandboxHistoryItemExecConfig
+    VellumValue:
+      oneOf:
+      - $ref: '#/components/schemas/StringVellumValue'
+      - $ref: '#/components/schemas/NumberVellumValue'
+      - $ref: '#/components/schemas/JsonVellumValue'
+      - $ref: '#/components/schemas/AudioVellumValue'
+      - $ref: '#/components/schemas/VideoVellumValue'
+      - $ref: '#/components/schemas/ImageVellumValue'
+      - $ref: '#/components/schemas/DocumentVellumValue'
+      - $ref: '#/components/schemas/FunctionCallVellumValue'
+      - $ref: '#/components/schemas/ErrorVellumValue'
+      - $ref: '#/components/schemas/ArrayVellumValue'
+      - $ref: '#/components/schemas/ChatHistoryVellumValue'
+      - $ref: '#/components/schemas/SearchResultsVellumValue'
+      - $ref: '#/components/schemas/ThinkingVellumValue'
+      title: VellumValue
     ArrayChatMessageContentItem:
       oneOf:
       - $ref: '#/components/schemas/StringChatMessageContent'
@@ -820,81 +832,27 @@ components:
       - $ref: '#/components/schemas/ImageChatMessageContent'
       - $ref: '#/components/schemas/DocumentChatMessageContent'
       title: ArrayChatMessageContentItem
-    ErrorEnum:
-      type: string
-      enum:
-      - ERROR
-      title: ErrorEnum
-    TestSuiteRunMetricNumberOutputTypeEnum:
-      type: string
-      enum:
-      - NUMBER
-      description: '* `NUMBER` - NUMBER'
-      title: TestSuiteRunMetricNumberOutputTypeEnum
-    NumberVellumValueRequest:
+    PdfSearchResultMetaSourceRequest:
       type: object
       properties:
-        type:
-          $ref: '#/components/schemas/NumberEnum'
-        value:
+        document_type:
+          $ref: '#/components/schemas/PdfEnum'
+        start_page_num:
           type:
-          - number
+          - integer
           - 'null'
-          format: double
-      required:
-      - type
-      - value
-      description: A value representing a number.
-      title: NumberVellumValueRequest
-    NamedTestCaseArrayVariableValueRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/ArrayEnum'
-        value:
+          description: The 1-indexed page number where the chunk starts in the document. Only available for supported chunking strategies and document types.
+        end_page_num:
           type:
-          - array
+          - integer
           - 'null'
-          items:
-            $ref: '#/components/schemas/VellumValueRequest'
-        name:
-          type: string
+          description: The 1-indexed page number where the chunk ends in the document. Only available for supported chunking strategies and document types.
       required:
-      - type
-      - value
-      - name
-      description: Named Test Case value that is of type ARRAY
-      title: NamedTestCaseArrayVariableValueRequest
-    TestSuiteRunMetricJSONOutput:
-      type: object
-      properties:
-        value:
-          oneOf:
-          - description: Any type
-          - type: 'null'
-        type:
-          $ref: '#/components/schemas/TestSuiteRunMetricJSONOutputTypeEnum'
-        name:
-          type: string
-      required:
-      - value
-      - name
-      description: Output for a test suite run metric that is of type NUMBER
-      title: TestSuiteRunMetricJSONOutput
-    TestSuiteRunDeploymentReleaseTagExecConfigData:
-      type: object
-      properties:
-        deployment_id:
-          type: string
-          format: uuid
-          description: The ID of the Prompt Deployment to run the Test Suite against.
-        tag:
-          type: string
-          default: LATEST
-          description: A tag identifying which release of the Prompt Deployment to run the Test Suite against. Useful for testing past versions of the Prompt Deployment
-      required:
-      - deployment_id
-      title: TestSuiteRunDeploymentReleaseTagExecConfigData
+      - document_type
+      - start_page_num
+      - end_page_num
+      description: The source of a search result from a PDF document.
+      title: PdfSearchResultMetaSourceRequest
     VellumErrorCodeEnum:
       type: string
       enum:
@@ -934,38 +892,67 @@ components:
 
         * `CHAT_QUOTA_EXCEEDED` - CHAT_QUOTA_EXCEEDED'
       title: VellumErrorCodeEnum
-    VideoVellumValue:
+    SearchResultsVellumValue:
       type: object
       properties:
         type:
-          $ref: '#/components/schemas/VideoEnum'
+          $ref: '#/components/schemas/SearchResultsEnum'
         value:
-          oneOf:
-          - $ref: '#/components/schemas/VellumVideo'
-          - type: 'null'
-      required:
-      - type
-      - value
-      description: A base Vellum primitive value representing a video.
-      title: VideoVellumValue
-    TestSuiteRunWorkflowSandboxHistoryItemExecConfig:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/TestSuiteRunWorkflowSandboxHistoryItemExecConfigTypeEnum'
-        data:
-          $ref: '#/components/schemas/TestSuiteRunWorkflowSandboxHistoryItemExecConfigData'
-        test_case_ids:
           type:
           - array
           - 'null'
           items:
-            type: string
-          description: Optionally specify a subset of test case ids to run. If not provided, all test cases within the test suite will be run by default.
+            $ref: '#/components/schemas/SearchResult'
       required:
-      - data
-      description: Execution configuration for running a Test Suite against a Workflow Sandbox History Item
-      title: TestSuiteRunWorkflowSandboxHistoryItemExecConfig
+      - type
+      - value
+      description: A value representing Search Results.
+      title: SearchResultsVellumValue
+    TestSuiteRunWorkflowSandboxHistoryItemExecConfigData:
+      type: object
+      properties:
+        history_item_id:
+          type: string
+          format: uuid
+          description: The ID of the Workflow Sandbox History Item that the Test Suite will run against.
+        workflow_variant_id:
+          type: string
+          format: uuid
+          description: The ID of the Workflow Variant within the Workflow Sandbox History Item that you'd like to run the Test Suite against.
+      required:
+      - history_item_id
+      - workflow_variant_id
+      title: TestSuiteRunWorkflowSandboxHistoryItemExecConfigData
+    ArrayChatMessageContentItemRequest:
+      oneOf:
+      - $ref: '#/components/schemas/StringChatMessageContentRequest'
+      - $ref: '#/components/schemas/FunctionCallChatMessageContentRequest'
+      - $ref: '#/components/schemas/AudioChatMessageContentRequest'
+      - $ref: '#/components/schemas/VideoChatMessageContentRequest'
+      - $ref: '#/components/schemas/ImageChatMessageContentRequest'
+      - $ref: '#/components/schemas/DocumentChatMessageContentRequest'
+      title: ArrayChatMessageContentItemRequest
+    TestSuiteRunExecutionErrorOutput:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/ErrorEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumError'
+          - type: 'null'
+        output_variable_id:
+          type: string
+          format: uuid
+      required:
+      - name
+      - type
+      - value
+      - output_variable_id
+      description: Execution output of an entity evaluated during a Test Suite Run that is of type ERROR
+      title: TestSuiteRunExecutionErrorOutput
     NamedTestCaseSearchResultsVariableValue:
       type: object
       properties:
@@ -985,18 +972,1302 @@ components:
       - name
       description: Named Test Case value that is of type SEARCH_RESULTS
       title: NamedTestCaseSearchResultsVariableValue
-    StringChatMessageContentRequest:
+    TestSuiteRunWorkflowReleaseTagExecConfigDataRequest:
+      type: object
+      properties:
+        workflow_deployment_id:
+          type: string
+          format: uuid
+          description: The ID of the Workflow Deployment to run the Test Suite against.
+        tag:
+          type: string
+          default: LATEST
+          description: A tag identifying which release of the Workflow Deployment to run the Test Suite against. Useful for testing past versions of the Workflow Deployment
+      required:
+      - workflow_deployment_id
+      title: TestSuiteRunWorkflowReleaseTagExecConfigDataRequest
+    DocumentVellumValueRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/DocumentEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumDocumentRequest'
+          - type: 'null'
+      required:
+      - type
+      - value
+      description: A base Vellum primitive value representing a document.
+      title: DocumentVellumValueRequest
+    TestSuiteRunPromptSandboxHistoryItemExecConfigData:
+      type: object
+      properties:
+        history_item_id:
+          type: string
+          format: uuid
+          description: The ID of the Prompt Sandbox History Item that the Test Suite will run against.
+        prompt_variant_id:
+          type: string
+          format: uuid
+          description: The ID of the Prompt Variant within the Prompt Sandbox History Item that you'd like to run the Test Suite against.
+      required:
+      - history_item_id
+      - prompt_variant_id
+      title: TestSuiteRunPromptSandboxHistoryItemExecConfigData
+    TestSuiteRunWorkflowSandboxHistoryItemExecConfigDataRequest:
+      type: object
+      properties:
+        history_item_id:
+          type: string
+          format: uuid
+          description: The ID of the Workflow Sandbox History Item that the Test Suite will run against.
+        workflow_variant_id:
+          type: string
+          format: uuid
+          description: The ID of the Workflow Variant within the Workflow Sandbox History Item that you'd like to run the Test Suite against.
+      required:
+      - history_item_id
+      - workflow_variant_id
+      title: TestSuiteRunWorkflowSandboxHistoryItemExecConfigDataRequest
+    TestSuiteRunMetricJSONOutputTypeEnum:
+      type: string
+      enum:
+      - JSON
+      description: '* `JSON` - JSON'
+      title: TestSuiteRunMetricJSONOutputTypeEnum
+    TestSuiteRunExecutionMetricResult:
+      type: object
+      properties:
+        metric_id:
+          type: string
+          format: uuid
+        outputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/TestSuiteRunMetricOutput'
+        metric_label:
+          type: string
+        metric_definition:
+          $ref: '#/components/schemas/TestSuiteRunExecutionMetricDefinition'
+      required:
+      - metric_id
+      - outputs
+      title: TestSuiteRunExecutionMetricResult
+    VellumVideo:
+      type: object
+      properties:
+        src:
+          type: string
+          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - src
+      title: VellumVideo
+    SearchResultDocumentRequest:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of the document.
+        label:
+          type: string
+          description: The human-readable name for the document.
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: The unique ID of the document as represented in an external system and specified when it was originally uploaded.
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+          description: A previously supplied JSON object containing metadata that can be filtered on when searching.
+      required:
+      - label
+      title: SearchResultDocumentRequest
+    ImageChatMessageContentRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ImageEnum'
+        value:
+          $ref: '#/components/schemas/VellumImageRequest'
+      required:
+      - type
+      - value
+      description: An image value that is used in a chat message.
+      title: ImageChatMessageContentRequest
+    PdfSearchResultMetaSource:
+      type: object
+      properties:
+        document_type:
+          $ref: '#/components/schemas/PdfEnum'
+        start_page_num:
+          type:
+          - integer
+          - 'null'
+          description: The 1-indexed page number where the chunk starts in the document. Only available for supported chunking strategies and document types.
+        end_page_num:
+          type:
+          - integer
+          - 'null'
+          description: The 1-indexed page number where the chunk ends in the document. Only available for supported chunking strategies and document types.
+      required:
+      - document_type
+      - start_page_num
+      - end_page_num
+      description: The source of a search result from a PDF document.
+      title: PdfSearchResultMetaSource
+    FunctionCallChatMessageContentValue:
+      type: object
+      properties:
+        name:
+          type: string
+        arguments:
+          type: object
+          additionalProperties:
+            description: Any type
+        id:
+          type:
+          - string
+          - 'null'
+      required:
+      - name
+      - arguments
+      description: The final resolved function call value.
+      title: FunctionCallChatMessageContentValue
+    VideoChatMessageContent:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/VideoEnum'
+        value:
+          $ref: '#/components/schemas/VellumVideo'
+      required:
+      - type
+      - value
+      description: A video value that is used in a chat message.
+      title: VideoChatMessageContent
+    NamedTestCaseStringVariableValueRequest:
       type: object
       properties:
         type:
           $ref: '#/components/schemas/StringEnum'
         value:
+          type:
+          - string
+          - 'null'
+        name:
           type: string
       required:
       - type
       - value
-      description: A string value that is used in a chat message.
-      title: StringChatMessageContentRequest
+      - name
+      description: Named Test Case value that is of type STRING
+      title: NamedTestCaseStringVariableValueRequest
+    VellumImageRequest:
+      type: object
+      properties:
+        src:
+          type: string
+          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - src
+      title: VellumImageRequest
+    SearchResultDocument:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of the document.
+        label:
+          type: string
+          description: The human-readable name for the document.
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: The unique ID of the document as represented in an external system and specified when it was originally uploaded.
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+          description: A previously supplied JSON object containing metadata that can be filtered on when searching.
+      required:
+      - label
+      title: SearchResultDocument
+    TestSuiteRunPromptSandboxExecConfigTypeEnum:
+      type: string
+      enum:
+      - PROMPT_SANDBOX
+      description: '* `PROMPT_SANDBOX` - PROMPT_SANDBOX'
+      title: TestSuiteRunPromptSandboxExecConfigTypeEnum
+    TestSuiteRunPromptSandboxHistoryItemExecConfigTypeEnum:
+      type: string
+      enum:
+      - PROMPT_SANDBOX_HISTORY_ITEM
+      description: '* `PROMPT_SANDBOX_HISTORY_ITEM` - PROMPT_SANDBOX_HISTORY_ITEM'
+      title: TestSuiteRunPromptSandboxHistoryItemExecConfigTypeEnum
+    TestSuiteRunMetricJSONOutput:
+      type: object
+      properties:
+        value:
+          oneOf:
+          - description: Any type
+          - type: 'null'
+        type:
+          $ref: '#/components/schemas/TestSuiteRunMetricJSONOutputTypeEnum'
+        name:
+          type: string
+      required:
+      - value
+      - name
+      description: Output for a test suite run metric that is of type NUMBER
+      title: TestSuiteRunMetricJSONOutput
+    TestSuiteRunWorkflowReleaseTagExecConfigTypeEnum:
+      type: string
+      enum:
+      - WORKFLOW_RELEASE_TAG
+      description: '* `WORKFLOW_RELEASE_TAG` - WORKFLOW_RELEASE_TAG'
+      title: TestSuiteRunWorkflowReleaseTagExecConfigTypeEnum
+    NamedTestCaseAudioVariableValueRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/AudioEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumAudioRequest'
+          - type: 'null'
+        name:
+          type: string
+      required:
+      - type
+      - value
+      - name
+      description: Named Test Case value that is of type AUDIO
+      title: NamedTestCaseAudioVariableValueRequest
+    DocumentEnum:
+      type: string
+      enum:
+      - DOCUMENT
+      title: DocumentEnum
+    VideoVellumValueRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/VideoEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumVideoRequest'
+          - type: 'null'
+      required:
+      - type
+      - value
+      description: A base Vellum primitive value representing a video.
+      title: VideoVellumValueRequest
+    ChatMessageContentRequest:
+      oneOf:
+      - $ref: '#/components/schemas/StringChatMessageContentRequest'
+      - $ref: '#/components/schemas/FunctionCallChatMessageContentRequest'
+      - $ref: '#/components/schemas/ArrayChatMessageContentRequest'
+      - $ref: '#/components/schemas/AudioChatMessageContentRequest'
+      - $ref: '#/components/schemas/VideoChatMessageContentRequest'
+      - $ref: '#/components/schemas/ImageChatMessageContentRequest'
+      - $ref: '#/components/schemas/DocumentChatMessageContentRequest'
+      title: ChatMessageContentRequest
+    FunctionCallChatMessageContent:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/FunctionCallEnum'
+        value:
+          $ref: '#/components/schemas/FunctionCallChatMessageContentValue'
+      required:
+      - type
+      - value
+      description: A function call value that is used in a chat message.
+      title: FunctionCallChatMessageContent
+    TestSuiteRunExecutionFunctionCallOutput:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/FunctionCallEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/FunctionCall'
+          - type: 'null'
+        output_variable_id:
+          type: string
+          format: uuid
+      required:
+      - name
+      - type
+      - value
+      - output_variable_id
+      description: Execution output of an entity evaluated during a Test Suite Run that is of type FUNCTION_CALL
+      title: TestSuiteRunExecutionFunctionCallOutput
+    ChatMessageRequest:
+      type: object
+      properties:
+        text:
+          type:
+          - string
+          - 'null'
+        role:
+          $ref: '#/components/schemas/ChatMessageRole'
+        content:
+          oneOf:
+          - $ref: '#/components/schemas/ChatMessageContentRequest'
+          - type: 'null'
+        source:
+          type:
+          - string
+          - 'null'
+          description: An optional identifier representing who or what generated this message.
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - role
+      title: ChatMessageRequest
+    TestSuiteRunWorkflowSandboxHistoryItemExecConfigTypeEnum:
+      type: string
+      enum:
+      - WORKFLOW_SANDBOX_HISTORY_ITEM
+      description: '* `WORKFLOW_SANDBOX_HISTORY_ITEM` - WORKFLOW_SANDBOX_HISTORY_ITEM'
+      title: TestSuiteRunWorkflowSandboxHistoryItemExecConfigTypeEnum
+    TestSuiteRunExternalExecConfigRequest:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/TestSuiteRunExternalExecConfigDataRequest'
+        test_case_ids:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Optionally specify a subset of test case ids to run. If not provided, all test cases within the test suite will be run by default.
+        type:
+          $ref: '#/components/schemas/TestSuiteRunExternalExecConfigTypeEnum'
+      required:
+      - data
+      description: Execution configuration for running a Vellum Test Suite against an external callable
+      title: TestSuiteRunExternalExecConfigRequest
+    ChatHistoryEnum:
+      type: string
+      enum:
+      - CHAT_HISTORY
+      title: ChatHistoryEnum
+    StringVellumValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/StringEnum'
+        value:
+          type:
+          - string
+          - 'null'
+      required:
+      - type
+      - value
+      description: A value representing a string.
+      title: StringVellumValue
+    NamedTestCaseVideoVariableValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/VideoEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumVideo'
+          - type: 'null'
+        name:
+          type: string
+      required:
+      - type
+      - value
+      - name
+      title: NamedTestCaseVideoVariableValue
+    TestSuiteRunExecutionMetricDefinition:
+      type: object
+      properties:
+        id:
+          type: string
+        label:
+          type: string
+        name:
+          type: string
+      title: TestSuiteRunExecutionMetricDefinition
+    TestSuiteRunWorkflowReleaseTagExecConfig:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/TestSuiteRunWorkflowReleaseTagExecConfigTypeEnum'
+        data:
+          $ref: '#/components/schemas/TestSuiteRunWorkflowReleaseTagExecConfigData'
+        test_case_ids:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Optionally specify a subset of test case ids to run. If not provided, all test cases within the test suite will be run by default.
+      required:
+      - data
+      description: Execution configuration for running a Test Suite against a Workflow Deployment
+      title: TestSuiteRunWorkflowReleaseTagExecConfig
+    TestSuiteRunExecConfig:
+      oneOf:
+      - $ref: '#/components/schemas/TestSuiteRunDeploymentReleaseTagExecConfig'
+      - $ref: '#/components/schemas/TestSuiteRunPromptSandboxHistoryItemExecConfig'
+      - $ref: '#/components/schemas/TestSuiteRunWorkflowReleaseTagExecConfig'
+      - $ref: '#/components/schemas/TestSuiteRunWorkflowSandboxHistoryItemExecConfig'
+      - $ref: '#/components/schemas/TestSuiteRunExternalExecConfig'
+      title: TestSuiteRunExecConfig
+    TestSuiteRunPromptSandboxExecConfigRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/TestSuiteRunPromptSandboxExecConfigTypeEnum'
+        data:
+          $ref: '#/components/schemas/TestSuiteRunPromptSandboxExecConfigDataRequest'
+        test_case_ids:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Optionally specify a subset of test case ids to run. If not provided, all test cases within the test suite will be run by default.
+      required:
+      - data
+      description: Execution configuration for running a Test Suite against a Prompt Sandbox
+      title: TestSuiteRunPromptSandboxExecConfigRequest
+    ErrorEnum:
+      type: string
+      enum:
+      - ERROR
+      title: ErrorEnum
+    NamedTestCaseFunctionCallVariableValueRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/FunctionCallEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/FunctionCallRequest'
+          - type: 'null'
+        name:
+          type: string
+      required:
+      - type
+      - value
+      - name
+      description: Named Test Case value that is of type FUNCTION_CALL
+      title: NamedTestCaseFunctionCallVariableValueRequest
+    TestSuiteRunRead:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        created:
+          type: string
+          format: date-time
+        test_suite:
+          $ref: '#/components/schemas/TestSuiteRunTestSuite'
+        state:
+          $ref: '#/components/schemas/TestSuiteRunState'
+          description: 'The current state of this run
+
+
+            * `QUEUED` - Queued
+
+            * `RUNNING` - Running
+
+            * `COMPLETE` - Complete
+
+            * `FAILED` - Failed
+
+            * `CANCELLED` - Cancelled'
+        exec_config:
+          oneOf:
+          - $ref: '#/components/schemas/TestSuiteRunExecConfig'
+          - type: 'null'
+          description: Configuration that defines how the Test Suite should be run
+        progress:
+          $ref: '#/components/schemas/TestSuiteRunProgress'
+      required:
+      - id
+      - created
+      - test_suite
+      - state
+      title: TestSuiteRunRead
+    FunctionCallChatMessageContentValueRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        arguments:
+          type: object
+          additionalProperties:
+            description: Any type
+        id:
+          type:
+          - string
+          - 'null'
+      required:
+      - name
+      - arguments
+      description: The final resolved function call value.
+      title: FunctionCallChatMessageContentValueRequest
+    SearchResultMetaSource:
+      oneOf:
+      - $ref: '#/components/schemas/PdfSearchResultMetaSource'
+      title: SearchResultMetaSource
+    SearchResultMetaRequest:
+      type: object
+      properties:
+        source:
+          oneOf:
+          - $ref: '#/components/schemas/SearchResultMetaSourceRequest'
+          - type: 'null'
+      title: SearchResultMetaRequest
+    ArrayEnum:
+      type: string
+      enum:
+      - ARRAY
+      title: ArrayEnum
+    FunctionCall:
+      type: object
+      properties:
+        arguments:
+          type: object
+          additionalProperties:
+            description: Any type
+        id:
+          type:
+          - string
+          - 'null'
+        name:
+          type: string
+      required:
+      - arguments
+      - name
+      description: The final resolved function call value.
+      title: FunctionCall
+    TestSuiteRunPromptSandboxHistoryItemExecConfigDataRequest:
+      type: object
+      properties:
+        history_item_id:
+          type: string
+          format: uuid
+          description: The ID of the Prompt Sandbox History Item that the Test Suite will run against.
+        prompt_variant_id:
+          type: string
+          format: uuid
+          description: The ID of the Prompt Variant within the Prompt Sandbox History Item that you'd like to run the Test Suite against.
+      required:
+      - history_item_id
+      - prompt_variant_id
+      title: TestSuiteRunPromptSandboxHistoryItemExecConfigDataRequest
+    DocumentVellumValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/DocumentEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumDocument'
+          - type: 'null'
+      required:
+      - type
+      - value
+      description: A base Vellum primitive value representing a document.
+      title: DocumentVellumValue
+    TestSuiteRunMetricErrorOutput:
+      type: object
+      properties:
+        value:
+          $ref: '#/components/schemas/VellumError'
+        type:
+          $ref: '#/components/schemas/TestSuiteRunMetricErrorOutputTypeEnum'
+        name:
+          type: string
+      required:
+      - value
+      - name
+      description: Output for a test suite run metric that is of type ERROR
+      title: TestSuiteRunMetricErrorOutput
+    TestSuiteRunExecutionSearchResultsOutput:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/SearchResultsEnum'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SearchResult'
+        output_variable_id:
+          type: string
+          format: uuid
+      required:
+      - name
+      - type
+      - value
+      - output_variable_id
+      description: Execution output of an entity evaluated during a Test Suite Run that is of type SEARCH_RESULTS
+      title: TestSuiteRunExecutionSearchResultsOutput
+    JsonVellumValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/JsonEnum'
+        value:
+          oneOf:
+          - description: Any type
+          - type: 'null'
+      required:
+      - type
+      - value
+      description: A value representing a JSON object.
+      title: JsonVellumValue
+    TestSuiteRunWorkflowSandboxExecConfigTypeEnum:
+      type: string
+      enum:
+      - WORKFLOW_SANDBOX
+      description: '* `WORKFLOW_SANDBOX` - WORKFLOW_SANDBOX'
+      title: TestSuiteRunWorkflowSandboxExecConfigTypeEnum
+    TestSuiteRunCreateRequest:
+      type: object
+      properties:
+        test_suite_id:
+          type: string
+          format: uuid
+          description: The ID of the Test Suite to run. Must provide either this or test_suite_id.
+        test_suite_name:
+          type: string
+          description: The name of the Test Suite to run. Must provide either this or test_suite_id.
+        exec_config:
+          $ref: '#/components/schemas/TestSuiteRunExecConfigRequest'
+          description: Configuration that defines how the Test Suite should be run
+      required:
+      - exec_config
+      title: TestSuiteRunCreateRequest
+    NamedTestCaseErrorVariableValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ErrorEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumError'
+          - type: 'null'
+        name:
+          type: string
+      required:
+      - type
+      - value
+      - name
+      description: Named Test Case value that is of type ERROR
+      title: NamedTestCaseErrorVariableValue
+    StringEnum:
+      type: string
+      enum:
+      - STRING
+      title: StringEnum
+    NamedTestCaseImageVariableValueRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ImageEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumImageRequest'
+          - type: 'null'
+        name:
+          type: string
+      required:
+      - type
+      - value
+      - name
+      title: NamedTestCaseImageVariableValueRequest
+    NumberVellumValueRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/NumberEnum'
+        value:
+          type:
+          - number
+          - 'null'
+          format: double
+      required:
+      - type
+      - value
+      description: A value representing a number.
+      title: NumberVellumValueRequest
+    NamedTestCaseNumberVariableValueRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/NumberEnum'
+        value:
+          type:
+          - number
+          - 'null'
+          format: double
+        name:
+          type: string
+      required:
+      - type
+      - value
+      - name
+      description: Named Test Case value that is of type NUMBER
+      title: NamedTestCaseNumberVariableValueRequest
+    NamedTestCaseArrayVariableValueRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ArrayEnum'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/VellumValueRequest'
+        name:
+          type: string
+      required:
+      - type
+      - value
+      - name
+      description: Named Test Case value that is of type ARRAY
+      title: NamedTestCaseArrayVariableValueRequest
+    ArrayVellumValueRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ArrayEnum'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/VellumValueRequest'
+      required:
+      - type
+      - value
+      description: A value representing an array of Vellum variable values.
+      title: ArrayVellumValueRequest
+    NamedTestCaseSearchResultsVariableValueRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/SearchResultsEnum'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SearchResultRequest'
+        name:
+          type: string
+      required:
+      - type
+      - value
+      - name
+      description: Named Test Case value that is of type SEARCH_RESULTS
+      title: NamedTestCaseSearchResultsVariableValueRequest
+    VellumAudio:
+      type: object
+      properties:
+        src:
+          type: string
+          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - src
+      title: VellumAudio
+    TestSuiteRunPromptSandboxHistoryItemExecConfigRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/TestSuiteRunPromptSandboxHistoryItemExecConfigTypeEnum'
+        data:
+          $ref: '#/components/schemas/TestSuiteRunPromptSandboxHistoryItemExecConfigDataRequest'
+        test_case_ids:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Optionally specify a subset of test case ids to run. If not provided, all test cases within the test suite will be run by default.
+      required:
+      - data
+      description: Execution configuration for running a Test Suite against a Prompt Sandbox History Item
+      title: TestSuiteRunPromptSandboxHistoryItemExecConfigRequest
+    NamedTestCaseJsonVariableValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/JsonEnum'
+        value:
+          oneOf:
+          - description: Any type
+          - type: 'null'
+        name:
+          type: string
+      required:
+      - type
+      - value
+      - name
+      description: Named Test Case value that is of type JSON
+      title: NamedTestCaseJsonVariableValue
+    TestSuiteRunMetricNumberOutput:
+      type: object
+      properties:
+        value:
+          type:
+          - number
+          - 'null'
+          format: double
+        type:
+          $ref: '#/components/schemas/TestSuiteRunMetricNumberOutputTypeEnum'
+        name:
+          type: string
+      required:
+      - value
+      - name
+      description: Output for a test suite run metric that is of type NUMBER
+      title: TestSuiteRunMetricNumberOutput
+    VellumVideoRequest:
+      type: object
+      properties:
+        src:
+          type: string
+          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - src
+      title: VellumVideoRequest
+    ImageEnum:
+      type: string
+      enum:
+      - IMAGE
+      title: ImageEnum
+    TestSuiteRunExecutionStringOutput:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/StringEnum'
+        value:
+          type:
+          - string
+          - 'null'
+        output_variable_id:
+          type: string
+          format: uuid
+      required:
+      - name
+      - type
+      - value
+      - output_variable_id
+      description: Execution output of an entity evaluated during a Test Suite Run that is of type STRING
+      title: TestSuiteRunExecutionStringOutput
+    AudioVellumValueRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/AudioEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumAudioRequest'
+          - type: 'null'
+      required:
+      - type
+      - value
+      description: A base Vellum primitive value representing audio.
+      title: AudioVellumValueRequest
+    NamedTestCaseArrayVariableValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ArrayEnum'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/VellumValue'
+        name:
+          type: string
+      required:
+      - type
+      - value
+      - name
+      description: Named Test Case value that is of type ARRAY
+      title: NamedTestCaseArrayVariableValue
+    PaginatedTestSuiteRunExecutionList:
+      type: object
+      properties:
+        count:
+          type: integer
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/TestSuiteRunExecution'
+      required:
+      - count
+      - next
+      - previous
+      - results
+      title: PaginatedTestSuiteRunExecutionList
+    DocumentChatMessageContentRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/DocumentEnum'
+        value:
+          $ref: '#/components/schemas/VellumDocumentRequest'
+      required:
+      - type
+      - value
+      description: A document value that is used in a chat message.
+      title: DocumentChatMessageContentRequest
+    ThinkingVellumValueRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ThinkingEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/StringVellumValueRequest'
+          - type: 'null'
+      required:
+      - type
+      - value
+      description: A value representing Thinking mode output.
+      title: ThinkingVellumValueRequest
+    AudioChatMessageContent:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/AudioEnum'
+        value:
+          $ref: '#/components/schemas/VellumAudio'
+      required:
+      - type
+      - value
+      description: An audio value that is used in a chat message.
+      title: AudioChatMessageContent
+    TestSuiteRunExecutionOutput:
+      oneOf:
+      - $ref: '#/components/schemas/TestSuiteRunExecutionStringOutput'
+      - $ref: '#/components/schemas/TestSuiteRunExecutionNumberOutput'
+      - $ref: '#/components/schemas/TestSuiteRunExecutionJsonOutput'
+      - $ref: '#/components/schemas/TestSuiteRunExecutionChatHistoryOutput'
+      - $ref: '#/components/schemas/TestSuiteRunExecutionSearchResultsOutput'
+      - $ref: '#/components/schemas/TestSuiteRunExecutionErrorOutput'
+      - $ref: '#/components/schemas/TestSuiteRunExecutionFunctionCallOutput'
+      - $ref: '#/components/schemas/TestSuiteRunExecutionArrayOutput'
+      title: TestSuiteRunExecutionOutput
+    ExternalTestCaseExecutionRequest:
+      type: object
+      properties:
+        outputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedTestCaseVariableValueRequest'
+          description: The output values of a callable that was executed against a Test Case outside of Vellum
+        test_case_id:
+          type: string
+      required:
+      - outputs
+      - test_case_id
+      title: ExternalTestCaseExecutionRequest
+    VellumDocument:
+      type: object
+      properties:
+        src:
+          type: string
+          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - src
+      title: VellumDocument
+    ChatMessageRole:
+      type: string
+      enum:
+      - SYSTEM
+      - ASSISTANT
+      - USER
+      - FUNCTION
+      description: '* `SYSTEM` - System
+
+        * `ASSISTANT` - Assistant
+
+        * `USER` - User
+
+        * `FUNCTION` - Function'
+      title: ChatMessageRole
+    TestSuiteRunExecConfigRequest:
+      oneOf:
+      - $ref: '#/components/schemas/TestSuiteRunDeploymentReleaseTagExecConfigRequest'
+      - $ref: '#/components/schemas/TestSuiteRunPromptSandboxExecConfigRequest'
+      - $ref: '#/components/schemas/TestSuiteRunPromptSandboxHistoryItemExecConfigRequest'
+      - $ref: '#/components/schemas/TestSuiteRunWorkflowReleaseTagExecConfigRequest'
+      - $ref: '#/components/schemas/TestSuiteRunWorkflowSandboxExecConfigRequest'
+      - $ref: '#/components/schemas/TestSuiteRunWorkflowSandboxHistoryItemExecConfigRequest'
+      - $ref: '#/components/schemas/TestSuiteRunExternalExecConfigRequest'
+      title: TestSuiteRunExecConfigRequest
+    TestSuiteRunExternalExecConfigData:
+      type: object
+      properties:
+        executions:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExternalTestCaseExecution'
+          description: The executions of some callable external to Vellum whose outputs you would like to evaluate.
+      required:
+      - executions
+      title: TestSuiteRunExternalExecConfigData
+    FunctionCallChatMessageContentRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/FunctionCallEnum'
+        value:
+          $ref: '#/components/schemas/FunctionCallChatMessageContentValueRequest'
+      required:
+      - type
+      - value
+      description: A function call value that is used in a chat message.
+      title: FunctionCallChatMessageContentRequest
+    TestSuiteRunDeploymentReleaseTagExecConfig:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/TestSuiteRunDeploymentReleaseTagExecConfigTypeEnum'
+        data:
+          $ref: '#/components/schemas/TestSuiteRunDeploymentReleaseTagExecConfigData'
+        test_case_ids:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Optionally specify a subset of test case ids to run. If not provided, all test cases within the test suite will be run by default.
+      required:
+      - data
+      description: Execution configuration for running a Test Suite against a Prompt Deployment
+      title: TestSuiteRunDeploymentReleaseTagExecConfig
+    ChatMessageContent:
+      oneOf:
+      - $ref: '#/components/schemas/StringChatMessageContent'
+      - $ref: '#/components/schemas/FunctionCallChatMessageContent'
+      - $ref: '#/components/schemas/ArrayChatMessageContent'
+      - $ref: '#/components/schemas/AudioChatMessageContent'
+      - $ref: '#/components/schemas/VideoChatMessageContent'
+      - $ref: '#/components/schemas/ImageChatMessageContent'
+      - $ref: '#/components/schemas/DocumentChatMessageContent'
+      title: ChatMessageContent
+    TestSuiteRunMetricNumberOutputTypeEnum:
+      type: string
+      enum:
+      - NUMBER
+      description: '* `NUMBER` - NUMBER'
+      title: TestSuiteRunMetricNumberOutputTypeEnum
+    TestSuiteRunDeploymentReleaseTagExecConfigRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/TestSuiteRunDeploymentReleaseTagExecConfigTypeEnum'
+        data:
+          $ref: '#/components/schemas/TestSuiteRunDeploymentReleaseTagExecConfigDataRequest'
+        test_case_ids:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Optionally specify a subset of test case ids to run. If not provided, all test cases within the test suite will be run by default.
+      required:
+      - data
+      description: Execution configuration for running a Test Suite against a Prompt Deployment
+      title: TestSuiteRunDeploymentReleaseTagExecConfigRequest
+    TestSuiteRunMetricErrorOutputTypeEnum:
+      type: string
+      enum:
+      - ERROR
+      description: '* `ERROR` - ERROR'
+      title: TestSuiteRunMetricErrorOutputTypeEnum
+    TestSuiteRunExecutionJsonOutput:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/JsonEnum'
+        value:
+          oneOf:
+          - description: Any type
+          - type: 'null'
+        output_variable_id:
+          type: string
+          format: uuid
+      required:
+      - name
+      - type
+      - value
+      - output_variable_id
+      description: Execution output of an entity evaluated during a Test Suite Run that is of type JSON
+      title: TestSuiteRunExecutionJsonOutput
+    NumberVellumValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/NumberEnum'
+        value:
+          type:
+          - number
+          - 'null'
+          format: double
+      required:
+      - type
+      - value
+      description: A value representing a number.
+      title: NumberVellumValue
+    JsonEnum:
+      type: string
+      enum:
+      - JSON
+      title: JsonEnum
+    VideoEnum:
+      type: string
+      enum:
+      - VIDEO
+      title: VideoEnum
+    NamedTestCaseStringVariableValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/StringEnum'
+        value:
+          type:
+          - string
+          - 'null'
+        name:
+          type: string
+      required:
+      - type
+      - value
+      - name
+      description: Named Test Case value that is of type STRING
+      title: NamedTestCaseStringVariableValue
+    ImageVellumValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ImageEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumImage'
+          - type: 'null'
+      required:
+      - type
+      - value
+      description: A base Vellum primitive value representing an image.
+      title: ImageVellumValue
+    TestSuiteRunPromptSandboxExecConfigDataRequest:
+      type: object
+      properties:
+        prompt_sandbox_id:
+          type: string
+          format: uuid
+          description: The ID of the Prompt Sandbox to run the Test Suite against.
+        prompt_variant_id:
+          type: string
+          format: uuid
+          description: The ID of the Prompt Variant within the Prompt Sandbox that you'd like to run the Test Suite against.
+      required:
+      - prompt_sandbox_id
+      - prompt_variant_id
+      title: TestSuiteRunPromptSandboxExecConfigDataRequest
+    VellumDocumentRequest:
+      type: object
+      properties:
+        src:
+          type: string
+          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - src
+      title: VellumDocumentRequest
     ChatMessage:
       type: object
       properties:
@@ -1024,60 +2295,36 @@ components:
       required:
       - role
       title: ChatMessage
-    VellumValue:
+    SearchResultMetaSourceRequest:
       oneOf:
-      - $ref: '#/components/schemas/StringVellumValue'
-      - $ref: '#/components/schemas/NumberVellumValue'
-      - $ref: '#/components/schemas/JsonVellumValue'
-      - $ref: '#/components/schemas/AudioVellumValue'
-      - $ref: '#/components/schemas/VideoVellumValue'
-      - $ref: '#/components/schemas/ImageVellumValue'
-      - $ref: '#/components/schemas/DocumentVellumValue'
-      - $ref: '#/components/schemas/FunctionCallVellumValue'
-      - $ref: '#/components/schemas/ErrorVellumValue'
-      - $ref: '#/components/schemas/ArrayVellumValue'
-      - $ref: '#/components/schemas/ChatHistoryVellumValue'
-      - $ref: '#/components/schemas/SearchResultsVellumValue'
-      - $ref: '#/components/schemas/ThinkingVellumValue'
-      title: VellumValue
-    TestSuiteRunMetricStringOutput:
+      - $ref: '#/components/schemas/PdfSearchResultMetaSourceRequest'
+      title: SearchResultMetaSourceRequest
+    SearchResultMeta:
       type: object
       properties:
-        value:
-          type:
-          - string
-          - 'null'
-        type:
-          $ref: '#/components/schemas/TestSuiteRunMetricStringOutputTypeEnum'
-        name:
-          type: string
-      required:
-      - value
-      - name
-      description: Output for a test suite run metric that is of type STRING
-      title: TestSuiteRunMetricStringOutput
-    AudioVellumValue:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/AudioEnum'
-        value:
+        source:
           oneOf:
-          - $ref: '#/components/schemas/VellumAudio'
+          - $ref: '#/components/schemas/SearchResultMetaSource'
           - type: 'null'
+      title: SearchResultMeta
+    TestSuiteRunWorkflowSandboxExecConfigDataRequest:
+      type: object
+      properties:
+        workflow_sandbox_id:
+          type: string
+          format: uuid
+          description: The ID of the Workflow Sandbox to run the Test Suite against.
       required:
-      - type
-      - value
-      description: A base Vellum primitive value representing audio.
-      title: AudioVellumValue
-    NamedTestCaseDocumentVariableValue:
+      - workflow_sandbox_id
+      title: TestSuiteRunWorkflowSandboxExecConfigDataRequest
+    NamedTestCaseVideoVariableValueRequest:
       type: object
       properties:
         type:
-          $ref: '#/components/schemas/DocumentEnum'
+          $ref: '#/components/schemas/VideoEnum'
         value:
           oneOf:
-          - $ref: '#/components/schemas/VellumDocument'
+          - $ref: '#/components/schemas/VellumVideoRequest'
           - type: 'null'
         name:
           type: string
@@ -1085,193 +2332,7 @@ components:
       - type
       - value
       - name
-      title: NamedTestCaseDocumentVariableValue
-    ArrayEnum:
-      type: string
-      enum:
-      - ARRAY
-      title: ArrayEnum
-    TestSuiteRunMetricStringOutputTypeEnum:
-      type: string
-      enum:
-      - STRING
-      description: '* `STRING` - STRING'
-      title: TestSuiteRunMetricStringOutputTypeEnum
-    TestSuiteRunPromptSandboxHistoryItemExecConfig:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/TestSuiteRunPromptSandboxHistoryItemExecConfigTypeEnum'
-        data:
-          $ref: '#/components/schemas/TestSuiteRunPromptSandboxHistoryItemExecConfigData'
-        test_case_ids:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-          description: Optionally specify a subset of test case ids to run. If not provided, all test cases within the test suite will be run by default.
-      required:
-      - data
-      description: Execution configuration for running a Test Suite against a Prompt Sandbox History Item
-      title: TestSuiteRunPromptSandboxHistoryItemExecConfig
-    NamedTestCaseVariableValueRequest:
-      oneOf:
-      - $ref: '#/components/schemas/NamedTestCaseStringVariableValueRequest'
-      - $ref: '#/components/schemas/NamedTestCaseNumberVariableValueRequest'
-      - $ref: '#/components/schemas/NamedTestCaseJsonVariableValueRequest'
-      - $ref: '#/components/schemas/NamedTestCaseChatHistoryVariableValueRequest'
-      - $ref: '#/components/schemas/NamedTestCaseSearchResultsVariableValueRequest'
-      - $ref: '#/components/schemas/NamedTestCaseErrorVariableValueRequest'
-      - $ref: '#/components/schemas/NamedTestCaseFunctionCallVariableValueRequest'
-      - $ref: '#/components/schemas/NamedTestCaseArrayVariableValueRequest'
-      - $ref: '#/components/schemas/NamedTestCaseAudioVariableValueRequest'
-      - $ref: '#/components/schemas/NamedTestCaseVideoVariableValueRequest'
-      - $ref: '#/components/schemas/NamedTestCaseImageVariableValueRequest'
-      - $ref: '#/components/schemas/NamedTestCaseDocumentVariableValueRequest'
-      title: NamedTestCaseVariableValueRequest
-    TestSuiteRunExecutionNumberOutput:
-      type: object
-      properties:
-        name:
-          type: string
-        type:
-          $ref: '#/components/schemas/NumberEnum'
-        value:
-          type:
-          - number
-          - 'null'
-          format: double
-        output_variable_id:
-          type: string
-          format: uuid
-      required:
-      - name
-      - type
-      - value
-      - output_variable_id
-      description: Execution output of an entity evaluated during a Test Suite Run that is of type NUMBER
-      title: TestSuiteRunExecutionNumberOutput
-    TestSuiteRunMetricOutput:
-      oneOf:
-      - $ref: '#/components/schemas/TestSuiteRunMetricStringOutput'
-      - $ref: '#/components/schemas/TestSuiteRunMetricNumberOutput'
-      - $ref: '#/components/schemas/TestSuiteRunMetricJSONOutput'
-      - $ref: '#/components/schemas/TestSuiteRunMetricErrorOutput'
-      - $ref: '#/components/schemas/TestSuiteRunMetricArrayOutput'
-      title: TestSuiteRunMetricOutput
-    NamedTestCaseStringVariableValueRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/StringEnum'
-        value:
-          type:
-          - string
-          - 'null'
-        name:
-          type: string
-      required:
-      - type
-      - value
-      - name
-      description: Named Test Case value that is of type STRING
-      title: NamedTestCaseStringVariableValueRequest
-    TestSuiteRunExecutionSearchResultsOutput:
-      type: object
-      properties:
-        name:
-          type: string
-        type:
-          $ref: '#/components/schemas/SearchResultsEnum'
-        value:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/SearchResult'
-        output_variable_id:
-          type: string
-          format: uuid
-      required:
-      - name
-      - type
-      - value
-      - output_variable_id
-      description: Execution output of an entity evaluated during a Test Suite Run that is of type SEARCH_RESULTS
-      title: TestSuiteRunExecutionSearchResultsOutput
-    NamedTestCaseJsonVariableValue:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/JsonEnum'
-        value:
-          oneOf:
-          - description: Any type
-          - type: 'null'
-        name:
-          type: string
-      required:
-      - type
-      - value
-      - name
-      description: Named Test Case value that is of type JSON
-      title: NamedTestCaseJsonVariableValue
-    PdfSearchResultMetaSource:
-      type: object
-      properties:
-        document_type:
-          $ref: '#/components/schemas/PdfEnum'
-        start_page_num:
-          type:
-          - integer
-          - 'null'
-          description: The 1-indexed page number where the chunk starts in the document. Only available for supported chunking strategies and document types.
-        end_page_num:
-          type:
-          - integer
-          - 'null'
-          description: The 1-indexed page number where the chunk ends in the document. Only available for supported chunking strategies and document types.
-      required:
-      - document_type
-      - start_page_num
-      - end_page_num
-      description: The source of a search result from a PDF document.
-      title: PdfSearchResultMetaSource
-    NamedTestCaseArrayVariableValue:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/ArrayEnum'
-        value:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/VellumValue'
-        name:
-          type: string
-      required:
-      - type
-      - value
-      - name
-      description: Named Test Case value that is of type ARRAY
-      title: NamedTestCaseArrayVariableValue
-    TestSuiteRunPromptSandboxHistoryItemExecConfigDataRequest:
-      type: object
-      properties:
-        history_item_id:
-          type: string
-          format: uuid
-          description: The ID of the Prompt Sandbox History Item that the Test Suite will run against.
-        prompt_variant_id:
-          type: string
-          format: uuid
-          description: The ID of the Prompt Variant within the Prompt Sandbox History Item that you'd like to run the Test Suite against.
-      required:
-      - history_item_id
-      - prompt_variant_id
-      title: TestSuiteRunPromptSandboxHistoryItemExecConfigDataRequest
+      title: NamedTestCaseVideoVariableValueRequest
     TestSuiteRunMetricArrayOutput:
       type: object
       properties:
@@ -1290,27 +2351,7 @@ components:
       - name
       description: Output for a test suite run metric that is of type ARRAY
       title: TestSuiteRunMetricArrayOutput
-    TestSuiteRunWorkflowReleaseTagExecConfigDataRequest:
-      type: object
-      properties:
-        workflow_deployment_id:
-          type: string
-          format: uuid
-          description: The ID of the Workflow Deployment to run the Test Suite against.
-        tag:
-          type: string
-          default: LATEST
-          description: A tag identifying which release of the Workflow Deployment to run the Test Suite against. Useful for testing past versions of the Workflow Deployment
-      required:
-      - workflow_deployment_id
-      title: TestSuiteRunWorkflowReleaseTagExecConfigDataRequest
-    TestSuiteRunDeploymentReleaseTagExecConfigTypeEnum:
-      type: string
-      enum:
-      - DEPLOYMENT_RELEASE_TAG
-      description: '* `DEPLOYMENT_RELEASE_TAG` - DEPLOYMENT_RELEASE_TAG'
-      title: TestSuiteRunDeploymentReleaseTagExecConfigTypeEnum
-    ArrayChatMessageContent:
+    ArrayChatMessageContentRequest:
       type: object
       properties:
         type:
@@ -1318,13 +2359,104 @@ components:
         value:
           type: array
           items:
-            $ref: '#/components/schemas/ArrayChatMessageContentItem'
+            $ref: '#/components/schemas/ArrayChatMessageContentItemRequest'
       required:
       - type
       - value
       description: A list of chat message content items.
-      title: ArrayChatMessageContent
-    VellumAudio:
+      title: ArrayChatMessageContentRequest
+    NamedTestCaseNumberVariableValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/NumberEnum'
+        value:
+          type:
+          - number
+          - 'null'
+          format: double
+        name:
+          type: string
+      required:
+      - type
+      - value
+      - name
+      description: Named Test Case value that is of type NUMBER
+      title: NamedTestCaseNumberVariableValue
+    TestSuiteRunExecutionChatHistoryOutput:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/ChatHistoryEnum'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ChatMessage'
+        output_variable_id:
+          type: string
+          format: uuid
+      required:
+      - name
+      - type
+      - value
+      - output_variable_id
+      description: Execution output of an entity evaluated during a Test Suite Run that is of type CHAT_HISTORY
+      title: TestSuiteRunExecutionChatHistoryOutput
+    NamedTestCaseChatHistoryVariableValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ChatHistoryEnum'
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ChatMessage'
+        name:
+          type: string
+      required:
+      - type
+      - value
+      - name
+      description: Named Test Case value that is of type CHAT_HISTORY
+      title: NamedTestCaseChatHistoryVariableValue
+    ExternalTestCaseExecution:
+      type: object
+      properties:
+        outputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedTestCaseVariableValue'
+          description: The output values of a callable that was executed against a Test Case outside of Vellum
+        test_case_id:
+          type: string
+      required:
+      - outputs
+      - test_case_id
+      title: ExternalTestCaseExecution
+    NamedTestCaseErrorVariableValueRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ErrorEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/VellumErrorRequest'
+          - type: 'null'
+        name:
+          type: string
+      required:
+      - type
+      - value
+      - name
+      description: Named Test Case value that is of type ERROR
+      title: NamedTestCaseErrorVariableValueRequest
+    VellumAudioRequest:
       type: object
       properties:
         src:
@@ -1338,74 +2470,65 @@ components:
             description: Any type
       required:
       - src
-      title: VellumAudio
-    StringVellumValueRequest:
+      title: VellumAudioRequest
+    TestSuiteRunProgress:
+      type: object
+      properties:
+        number_of_requested_test_cases:
+          type: integer
+        number_of_completed_test_cases:
+          type: integer
+      required:
+      - number_of_requested_test_cases
+      - number_of_completed_test_cases
+      title: TestSuiteRunProgress
+    FunctionCallVellumValue:
       type: object
       properties:
         type:
-          $ref: '#/components/schemas/StringEnum'
+          $ref: '#/components/schemas/FunctionCallEnum'
         value:
-          type:
-          - string
-          - 'null'
+          oneOf:
+          - $ref: '#/components/schemas/FunctionCall'
+          - type: 'null'
       required:
       - type
       - value
-      description: A value representing a string.
-      title: StringVellumValueRequest
-    FunctionCallChatMessageContentValueRequest:
+      description: A value representing a Function Call.
+      title: FunctionCallVellumValue
+    VellumErrorRequest:
       type: object
       properties:
-        name:
+        code:
+          $ref: '#/components/schemas/VellumErrorCodeEnum'
+        message:
           type: string
-        arguments:
-          type: object
+        raw_data:
+          type:
+          - object
+          - 'null'
           additionalProperties:
             description: Any type
-        id:
-          type:
-          - string
-          - 'null'
       required:
-      - name
-      - arguments
-      description: The final resolved function call value.
-      title: FunctionCallChatMessageContentValueRequest
-    PdfSearchResultMetaSourceRequest:
+      - code
+      - message
+      title: VellumErrorRequest
+    SearchResultsVellumValueRequest:
       type: object
       properties:
-        document_type:
-          $ref: '#/components/schemas/PdfEnum'
-        start_page_num:
+        type:
+          $ref: '#/components/schemas/SearchResultsEnum'
+        value:
           type:
-          - integer
+          - array
           - 'null'
-          description: The 1-indexed page number where the chunk starts in the document. Only available for supported chunking strategies and document types.
-        end_page_num:
-          type:
-          - integer
-          - 'null'
-          description: The 1-indexed page number where the chunk ends in the document. Only available for supported chunking strategies and document types.
+          items:
+            $ref: '#/components/schemas/SearchResultRequest'
       required:
-      - document_type
-      - start_page_num
-      - end_page_num
-      description: The source of a search result from a PDF document.
-      title: PdfSearchResultMetaSourceRequest
-    TestSuiteRunDeploymentReleaseTagExecConfigDataRequest:
-      type: object
-      properties:
-        deployment_id:
-          type: string
-          format: uuid
-          description: The ID of the Prompt Deployment to run the Test Suite against.
-        tag:
-          type: string
-          default: LATEST
-          description: A tag identifying which release of the Prompt Deployment to run the Test Suite against. Useful for testing past versions of the Prompt Deployment
-      required:
-      - deployment_id
-      title: TestSuiteRunDeploymentReleaseTagExecConfigDataRequest
+      - type
+      - value
+      description: A value representing Search Results.
+      title: SearchResultsVellumValueRequest
     TestSuiteRunExecution:
       type: object
       properties:
@@ -1428,27 +2551,50 @@ components:
       - outputs
       - metric_results
       title: TestSuiteRunExecution
-    FunctionCallRequest:
+    TestSuiteRunDeploymentReleaseTagExecConfigDataRequest:
       type: object
       properties:
-        arguments:
-          type: object
-          additionalProperties:
-            description: Any type
-        id:
-          type:
-          - string
-          - 'null'
+        deployment_id:
+          type: string
+          format: uuid
+          description: The ID of the Prompt Deployment to run the Test Suite against.
+        tag:
+          type: string
+          default: LATEST
+          description: A tag identifying which release of the Prompt Deployment to run the Test Suite against. Useful for testing past versions of the Prompt Deployment
+      required:
+      - deployment_id
+      title: TestSuiteRunDeploymentReleaseTagExecConfigDataRequest
+    NamedTestCaseJsonVariableValueRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/JsonEnum'
+        value:
+          oneOf:
+          - description: Any type
+          - type: 'null'
         name:
           type: string
       required:
-      - arguments
+      - type
+      - value
       - name
-      description: The final resolved function call value.
-      title: FunctionCallRequest
-    ArrayVellumValueRequest:
+      description: Named Test Case value that is of type JSON
+      title: NamedTestCaseJsonVariableValueRequest
+    TestSuiteRunMetricOutput:
+      oneOf:
+      - $ref: '#/components/schemas/TestSuiteRunMetricStringOutput'
+      - $ref: '#/components/schemas/TestSuiteRunMetricNumberOutput'
+      - $ref: '#/components/schemas/TestSuiteRunMetricJSONOutput'
+      - $ref: '#/components/schemas/TestSuiteRunMetricErrorOutput'
+      - $ref: '#/components/schemas/TestSuiteRunMetricArrayOutput'
+      title: TestSuiteRunMetricOutput
+    TestSuiteRunExecutionArrayOutput:
       type: object
       properties:
+        name:
+          type: string
         type:
           $ref: '#/components/schemas/ArrayEnum'
         value:
@@ -1456,138 +2602,31 @@ components:
           - array
           - 'null'
           items:
-            $ref: '#/components/schemas/VellumValueRequest'
+            $ref: '#/components/schemas/VellumValue'
+        output_variable_id:
+          type: string
+          format: uuid
       required:
+      - name
       - type
       - value
-      description: A value representing an array of Vellum variable values.
-      title: ArrayVellumValueRequest
-    NamedTestCaseErrorVariableValue:
+      - output_variable_id
+      description: Execution output of an entity evaluated during a Test Suite Run that is of type ARRAY
+      title: TestSuiteRunExecutionArrayOutput
+    JsonVellumValueRequest:
       type: object
       properties:
         type:
-          $ref: '#/components/schemas/ErrorEnum'
+          $ref: '#/components/schemas/JsonEnum'
         value:
           oneOf:
-          - $ref: '#/components/schemas/VellumError'
-          - type: 'null'
-        name:
-          type: string
-      required:
-      - type
-      - value
-      - name
-      description: Named Test Case value that is of type ERROR
-      title: NamedTestCaseErrorVariableValue
-    FunctionCall:
-      type: object
-      properties:
-        arguments:
-          type: object
-          additionalProperties:
-            description: Any type
-        id:
-          type:
-          - string
-          - 'null'
-        name:
-          type: string
-      required:
-      - arguments
-      - name
-      description: The final resolved function call value.
-      title: FunctionCall
-    TestSuiteRunExecConfig:
-      oneOf:
-      - $ref: '#/components/schemas/TestSuiteRunDeploymentReleaseTagExecConfig'
-      - $ref: '#/components/schemas/TestSuiteRunPromptSandboxHistoryItemExecConfig'
-      - $ref: '#/components/schemas/TestSuiteRunWorkflowReleaseTagExecConfig'
-      - $ref: '#/components/schemas/TestSuiteRunWorkflowSandboxHistoryItemExecConfig'
-      - $ref: '#/components/schemas/TestSuiteRunExternalExecConfig'
-      title: TestSuiteRunExecConfig
-    DocumentEnum:
-      type: string
-      enum:
-      - DOCUMENT
-      title: DocumentEnum
-    TestSuiteRunProgress:
-      type: object
-      properties:
-        number_of_requested_test_cases:
-          type: integer
-        number_of_completed_test_cases:
-          type: integer
-      required:
-      - number_of_requested_test_cases
-      - number_of_completed_test_cases
-      title: TestSuiteRunProgress
-    ChatMessageContent:
-      oneOf:
-      - $ref: '#/components/schemas/StringChatMessageContent'
-      - $ref: '#/components/schemas/FunctionCallChatMessageContent'
-      - $ref: '#/components/schemas/ArrayChatMessageContent'
-      - $ref: '#/components/schemas/AudioChatMessageContent'
-      - $ref: '#/components/schemas/VideoChatMessageContent'
-      - $ref: '#/components/schemas/ImageChatMessageContent'
-      - $ref: '#/components/schemas/DocumentChatMessageContent'
-      title: ChatMessageContent
-    AudioChatMessageContent:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/AudioEnum'
-        value:
-          $ref: '#/components/schemas/VellumAudio'
-      required:
-      - type
-      - value
-      description: An audio value that is used in a chat message.
-      title: AudioChatMessageContent
-    VideoVellumValueRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/VideoEnum'
-        value:
-          oneOf:
-          - $ref: '#/components/schemas/VellumVideoRequest'
+          - description: Any type
           - type: 'null'
       required:
       - type
       - value
-      description: A base Vellum primitive value representing a video.
-      title: VideoVellumValueRequest
-    VellumAudioRequest:
-      type: object
-      properties:
-        src:
-          type: string
-          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
-        metadata:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            description: Any type
-      required:
-      - src
-      title: VellumAudioRequest
-    SearchResultsVellumValue:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/SearchResultsEnum'
-        value:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/SearchResult'
-      required:
-      - type
-      - value
-      description: A value representing Search Results.
-      title: SearchResultsVellumValue
+      description: A value representing a JSON object.
+      title: JsonVellumValueRequest
     SearchResultRequest:
       type: object
       properties:
@@ -1616,206 +2655,23 @@ components:
       - keywords
       - document
       title: SearchResultRequest
-    AudioChatMessageContentRequest:
+    ArrayVellumValue:
       type: object
       properties:
         type:
-          $ref: '#/components/schemas/AudioEnum'
+          $ref: '#/components/schemas/ArrayEnum'
         value:
-          $ref: '#/components/schemas/VellumAudioRequest'
-      required:
-      - type
-      - value
-      description: An audio value that is used in a chat message.
-      title: AudioChatMessageContentRequest
-    FunctionCallChatMessageContentValue:
-      type: object
-      properties:
-        name:
-          type: string
-        arguments:
-          type: object
-          additionalProperties:
-            description: Any type
-        id:
-          type:
-          - string
-          - 'null'
-      required:
-      - name
-      - arguments
-      description: The final resolved function call value.
-      title: FunctionCallChatMessageContentValue
-    ChatHistoryEnum:
-      type: string
-      enum:
-      - CHAT_HISTORY
-      title: ChatHistoryEnum
-    SearchResultMeta:
-      type: object
-      properties:
-        source:
-          oneOf:
-          - $ref: '#/components/schemas/SearchResultMetaSource'
-          - type: 'null'
-      title: SearchResultMeta
-    FunctionCallVellumValue:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/FunctionCallEnum'
-        value:
-          oneOf:
-          - $ref: '#/components/schemas/FunctionCall'
-          - type: 'null'
-      required:
-      - type
-      - value
-      description: A value representing a Function Call.
-      title: FunctionCallVellumValue
-    NamedTestCaseNumberVariableValueRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/NumberEnum'
-        value:
-          type:
-          - number
-          - 'null'
-          format: double
-        name:
-          type: string
-      required:
-      - type
-      - value
-      - name
-      description: Named Test Case value that is of type NUMBER
-      title: NamedTestCaseNumberVariableValueRequest
-    TestSuiteRunWorkflowSandboxExecConfigRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/TestSuiteRunWorkflowSandboxExecConfigTypeEnum'
-        data:
-          $ref: '#/components/schemas/TestSuiteRunWorkflowSandboxExecConfigDataRequest'
-        test_case_ids:
           type:
           - array
           - 'null'
           items:
-            type: string
-          description: Optionally specify a subset of test case ids to run. If not provided, all test cases within the test suite will be run by default.
-      required:
-      - data
-      description: Execution configuration for running a Test Suite against a Workflow Sandbox
-      title: TestSuiteRunWorkflowSandboxExecConfigRequest
-    FunctionCallEnum:
-      type: string
-      enum:
-      - FUNCTION_CALL
-      title: FunctionCallEnum
-    TestSuiteRunCreateRequest:
-      type: object
-      properties:
-        test_suite_id:
-          type: string
-          format: uuid
-          description: The ID of the Test Suite to run. Must provide either this or test_suite_id.
-        test_suite_name:
-          type: string
-          description: The name of the Test Suite to run. Must provide either this or test_suite_id.
-        exec_config:
-          $ref: '#/components/schemas/TestSuiteRunExecConfigRequest'
-          description: Configuration that defines how the Test Suite should be run
-      required:
-      - exec_config
-      title: TestSuiteRunCreateRequest
-    TestSuiteRunExecutionFunctionCallOutput:
-      type: object
-      properties:
-        name:
-          type: string
-        type:
-          $ref: '#/components/schemas/FunctionCallEnum'
-        value:
-          oneOf:
-          - $ref: '#/components/schemas/FunctionCall'
-          - type: 'null'
-        output_variable_id:
-          type: string
-          format: uuid
-      required:
-      - name
-      - type
-      - value
-      - output_variable_id
-      description: Execution output of an entity evaluated during a Test Suite Run that is of type FUNCTION_CALL
-      title: TestSuiteRunExecutionFunctionCallOutput
-    ExternalTestCaseExecution:
-      type: object
-      properties:
-        outputs:
-          type: array
-          items:
-            $ref: '#/components/schemas/NamedTestCaseVariableValue'
-          description: The output values of a callable that was executed against a Test Case outside of Vellum
-        test_case_id:
-          type: string
-      required:
-      - outputs
-      - test_case_id
-      title: ExternalTestCaseExecution
-    TestSuiteRunWorkflowSandboxExecConfigTypeEnum:
-      type: string
-      enum:
-      - WORKFLOW_SANDBOX
-      description: '* `WORKFLOW_SANDBOX` - WORKFLOW_SANDBOX'
-      title: TestSuiteRunWorkflowSandboxExecConfigTypeEnum
-    DocumentVellumValue:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/DocumentEnum'
-        value:
-          oneOf:
-          - $ref: '#/components/schemas/VellumDocument'
-          - type: 'null'
+            $ref: '#/components/schemas/VellumValue'
       required:
       - type
       - value
-      description: A base Vellum primitive value representing a document.
-      title: DocumentVellumValue
-    TestSuiteRunWorkflowSandboxHistoryItemExecConfigDataRequest:
-      type: object
-      properties:
-        history_item_id:
-          type: string
-          format: uuid
-          description: The ID of the Workflow Sandbox History Item that the Test Suite will run against.
-        workflow_variant_id:
-          type: string
-          format: uuid
-          description: The ID of the Workflow Variant within the Workflow Sandbox History Item that you'd like to run the Test Suite against.
-      required:
-      - history_item_id
-      - workflow_variant_id
-      title: TestSuiteRunWorkflowSandboxHistoryItemExecConfigDataRequest
-    VellumImage:
-      type: object
-      properties:
-        src:
-          type: string
-          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
-        metadata:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            description: Any type
-      required:
-      - src
-      title: VellumImage
-    NamedTestCaseAudioVariableValue:
+      description: A value representing an array of Vellum variable values.
+      title: ArrayVellumValue
+    AudioVellumValue:
       type: object
       properties:
         type:
@@ -1824,437 +2680,36 @@ components:
           oneOf:
           - $ref: '#/components/schemas/VellumAudio'
           - type: 'null'
-        name:
-          type: string
       required:
       - type
       - value
-      - name
-      description: Named Test Case value that is of type AUDIO
-      title: NamedTestCaseAudioVariableValue
-    NumberEnum:
+      description: A base Vellum primitive value representing audio.
+      title: AudioVellumValue
+    TestSuiteRunMetricStringOutputTypeEnum:
       type: string
       enum:
-      - NUMBER
-      title: NumberEnum
-    VellumValueRequest:
-      oneOf:
-      - $ref: '#/components/schemas/StringVellumValueRequest'
-      - $ref: '#/components/schemas/NumberVellumValueRequest'
-      - $ref: '#/components/schemas/JsonVellumValueRequest'
-      - $ref: '#/components/schemas/AudioVellumValueRequest'
-      - $ref: '#/components/schemas/VideoVellumValueRequest'
-      - $ref: '#/components/schemas/ImageVellumValueRequest'
-      - $ref: '#/components/schemas/DocumentVellumValueRequest'
-      - $ref: '#/components/schemas/FunctionCallVellumValueRequest'
-      - $ref: '#/components/schemas/ErrorVellumValueRequest'
-      - $ref: '#/components/schemas/ArrayVellumValueRequest'
-      - $ref: '#/components/schemas/ChatHistoryVellumValueRequest'
-      - $ref: '#/components/schemas/SearchResultsVellumValueRequest'
-      - $ref: '#/components/schemas/ThinkingVellumValueRequest'
-      title: VellumValueRequest
-    VellumDocument:
+      - STRING
+      description: '* `STRING` - STRING'
+      title: TestSuiteRunMetricStringOutputTypeEnum
+    TestSuiteRunDeploymentReleaseTagExecConfigData:
       type: object
       properties:
-        src:
+        deployment_id:
           type: string
-          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
-        metadata:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            description: Any type
+          format: uuid
+          description: The ID of the Prompt Deployment to run the Test Suite against.
+        tag:
+          type: string
+          default: LATEST
+          description: A tag identifying which release of the Prompt Deployment to run the Test Suite against. Useful for testing past versions of the Prompt Deployment
       required:
-      - src
-      title: VellumDocument
+      - deployment_id
+      title: TestSuiteRunDeploymentReleaseTagExecConfigData
     ThinkingEnum:
       type: string
       enum:
       - THINKING
       title: ThinkingEnum
-    NamedTestCaseErrorVariableValueRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/ErrorEnum'
-        value:
-          oneOf:
-          - $ref: '#/components/schemas/VellumErrorRequest'
-          - type: 'null'
-        name:
-          type: string
-      required:
-      - type
-      - value
-      - name
-      description: Named Test Case value that is of type ERROR
-      title: NamedTestCaseErrorVariableValueRequest
-    JsonEnum:
-      type: string
-      enum:
-      - JSON
-      title: JsonEnum
-    ImageVellumValueRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/ImageEnum'
-        value:
-          oneOf:
-          - $ref: '#/components/schemas/VellumImageRequest'
-          - type: 'null'
-      required:
-      - type
-      - value
-      description: A base Vellum primitive value representing an image.
-      title: ImageVellumValueRequest
-    TestSuiteRunMetricErrorOutput:
-      type: object
-      properties:
-        value:
-          $ref: '#/components/schemas/VellumError'
-        type:
-          $ref: '#/components/schemas/TestSuiteRunMetricErrorOutputTypeEnum'
-        name:
-          type: string
-      required:
-      - value
-      - name
-      description: Output for a test suite run metric that is of type ERROR
-      title: TestSuiteRunMetricErrorOutput
-    TestSuiteRunWorkflowReleaseTagExecConfig:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/TestSuiteRunWorkflowReleaseTagExecConfigTypeEnum'
-        data:
-          $ref: '#/components/schemas/TestSuiteRunWorkflowReleaseTagExecConfigData'
-        test_case_ids:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-          description: Optionally specify a subset of test case ids to run. If not provided, all test cases within the test suite will be run by default.
-      required:
-      - data
-      description: Execution configuration for running a Test Suite against a Workflow Deployment
-      title: TestSuiteRunWorkflowReleaseTagExecConfig
-    SearchResultMetaSourceRequest:
-      oneOf:
-      - $ref: '#/components/schemas/PdfSearchResultMetaSourceRequest'
-      title: SearchResultMetaSourceRequest
-    ErrorVellumValueRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/ErrorEnum'
-        value:
-          oneOf:
-          - $ref: '#/components/schemas/VellumErrorRequest'
-          - type: 'null'
-      required:
-      - type
-      - value
-      description: A value representing an Error.
-      title: ErrorVellumValueRequest
-    VellumError:
-      type: object
-      properties:
-        code:
-          $ref: '#/components/schemas/VellumErrorCodeEnum'
-        message:
-          type: string
-        raw_data:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            description: Any type
-      required:
-      - code
-      - message
-      title: VellumError
-    TestSuiteRunDeploymentReleaseTagExecConfig:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/TestSuiteRunDeploymentReleaseTagExecConfigTypeEnum'
-        data:
-          $ref: '#/components/schemas/TestSuiteRunDeploymentReleaseTagExecConfigData'
-        test_case_ids:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-          description: Optionally specify a subset of test case ids to run. If not provided, all test cases within the test suite will be run by default.
-      required:
-      - data
-      description: Execution configuration for running a Test Suite against a Prompt Deployment
-      title: TestSuiteRunDeploymentReleaseTagExecConfig
-    TestSuiteRunWorkflowReleaseTagExecConfigData:
-      type: object
-      properties:
-        workflow_deployment_id:
-          type: string
-          format: uuid
-          description: The ID of the Workflow Deployment to run the Test Suite against.
-        tag:
-          type: string
-          default: LATEST
-          description: A tag identifying which release of the Workflow Deployment to run the Test Suite against. Useful for testing past versions of the Workflow Deployment
-      required:
-      - workflow_deployment_id
-      title: TestSuiteRunWorkflowReleaseTagExecConfigData
-    TestSuiteRunExecutionStringOutput:
-      type: object
-      properties:
-        name:
-          type: string
-        type:
-          $ref: '#/components/schemas/StringEnum'
-        value:
-          type:
-          - string
-          - 'null'
-        output_variable_id:
-          type: string
-          format: uuid
-      required:
-      - name
-      - type
-      - value
-      - output_variable_id
-      description: Execution output of an entity evaluated during a Test Suite Run that is of type STRING
-      title: TestSuiteRunExecutionStringOutput
-    NamedTestCaseFunctionCallVariableValueRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/FunctionCallEnum'
-        value:
-          oneOf:
-          - $ref: '#/components/schemas/FunctionCallRequest'
-          - type: 'null'
-        name:
-          type: string
-      required:
-      - type
-      - value
-      - name
-      description: Named Test Case value that is of type FUNCTION_CALL
-      title: NamedTestCaseFunctionCallVariableValueRequest
-    NamedTestCaseImageVariableValueRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/ImageEnum'
-        value:
-          oneOf:
-          - $ref: '#/components/schemas/VellumImageRequest'
-          - type: 'null'
-        name:
-          type: string
-      required:
-      - type
-      - value
-      - name
-      title: NamedTestCaseImageVariableValueRequest
-    TestSuiteRunDeploymentReleaseTagExecConfigRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/TestSuiteRunDeploymentReleaseTagExecConfigTypeEnum'
-        data:
-          $ref: '#/components/schemas/TestSuiteRunDeploymentReleaseTagExecConfigDataRequest'
-        test_case_ids:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-          description: Optionally specify a subset of test case ids to run. If not provided, all test cases within the test suite will be run by default.
-      required:
-      - data
-      description: Execution configuration for running a Test Suite against a Prompt Deployment
-      title: TestSuiteRunDeploymentReleaseTagExecConfigRequest
-    TestSuiteRunWorkflowSandboxHistoryItemExecConfigData:
-      type: object
-      properties:
-        history_item_id:
-          type: string
-          format: uuid
-          description: The ID of the Workflow Sandbox History Item that the Test Suite will run against.
-        workflow_variant_id:
-          type: string
-          format: uuid
-          description: The ID of the Workflow Variant within the Workflow Sandbox History Item that you'd like to run the Test Suite against.
-      required:
-      - history_item_id
-      - workflow_variant_id
-      title: TestSuiteRunWorkflowSandboxHistoryItemExecConfigData
-    FunctionCallChatMessageContentRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/FunctionCallEnum'
-        value:
-          $ref: '#/components/schemas/FunctionCallChatMessageContentValueRequest'
-      required:
-      - type
-      - value
-      description: A function call value that is used in a chat message.
-      title: FunctionCallChatMessageContentRequest
-    ThinkingVellumValue:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/ThinkingEnum'
-        value:
-          oneOf:
-          - $ref: '#/components/schemas/StringVellumValue'
-          - type: 'null'
-      required:
-      - type
-      - value
-      description: A value representing Thinking mode output.
-      title: ThinkingVellumValue
-    VideoChatMessageContentRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/VideoEnum'
-        value:
-          $ref: '#/components/schemas/VellumVideoRequest'
-      required:
-      - type
-      - value
-      description: A video value that is used in a chat message.
-      title: VideoChatMessageContentRequest
-    DocumentChatMessageContentRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/DocumentEnum'
-        value:
-          $ref: '#/components/schemas/VellumDocumentRequest'
-      required:
-      - type
-      - value
-      description: A document value that is used in a chat message.
-      title: DocumentChatMessageContentRequest
-    TestSuiteRunExecutionErrorOutput:
-      type: object
-      properties:
-        name:
-          type: string
-        type:
-          $ref: '#/components/schemas/ErrorEnum'
-        value:
-          oneOf:
-          - $ref: '#/components/schemas/VellumError'
-          - type: 'null'
-        output_variable_id:
-          type: string
-          format: uuid
-      required:
-      - name
-      - type
-      - value
-      - output_variable_id
-      description: Execution output of an entity evaluated during a Test Suite Run that is of type ERROR
-      title: TestSuiteRunExecutionErrorOutput
-    DocumentChatMessageContent:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/DocumentEnum'
-        value:
-          $ref: '#/components/schemas/VellumDocument'
-      required:
-      - type
-      - value
-      description: A document value that is used in a chat message.
-      title: DocumentChatMessageContent
-    ImageChatMessageContent:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/ImageEnum'
-        value:
-          $ref: '#/components/schemas/VellumImage'
-      required:
-      - type
-      - value
-      description: An image value that is used in a chat message.
-      title: ImageChatMessageContent
-    NamedTestCaseFunctionCallVariableValue:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/FunctionCallEnum'
-        value:
-          oneOf:
-          - $ref: '#/components/schemas/FunctionCall'
-          - type: 'null'
-        name:
-          type: string
-      required:
-      - type
-      - value
-      - name
-      description: Named Test Case value that is of type FUNCTION_CALL
-      title: NamedTestCaseFunctionCallVariableValue
-    NamedTestCaseVideoVariableValueRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/VideoEnum'
-        value:
-          oneOf:
-          - $ref: '#/components/schemas/VellumVideoRequest'
-          - type: 'null'
-        name:
-          type: string
-      required:
-      - type
-      - value
-      - name
-      title: NamedTestCaseVideoVariableValueRequest
-    ChatHistoryVellumValue:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/ChatHistoryEnum'
-        value:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/ChatMessage'
-      required:
-      - type
-      - value
-      description: A value representing Chat History.
-      title: ChatHistoryVellumValue
-    NamedTestCaseVideoVariableValue:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/VideoEnum'
-        value:
-          oneOf:
-          - $ref: '#/components/schemas/VellumVideo'
-          - type: 'null'
-        name:
-          type: string
-      required:
-      - type
-      - value
-      - name
-      title: NamedTestCaseVideoVariableValue
     StringChatMessageContent:
       type: object
       properties:
@@ -2267,461 +2722,6 @@ components:
       - value
       description: A string value that is used in a chat message.
       title: StringChatMessageContent
-    TestSuiteRunPromptSandboxHistoryItemExecConfigRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/TestSuiteRunPromptSandboxHistoryItemExecConfigTypeEnum'
-        data:
-          $ref: '#/components/schemas/TestSuiteRunPromptSandboxHistoryItemExecConfigDataRequest'
-        test_case_ids:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-          description: Optionally specify a subset of test case ids to run. If not provided, all test cases within the test suite will be run by default.
-      required:
-      - data
-      description: Execution configuration for running a Test Suite against a Prompt Sandbox History Item
-      title: TestSuiteRunPromptSandboxHistoryItemExecConfigRequest
-    ImageVellumValue:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/ImageEnum'
-        value:
-          oneOf:
-          - $ref: '#/components/schemas/VellumImage'
-          - type: 'null'
-      required:
-      - type
-      - value
-      description: A base Vellum primitive value representing an image.
-      title: ImageVellumValue
-    TestSuiteRunMetricNumberOutput:
-      type: object
-      properties:
-        value:
-          type:
-          - number
-          - 'null'
-          format: double
-        type:
-          $ref: '#/components/schemas/TestSuiteRunMetricNumberOutputTypeEnum'
-        name:
-          type: string
-      required:
-      - value
-      - name
-      description: Output for a test suite run metric that is of type NUMBER
-      title: TestSuiteRunMetricNumberOutput
-    SearchResultsVellumValueRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/SearchResultsEnum'
-        value:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/SearchResultRequest'
-      required:
-      - type
-      - value
-      description: A value representing Search Results.
-      title: SearchResultsVellumValueRequest
-    TestSuiteRunTestSuite:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        history_item_id:
-          type: string
-          format: uuid
-        label:
-          type: string
-      required:
-      - id
-      - history_item_id
-      - label
-      title: TestSuiteRunTestSuite
-    FunctionCallVellumValueRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/FunctionCallEnum'
-        value:
-          oneOf:
-          - $ref: '#/components/schemas/FunctionCallRequest'
-          - type: 'null'
-      required:
-      - type
-      - value
-      description: A value representing a Function Call.
-      title: FunctionCallVellumValueRequest
-    ExternalTestCaseExecutionRequest:
-      type: object
-      properties:
-        outputs:
-          type: array
-          items:
-            $ref: '#/components/schemas/NamedTestCaseVariableValueRequest'
-          description: The output values of a callable that was executed against a Test Case outside of Vellum
-        test_case_id:
-          type: string
-      required:
-      - outputs
-      - test_case_id
-      title: ExternalTestCaseExecutionRequest
-    TestSuiteRunExternalExecConfigData:
-      type: object
-      properties:
-        executions:
-          type: array
-          items:
-            $ref: '#/components/schemas/ExternalTestCaseExecution'
-          description: The executions of some callable external to Vellum whose outputs you would like to evaluate.
-      required:
-      - executions
-      title: TestSuiteRunExternalExecConfigData
-    TestSuiteRunExecConfigRequest:
-      oneOf:
-      - $ref: '#/components/schemas/TestSuiteRunDeploymentReleaseTagExecConfigRequest'
-      - $ref: '#/components/schemas/TestSuiteRunPromptSandboxExecConfigRequest'
-      - $ref: '#/components/schemas/TestSuiteRunPromptSandboxHistoryItemExecConfigRequest'
-      - $ref: '#/components/schemas/TestSuiteRunWorkflowReleaseTagExecConfigRequest'
-      - $ref: '#/components/schemas/TestSuiteRunWorkflowSandboxExecConfigRequest'
-      - $ref: '#/components/schemas/TestSuiteRunWorkflowSandboxHistoryItemExecConfigRequest'
-      - $ref: '#/components/schemas/TestSuiteRunExternalExecConfigRequest'
-      title: TestSuiteRunExecConfigRequest
-    TestSuiteRunWorkflowReleaseTagExecConfigTypeEnum:
-      type: string
-      enum:
-      - WORKFLOW_RELEASE_TAG
-      description: '* `WORKFLOW_RELEASE_TAG` - WORKFLOW_RELEASE_TAG'
-      title: TestSuiteRunWorkflowReleaseTagExecConfigTypeEnum
-    TestSuiteRunExternalExecConfigTypeEnum:
-      type: string
-      enum:
-      - EXTERNAL
-      description: '* `EXTERNAL` - EXTERNAL'
-      title: TestSuiteRunExternalExecConfigTypeEnum
-    TestSuiteRunExecutionChatHistoryOutput:
-      type: object
-      properties:
-        name:
-          type: string
-        type:
-          $ref: '#/components/schemas/ChatHistoryEnum'
-        value:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/ChatMessage'
-        output_variable_id:
-          type: string
-          format: uuid
-      required:
-      - name
-      - type
-      - value
-      - output_variable_id
-      description: Execution output of an entity evaluated during a Test Suite Run that is of type CHAT_HISTORY
-      title: TestSuiteRunExecutionChatHistoryOutput
-    TestSuiteRunExternalExecConfigRequest:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/TestSuiteRunExternalExecConfigDataRequest'
-        test_case_ids:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-          description: Optionally specify a subset of test case ids to run. If not provided, all test cases within the test suite will be run by default.
-        type:
-          $ref: '#/components/schemas/TestSuiteRunExternalExecConfigTypeEnum'
-      required:
-      - data
-      description: Execution configuration for running a Vellum Test Suite against an external callable
-      title: TestSuiteRunExternalExecConfigRequest
-    ImageEnum:
-      type: string
-      enum:
-      - IMAGE
-      title: ImageEnum
-    TestSuiteRunExecutionJsonOutput:
-      type: object
-      properties:
-        name:
-          type: string
-        type:
-          $ref: '#/components/schemas/JsonEnum'
-        value:
-          oneOf:
-          - description: Any type
-          - type: 'null'
-        output_variable_id:
-          type: string
-          format: uuid
-      required:
-      - name
-      - type
-      - value
-      - output_variable_id
-      description: Execution output of an entity evaluated during a Test Suite Run that is of type JSON
-      title: TestSuiteRunExecutionJsonOutput
-    TestSuiteRunMetricArrayOutputTypeEnum:
-      type: string
-      enum:
-      - ARRAY
-      description: '* `ARRAY` - ARRAY'
-      title: TestSuiteRunMetricArrayOutputTypeEnum
-    TestSuiteRunExecutionMetricResult:
-      type: object
-      properties:
-        metric_id:
-          type: string
-          format: uuid
-        outputs:
-          type: array
-          items:
-            $ref: '#/components/schemas/TestSuiteRunMetricOutput'
-        metric_label:
-          type: string
-        metric_definition:
-          $ref: '#/components/schemas/TestSuiteRunExecutionMetricDefinition'
-      required:
-      - metric_id
-      - outputs
-      title: TestSuiteRunExecutionMetricResult
-    ThinkingVellumValueRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/ThinkingEnum'
-        value:
-          oneOf:
-          - $ref: '#/components/schemas/StringVellumValueRequest'
-          - type: 'null'
-      required:
-      - type
-      - value
-      description: A value representing Thinking mode output.
-      title: ThinkingVellumValueRequest
-    TestSuiteRunMetricJSONOutputTypeEnum:
-      type: string
-      enum:
-      - JSON
-      description: '* `JSON` - JSON'
-      title: TestSuiteRunMetricJSONOutputTypeEnum
-    AudioEnum:
-      type: string
-      enum:
-      - AUDIO
-      title: AudioEnum
-    VideoChatMessageContent:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/VideoEnum'
-        value:
-          $ref: '#/components/schemas/VellumVideo'
-      required:
-      - type
-      - value
-      description: A video value that is used in a chat message.
-      title: VideoChatMessageContent
-    SearchResultDocumentRequest:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: The ID of the document.
-        label:
-          type: string
-          description: The human-readable name for the document.
-        external_id:
-          type:
-          - string
-          - 'null'
-          description: The unique ID of the document as represented in an external system and specified when it was originally uploaded.
-        metadata:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            description: Any type
-          description: A previously supplied JSON object containing metadata that can be filtered on when searching.
-      required:
-      - label
-      title: SearchResultDocumentRequest
-    StringEnum:
-      type: string
-      enum:
-      - STRING
-      title: StringEnum
-    NamedTestCaseAudioVariableValueRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/AudioEnum'
-        value:
-          oneOf:
-          - $ref: '#/components/schemas/VellumAudioRequest'
-          - type: 'null'
-        name:
-          type: string
-      required:
-      - type
-      - value
-      - name
-      description: Named Test Case value that is of type AUDIO
-      title: NamedTestCaseAudioVariableValueRequest
-    JsonVellumValueRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/JsonEnum'
-        value:
-          oneOf:
-          - description: Any type
-          - type: 'null'
-      required:
-      - type
-      - value
-      description: A value representing a JSON object.
-      title: JsonVellumValueRequest
-    SearchResultDocument:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: The ID of the document.
-        label:
-          type: string
-          description: The human-readable name for the document.
-        external_id:
-          type:
-          - string
-          - 'null'
-          description: The unique ID of the document as represented in an external system and specified when it was originally uploaded.
-        metadata:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            description: Any type
-          description: A previously supplied JSON object containing metadata that can be filtered on when searching.
-      required:
-      - label
-      title: SearchResultDocument
-    TestSuiteRunPromptSandboxHistoryItemExecConfigTypeEnum:
-      type: string
-      enum:
-      - PROMPT_SANDBOX_HISTORY_ITEM
-      description: '* `PROMPT_SANDBOX_HISTORY_ITEM` - PROMPT_SANDBOX_HISTORY_ITEM'
-      title: TestSuiteRunPromptSandboxHistoryItemExecConfigTypeEnum
-    NamedTestCaseVariableValue:
-      oneOf:
-      - $ref: '#/components/schemas/NamedTestCaseStringVariableValue'
-      - $ref: '#/components/schemas/NamedTestCaseNumberVariableValue'
-      - $ref: '#/components/schemas/NamedTestCaseJsonVariableValue'
-      - $ref: '#/components/schemas/NamedTestCaseChatHistoryVariableValue'
-      - $ref: '#/components/schemas/NamedTestCaseSearchResultsVariableValue'
-      - $ref: '#/components/schemas/NamedTestCaseErrorVariableValue'
-      - $ref: '#/components/schemas/NamedTestCaseFunctionCallVariableValue'
-      - $ref: '#/components/schemas/NamedTestCaseArrayVariableValue'
-      - $ref: '#/components/schemas/NamedTestCaseAudioVariableValue'
-      - $ref: '#/components/schemas/NamedTestCaseVideoVariableValue'
-      - $ref: '#/components/schemas/NamedTestCaseImageVariableValue'
-      - $ref: '#/components/schemas/NamedTestCaseDocumentVariableValue'
-      title: NamedTestCaseVariableValue
-    NamedTestCaseChatHistoryVariableValue:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/ChatHistoryEnum'
-        value:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/ChatMessage'
-        name:
-          type: string
-      required:
-      - type
-      - value
-      - name
-      description: Named Test Case value that is of type CHAT_HISTORY
-      title: NamedTestCaseChatHistoryVariableValue
-    NamedTestCaseJsonVariableValueRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/JsonEnum'
-        value:
-          oneOf:
-          - description: Any type
-          - type: 'null'
-        name:
-          type: string
-      required:
-      - type
-      - value
-      - name
-      description: Named Test Case value that is of type JSON
-      title: NamedTestCaseJsonVariableValueRequest
-    TestSuiteRunPromptSandboxExecConfigTypeEnum:
-      type: string
-      enum:
-      - PROMPT_SANDBOX
-      description: '* `PROMPT_SANDBOX` - PROMPT_SANDBOX'
-      title: TestSuiteRunPromptSandboxExecConfigTypeEnum
-    AudioVellumValueRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/AudioEnum'
-        value:
-          oneOf:
-          - $ref: '#/components/schemas/VellumAudioRequest'
-          - type: 'null'
-      required:
-      - type
-      - value
-      description: A base Vellum primitive value representing audio.
-      title: AudioVellumValueRequest
-    TestSuiteRunWorkflowReleaseTagExecConfigRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/TestSuiteRunWorkflowReleaseTagExecConfigTypeEnum'
-        data:
-          $ref: '#/components/schemas/TestSuiteRunWorkflowReleaseTagExecConfigDataRequest'
-        test_case_ids:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-          description: Optionally specify a subset of test case ids to run. If not provided, all test cases within the test suite will be run by default.
-      required:
-      - data
-      description: Execution configuration for running a Test Suite against a Workflow Deployment
-      title: TestSuiteRunWorkflowReleaseTagExecConfigRequest
   securitySchemes:
     default:
       type: apiKey

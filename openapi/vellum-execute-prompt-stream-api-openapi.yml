@@ -65,18 +65,273 @@ paths:
               $ref: '#/components/schemas/ExecutePromptStreamRequest'
 components:
   schemas:
-    DocumentChatMessageContentRequest:
+    ChatHistoryEnum:
+      type: string
+      enum:
+      - CHAT_HISTORY
+      title: ChatHistoryEnum
+    ExecutePromptApiErrorResponse:
+      type: object
+      properties:
+        detail:
+          type: string
+          description: Details about why the request failed.
+        raw_data:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+          description: The raw error data structure, if available.
+      required:
+      - detail
+      title: ExecutePromptApiErrorResponse
+    StringVellumValue:
       type: object
       properties:
         type:
-          $ref: '#/components/schemas/DocumentEnum'
+          $ref: '#/components/schemas/StringEnum'
         value:
-          $ref: '#/components/schemas/VellumDocumentRequest'
+          type:
+          - string
+          - 'null'
       required:
       - type
       - value
-      description: A document value that is used in a chat message.
-      title: DocumentChatMessageContentRequest
+      description: A value representing a string.
+      title: StringVellumValue
+    FunctionCallChatMessageContentRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/FunctionCallEnum'
+        value:
+          $ref: '#/components/schemas/FunctionCallChatMessageContentValueRequest'
+      required:
+      - type
+      - value
+      description: A function call value that is used in a chat message.
+      title: FunctionCallChatMessageContentRequest
+    ThinkingVellumValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ThinkingEnum'
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/StringVellumValue'
+          - type: 'null'
+      required:
+      - type
+      - value
+      description: A value representing Thinking mode output.
+      title: ThinkingVellumValue
+    RejectedEnum:
+      type: string
+      enum:
+      - REJECTED
+      title: RejectedEnum
+    ErrorEnum:
+      type: string
+      enum:
+      - ERROR
+      title: ErrorEnum
+    VideoChatMessageContentRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/VideoEnum'
+        value:
+          $ref: '#/components/schemas/VellumVideoRequest'
+      required:
+      - type
+      - value
+      description: A video value that is used in a chat message.
+      title: VideoChatMessageContentRequest
+    JsonEnum:
+      type: string
+      enum:
+      - JSON
+      title: JsonEnum
+    FunctionCallEnum:
+      type: string
+      enum:
+      - FUNCTION_CALL
+      title: FunctionCallEnum
+    VideoEnum:
+      type: string
+      enum:
+      - VIDEO
+      title: VideoEnum
+    VellumDocumentRequest:
+      type: object
+      properties:
+        src:
+          type: string
+          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - src
+      title: VellumDocumentRequest
+    VellumErrorCodeEnum:
+      type: string
+      enum:
+      - INVALID_REQUEST
+      - INVALID_INPUTS
+      - PROVIDER_ERROR
+      - PROVIDER_CREDENTIALS_UNAVAILABLE
+      - INTEGRATION_CREDENTIALS_UNAVAILABLE
+      - REQUEST_TIMEOUT
+      - INTERNAL_SERVER_ERROR
+      - USER_DEFINED_ERROR
+      - WORKFLOW_CANCELLED
+      - NODE_CANCELLED
+      - PROVIDER_QUOTA_EXCEEDED
+      - CHAT_QUOTA_EXCEEDED
+      description: '* `INVALID_REQUEST` - INVALID_REQUEST
+
+        * `INVALID_INPUTS` - INVALID_INPUTS
+
+        * `PROVIDER_ERROR` - PROVIDER_ERROR
+
+        * `PROVIDER_CREDENTIALS_UNAVAILABLE` - PROVIDER_CREDENTIALS_UNAVAILABLE
+
+        * `INTEGRATION_CREDENTIALS_UNAVAILABLE` - INTEGRATION_CREDENTIALS_UNAVAILABLE
+
+        * `REQUEST_TIMEOUT` - REQUEST_TIMEOUT
+
+        * `INTERNAL_SERVER_ERROR` - INTERNAL_SERVER_ERROR
+
+        * `USER_DEFINED_ERROR` - USER_DEFINED_ERROR
+
+        * `WORKFLOW_CANCELLED` - WORKFLOW_CANCELLED
+
+        * `NODE_CANCELLED` - NODE_CANCELLED
+
+        * `PROVIDER_QUOTA_EXCEEDED` - PROVIDER_QUOTA_EXCEEDED
+
+        * `CHAT_QUOTA_EXCEEDED` - CHAT_QUOTA_EXCEEDED'
+      title: VellumErrorCodeEnum
+    FunctionCallChatMessageContentValueRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        arguments:
+          type: object
+          additionalProperties:
+            description: Any type
+        id:
+          type:
+          - string
+          - 'null'
+      required:
+      - name
+      - arguments
+      description: The final resolved function call value.
+      title: FunctionCallChatMessageContentValueRequest
+    ArrayChatMessageContentItemRequest:
+      oneOf:
+      - $ref: '#/components/schemas/StringChatMessageContentRequest'
+      - $ref: '#/components/schemas/FunctionCallChatMessageContentRequest'
+      - $ref: '#/components/schemas/AudioChatMessageContentRequest'
+      - $ref: '#/components/schemas/VideoChatMessageContentRequest'
+      - $ref: '#/components/schemas/ImageChatMessageContentRequest'
+      - $ref: '#/components/schemas/DocumentChatMessageContentRequest'
+      title: ArrayChatMessageContentItemRequest
+    FulfilledEnum:
+      type: string
+      enum:
+      - FULFILLED
+      title: FulfilledEnum
+    FulfilledPromptExecutionMeta:
+      type: object
+      properties:
+        latency:
+          type:
+          - integer
+          - 'null'
+        finish_reason:
+          oneOf:
+          - $ref: '#/components/schemas/FinishReasonEnum'
+          - type: 'null'
+        usage:
+          oneOf:
+          - $ref: '#/components/schemas/MLModelUsage'
+          - type: 'null'
+        cost:
+          oneOf:
+          - $ref: '#/components/schemas/Price'
+          - type: 'null'
+      description: The subset of the metadata tracked by Vellum during prompt execution that the request opted into with `expand_meta`.
+      title: FulfilledPromptExecutionMeta
+    AudioEnum:
+      type: string
+      enum:
+      - AUDIO
+      title: AudioEnum
+    ImageInputRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The variable's name
+        type:
+          $ref: '#/components/schemas/ImageEnum'
+        value:
+          $ref: '#/components/schemas/VellumImageRequest'
+      required:
+      - name
+      - type
+      - value
+      description: A user input representing a Vellum Image value
+      title: ImageInputRequest
+    ArrayEnum:
+      type: string
+      enum:
+      - ARRAY
+      title: ArrayEnum
+    FunctionCall:
+      type: object
+      properties:
+        arguments:
+          type: object
+          additionalProperties:
+            description: Any type
+        id:
+          type:
+          - string
+          - 'null'
+        name:
+          type: string
+      required:
+      - arguments
+      - name
+      description: The final resolved function call value.
+      title: FunctionCall
+    ChatHistoryInputRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The variable's name, as defined in the deployment.
+        type:
+          $ref: '#/components/schemas/ChatHistoryEnum'
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChatMessageRequest'
+      required:
+      - name
+      - type
+      - value
+      description: A user input representing a list of chat messages
+      title: ChatHistoryInputRequest
     JSONInputRequest:
       type: object
       properties:
@@ -95,44 +350,113 @@ components:
       - value
       description: A user input representing a JSON object
       title: JSONInputRequest
-    MLModelUsage:
+    ArrayChatMessageContentRequest:
       type: object
       properties:
-        output_token_count:
-          type:
-          - integer
-          - 'null'
-        input_token_count:
-          type:
-          - integer
-          - 'null'
-        input_char_count:
-          type:
-          - integer
-          - 'null'
-        output_char_count:
-          type:
-          - integer
-          - 'null'
-        compute_nanos:
-          type:
-          - integer
-          - 'null'
-        cache_creation_input_tokens:
-          type:
-          - integer
-          - 'null'
-        cache_read_input_tokens:
-          type:
-          - integer
-          - 'null'
-      title: MLModelUsage
-    UnitEnum:
-      type: string
-      enum:
-      - USD
-      description: '* `USD` - USD'
-      title: UnitEnum
+        type:
+          $ref: '#/components/schemas/ArrayEnum'
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/ArrayChatMessageContentItemRequest'
+      required:
+      - type
+      - value
+      description: A list of chat message content items.
+      title: ArrayChatMessageContentRequest
+    StreamingExecutePromptEvent:
+      type: object
+      properties:
+        state:
+          $ref: '#/components/schemas/StreamingEnum'
+        output:
+          $ref: '#/components/schemas/PromptOutput'
+        output_index:
+          type: integer
+        execution_id:
+          type: string
+        meta:
+          $ref: '#/components/schemas/StreamingPromptExecutionMeta'
+        raw:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: The subset of the raw response from the model that the request opted into with `expand_raw`.
+      required:
+      - state
+      - output
+      - output_index
+      - execution_id
+      description: The data returned for each delta during the prompt execution stream.
+      title: StreamingExecutePromptEvent
+    AudioInputRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The variable's name
+        type:
+          $ref: '#/components/schemas/AudioEnum'
+        value:
+          $ref: '#/components/schemas/VellumAudioRequest'
+      required:
+      - name
+      - type
+      - value
+      description: A user input representing a Vellum Audio value
+      title: AudioInputRequest
+    AudioChatMessageContentRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/AudioEnum'
+        value:
+          $ref: '#/components/schemas/VellumAudioRequest'
+      required:
+      - type
+      - value
+      description: An audio value that is used in a chat message.
+      title: AudioChatMessageContentRequest
+    DocumentInputRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The variable's name
+        type:
+          $ref: '#/components/schemas/DocumentEnum'
+        value:
+          $ref: '#/components/schemas/VellumDocumentRequest'
+      required:
+      - name
+      - type
+      - value
+      description: A user input representing a Vellum Document value
+      title: DocumentInputRequest
+    PromptDeploymentInputRequest:
+      oneOf:
+      - $ref: '#/components/schemas/StringInputRequest'
+      - $ref: '#/components/schemas/JSONInputRequest'
+      - $ref: '#/components/schemas/ChatHistoryInputRequest'
+      - $ref: '#/components/schemas/AudioInputRequest'
+      - $ref: '#/components/schemas/VideoInputRequest'
+      - $ref: '#/components/schemas/ImageInputRequest'
+      - $ref: '#/components/schemas/DocumentInputRequest'
+      title: PromptDeploymentInputRequest
+    JsonVellumValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/JsonEnum'
+        value:
+          oneOf:
+          - description: Any type
+          - type: 'null'
+      required:
+      - type
+      - value
+      description: A value representing a JSON object.
+      title: JsonVellumValue
     ExecutePromptStreamRequest:
       type: object
       properties:
@@ -189,37 +513,20 @@ components:
       required:
       - inputs
       title: ExecutePromptStreamRequest
-    ArrayChatMessageContentRequest:
+    FunctionCallVellumValue:
       type: object
       properties:
         type:
-          $ref: '#/components/schemas/ArrayEnum'
+          $ref: '#/components/schemas/FunctionCallEnum'
         value:
-          type: array
-          items:
-            $ref: '#/components/schemas/ArrayChatMessageContentItemRequest'
+          oneOf:
+          - $ref: '#/components/schemas/FunctionCall'
+          - type: 'null'
       required:
       - type
       - value
-      description: A list of chat message content items.
-      title: ArrayChatMessageContentRequest
-    StringChatMessageContentRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/StringEnum'
-        value:
-          type: string
-      required:
-      - type
-      - value
-      description: A string value that is used in a chat message.
-      title: StringChatMessageContentRequest
-    RejectedEnum:
-      type: string
-      enum:
-      - REJECTED
-      title: RejectedEnum
+      description: A value representing a Function Call.
+      title: FunctionCallVellumValue
     VellumAudioRequest:
       type: object
       properties:
@@ -235,35 +542,185 @@ components:
       required:
       - src
       title: VellumAudioRequest
-    StringVellumValue:
+    StreamingEnum:
+      type: string
+      enum:
+      - STREAMING
+      title: StreamingEnum
+    RawPromptExecutionOverridesRequest:
       type: object
       properties:
-        type:
-          $ref: '#/components/schemas/StringEnum'
-        value:
+        body:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+        headers:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+          description: The raw headers to send to the model host.
+        url:
           type:
           - string
           - 'null'
+          description: The raw URL to send to the model host.
+      title: RawPromptExecutionOverridesRequest
+    StringInputRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The variable's name
+        type:
+          $ref: '#/components/schemas/StringEnum'
+        value:
+          type: string
+      required:
+      - name
+      - type
+      - value
+      description: A user input representing a string value
+      title: StringInputRequest
+    StringEnum:
+      type: string
+      enum:
+      - STRING
+      title: StringEnum
+    MLModelUsage:
+      type: object
+      properties:
+        output_token_count:
+          type:
+          - integer
+          - 'null'
+        input_token_count:
+          type:
+          - integer
+          - 'null'
+        input_char_count:
+          type:
+          - integer
+          - 'null'
+        output_char_count:
+          type:
+          - integer
+          - 'null'
+        compute_nanos:
+          type:
+          - integer
+          - 'null'
+        cache_creation_input_tokens:
+          type:
+          - integer
+          - 'null'
+        cache_read_input_tokens:
+          type:
+          - integer
+          - 'null'
+      title: MLModelUsage
+    InitiatedExecutePromptEvent:
+      type: object
+      properties:
+        state:
+          $ref: '#/components/schemas/InitiatedEnum'
+        meta:
+          $ref: '#/components/schemas/InitiatedPromptExecutionMeta'
+        execution_id:
+          type: string
+      required:
+      - state
+      - execution_id
+      description: The initial data returned indicating that the response from the model has returned and begun streaming.
+      title: InitiatedExecutePromptEvent
+    InitiatedPromptExecutionMeta:
+      type: object
+      properties:
+        model_name:
+          type:
+          - string
+          - 'null'
+        latency:
+          type:
+          - integer
+          - 'null'
+        deployment_release_tag:
+          type:
+          - string
+          - 'null'
+        prompt_version_id:
+          type:
+          - string
+          - 'null'
+      description: The subset of the metadata tracked by Vellum during prompt execution that the request opted into with `expand_meta`.
+      title: InitiatedPromptExecutionMeta
+    ImageChatMessageContentRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ImageEnum'
+        value:
+          $ref: '#/components/schemas/VellumImageRequest'
       required:
       - type
       - value
-      description: A value representing a string.
-      title: StringVellumValue
-    ChatMessageRole:
-      type: string
-      enum:
-      - SYSTEM
-      - ASSISTANT
-      - USER
-      - FUNCTION
-      description: '* `SYSTEM` - System
-
-        * `ASSISTANT` - Assistant
-
-        * `USER` - User
-
-        * `FUNCTION` - Function'
-      title: ChatMessageRole
+      description: An image value that is used in a chat message.
+      title: ImageChatMessageContentRequest
+    Price:
+      type: object
+      properties:
+        value:
+          type: number
+          format: double
+        unit:
+          $ref: '#/components/schemas/UnitEnum'
+      required:
+      - value
+      - unit
+      title: Price
+    VideoInputRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The variable's name
+        type:
+          $ref: '#/components/schemas/VideoEnum'
+        value:
+          $ref: '#/components/schemas/VellumVideoRequest'
+      required:
+      - name
+      - type
+      - value
+      description: A user input representing a Vellum Video value
+      title: VideoInputRequest
+    StreamingPromptExecutionMeta:
+      type: object
+      properties:
+        latency:
+          type:
+          - integer
+          - 'null'
+      description: The subset of the metadata tracked by Vellum during prompt execution that the request opted into with `expand_meta`.
+      title: StreamingPromptExecutionMeta
+    VellumImageRequest:
+      type: object
+      properties:
+        src:
+          type: string
+          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - src
+      title: VellumImageRequest
     FulfilledExecutePromptEvent:
       type: object
       properties:
@@ -289,78 +746,47 @@ components:
       - execution_id
       description: The final data event returned indicating that the stream has ended and all final resolved values from the model can be found.
       title: FulfilledExecutePromptEvent
-    AudioChatMessageContentRequest:
+    StringChatMessageContentRequest:
       type: object
       properties:
         type:
-          $ref: '#/components/schemas/AudioEnum'
+          $ref: '#/components/schemas/StringEnum'
         value:
-          $ref: '#/components/schemas/VellumAudioRequest'
-      required:
-      - type
-      - value
-      description: An audio value that is used in a chat message.
-      title: AudioChatMessageContentRequest
-    ChatHistoryEnum:
-      type: string
-      enum:
-      - CHAT_HISTORY
-      title: ChatHistoryEnum
-    FunctionCallVellumValue:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/FunctionCallEnum'
-        value:
-          oneOf:
-          - $ref: '#/components/schemas/FunctionCall'
-          - type: 'null'
-      required:
-      - type
-      - value
-      description: A value representing a Function Call.
-      title: FunctionCallVellumValue
-    StreamingExecutePromptEvent:
-      type: object
-      properties:
-        state:
-          $ref: '#/components/schemas/StreamingEnum'
-        output:
-          $ref: '#/components/schemas/PromptOutput'
-        output_index:
-          type: integer
-        execution_id:
           type: string
-        meta:
-          $ref: '#/components/schemas/StreamingPromptExecutionMeta'
-        raw:
-          type: object
+      required:
+      - type
+      - value
+      description: A string value that is used in a chat message.
+      title: StringChatMessageContentRequest
+    VellumError:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/VellumErrorCodeEnum'
+        message:
+          type: string
+        raw_data:
+          type:
+          - object
+          - 'null'
           additionalProperties:
             description: Any type
-          description: The subset of the raw response from the model that the request opted into with `expand_raw`.
       required:
-      - state
-      - output
-      - output_index
-      - execution_id
-      description: The data returned for each delta during the prompt execution stream.
-      title: StreamingExecutePromptEvent
-    AudioInputRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The variable's name
-        type:
-          $ref: '#/components/schemas/AudioEnum'
-        value:
-          $ref: '#/components/schemas/VellumAudioRequest'
-      required:
-      - name
-      - type
-      - value
-      description: A user input representing a Vellum Audio value
-      title: AudioInputRequest
+      - code
+      - message
+      title: VellumError
+    FinishReasonEnum:
+      type: string
+      enum:
+      - LENGTH
+      - STOP
+      - UNKNOWN
+      description: '* `LENGTH` - LENGTH
+
+        * `STOP` - STOP
+
+        * `UNKNOWN` - UNKNOWN'
+      title: FinishReasonEnum
     PromptOutput:
       oneOf:
       - $ref: '#/components/schemas/StringVellumValue'
@@ -369,36 +795,24 @@ components:
       - $ref: '#/components/schemas/FunctionCallVellumValue'
       - $ref: '#/components/schemas/ThinkingVellumValue'
       title: PromptOutput
-    ArrayEnum:
+    InitiatedEnum:
       type: string
       enum:
-      - ARRAY
-      title: ArrayEnum
-    ArrayChatMessageContentItemRequest:
-      oneOf:
-      - $ref: '#/components/schemas/StringChatMessageContentRequest'
-      - $ref: '#/components/schemas/FunctionCallChatMessageContentRequest'
-      - $ref: '#/components/schemas/AudioChatMessageContentRequest'
-      - $ref: '#/components/schemas/VideoChatMessageContentRequest'
-      - $ref: '#/components/schemas/ImageChatMessageContentRequest'
-      - $ref: '#/components/schemas/DocumentChatMessageContentRequest'
-      title: ArrayChatMessageContentItemRequest
-    StringInputRequest:
+      - INITIATED
+      title: InitiatedEnum
+    RejectedPromptExecutionMeta:
       type: object
       properties:
-        name:
-          type: string
-          description: The variable's name
-        type:
-          $ref: '#/components/schemas/StringEnum'
-        value:
-          type: string
-      required:
-      - name
-      - type
-      - value
-      description: A user input representing a string value
-      title: StringInputRequest
+        latency:
+          type:
+          - integer
+          - 'null'
+        finish_reason:
+          oneOf:
+          - $ref: '#/components/schemas/FinishReasonEnum'
+          - type: 'null'
+      description: The subset of the metadata tracked by Vellum during prompt execution that the request opted into with `expand_meta`.
+      title: RejectedPromptExecutionMeta
     RejectedExecutePromptEvent:
       type: object
       properties:
@@ -416,46 +830,6 @@ components:
       - execution_id
       description: The final data returned indicating an error occurred during the stream.
       title: RejectedExecutePromptEvent
-    InitiatedPromptExecutionMeta:
-      type: object
-      properties:
-        model_name:
-          type:
-          - string
-          - 'null'
-        latency:
-          type:
-          - integer
-          - 'null'
-        deployment_release_tag:
-          type:
-          - string
-          - 'null'
-        prompt_version_id:
-          type:
-          - string
-          - 'null'
-      description: The subset of the metadata tracked by Vellum during prompt execution that the request opted into with `expand_meta`.
-      title: InitiatedPromptExecutionMeta
-    FunctionCallEnum:
-      type: string
-      enum:
-      - FUNCTION_CALL
-      title: FunctionCallEnum
-    JsonVellumValue:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/JsonEnum'
-        value:
-          oneOf:
-          - description: Any type
-          - type: 'null'
-      required:
-      - type
-      - value
-      description: A value representing a JSON object.
-      title: JsonVellumValue
     VellumVideoRequest:
       type: object
       properties:
@@ -471,19 +845,18 @@ components:
       required:
       - src
       title: VellumVideoRequest
-    RejectedPromptExecutionMeta:
-      type: object
-      properties:
-        latency:
-          type:
-          - integer
-          - 'null'
-        finish_reason:
-          oneOf:
-          - $ref: '#/components/schemas/FinishReasonEnum'
-          - type: 'null'
-      description: The subset of the metadata tracked by Vellum during prompt execution that the request opted into with `expand_meta`.
-      title: RejectedPromptExecutionMeta
+    ImageEnum:
+      type: string
+      enum:
+      - IMAGE
+      title: ImageEnum
+    ExecutePromptEvent:
+      oneOf:
+      - $ref: '#/components/schemas/InitiatedExecutePromptEvent'
+      - $ref: '#/components/schemas/StreamingExecutePromptEvent'
+      - $ref: '#/components/schemas/FulfilledExecutePromptEvent'
+      - $ref: '#/components/schemas/RejectedExecutePromptEvent'
+      title: ExecutePromptEvent
     ErrorVellumValue:
       type: object
       properties:
@@ -498,32 +871,29 @@ components:
       - value
       description: A value representing an Error.
       title: ErrorVellumValue
-    VideoEnum:
-      type: string
-      enum:
-      - VIDEO
-      title: VideoEnum
-    ImageInputRequest:
+    DocumentChatMessageContentRequest:
       type: object
       properties:
-        name:
-          type: string
-          description: The variable's name
         type:
-          $ref: '#/components/schemas/ImageEnum'
+          $ref: '#/components/schemas/DocumentEnum'
         value:
-          $ref: '#/components/schemas/VellumImageRequest'
+          $ref: '#/components/schemas/VellumDocumentRequest'
       required:
-      - name
       - type
       - value
-      description: A user input representing a Vellum Image value
-      title: ImageInputRequest
-    ThinkingEnum:
+      description: A document value that is used in a chat message.
+      title: DocumentChatMessageContentRequest
+    UnitEnum:
       type: string
       enum:
-      - THINKING
-      title: ThinkingEnum
+      - USD
+      description: '* `USD` - USD'
+      title: UnitEnum
+    DocumentEnum:
+      type: string
+      enum:
+      - DOCUMENT
+      title: DocumentEnum
     PromptDeploymentExpandMetaRequest:
       type: object
       properties:
@@ -563,90 +933,11 @@ components:
           - 'null'
           description: If enabled, the response will include the ID of the Prompt Version backing the deployment.
       title: PromptDeploymentExpandMetaRequest
-    FulfilledEnum:
+    ThinkingEnum:
       type: string
       enum:
-      - FULFILLED
-      title: FulfilledEnum
-    VellumDocumentRequest:
-      type: object
-      properties:
-        src:
-          type: string
-          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
-        metadata:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            description: Any type
-      required:
-      - src
-      title: VellumDocumentRequest
-    FunctionCallChatMessageContentValueRequest:
-      type: object
-      properties:
-        name:
-          type: string
-        arguments:
-          type: object
-          additionalProperties:
-            description: Any type
-        id:
-          type:
-          - string
-          - 'null'
-      required:
-      - name
-      - arguments
-      description: The final resolved function call value.
-      title: FunctionCallChatMessageContentValueRequest
-    ImageEnum:
-      type: string
-      enum:
-      - IMAGE
-      title: ImageEnum
-    VellumImageRequest:
-      type: object
-      properties:
-        src:
-          type: string
-          description: "The reference to the source data. This can be one of the following formats:\n1. A base64-encoded data URL (e.g., 'data:application/pdf;base64,JVBERi0xLjQKJcfs...').\n2. A url pointing to a file accessible over HTTP or HTTPS.\n3. A reference to a file that's been previously uploaded to Vellum, in the form of 'vellum:uploaded-file:{uploaded_file_id}'.\n    You can use the Uploaded Files API to retrieve the url of the uploaded file given its ID. See https://docs.vellum.ai/developers/client-sdk/uploaded-files/retrieve for details."
-        metadata:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            description: Any type
-      required:
-      - src
-      title: VellumImageRequest
-    Price:
-      type: object
-      properties:
-        value:
-          type: number
-          format: double
-        unit:
-          $ref: '#/components/schemas/UnitEnum'
-      required:
-      - value
-      - unit
-      title: Price
-    StreamingPromptExecutionMeta:
-      type: object
-      properties:
-        latency:
-          type:
-          - integer
-          - 'null'
-      description: The subset of the metadata tracked by Vellum during prompt execution that the request opted into with `expand_meta`.
-      title: StreamingPromptExecutionMeta
-    JsonEnum:
-      type: string
-      enum:
-      - JSON
-      title: JsonEnum
+      - THINKING
+      title: ThinkingEnum
     ChatMessageContentRequest:
       oneOf:
       - $ref: '#/components/schemas/StringChatMessageContentRequest'
@@ -657,22 +948,6 @@ components:
       - $ref: '#/components/schemas/ImageChatMessageContentRequest'
       - $ref: '#/components/schemas/DocumentChatMessageContentRequest'
       title: ChatMessageContentRequest
-    VideoInputRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The variable's name
-        type:
-          $ref: '#/components/schemas/VideoEnum'
-        value:
-          $ref: '#/components/schemas/VellumVideoRequest'
-      required:
-      - name
-      - type
-      - value
-      description: A user input representing a Vellum Video value
-      title: VideoInputRequest
     ChatMessageRequest:
       type: object
       properties:
@@ -700,296 +975,21 @@ components:
       required:
       - role
       title: ChatMessageRequest
-    FinishReasonEnum:
+    ChatMessageRole:
       type: string
       enum:
-      - LENGTH
-      - STOP
-      - UNKNOWN
-      description: '* `LENGTH` - LENGTH
+      - SYSTEM
+      - ASSISTANT
+      - USER
+      - FUNCTION
+      description: '* `SYSTEM` - System
 
-        * `STOP` - STOP
+        * `ASSISTANT` - Assistant
 
-        * `UNKNOWN` - UNKNOWN'
-      title: FinishReasonEnum
-    ChatHistoryInputRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The variable's name, as defined in the deployment.
-        type:
-          $ref: '#/components/schemas/ChatHistoryEnum'
-        value:
-          type: array
-          items:
-            $ref: '#/components/schemas/ChatMessageRequest'
-      required:
-      - name
-      - type
-      - value
-      description: A user input representing a list of chat messages
-      title: ChatHistoryInputRequest
-    AudioEnum:
-      type: string
-      enum:
-      - AUDIO
-      title: AudioEnum
-    ImageChatMessageContentRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/ImageEnum'
-        value:
-          $ref: '#/components/schemas/VellumImageRequest'
-      required:
-      - type
-      - value
-      description: An image value that is used in a chat message.
-      title: ImageChatMessageContentRequest
-    ExecutePromptEvent:
-      oneOf:
-      - $ref: '#/components/schemas/InitiatedExecutePromptEvent'
-      - $ref: '#/components/schemas/StreamingExecutePromptEvent'
-      - $ref: '#/components/schemas/FulfilledExecutePromptEvent'
-      - $ref: '#/components/schemas/RejectedExecutePromptEvent'
-      title: ExecutePromptEvent
-    VellumError:
-      type: object
-      properties:
-        code:
-          $ref: '#/components/schemas/VellumErrorCodeEnum'
-        message:
-          type: string
-        raw_data:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            description: Any type
-      required:
-      - code
-      - message
-      title: VellumError
-    StreamingEnum:
-      type: string
-      enum:
-      - STREAMING
-      title: StreamingEnum
-    StringEnum:
-      type: string
-      enum:
-      - STRING
-      title: StringEnum
-    ErrorEnum:
-      type: string
-      enum:
-      - ERROR
-      title: ErrorEnum
-    FunctionCall:
-      type: object
-      properties:
-        arguments:
-          type: object
-          additionalProperties:
-            description: Any type
-        id:
-          type:
-          - string
-          - 'null'
-        name:
-          type: string
-      required:
-      - arguments
-      - name
-      description: The final resolved function call value.
-      title: FunctionCall
-    FulfilledPromptExecutionMeta:
-      type: object
-      properties:
-        latency:
-          type:
-          - integer
-          - 'null'
-        finish_reason:
-          oneOf:
-          - $ref: '#/components/schemas/FinishReasonEnum'
-          - type: 'null'
-        usage:
-          oneOf:
-          - $ref: '#/components/schemas/MLModelUsage'
-          - type: 'null'
-        cost:
-          oneOf:
-          - $ref: '#/components/schemas/Price'
-          - type: 'null'
-      description: The subset of the metadata tracked by Vellum during prompt execution that the request opted into with `expand_meta`.
-      title: FulfilledPromptExecutionMeta
-    PromptDeploymentInputRequest:
-      oneOf:
-      - $ref: '#/components/schemas/StringInputRequest'
-      - $ref: '#/components/schemas/JSONInputRequest'
-      - $ref: '#/components/schemas/ChatHistoryInputRequest'
-      - $ref: '#/components/schemas/AudioInputRequest'
-      - $ref: '#/components/schemas/VideoInputRequest'
-      - $ref: '#/components/schemas/ImageInputRequest'
-      - $ref: '#/components/schemas/DocumentInputRequest'
-      title: PromptDeploymentInputRequest
-    InitiatedExecutePromptEvent:
-      type: object
-      properties:
-        state:
-          $ref: '#/components/schemas/InitiatedEnum'
-        meta:
-          $ref: '#/components/schemas/InitiatedPromptExecutionMeta'
-        execution_id:
-          type: string
-      required:
-      - state
-      - execution_id
-      description: The initial data returned indicating that the response from the model has returned and begun streaming.
-      title: InitiatedExecutePromptEvent
-    RawPromptExecutionOverridesRequest:
-      type: object
-      properties:
-        body:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            description: Any type
-        headers:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type: string
-          description: The raw headers to send to the model host.
-        url:
-          type:
-          - string
-          - 'null'
-          description: The raw URL to send to the model host.
-      title: RawPromptExecutionOverridesRequest
-    DocumentEnum:
-      type: string
-      enum:
-      - DOCUMENT
-      title: DocumentEnum
-    VellumErrorCodeEnum:
-      type: string
-      enum:
-      - INVALID_REQUEST
-      - INVALID_INPUTS
-      - PROVIDER_ERROR
-      - PROVIDER_CREDENTIALS_UNAVAILABLE
-      - INTEGRATION_CREDENTIALS_UNAVAILABLE
-      - REQUEST_TIMEOUT
-      - INTERNAL_SERVER_ERROR
-      - USER_DEFINED_ERROR
-      - WORKFLOW_CANCELLED
-      - NODE_CANCELLED
-      - PROVIDER_QUOTA_EXCEEDED
-      - CHAT_QUOTA_EXCEEDED
-      description: '* `INVALID_REQUEST` - INVALID_REQUEST
+        * `USER` - User
 
-        * `INVALID_INPUTS` - INVALID_INPUTS
-
-        * `PROVIDER_ERROR` - PROVIDER_ERROR
-
-        * `PROVIDER_CREDENTIALS_UNAVAILABLE` - PROVIDER_CREDENTIALS_UNAVAILABLE
-
-        * `INTEGRATION_CREDENTIALS_UNAVAILABLE` - INTEGRATION_CREDENTIALS_UNAVAILABLE
-
-        * `REQUEST_TIMEOUT` - REQUEST_TIMEOUT
-
-        * `INTERNAL_SERVER_ERROR` - INTERNAL_SERVER_ERROR
-
-        * `USER_DEFINED_ERROR` - USER_DEFINED_ERROR
-
-        * `WORKFLOW_CANCELLED` - WORKFLOW_CANCELLED
-
-        * `NODE_CANCELLED` - NODE_CANCELLED
-
-        * `PROVIDER_QUOTA_EXCEEDED` - PROVIDER_QUOTA_EXCEEDED
-
-        * `CHAT_QUOTA_EXCEEDED` - CHAT_QUOTA_EXCEEDED'
-      title: VellumErrorCodeEnum
-    FunctionCallChatMessageContentRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/FunctionCallEnum'
-        value:
-          $ref: '#/components/schemas/FunctionCallChatMessageContentValueRequest'
-      required:
-      - type
-      - value
-      description: A function call value that is used in a chat message.
-      title: FunctionCallChatMessageContentRequest
-    ExecutePromptApiErrorResponse:
-      type: object
-      properties:
-        detail:
-          type: string
-          description: Details about why the request failed.
-        raw_data:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            description: Any type
-          description: The raw error data structure, if available.
-      required:
-      - detail
-      title: ExecutePromptApiErrorResponse
-    InitiatedEnum:
-      type: string
-      enum:
-      - INITIATED
-      title: InitiatedEnum
-    DocumentInputRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The variable's name
-        type:
-          $ref: '#/components/schemas/DocumentEnum'
-        value:
-          $ref: '#/components/schemas/VellumDocumentRequest'
-      required:
-      - name
-      - type
-      - value
-      description: A user input representing a Vellum Document value
-      title: DocumentInputRequest
-    ThinkingVellumValue:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/ThinkingEnum'
-        value:
-          oneOf:
-          - $ref: '#/components/schemas/StringVellumValue'
-          - type: 'null'
-      required:
-      - type
-      - value
-      description: A value representing Thinking mode output.
-      title: ThinkingVellumValue
-    VideoChatMessageContentRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/VideoEnum'
-        value:
-          $ref: '#/components/schemas/VellumVideoRequest'
-      required:
-      - type
-      - value
-      description: A video value that is used in a chat message.
-      title: VideoChatMessageContentRequest
+        * `FUNCTION` - Function'
+      title: ChatMessageRole
   securitySchemes:
     default:
       type: apiKey
